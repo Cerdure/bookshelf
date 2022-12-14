@@ -34,7 +34,7 @@ body {
 .inner-wrapper {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 90%;
 }
 header {
   position: relative;
@@ -211,6 +211,7 @@ input {
 
 
 .caution {
+  position: relative;
   text-align: center;
   font-size: 14px;
   font-weight: 600;
@@ -248,9 +249,9 @@ input {
 }
 
 .footer-wrapper {
-  position: relative;
-  bottom: 0px;
+  position: absolute;
   width: 520px;
+  height: 10%;
   color: gray;
 }
 .footer-wrapper::before {

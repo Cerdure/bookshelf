@@ -1,6 +1,14 @@
 $(function () {
  
-$(".inner-wrapper").css('height',$('.meta-wrapper').height()-60+'px');
+  $(window).resize(function(){
+    let mh = $('.meta-wrapper').height();
+    if(mh<800){
+      $(".meta-wrapper").css('height','800px');
+      $(".inner-wrapper").css('height','100%');
+    } else {
+      $(".meta-wrapper").css('height','100%');
+    }
+  });
 
   $(".form-group").on({
     keyup: function () {
