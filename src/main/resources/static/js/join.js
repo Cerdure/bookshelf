@@ -1,6 +1,4 @@
 $(function () {
-  
-  $(".inner-wrapper").css('height',$('.meta-wrapper').height()-60+'px');
 
   $(".form-group").mouseover(function(){
     $(this).find(".clear-btn").stop().fadeIn(300);
@@ -45,8 +43,18 @@ $(function () {
   if(!rgx.test(val)) {
     $(this).val(val.substr(0,val.length-1));
   }
-  if(val.length>=6){
-    $(".birth-2").focus();
+  if($(".birth-1").val().length==6 && $(".birth-2").val().length==1){
+    $(this).parent().addClass('passed');
+  } else {
+    $(this).parent().removeClass('passed');
+  }
+  join();
+ });
+ $(".birth-2").on('keyup focus',function(e) {
+  const rgx = /^[0-9]{0,1}$/;
+  let val = $(this).val();
+  if(!rgx.test(val)) {
+    $(this).val(val.substr(0,val.length-1));
   }
   if($(".birth-1").val().length==6 && $(".birth-2").val().length==1){
     $(this).parent().addClass('passed');
@@ -55,21 +63,15 @@ $(function () {
   }
   join();
  });
- $(".birth-2").on('keyup focus',function() {
-  const rgx = /^[0-9]{0,1}$/;
-  let val = $(this).val();
-  if(!rgx.test(val)) {
-    $(this).val(val.substr(0,val.length-1));
-  }
-  if($(this).val()=='' && e.keyCode == 8){
-    $(".birth-1").focus();
-  }
-  if($(".birth-1").val().length==6 && $(".birth-2").val().length==1){
-    $(this).parent().addClass('passed');
-  } else {
-    $(this).parent().removeClass('passed');
-  }
-  join();
+  $('.birth-1').keyup(function (){
+  if($(this).val().length>=6){
+    $(".birth-2").focus();
+   }
+  });
+  $('.birth-2').keyup(function (e){
+   if($(this).val()=='' && e.keyCode == 8){
+     $(".birth-1").focus();
+   }
  });
 
 
@@ -138,10 +140,10 @@ $(".code-check").click(function(){
 
 $(".view").click(function(){
   if(!$(this).hasClass('clicked')){
-    $(this).attr('src','../static/img/icon/ico_eye_active@2x.png').addClass('clicked');
+    $(this).attr('src','/img/icon/ico_eye_active@2x.png').addClass('clicked');
     $(this).parent().find('input').attr('type','text');
   } else {
-    $(this).attr('src','../static/img/icon/ico_eye@2x.png').removeClass('clicked');
+    $(this).attr('src','/img/icon/ico_eye@2x.png').removeClass('clicked');
     $(this).parent().find('input').attr('type','password');
   }
 });

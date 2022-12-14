@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이벤트 | BookShelf</title>
-  <link rel="stylesheet" href="../static/css/event.css">
+  <link rel="stylesheet" href="/css/event.css">
 
   <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-  <script src="../static/js/event.js"></script>
+  <script src="/js/event.js"></script>
   
 </head>
 
@@ -26,24 +26,24 @@
 <header>
   <div class="top-nav-background"></div>
   <div class="top-nav-wrapper">
-    <div class="top-logo-wrapper" onclick="location.href='../templates/home.html'"> 
-    <img id="top-logo" src="../static/img/icon/logo.png">
+    <div class="top-logo-wrapper" onclick="location.href='/'">
+    <img id="top-logo" src="/img/icon/logo.png">
     <span class="top-title">BookShelf</span>
     </div>
     <div class="news-wrapper">
-      <img src="../static/img/icon/bell.svg" id="news">
+      <img src="/img/icon/bell.svg" id="news">
       <div id="news-n">N</div>
     </div>
-    <img src="../static/img/icon/cart.svg" id="cart">
-    <button class="login-button" onclick="location.href='../templates/login.html'">로그인</button>
+    <img src="/img/icon/cart.svg" id="cart">
+    <button class="login-button" onclick="location.href='/login'">로그인</button>
     <nav class="top-nav">
       <div id="underbar"></div>
       <ul>
-        <li onclick="location.href='../templates/home.html'">NOW</li>
-        <li onclick="location.href='../templates/search.html'">책찾기</li>
-        <li onclick="location.href='../templates/event.html'">이벤트</li>
-        <li onclick="location.href='../templates/myshelf.html'">내책장</li>
-        <li onclick="location.href='../templates/board-review.html'">게시판</li>
+        <li onclick="location.href='/'">NOW</li>
+        <li onclick="location.href='/search'">책찾기</li>
+        <li onclick="location.href='/event'">이벤트</li>
+        <li onclick="location.href='/myshelf'">내책장</li>
+        <li onclick="location.href='/review'">게시판</li>
       </ul>
     </nav>
   </div>
@@ -122,11 +122,11 @@
 
 
 <div class="category-img-wrapper">
-  <div><img src="../static/img/icon/sale.png"></div>
-  <div><img src="../static/img/icon/coupon.png"></div>
-  <div><img src="../static/img/icon/grade.png"></div>
-  <div><img src="../static/img/icon/check.png"></div>
-  <div><img src="../static/img/icon/notice.png"></div>
+  <div><img src="/img/icon/sale.png"></div>
+  <div><img src="/img/icon/coupon.png"></div>
+  <div><img src="/img/icon/grade.png"></div>
+  <div><img src="/img/icon/check.png"></div>
+  <div><img src="/img/icon/notice.png"></div>
 </div>
 
 <div class="category-title-wrapper">
@@ -142,7 +142,7 @@
 
 <div class="recommend-wrapper">
   <div class="recommend-title">
-    <img src="../static/img/icon/recommend.svg">
+    <img src="/img/icon/recommend.svg">
    <span>추천 이벤트</span>
   </div>
   <div class="recommend-list">
@@ -168,7 +168,7 @@
     <span>| 특가 세일 도서</span>
     <div class="sale-input-wrapper">
       <input type="text" placeholder="상품명으로 검색해보세요.">
-      <img src="../static/img/icon/search.svg">
+      <img src="/img/icon/search.svg">
     </div>
   </div>
   <div class="sale-contents">
@@ -292,7 +292,7 @@
         <div class="coupon-left-box">
           <span class="coupon-left-box-text">Point</span>
           <div class="coupon-left-box-logo">
-            <img src="../static/img/icon/logo.png">
+            <img src="/img/icon/logo.png">
             <span>BookShelf</span>
           </div>
           <span class="coupon-left-box-point">1,000</span>
@@ -313,7 +313,7 @@
         <div class="coupon-left-box">
           <span class="coupon-left-box-text">Point</span>
           <div class="coupon-left-box-logo">
-            <img src="../static/img/icon/logo.png">
+            <img src="/img/icon/logo.png">
             <span>BookShelf</span>
           </div>
           <span class="coupon-left-box-point">500</span>
@@ -334,7 +334,7 @@
         <div class="coupon-left-box">
           <span class="coupon-left-box-text">Point</span>
           <div class="coupon-left-box-logo">
-            <img src="../static/img/icon/logo.png">
+            <img src="/img/icon/logo.png">
             <span>BookShelf</span>
           </div>
           <span class="coupon-left-box-point">500</span>
@@ -360,7 +360,7 @@
         <div class="coupon-left-box">
           <span class="coupon-left-box-text">Point</span>
           <div class="coupon-left-box-logo">
-            <img src="../static/img/icon/logo.png">
+            <img src="/img/icon/logo.png">
             <span>BookShelf</span>
           </div>
           <span class="coupon-left-box-point">200</span>
@@ -381,7 +381,7 @@
         <div class="coupon-left-box">
           <span class="coupon-left-box-text">Point</span>
           <div class="coupon-left-box-logo">
-            <img src="../static/img/icon/logo.png">
+            <img src="/img/icon/logo.png">
             <span>BookShelf</span>
           </div>
           <span class="coupon-left-box-point">200</span>
@@ -402,7 +402,7 @@
         <div class="coupon-left-box">
           <span class="coupon-left-box-text">Point</span>
           <div class="coupon-left-box-logo">
-            <img src="../static/img/icon/logo.png">
+            <img src="/img/icon/logo.png">
             <span>BookShelf</span>
           </div>
           <span class="coupon-left-box-point">1,000</span>
@@ -432,7 +432,7 @@
     <div class="grade-middle">
       <p>매장 포인트 3% 셸프트랙스 2%</p>
       <p>온라인 상품별 추가 적립률</p>
-      <img class="plus" src="../static/img/icon/plus.svg">
+      <img class="plus" src="/img/icon/plus.svg">
       <p>추가 4%</p>
     </div>
     <div class="grade-bottom">
@@ -443,7 +443,7 @@
           <div class="grade-bottom-box-5000-back2"></div>
           <div class="grade-bottom-left-box">
             <div class="grade-bottom-left-box-logo">
-              <img src="../static/img/icon/logo.png">
+              <img src="/img/icon/logo.png">
               <span class="grade-bottom-left-box-logo-text">BookShelf</span>
             </div>
             <span class="grade-bottom-left-box-point">5,000</span>
@@ -458,7 +458,7 @@
           <div class="grade-bottom-box-3000-back2"></div>
           <div class="grade-bottom-left-box">
             <div class="grade-bottom-left-box-logo">
-              <img src="../static/img/icon/logo.png">
+              <img src="/img/icon/logo.png">
               <span class="grade-bottom-left-box-logo-text">BookShelf</span>
             </div>
             <span class="grade-bottom-left-box-point">3,000</span>
@@ -473,7 +473,7 @@
           <div class="grade-bottom-box-2000-back2"></div>
           <div class="grade-bottom-left-box">
             <div class="grade-bottom-left-box-logo">
-              <img src="../static/img/icon/logo.png">
+              <img src="/img/icon/logo.png">
               <span class="grade-bottom-left-box-logo-text">BookShelf</span>
             </div>
             <span class="grade-bottom-left-box-point">2,000</span>
@@ -495,7 +495,7 @@
     <div class="grade-middle">
       <p>매장 포인트 3% 셸프트랙스 1%</p>
       <p>온라인 상품별 추가 적립률</p>
-      <img class="plus" src="../static/img/icon/plus.svg">
+      <img class="plus" src="/img/icon/plus.svg">
       <p>추가 3%</p>
     </div>
     <div class="grade-bottom">
@@ -506,7 +506,7 @@
           <div class="grade-bottom-box-5000-back2"></div>
           <div class="grade-bottom-left-box">
             <div class="grade-bottom-left-box-logo">
-              <img src="../static/img/icon/logo.png">
+              <img src="/img/icon/logo.png">
               <span class="grade-bottom-left-box-logo-text">BookShelf</span>
             </div>
             <span class="grade-bottom-left-box-point">5,000</span>
@@ -521,7 +521,7 @@
           <div class="grade-bottom-box-3000-back2"></div>
           <div class="grade-bottom-left-box">
             <div class="grade-bottom-left-box-logo">
-              <img src="../static/img/icon/logo.png">
+              <img src="/img/icon/logo.png">
               <span class="grade-bottom-left-box-logo-text">BookShelf</span>
             </div>
             <span class="grade-bottom-left-box-point">3,000</span>
@@ -536,7 +536,7 @@
           <div class="grade-bottom-box-2000-back2"></div>
           <div class="grade-bottom-left-box">
             <div class="grade-bottom-left-box-logo">
-              <img src="../static/img/icon/logo.png">
+              <img src="/img/icon/logo.png">
               <span class="grade-bottom-left-box-logo-text">BookShelf</span>
             </div>
             <span class="grade-bottom-left-box-point">2,000</span>
@@ -557,7 +557,7 @@
     <div class="grade-middle">
       <p>매장 포인트 3% 셸프트랙스 1%</p>
       <p>온라인 상품별 추가 적립률</p>
-      <img class="plus" src="../static/img/icon/plus.svg">
+      <img class="plus" src="/img/icon/plus.svg">
       <p>추가 2%</p>
     </div>
     <div class="grade-bottom">
@@ -569,7 +569,7 @@
           <div class="grade-bottom-box-3000-back2"></div>
           <div class="grade-bottom-left-box">
             <div class="grade-bottom-left-box-logo">
-              <img src="../static/img/icon/logo.png">
+              <img src="/img/icon/logo.png">
               <span class="grade-bottom-left-box-logo-text">BookShelf</span>
             </div>
             <span class="grade-bottom-left-box-point">3,000</span>
@@ -584,7 +584,7 @@
           <div class="grade-bottom-box-2000-back2"></div>
           <div class="grade-bottom-left-box">
             <div class="grade-bottom-left-box-logo">
-              <img src="../static/img/icon/logo.png">
+              <img src="/img/icon/logo.png">
               <span class="grade-bottom-left-box-logo-text">BookShelf</span>
             </div>
             <span class="grade-bottom-left-box-point">2,000</span>
@@ -614,7 +614,7 @@
           <div class="grade-bottom-box-2000-back2"></div>
           <div class="grade-bottom-left-box">
             <div class="grade-bottom-left-box-logo">
-              <img src="../static/img/icon/logo.png">
+              <img src="/img/icon/logo.png">
               <span class="grade-bottom-left-box-logo-text">BookShelf</span>
             </div>
             <span class="grade-bottom-left-box-point">2,000</span>
@@ -634,7 +634,7 @@
     <div class="check-title-wrapper">
       <div class="check-title-sub">한달 최대 4000포인트 증정!</div>
       <div class="check-title">
-        <img src="../static/img/icon/calendar-check.svg">
+        <img src="/img/icon/calendar-check.svg">
         <span>출석 체크 이벤트</span>
       </div>
     </div>
@@ -753,11 +753,11 @@
   <div class="notice">
   <div class="notice-title">
     <h1>당첨자 발표</h1>
-    <h4>더보기 +</h4>
+    <h4 onclick="location.href='/winner'">더보기 +</h4>
   </div>
   <div class="notice-box">
     <ul>
-      <li>
+      <li onclick="location.href='/winner-detail'">
         <span>이벤트4 당첨자 발표</span>
         <p>다음 달부터 서울 등 규제지역에서<br>
           15억 원 초과 아파트의 주택담보대출이 가능해지고<br>
@@ -766,7 +766,7 @@
         </p>
         <span>2022.11.11</span>
       </li>
-      <li>
+      <li onclick="location.href='/winner-detail'">
         <span>이벤트3 당첨자 발표</span>
         <p>다음 달부터 서울 등 규제지역에서<br>
           15억 원 초과 아파트의 주택담보대출이 가능해지고<br>
@@ -775,7 +775,7 @@
         </p>
         <span>2022.10.29</span>
       </li>
-      <li>
+      <li onclick="location.href='/winner-detail'">
         <span>이벤트2 당첨자 발표</span>
         <p>다음 달부터 서울 등 규제지역에서<br>
           15억 원 초과 아파트의 주택담보대출이 가능해지고<br>
@@ -784,7 +784,7 @@
         </p>
         <span>2022.10.04</span>
       </li>
-      <li>
+      <li onclick="location.href='/winner-detail'">
         <span>이벤트1 당첨자 발표</span>
         <p>다음 달부터 서울 등 규제지역에서<br>
           15억 원 초과 아파트의 주택담보대출이 가능해지고<br>
@@ -832,7 +832,7 @@
 
 <div class="footer-wrapper">
   <footer>
-    <img src="../static/img/icon/logo.png">
+    <img src="/img/icon/logo.png">
     <div class="footer-title">Bookshelf</div>
     <span class="footer-infor-title">사업자 정보 열기 ∨</span>
     <p class="footer-infor">대표이사:최원석&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -859,24 +859,24 @@
   <nav class="bottom-nav">
     <ul>
       <div id="overbar"></div>
-      <li onclick="location.href='../templates/home.html'">
-        <img src="../static/img/icon/logo.png">
+      <li onclick="location.href='/'">
+        <img src="/img/icon/logo.png">
         <div>NOW</div>
       </li>
-      <li onclick="location.href='../templates/search.html'">
-        <a href="../templates/search.html"><img src="../static/img/icon/search.svg"></a>
+      <li onclick="location.href='/search'">
+        <a href="/search"><img src="/img/icon/search.svg"></a>
         <div>책찾기</div>
       </li>
-      <li onclick="location.href='../templates/event.html'">
-        <img src="../static/img/icon/event.svg">
+      <li onclick="location.href='/event'">
+        <img src="/img/icon/event.svg">
         <div>이벤트</div>
       </li>
-      <li onclick="location.href='../templates/myshelf.html'">
-        <img src="../static/img/icon/shelf.svg">
+      <li onclick="location.href='/myshelf'">
+        <img src="/img/icon/shelf.svg">
         <div>내책장</div>
       </li>
-      <li onclick="location.href='../templates/board-review.html'">
-        <img src="../static/img/icon/list.svg">
+      <li onclick="location.href='/review'">
+        <img src="/img/icon/list.svg">
         <div>게시판</div>
       </li>
     </ul>

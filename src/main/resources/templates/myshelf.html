@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>내책장 | BookShelf</title>
-  <link rel="stylesheet" href="../static/css/myshelf.css">
+  <link rel="stylesheet" href="/css/myshelf.css">
 
   <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-  <script src="../static/js/myshelf.js"></script>
+  <script src="/js/myshelf.js"></script>
   
 </head>
 
@@ -28,24 +28,24 @@
 <header>
   <div class="top-nav-background"></div>
   <div class="top-nav-wrapper">
-    <div class="top-logo-wrapper" onclick="location.href='../templates/home.html'"> 
-    <img id="top-logo" src="../static/img/icon/logo.png">
+    <div class="top-logo-wrapper" onclick="location.href='/'">
+    <img id="top-logo" src="/img/icon/logo.png">
     <span class="top-title">BookShelf</span>
     </div>
     <div class="news-wrapper">
-      <img src="../static/img/icon/bell.svg" id="news">
+      <img src="/img/icon/bell.svg" id="news">
       <div id="news-n">N</div>
     </div>
-    <img src="../static/img/icon/cart.svg" id="cart">
-    <button class="login-button" onclick="location.href='../templates/login.html'">로그인</button>
+    <img src="/img/icon/cart.svg" id="cart">
+    <button class="login-button" onclick="location.href='/login'">로그인</button>
     <nav class="top-nav">
       <div id="underbar"></div>
       <ul>
-        <li onclick="location.href='../templates/home.html'">NOW</li>
-        <li onclick="location.href='../templates/search.html'">책찾기</li>
-        <li onclick="location.href='../templates/event.html'">이벤트</li>
-        <li onclick="location.href='../templates/myshelf.html'">내책장</li>
-        <li onclick="location.href='../templates/board-review.html'">게시판</li>
+        <li onclick="location.href='/'">NOW</li>
+        <li onclick="location.href='/search'">책찾기</li>
+        <li onclick="location.href='/event'">이벤트</li>
+        <li onclick="location.href='/myshelf'">내책장</li>
+        <li onclick="location.href='/review'">게시판</li>
       </ul>
     </nav>
   </div>
@@ -56,16 +56,16 @@
       <div class="top-background"></div>
     </div>
     <div class="top-back-title-wrapper">
-      <img class="profile" src="../static/img/icon/img_no_profile@2x.png">
+      <img class="profile" src="/img/icon/img_no_profile@2x.png">
       <div class="top-back-title">
         <div class="top-back-title-name">user</div>
         <div class="top-back-title-text">의 책장</div>
         <div class="top-back-title-following">팔로잉+</div>
         <div class="top-back-title-follower">팔로워+</div>
       </div>
-      <img class="top-back-setting" src="../static/img/icon/setting-list.svg">
+      <img class="top-back-setting" src="/img/icon/setting-list.svg">
       <div class="top-back-point-wrapper">
-        <img class="top-back-point-icon" src="../static/img/icon/bootstrap-fill.svg">
+        <img class="top-back-point-icon" src="/img/icon/bootstrap-fill.svg">
         <div class="top-back-point-text">1000 포인트</div>
       </div>
     </div>
@@ -94,7 +94,7 @@
   <div class="entire-book-title">
    <div class="entire-book-number">
     <div class="entire-book-number-text">전체 0권</div>
-    <img src="../static/img/icon/down-arr.png">
+    <img src="/img/icon/down-arr.png">
     <div class="entire-book-number-list">
       <li>전체</li>
       <li>읽은 책</li>
@@ -103,13 +103,13 @@
     </div>
    </div>
    <div class="entire-book-search">
-    <img src="../static/img/icon/search.svg">
+    <img src="/img/icon/search.svg">
     <input type="text">
-    <img src="../static/img/icon/three-dots-vertical.svg">
+    <img src="/img/icon/three-dots-vertical.svg">
     <div class="entire-book-search-text">닫기</div>
    </div>
    <div class="entire-book-order">
-    <img src="../static/img/icon/down-arr.png">
+    <img src="/img/icon/down-arr.png">
     <span>최근 담은 순</span>
     <div class="entire-book-order-list">
       <li>최근 담은 순</li>
@@ -123,63 +123,63 @@
   </div>
     <div class="entire-book">
         <li>
-          <div class="entire-book-img-1"><img src="../static/img/book-cover/1.jpg"></div>
-          <div class="entire-book-name-1"><span>책이름 1</span><img src="../static/img/icon/three-dots-vertical.svg"></div>
+          <div class="entire-book-img-1"><img src="/img/book-cover/1.jpg"></div>
+          <div class="entire-book-name-1"><span>책이름 1</span><img src="/img/icon/three-dots-vertical.svg"></div>
           <div class="entire-book-author-1"><span>작가 1</span></div>
         </li>
         <li>
-          <div class="entire-book-img-2"><img src="../static/img/book-cover/2.jpg"></div>
-          <div class="entire-book-name-2"><span>책이름 2</span><img src="../static/img/icon/three-dots-vertical.svg"></div>
+          <div class="entire-book-img-2"><img src="/img/book-cover/2.jpg"></div>
+          <div class="entire-book-name-2"><span>책이름 2</span><img src="/img/icon/three-dots-vertical.svg"></div>
           <div class="entire-book-author-2"><span>작가 2</span></div>
         </li>
         <li>
-          <div class="entire-book-img-3"><img src="../static/img/book-cover/3.jpg"></div>
-          <div class="entire-book-name-3"><span>책이름 3</span><img src="../static/img/icon/three-dots-vertical.svg"></div>
+          <div class="entire-book-img-3"><img src="/img/book-cover/3.jpg"></div>
+          <div class="entire-book-name-3"><span>책이름 3</span><img src="/img/icon/three-dots-vertical.svg"></div>
           <div class="entire-book-author-3"><span>작가 3</span></div>
         </li>
         <li>
-          <div class="entire-book-img-4"><img src="../static/img/book-cover/4.jpg"></div>
-          <div class="entire-book-name-4"><span>책이름 4</span><img src="../static/img/icon/three-dots-vertical.svg"></div>
+          <div class="entire-book-img-4"><img src="/img/book-cover/4.jpg"></div>
+          <div class="entire-book-name-4"><span>책이름 4</span><img src="/img/icon/three-dots-vertical.svg"></div>
           <div class="entire-book-author-4"><span>작가 4</span></div>
         </li>
         <li>
-          <div class="entire-book-img-5"><img src="../static/img/book-cover/5.jpg"></div>
-          <div class="entire-book-name-5"><span>책이름 5</span><img src="../static/img/icon/three-dots-vertical.svg"></div>
+          <div class="entire-book-img-5"><img src="/img/book-cover/5.jpg"></div>
+          <div class="entire-book-name-5"><span>책이름 5</span><img src="/img/icon/three-dots-vertical.svg"></div>
           <div class="entire-book-author-5"><span>작가 5</span></div>
         </li>
         <li>
-          <div class="entire-book-img-6"><img src="../static/img/book-cover/6.jpg"></div>
-          <div class="entire-book-name-6"><span>책이름 6</span><img src="../static/img/icon/three-dots-vertical.svg"></div>
+          <div class="entire-book-img-6"><img src="/img/book-cover/6.jpg"></div>
+          <div class="entire-book-name-6"><span>책이름 6</span><img src="/img/icon/three-dots-vertical.svg"></div>
           <div class="entire-book-author-6"><span>작가 6</span></div>
         </li>
         <li>
-          <div class="entire-book-img-7"><img src="../static/img/book-cover/7.jpg"></div>
-          <div class="entire-book-name-7"><span>책이름 7</span><img src="../static/img/icon/three-dots-vertical.svg"></div>
+          <div class="entire-book-img-7"><img src="/img/book-cover/7.jpg"></div>
+          <div class="entire-book-name-7"><span>책이름 7</span><img src="/img/icon/three-dots-vertical.svg"></div>
           <div class="entire-book-author-7"><span>작가 7</span></div>
         </li>
         <li>
-          <div class="entire-book-img-8"><img src="../static/img/book-cover/8.jpg"></div>
-          <div class="entire-book-name-8"><span>책이름 8</span><img src="../static/img/icon/three-dots-vertical.svg"></div>
+          <div class="entire-book-img-8"><img src="/img/book-cover/8.jpg"></div>
+          <div class="entire-book-name-8"><span>책이름 8</span><img src="/img/icon/three-dots-vertical.svg"></div>
           <div class="entire-book-author-8"><span>작가 8</span></div>
         </li>
         <li>
-          <div class="entire-book-img-9"><img src="../static/img/book-cover/9.jpg"></div>
-          <div class="entire-book-name-9"><span>책이름 9</span><img src="../static/img/icon/three-dots-vertical.svg"></div>
+          <div class="entire-book-img-9"><img src="/img/book-cover/9.jpg"></div>
+          <div class="entire-book-name-9"><span>책이름 9</span><img src="/img/icon/three-dots-vertical.svg"></div>
           <div class="entire-book-author-9"><span>작가 9</span></div>
         </li>
         <li>
-          <div class="entire-book-img-10"><img src="../static/img/book-cover/10.jpg"></div>
-          <div class="entire-book-name-10"><span>책이름 10</span><img src="../static/img/icon/three-dots-vertical.svg"></div>
+          <div class="entire-book-img-10"><img src="/img/book-cover/10.jpg"></div>
+          <div class="entire-book-name-10"><span>책이름 10</span><img src="/img/icon/three-dots-vertical.svg"></div>
           <div class="entire-book-author-10"><span>작가 10</span></div>
         </li>
         <li>
-          <div class="entire-book-img-11"><img src="../static/img/book-cover/11.jpg"></div>
-          <div class="entire-book-name-11"><span>책이름 11</span><img src="../static/img/icon/three-dots-vertical.svg"></div>
+          <div class="entire-book-img-11"><img src="/img/book-cover/11.jpg"></div>
+          <div class="entire-book-name-11"><span>책이름 11</span><img src="/img/icon/three-dots-vertical.svg"></div>
           <div class="entire-book-author-11"><span>작가 11</span></div>
         </li>
         <li>
-          <div class="entire-book-img-12"><img src="../static/img/book-cover/12.jpg"></div>
-          <div class="entire-book-name-12"><span>책이름 12</span><img src="../static/img/icon/three-dots-vertical.svg"></div>
+          <div class="entire-book-img-12"><img src="/img/book-cover/12.jpg"></div>
+          <div class="entire-book-name-12"><span>책이름 12</span><img src="/img/icon/three-dots-vertical.svg"></div>
           <div class="entire-book-author-12"><span>작가 12</span></div>
         </li>
     </div>
@@ -189,18 +189,18 @@
   <div class="favorite-wrapper">
     <div class="favorite-contents-wrapper">
       <div class="favorite-title-wrapper">
-       <img class="favorite-title-icon" src="../static/img/icon/bookmark.svg">
+       <img class="favorite-title-icon" src="/img/icon/bookmark.svg">
        <div class="favorite-title">북마크한 책</div>
        <div class="favorite-number">12 ></div>
       </div>
 
       <div class="favorite-books">
         <div class="favorite-contents-null">북마크한 책이 자동으로 담깁니다.</div>
-        <div><img src="../static/img/book-cover/11.jpg"></div>
-        <div><img src="../static/img/book-cover/12.jpg"></div>
-        <div><img src="../static/img/book-cover/13.jpg"></div>
-        <div><img src="../static/img/book-cover/14.jpg"></div>
-        <div><img src="../static/img/book-cover/15.jpg"></div>
+        <div><img src="/img/book-cover/11.jpg"></div>
+        <div><img src="/img/book-cover/12.jpg"></div>
+        <div><img src="/img/book-cover/13.jpg"></div>
+        <div><img src="/img/book-cover/14.jpg"></div>
+        <div><img src="/img/book-cover/15.jpg"></div>
       </div>
       <div class="favorite-shelf"></div>
     </div>
@@ -209,7 +209,7 @@
   <div class="reading-wrapper">
     <div class="reading-contents-wrapper">
     <div class="reading-title-wrapper">
-      <img class="reading-title-icon" src="../static/img/icon/book.svg">
+      <img class="reading-title-icon" src="/img/icon/book.svg">
       <div class="reading-title">읽고있는 책</div>
       <div class="reading-number">12 ></div>
     </div>
@@ -237,29 +237,29 @@
       <span class="record-sort-sum">누적</span>
       <div class="record-sort-button"></div>
     </div>
-    <img class="record-question" src="../static/img/icon/question-circle.svg">
+    <img class="record-question" src="/img/icon/question-circle.svg">
 
     <div class="record-question-box">
       <div class="record-question-info">
         <span>구독기간 동안의 독서활동으로 분석합니다.</span> 
-        <img src="../static/img/icon/btn_dialog_close@2x.png">
+        <img src="/img/icon/btn_dialog_close@2x.png">
       </div>
       <div class="record-question-book-wrapper">
-        <img src="../static/img/icon/book.svg">
+        <img src="/img/icon/book.svg">
         <div class="record-question-book-right">
           <div class="record-question-book-title">책</div>
           <div class="record-question-book-info">기간 동안 한 번 이상 열어본 책의 수</div>
         </div>
       </div>
       <div class="record-question-time-wrapper">
-        <img src="../static/img/icon/clock.svg">
+        <img src="/img/icon/clock.svg">
         <div class="record-question-time-right">
           <div class="record-question-time-title">독서 시간</div>
           <div class="record-question-time-info">기간 동안 책을 본 누적 시간</div>
         </div>
       </div>
       <div class="record-question-routine-wrapper">
-        <img src="../static/img/icon/hourglass.svg">
+        <img src="/img/icon/hourglass.svg">
         <div class="record-question-routine-right">
           <div class="record-question-routine-title">독서 루틴</div>
           <div class="record-question-routine-info">기간 동안 서비스에 로그인한 날짜 및 횟수</div>
@@ -275,7 +275,7 @@
     <div class="record-contents">
     <div class="record-book">
       <div class="record-book-left">
-      <img class="record-book-icon" src="../static/img/icon/book.svg">
+      <img class="record-book-icon" src="/img/icon/book.svg">
       <div class="record-book-title">책</div>
       </div>
       <div class="record-book-right">
@@ -288,7 +288,7 @@
 <div class="record-contents">
   <div class="record-time">
     <div class="record-time-left">
-      <img class="record-time-icon" src="../static/img/icon/clock.svg">
+      <img class="record-time-icon" src="/img/icon/clock.svg">
       <div class="record-time-title">독서시간</div>
     </div>
     <div class="record-time-right">
@@ -303,7 +303,7 @@
   <div class="record-contents">
     <div class="record-routine">
       <div class="record-routine-left">
-      <img class="record-routine-icon" src="../static/img/icon/hourglass.svg">
+      <img class="record-routine-icon" src="/img/icon/hourglass.svg">
       <div class="record-routine-title">독서루틴</div>
       </div>
     <div class="record-routine-right">
@@ -349,7 +349,7 @@
   <div class="order-list-title-inner-wrapper">
     <span class="order-list-title">구매 목록</span>
     <div class="order-list-title-button">
-      <img src="../static/img/icon/calendar.svg">
+      <img src="/img/icon/calendar.svg">
       <span>상세조회</span>
     </div>
     <span class="order-list-title-info">최근 1개월 구매 내역입니다.</span>
@@ -358,7 +358,7 @@
     <div class="order-list-title-detail-wrapper">
       <div class="detail-title">
         <span>상세조회</span>
-        <img src="../static/img/icon/btn_dialog_close@2x.png">
+        <img src="/img/icon/btn_dialog_close@2x.png">
       </div>
       <div class="order-list-title-detail-info">
         <li>조회기간 설정은 6개월 단위이며, 주문정보 조회는 최대 5년까지 가능합니다.</li>
@@ -375,12 +375,12 @@
       </select>
         <div class="detail-range-start-wrapper">
         <input type="text" class="detail-range-start">
-        <img class="detail-range-start-icon" src="../static/img/icon/calendar.svg">
+        <img class="detail-range-start-icon" src="/img/icon/calendar.svg">
         </div>
         <div class="detail-range-between">~</div>
         <div class="detail-range-end-wrapper">
         <input type="text" class="detail-range-end">
-        <img class="detail-range-end-icon" src="../static/img/icon/calendar.svg">
+        <img class="detail-range-end-icon" src="/img/icon/calendar.svg">
       </div>
     </div>
       <div class="order-list-detail-state">
@@ -398,7 +398,7 @@
       </div>
       <div class="order-list-detail-bottom">
         <div class="detail-bottom-reset">
-          <img class="detail-bottom-reset-icon" src="../static/img/icon/arrow-clockwise.svg">
+          <img class="detail-bottom-reset-icon" src="/img/icon/arrow-clockwise.svg">
           <span>초기화</span>
         </div>
         <div class="detail-bottom-apply">
@@ -467,7 +467,7 @@
 
   <div class="order-list-contents-wrapper">
     <div class="order-list-contents-null">
-      <img src="../static/img/icon/ico_nodata@2x.png">
+      <img src="/img/icon/ico_nodata@2x.png">
       <span>해당 기간에 구매한 상품이 없습니다.</span>
     </div>
   </div>
@@ -479,7 +479,7 @@
 
 <div class="footer-wrapper">
   <footer>
-    <img src="../static/img/icon/logo.png">
+    <img src="/img/icon/logo.png">
     <div class="footer-title">Bookshelf</div>
     <span class="footer-infor-title">사업자 정보 열기 ∨</span>
     <p class="footer-infor">대표이사:최원석&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -506,24 +506,24 @@
   <nav class="bottom-nav">
     <ul>
       <div id="overbar"></div>
-      <li onclick="location.href='../templates/home.html'">
-        <img src="../static/img/icon/logo.png">
+      <li onclick="location.href='/'">
+        <img src="/img/icon/logo.png">
         <div>NOW</div>
       </li>
-      <li onclick="location.href='../templates/search.html'">
-        <a href="../templates/search.html"><img src="../static/img/icon/search.svg"></a>
+      <li onclick="location.href='/search'">
+        <a href="/search"><img src="/img/icon/search.svg"></a>
         <div>책찾기</div>
       </li>
-      <li onclick="location.href='../templates/event.html'">
-        <img src="../static/img/icon/event.svg">
+      <li onclick="location.href='/event'">
+        <img src="/img/icon/event.svg">
         <div>이벤트</div>
       </li>
-      <li onclick="location.href='../templates/myshelf.html'">
-        <img src="../static/img/icon/shelf.svg">
+      <li onclick="location.href='/myshelf'">
+        <img src="/img/icon/shelf.svg">
         <div>내책장</div>
       </li>
-      <li onclick="location.href='../templates/board-review.html'">
-        <img src="../static/img/icon/list.svg">
+      <li onclick="location.href='/review'">
+        <img src="/img/icon/list.svg">
         <div>게시판</div>
       </li>
     </ul>

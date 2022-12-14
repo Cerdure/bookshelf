@@ -55,22 +55,22 @@ $(function () {
   
   $(".pw-wrapper img").click(function(){
     if(!$(this).hasClass('clicked')){
-      $(this).attr('src','../static/img/icon/ico_eye_active@2x.png').addClass('clicked');
+      $(this).attr('src','/img/icon/ico_eye_active@2x.png').addClass('clicked');
       $(".user-pw").attr('type','text');
     } else {
-      $(this).attr('src','../static/img/icon/ico_eye@2x.png').removeClass('clicked');
+      $(this).attr('src','/img/icon/ico_eye@2x.png').removeClass('clicked');
       $(".user-pw").attr('type','password');
     }
   });
 
   $(".id-save-check").click(function () {
     if (!$(this).hasClass('clicked')) {
-      $(this).attr('src', "../static/img/icon/ico_checkbox_active@2x.png")
+      $(this).attr('src', "/img/icon/ico_checkbox_active@2x.png")
         .css({ 'border': 'none', 'width': '12px', 'height': '12px' })
         .animate({ 'backgroundColor': 'rgb(101, 168, 255)' }, 200)
         .addClass('clicked');
     } else {
-      $(this).attr('src', "../static/img/icon/ico_checkbox@2x.png")
+      $(this).attr('src', "/img/icon/ico_checkbox@2x.png")
         .css({ 'border': '1px solid rgb(211, 211, 211)', 'width': '10px', 'height': '10px' })
         .animate({ 'backgroundColor': 'white' }, 200)
         .removeClass('clicked');

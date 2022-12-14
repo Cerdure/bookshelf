@@ -162,7 +162,7 @@ $(".reply").click(function(){
   let div = document.createElement("div");
   div.setAttribute('class','inner-comment');
   div.innerHTML = 
-  '<img src="../static/img/icon/arrow-return-right.svg">' +
+  '<img src="/img/icon/arrow-return-right.svg">' +
   '<textarea class="comment" name="comment" maxlength="300" onkeydown="resize(this)" onkeyup="resize(this)" onclick="commentClick(this)" onfocusout="commentFocusout(this)" placeholder="내용을 입력해주세요."></textarea>'+
   '<div class="comment-underline"></div>' +
   '<button class="comment-button-save" type="submit" value="save">등록</button>' +

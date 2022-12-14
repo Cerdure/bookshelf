@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BookShelf</title>
-  <link rel="stylesheet" href="../static/css/home.css">
+  <link rel="stylesheet" href="/css/home.css">
   <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-  <script src="../static/js/home.js"></script>
+  <script src="/js/home.js"></script>
 </head>
 
 <body>
@@ -24,26 +24,26 @@
 <header>
   <div class="top-nav-background"></div>
   <div class="top-nav-wrapper">
-    <div class="top-logo-wrapper" onclick="location.href='../templates/home.html'"> 
-    <img id="top-logo" src="../static/img/icon/logo.png">
+    <div class="top-logo-wrapper" onclick="location.href='/'"> 
+    <img id="top-logo" src="/img/icon/logo.png">
     <span class="top-title">BookShelf</span>
     </div>
 
     <div class="news-wrapper">
-      <img src="../static/img/icon/bell.svg" id="news">
+      <img src="/img/icon/bell.svg" id="news">
       <div id="news-n">N</div>
     </div>
-    <img src="../static/img/icon/cart.svg" id="cart">
+    <img src="/img/icon/cart.svg" id="cart">
     
-    <button class="login-button" onclick="location.href='../templates/login.html'">로그인</button>
+    <button class="login-button" onclick="location.href='/login'">로그인</button>
     <nav class="top-nav">
       <div id="underbar"></div>
       <ul>
-        <li onclick="location.href='../templates/home.html'">NOW</li>
-        <li onclick="location.href='../templates/search.html'">책찾기</li>
-        <li onclick="location.href='../templates/event.html'">이벤트</li>
-        <li onclick="location.href='../templates/myshelf.html'">내책장</li>
-        <li onclick="location.href='../templates/board-review.html'">게시판</li>
+        <li onclick="location.href='/'">NOW</li>
+        <li onclick="location.href='/search'">책찾기</li>
+        <li onclick="location.href='/event'">이벤트</li>
+        <li onclick="location.href='/myshelf'">내책장</li>
+        <li onclick="location.href='/review'">게시판</li>
       </ul>
     </nav>
   </div>
@@ -51,12 +51,12 @@
 <div class="banner-wrapper">
   <div class="banner">
     <div class="banner-img-wrapper">
-      <img class="banner-img-0" src="../static/img/book-cover/1.jpg" alt="">
-      <img class="banner-img-1" src="../static/img/book-cover/2.jpg" alt="">
-      <img class="banner-img-2" src="../static/img/book-cover/3.jpg" alt="">
-      <img class="banner-img-3" src="../static/img/book-cover/4.jpg" alt="">
-      <img class="banner-img-4" src="../static/img/book-cover/5.jpg" alt="">
-      <img class="banner-img-5" src="../static/img/book-cover/6.jpg" alt="">
+      <img class="banner-img-0" src="/img/book-cover/1.jpg" alt="">
+      <img class="banner-img-1" src="/img/book-cover/2.jpg" alt="">
+      <img class="banner-img-2" src="/img/book-cover/3.jpg" alt="">
+      <img class="banner-img-3" src="/img/book-cover/4.jpg" alt="">
+      <img class="banner-img-4" src="/img/book-cover/5.jpg" alt="">
+      <img class="banner-img-5" src="/img/book-cover/6.jpg" alt="">
     </div>
     <div class="banner-font-wrapper">
       <li>
@@ -104,7 +104,7 @@
       <div class="simple-search-title">User 님,</div>
       <div class="simple-search-input">
       <input type="text" placeholder="찾으시는 책이 있나요?">
-      <img src="../static/img/icon/search.svg" alt="">
+      <img src="/img/icon/search.svg" alt="">
       </div>
     </div>
   </div>
@@ -151,7 +151,7 @@
     </div>
     <div class="tb-reset-wrapper">
       <div class="tb-reset-box">
-      <img class="tb-reset-icon" src="../static/img/icon/arrow-clockwise.svg">
+      <img class="tb-reset-icon" src="/img/icon/arrow-clockwise.svg">
       <div class="tb-reset-text">다른 책 찾아보기</div>
       </div>
     </div>
@@ -208,31 +208,31 @@
         <h1 class="picks-title-1">Picks</h1><h1 class="picks-title-2">!</h1>
         <h5>새로운 즐거움을 드립니다.</h5>
         <h2>취향에 꼭 맞는 책<br>북셸프가 찾아드려요!</h2>
-        <button onclick="location.href='../templates/login.html'">로그인하고 추천받기</button>
+        <button onclick="location.href='/login'">로그인하고 추천받기</button>
       </li>
       <li>
-        <img src="../static/img/background/img_welcome_picks_item_01.png" alt="">
+        <img src="/img/background/img_welcome_picks_item_01.png" alt="">
         <span>종합추천</span>
         <span>고객님의 취향을 분석해<br>
           이틀밤낮 고민하여<br>
           고른 책을 확인하세요.</span>
       </li>
       <li>
-        <img src="../static/img/background/img_welcome_picks_item_02.png" alt="">
+        <img src="/img/background/img_welcome_picks_item_02.png" alt="">
         <span>작가 Picks</span>
         <span>픽스를 통해 고객님의<br>
           선호 작가와 비슷한<br>
           새로운 작가를 만나보세요!</span>
       </li>
       <li>
-        <img src="../static/img/background/img_welcome_picks_item_03.png" alt="">
+        <img src="/img/background/img_welcome_picks_item_03.png" alt="">
         <span>내 마음대로 Picks</span>
         <span>오늘은<br>
           내 맘대로 이 책 한 권<br>
           어때요?</span>
       </li>
       <li>
-        <img src="../static/img/background/img_welcome_picks_item_04.png" alt="">
+        <img src="/img/background/img_welcome_picks_item_04.png" alt="">
         <span>소울메이트 Picks</span>
         <span>고객님과 취향이 비슷한<br>
           소울메이트들은<br>
@@ -245,11 +245,11 @@
   <div class="notice">
   <div class="notice-title">
     <h1>공지사항</h1>
-    <h4>더보기 +</h4>
+    <h4 onclick="location.href='/notice'">더보기 +</h4>
   </div>
   <div class="notice-box">
     <ul>
-      <li>
+      <li onclick="location.href='/notice-detail'">
         <span>공지사항 1</span>
         <p>다음 달부터 서울 등 규제지역에서<br>
           15억 원 초과 아파트의 주택담보대출이 가능해지고<br>
@@ -258,7 +258,7 @@
         </p>
         <span>2022.11.11</span>
       </li>
-      <li>
+      <li onclick="location.href='/notice-detail'">
         <span>공지사항 2</span>
         <p>다음 달부터 서울 등 규제지역에서<br>
           15억 원 초과 아파트의 주택담보대출이 가능해지고<br>
@@ -267,7 +267,7 @@
         </p>
         <span>2022.10.29</span>
       </li>
-      <li>
+      <li onclick="location.href='/notice-detail'">
         <span>공지사항 3</span>
         <p>다음 달부터 서울 등 규제지역에서<br>
           15억 원 초과 아파트의 주택담보대출이 가능해지고<br>
@@ -276,7 +276,7 @@
         </p>
         <span>2022.10.04</span>
       </li>
-      <li>
+      <li onclick="location.href='/notice-detail'">
         <span>공지사항 4</span>
         <p>다음 달부터 서울 등 규제지역에서<br>
           15억 원 초과 아파트의 주택담보대출이 가능해지고<br>
@@ -294,20 +294,20 @@
   <div class="bottom-banner-button">></div>
   <div class="bottom-banner-inner-box">
     <div class="bottom-banner-inner-title">오늘은 무비데이!</div>
-    <img class="bottom-banner-qutoes-left" src="../static/img/icon/qutoes-top-gray.left.png">
+    <img class="bottom-banner-qutoes-left" src="/img/icon/qutoes-top-gray.left.png">
     <div class="bottom-banner-inner-text">
       새삼스러울 것 없는<br>
       얘기지만,<br>
       우리가 본 영화는<br>
       우리의 인생과 붙어 있다.<br>
       몸으로 영화를 본다.</div>
-      <img class="bottom-banner-qutoes-right" src="../static/img/icon/qutoes-bottom-gray.right.png">
+      <img class="bottom-banner-qutoes-right" src="/img/icon/qutoes-bottom-gray.right.png">
       <span class="bottom-banner-booktitle">정희진, <혼자서 본 영화></span>
   </div>
 </div>
 <div class="footer-wrapper">
   <footer>
-    <img src="../static/img/icon/logo.png">
+    <img src="/img/icon/logo.png">
     <div class="footer-title">Bookshelf</div>
     <span class="footer-infor-title">사업자 정보 열기 ∨</span>
     <p class="footer-infor">대표이사:최원석&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -334,24 +334,24 @@
   <nav class="bottom-nav">
     <ul>
       <div id="overbar"></div>
-      <li onclick="location.href='../templates/home.html'">
-        <img src="../static/img/icon/logo.png">
+      <li onclick="location.href='/'">
+        <img src="/img/icon/logo.png">
         <div>NOW</div>
       </li>
-      <li onclick="location.href='../templates/search.html'">
-        <a href="../templates/search.html"><img src="../static/img/icon/search.svg"></a>
+      <li onclick="location.href='/search'">
+        <a href="/search"><img src="/img/icon/search.svg"></a>
         <div>책찾기</div>
       </li>
-      <li onclick="location.href='../templates/event.html'">
-        <img src="../static/img/icon/event.svg">
+      <li onclick="location.href='/event'">
+        <img src="/img/icon/event.svg">
         <div>이벤트</div>
       </li>
-      <li onclick="location.href='../templates/myshelf.html'">
-        <img src="../static/img/icon/shelf.svg">
+      <li onclick="location.href='/myshelf'">
+        <img src="/img/icon/shelf.svg">
         <div>내책장</div>
       </li>
-      <li onclick="location.href='../templates/board-review.html'">
-        <img src="../static/img/icon/list.svg">
+      <li onclick="location.href='/review'">
+        <img src="/img/icon/list.svg">
         <div>게시판</div>
       </li>
     </ul>
