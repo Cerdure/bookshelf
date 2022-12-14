@@ -164,7 +164,7 @@
           let randNum = Math.floor(Math.random()*62+1);
           while(arr.indexOf(randNum)!=-1) randNum = Math.floor(Math.random()*62+1);
           arr.push(randNum);
-          $(".today-book-img-"+i).attr('src',"../static/img/book-cover/"+randNum+".jpg");
+          $(".today-book-img-"+i).attr('src',"/img/book-cover/"+randNum+".jpg");
           $(".today-book-name-"+i).text("책이름"+randNum);
           $(".today-book-author-"+i).text("작가"+randNum);
         }
@@ -225,7 +225,7 @@
           let randNum = Math.floor(Math.random()*62+1);
           while(arr.indexOf(randNum)!=-1) randNum = Math.floor(Math.random()*62+1);
           arr.push(randNum);
-          $(".today-book-img-"+i).attr('src',"../static/img/book-cover/"+randNum+".jpg");
+          $(".today-book-img-"+i).attr('src',"/img/book-cover/"+randNum+".jpg");
           $(".today-book-name-"+i).text("책이름"+randNum);
           $(".today-book-author-"+i).text("작가"+randNum);
         }
@@ -277,7 +277,7 @@
         }
 
         for(var j=0;j<10;j++){
-          $(".best-img-"+(j+1)).attr('src',"../static/img/book-cover/"+bestEntire[j]+".jpg");
+          $(".best-img-"+(j+1)).attr('src',"/img/book-cover/"+bestEntire[j]+".jpg");
         }
         $(".title-best").click(function(){
           best = true;
@@ -307,7 +307,7 @@
           if(best && entire){     console.log("best && entire");
             $(".best-books-wrapper").css('display','none');
             for(var j=0;j<10;j++){
-            $(".best-img-"+(j+1)).attr('src',"../static/img/book-cover/"+bestEntire[j]+".jpg");
+            $(".best-img-"+(j+1)).attr('src',"/img/book-cover/"+bestEntire[j]+".jpg");
             }
             $(".best-books-wrapper").fadeIn(500);
             $(".title-best").css('color','black');
@@ -319,7 +319,7 @@
           else if(best && domestic){      console.log("best && domestic");
             $(".best-books-wrapper").css('display','none');
             for(var j=0;j<10;j++){
-            $(".best-img-"+(j+1)).attr('src',"../static/img/book-cover/"+bestDomestic[j]+".jpg");
+            $(".best-img-"+(j+1)).attr('src',"/img/book-cover/"+bestDomestic[j]+".jpg");
             }
             $(".best-books-wrapper").fadeIn(500);
             $(".title-best").css('color','black');
@@ -331,7 +331,7 @@
           else if(best && foreign){      console.log("best && foreign");
             $(".best-books-wrapper").css('display','none');
             for(var j=0;j<10;j++){
-            $(".best-img-"+(j+1)).attr('src',"../static/img/book-cover/"+bestForeign[j]+".jpg");
+            $(".best-img-"+(j+1)).attr('src',"/img/book-cover/"+bestForeign[j]+".jpg");
             }
             $(".best-books-wrapper").fadeIn(500);
             $(".title-best").css('color','black');
@@ -343,7 +343,7 @@
           else if(steady && entire){
             $(".best-books-wrapper").css('display','none');
             for(var j=0;j<10;j++){
-            $(".best-img-"+(j+1)).attr('src',"../static/img/book-cover/"+steadyEntire[j]+".jpg");
+            $(".best-img-"+(j+1)).attr('src',"/img/book-cover/"+steadyEntire[j]+".jpg");
             }
             $(".best-books-wrapper").fadeIn(500);
             $(".title-best").css('color','lightgray');
@@ -355,7 +355,7 @@
           else if(steady && domestic){
             $(".best-books-wrapper").css('display','none');
             for(var j=0;j<10;j++){
-            $(".best-img-"+(j+1)).attr('src',"../static/img/book-cover/"+steadyDomestic[j]+".jpg");
+            $(".best-img-"+(j+1)).attr('src',"/img/book-cover/"+steadyDomestic[j]+".jpg");
             }
             $(".best-books-wrapper").fadeIn(500);
             $(".title-best").css('color','lightgray');
@@ -367,7 +367,7 @@
           else if(steady && foreign){
             $(".best-books-wrapper").css('display','none');
             for(var j=0;j<10;j++){
-            $(".best-img-"+(j+1)).attr('src',"../static/img/book-cover/"+steadyForeign[j]+".jpg");
+            $(".best-img-"+(j+1)).attr('src',"/img/book-cover/"+steadyForeign[j]+".jpg");
             }
             $(".best-books-wrapper").fadeIn(500);
             $(".title-best").css('color','lightgray');
