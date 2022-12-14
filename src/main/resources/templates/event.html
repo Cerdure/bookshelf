@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이벤트 | BookShelf</title>
+  <link rel="stylesheet" href="../static/css/event.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+  <script src="../static/js/event.js"></script>
+  
+</head>
+
+<body>
+
+<header>
+  <div class="top-nav-background"></div>
+  <div class="top-nav-wrapper">
+    <div class="top-logo-wrapper" onclick="location.href='../templates/home.html'"> 
+    <img id="top-logo" src="../static/img/icon/logo.png">
+    <span class="top-title">BookShelf</span>
+    </div>
+    <div class="news-wrapper">
+      <img src="../static/img/icon/bell.svg" id="news">
+      <div id="news-n">N</div>
+    </div>
+    <img src="../static/img/icon/cart.svg" id="cart">
+    <button class="login-button" onclick="location.href='../templates/login.html'">로그인</button>
+    <nav class="top-nav">
+      <div id="underbar"></div>
+      <ul>
+        <li onclick="location.href='../templates/home.html'">NOW</li>
+        <li onclick="location.href='../templates/search.html'">책찾기</li>
+        <li onclick="location.href='../templates/event.html'">이벤트</li>
+        <li onclick="location.href='../templates/myshelf.html'">내책장</li>
+        <li onclick="location.href='../templates/board-review.html'">게시판</li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="banner-wrapper">
+  <div class="banner">
+    <div class="banner-title">
+      <div class="banner-title-1">북셸프 0주년 기념!</div>
+      <div class="banner-title-2">특별 기획전</div>
+    </div>
+    <div class="banner-before"></div>
+    <div class="banner-img-wrapper">
+      <ul>
+        <li class="bi-7"><img></li>
+        <li class="bi-8"><img></li>
+        <li class="bi-9"><img></li>
+        <li class="bi-10"><img></li>
+        <li class="bi-11"><img></li>
+        <li class="bi-12"><img></li>
+        <li class="bi-13"><img></li>
+        <li class="bi-14"><img></li>
+        <li class="bi-15"><img></li>
+        
+        <li class="bi-0"><img></li>
+        <li class="bi-1"><img></li>
+        <li class="bi-2"><img></li>
+        <li class="bi-3"><img></li>
+        <li class="bi-4"><img></li>
+        <li class="bi-5"><img></li>
+        <li class="bi-6"><img></li>
+        <li class="bi-7"><img></li>
+        <li class="bi-8"><img></li>
+        <li class="bi-9"><img></li>
+        <li class="bi-10"><img></li>
+        <li class="bi-11"><img></li>
+        <li class="bi-12"><img></li>
+        <li class="bi-13"><img></li>
+        <li class="bi-14"><img></li>
+        <li class="bi-15"><img></li>
+
+        <li class="bi-0"><img></li>
+        <li class="bi-1"><img></li>
+        <li class="bi-2"><img></li>
+        <li class="bi-3"><img></li>
+        <li class="bi-4"><img></li>
+        <li class="bi-5"><img></li>
+        <li class="bi-6"><img></li>
+        <li class="bi-7"><img></li>
+        <li class="bi-8"><img></li>
+      </ul>
+    </div>
+    <div class="banner-font-wrapper">
+        <h1 class="banner-font-big"></h1>
+        <h4 class="banner-font-small"></span>
+      </li>
+    </div>
+    <div class="banner-button-wrapper">
+      <button class="btn-left"><</button>
+      <button class="btn-right">></button>
+    </div>
+    <div class="banner-index-wrapper">
+      <div class="banner-current-index">01</div>
+      <div class="banner-index-fill-box">
+        <div class="banner-index-fill"></div>
+      </div>
+      <div class="banner-last-index">16</div>
+      <div class="banner-stop"></div>
+      <div class="banner-play"></div>
+    </div>
+  </div>
+</div>
+ 
+<!-- tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt -->
+
+
+
+<div class="category-img-wrapper">
+  <div><img src="../static/img/icon/sale.png"></div>
+  <div><img src="../static/img/icon/coupon.png"></div>
+  <div><img src="../static/img/icon/grade.png"></div>
+  <div><img src="../static/img/icon/check.png"></div>
+  <div><img src="../static/img/icon/notice.png"></div>
+</div>
+
+<div class="category-title-wrapper">
+  <div class="category-title">
+    <span>특가 도서</span>
+    <span>포인트</span>
+    <span>회원혜택</span>
+    <span>출석체크</span>
+    <span>당첨자 발표</span>
+  </div>
+</div>
+
+
+<div class="recommend-wrapper">
+  <div class="recommend-title">
+    <img src="../static/img/icon/recommend.svg">
+   <span>추천 이벤트</span>
+  </div>
+  <div class="recommend-list">
+    <ul>
+      <li><div>북셸프 혜택가이드</div></li>
+      <li><div>수능탈출 버킷리스트</div></li>
+      <li><div>경제 경영 브랜드전</div></li>
+      <li><div>최고 90% 책방 특가</div></li>
+      <li><div>원피스 25주년 기념</div></li>
+      <li><div>오늘의 추천 사은품</div></li>
+      <li><div>동네 책방 여행</div></li>
+      <li><div>영화 속 장면 책으로</div></li>
+      <li><div>첫달 무료 구독</div></li>
+      <li><div>이달의 문화컨텐츠</div></li>
+      <li><div>성공하는 말하기</div></li>
+      <li><div>어린이 이달의 혜택</div></li>
+    </ul>
+  </div>
+</div>
+
+<div class="sale-wrapper">
+  <div class="sale-title-wrapper">
+    <span>| 특가 세일 도서</span>
+    <div class="sale-input-wrapper">
+      <input type="text" placeholder="상품명으로 검색해보세요.">
+      <img src="../static/img/icon/search.svg">
+    </div>
+  </div>
+  <div class="sale-contents">
+    <ul class="sale-row-0">
+      <li>
+        <img src="">
+        <span id="sale-book-name"></span>
+        <span id="sale-author"></span>
+      </li>
+      <li>
+        <img src="">
+        <span id="sale-book-name"></span>
+        <span id="sale-author"></span>
+      </li>
+      <li>
+        <img src="">
+        <span id="sale-book-name"></span>
+        <span id="sale-author"></span>
+      </li>
+      <li>
+        <img src="">
+        <span id="sale-book-name"></span>
+        <span id="sale-author"></span>
+      </li>
+      <li>
+        <img src="">
+        <span id="sale-book-name"></span>
+        <span id="sale-author"></span>
+      </li>
+      <li>
+        <img src="">
+        <span id="sale-book-name"></span>
+        <span id="sale-author"></span>
+      </li>
+      <li>
+        <img src="">
+        <span id="sale-book-name"></span>
+        <span id="sale-author"></span>
+      </li>
+      <li>
+        <img src="">
+        <span id="sale-book-name"></span>
+        <span id="sale-author"></span>
+      </li>
+      <li>
+        <img src="">
+        <span id="sale-book-name"></span>
+        <span id="sale-author"></span>
+      </li>
+      <li>
+        <img src="">
+        <span id="sale-book-name"></span>
+        <span id="sale-author"></span>
+      </li>
+    </ul>
+    <ul class="sale-row-1">
+      <li>
+        <img src="">
+        <span id="sale-book-name"></span>
+        <span id="sale-author"></span>
+      </li>
+      <li>
+        <img src="">
+        <span id="sale-book-name"></span>
+        <span id="sale-author"></span>
+      </li>
+      <li>
+        <img src="">
+        <span id="sale-book-name"></span>
+        <span id="sale-author"></span>
+      </li>
+      <li>
+        <img src="">
+        <span id="sale-book-name"></span>
+        <span id="sale-author"></span>
+      </li>
+      <li>
+        <img src="">
+        <span id="sale-book-name"></span>
+        <span id="sale-author"></span>
+      </li>
+      <li>
+        <img src="">
+        <span id="sale-book-name"></span>
+        <span id="sale-author"></span>
+      </li>
+      <li>
+        <img src="">
+        <span id="sale-book-name"></span>
+        <span id="sale-author"></span>
+      </li>
+      <li>
+        <img src="">
+        <span id="sale-book-name"></span>
+        <span id="sale-author"></span>
+      </li>
+      <li>
+        <img src="">
+        <span id="sale-book-name"></span>
+        <span id="sale-author"></span>
+      </li>
+      <li>
+        <img src="">
+        <span id="sale-book-name"></span>
+        <span id="sale-author"></span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<div class="coupon-wrapper">
+  <div class="coupon-title">| 포인트 지급 이벤트</div>
+
+  <div class="coupon-row-1">
+
+    <div class="coupon-li">
+      <div class="coupon-box">
+        <div class="coupon-box-back1"></div>
+        <div class="coupon-box-back2"></div>
+        <div class="coupon-left-box">
+          <span class="coupon-left-box-text">Point</span>
+          <div class="coupon-left-box-logo">
+            <img src="../static/img/icon/logo.png">
+            <span>BookShelf</span>
+          </div>
+          <span class="coupon-left-box-point">1,000</span>
+        </div>
+      </div>
+      <div class="coupon-info-wrapper">
+        <span class="coupon-info-title">출석체크</span>
+        <p class="coupon-info">| 한달 최대 4,000포인트 혜택</p>
+        <p class="coupon-info">| 1,000포인트 x 4회, 당일 사용</p>
+      </div>
+      <div class="coupon-info-button">자세히 보기</div>
+    </div>
+
+    <div class="coupon-li">
+      <div class="coupon-box">
+        <div class="coupon-box-back1"></div>
+        <div class="coupon-box-back2"></div>
+        <div class="coupon-left-box">
+          <span class="coupon-left-box-text">Point</span>
+          <div class="coupon-left-box-logo">
+            <img src="../static/img/icon/logo.png">
+            <span>BookShelf</span>
+          </div>
+          <span class="coupon-left-box-point">500</span>
+        </div>
+      </div>
+      <div class="coupon-info-wrapper">
+        <span class="coupon-info-title">함께 읽는 이달의 책</span>
+        <p class="coupon-info">| 북셸프 메이트 참여 시</p>
+        <p class="coupon-info">| ID당 1회, 발급 당일 사용</p>
+      </div>
+      <div class="coupon-info-button">자세히 보기</div>
+    </div>
+    
+    <div class="coupon-li">
+      <div class="coupon-box">
+        <div class="coupon-box-back1"></div>
+        <div class="coupon-box-back2"></div>
+        <div class="coupon-left-box">
+          <span class="coupon-left-box-text">Point</span>
+          <div class="coupon-left-box-logo">
+            <img src="../static/img/icon/logo.png">
+            <span>BookShelf</span>
+          </div>
+          <span class="coupon-left-box-point">500</span>
+        </div>
+      </div>
+      <div class="coupon-info-wrapper">
+        <span class="coupon-info-title">정기 연재 구독 시</span>
+        <p class="coupon-info">| 연재 작품 구독 신청하면</p>
+        <p class="coupon-info">| 매주 포인트 500포인트 지급</p>
+      </div>
+      <div class="coupon-info-button">자세히 보기</div>
+    </div>
+
+  </div>
+
+
+  <div class="coupon-row-2">
+
+    <div class="coupon-li">
+      <div class="coupon-box">
+        <div class="coupon-box-back1"></div>
+        <div class="coupon-box-back2"></div>
+        <div class="coupon-left-box">
+          <span class="coupon-left-box-text">Point</span>
+          <div class="coupon-left-box-logo">
+            <img src="../static/img/icon/logo.png">
+            <span>BookShelf</span>
+          </div>
+          <span class="coupon-left-box-point">200</span>
+        </div>
+      </div>
+      <div class="coupon-info-wrapper">
+        <span class="coupon-info-title">우리가 만드는 책</span>
+        <p class="coupon-info">| 선착순 이내 투표 참여 시</p>
+        <p class="coupon-info">| 200포인트 지급</p>
+      </div>
+      <div class="coupon-info-button">자세히 보기</div>
+    </div>
+
+    <div class="coupon-li">
+      <div class="coupon-box">
+        <div class="coupon-box-back1"></div>
+        <div class="coupon-box-back2"></div>
+        <div class="coupon-left-box">
+          <span class="coupon-left-box-text">Point</span>
+          <div class="coupon-left-box-logo">
+            <img src="../static/img/icon/logo.png">
+            <span>BookShelf</span>
+          </div>
+          <span class="coupon-left-box-point">200</span>
+        </div>
+      </div>
+      <div class="coupon-info-wrapper">
+        <span class="coupon-info-title">구매 후 리뷰 작성 시</span>
+        <p class="coupon-info">| 책 리뷰 200포인트</p>
+        <p class="coupon-info">| 도서 문장 수집 100포인트</p>
+      </div>
+      <div class="coupon-info-button">자세히 보기</div>
+    </div>
+    
+    <div class="coupon-li">
+      <div class="coupon-box">
+        <div class="coupon-box-back1"></div>
+        <div class="coupon-box-back2"></div>
+        <div class="coupon-left-box">
+          <span class="coupon-left-box-text">Point</span>
+          <div class="coupon-left-box-logo">
+            <img src="../static/img/icon/logo.png">
+            <span>BookShelf</span>
+          </div>
+          <span class="coupon-left-box-point">1,000</span>
+        </div>
+      </div>
+      <div class="coupon-info-wrapper">
+        <span class="coupon-info-title">이달의 포인트</span>
+        <p class="coupon-info">| ID당 월 1회 지급</p>
+        <p class="coupon-info">| 발급 당일 사용 가능</p>
+      </div>
+      <div class="coupon-info-button">자세히 보기</div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="grade-wrapper">
+  <div class="grade-title">| 회원 등급 혜택</div>
+
+  <div class="grade">
+    <div class="grade-top">
+      <div class="vip-logo">V</div>
+      <div class="grade-top-title">VIP</div>
+      <p>최근 3개월 순수 구매액<br>30만원 이상</p>
+    </div>
+    <div class="grade-middle">
+      <p>매장 포인트 3% 셸프트랙스 2%</p>
+      <p>온라인 상품별 추가 적립률</p>
+      <img class="plus" src="../static/img/icon/plus.svg">
+      <p>추가 4%</p>
+    </div>
+    <div class="grade-bottom">
+      <div class="grade-bottom-title">북셸프 통합 포인트</div>
+      <div class="grade-bottom-li">
+        <div class="grade-bottom-box-5000">
+          <div class="grade-bottom-box-5000-back1"></div>
+          <div class="grade-bottom-box-5000-back2"></div>
+          <div class="grade-bottom-left-box">
+            <div class="grade-bottom-left-box-logo">
+              <img src="../static/img/icon/logo.png">
+              <span class="grade-bottom-left-box-logo-text">BookShelf</span>
+            </div>
+            <span class="grade-bottom-left-box-point">5,000</span>
+            <span class="grade-bottom-left-box-point-text">P</span>
+          </div>
+        </div>
+        <div class="grade-bottom-info">7만원 이상 구매 시</div>
+      </div>
+      <div class="grade-bottom-li">
+        <div class="grade-bottom-box-3000">
+          <div class="grade-bottom-box-3000-back1"></div>
+          <div class="grade-bottom-box-3000-back2"></div>
+          <div class="grade-bottom-left-box">
+            <div class="grade-bottom-left-box-logo">
+              <img src="../static/img/icon/logo.png">
+              <span class="grade-bottom-left-box-logo-text">BookShelf</span>
+            </div>
+            <span class="grade-bottom-left-box-point">3,000</span>
+            <span class="grade-bottom-left-box-point-text">P</span>
+          </div>
+        </div>
+          <div class="grade-bottom-info">5만원 이상 구매 시</div>
+      </div>
+      <div class="grade-bottom-li">
+        <div class="grade-bottom-box-2000">
+          <div class="grade-bottom-box-2000-back1"></div>
+          <div class="grade-bottom-box-2000-back2"></div>
+          <div class="grade-bottom-left-box">
+            <div class="grade-bottom-left-box-logo">
+              <img src="../static/img/icon/logo.png">
+              <span class="grade-bottom-left-box-logo-text">BookShelf</span>
+            </div>
+            <span class="grade-bottom-left-box-point">2,000</span>
+            <span class="grade-bottom-left-box-point-text">P</span>
+          </div>
+        </div>
+          <div class="grade-bottom-info">3만원 이상 구매 시</div>
+          <div class="multi">X2</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grade">
+    <div class="grade-top">
+      <div class="gold-logo">G</div>
+      <div class="grade-top-title">GOLD</div>
+      <p>최근 3개월 순수 구매액<br>20~30만원</p>
+    </div>
+    <div class="grade-middle">
+      <p>매장 포인트 3% 셸프트랙스 1%</p>
+      <p>온라인 상품별 추가 적립률</p>
+      <img class="plus" src="../static/img/icon/plus.svg">
+      <p>추가 3%</p>
+    </div>
+    <div class="grade-bottom">
+      <div class="grade-bottom-title">북셸프 통합 포인트</div>
+      <div class="grade-bottom-li">
+        <div class="grade-bottom-box-5000">
+          <div class="grade-bottom-box-5000-back1"></div>
+          <div class="grade-bottom-box-5000-back2"></div>
+          <div class="grade-bottom-left-box">
+            <div class="grade-bottom-left-box-logo">
+              <img src="../static/img/icon/logo.png">
+              <span class="grade-bottom-left-box-logo-text">BookShelf</span>
+            </div>
+            <span class="grade-bottom-left-box-point">5,000</span>
+            <span class="grade-bottom-left-box-point-text">P</span>
+          </div>
+        </div>
+        <div class="grade-bottom-info">7만원 이상 구매 시</div>
+      </div>
+      <div class="grade-bottom-li">
+        <div class="grade-bottom-box-3000">
+          <div class="grade-bottom-box-3000-back1"></div>
+          <div class="grade-bottom-box-3000-back2"></div>
+          <div class="grade-bottom-left-box">
+            <div class="grade-bottom-left-box-logo">
+              <img src="../static/img/icon/logo.png">
+              <span class="grade-bottom-left-box-logo-text">BookShelf</span>
+            </div>
+            <span class="grade-bottom-left-box-point">3,000</span>
+            <span class="grade-bottom-left-box-point-text">P</span>
+          </div>
+        </div>
+          <div class="grade-bottom-info">5만원 이상 구매 시</div>
+      </div>
+      <div class="grade-bottom-li">
+        <div class="grade-bottom-box-2000">
+          <div class="grade-bottom-box-2000-back1"></div>
+          <div class="grade-bottom-box-2000-back2"></div>
+          <div class="grade-bottom-left-box">
+            <div class="grade-bottom-left-box-logo">
+              <img src="../static/img/icon/logo.png">
+              <span class="grade-bottom-left-box-logo-text">BookShelf</span>
+            </div>
+            <span class="grade-bottom-left-box-point">2,000</span>
+            <span class="grade-bottom-left-box-point-text">P</span>
+          </div>
+        </div>
+          <div class="grade-bottom-info">3만원 이상 구매 시</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grade">
+    <div class="grade-top">
+      <div class="silver-logo">S</div>
+      <div class="grade-top-title">SILVER</div>
+      <p>최근 3개월 순수 구매액<br>10~20만원</p>
+    </div>
+    <div class="grade-middle">
+      <p>매장 포인트 3% 셸프트랙스 1%</p>
+      <p>온라인 상품별 추가 적립률</p>
+      <img class="plus" src="../static/img/icon/plus.svg">
+      <p>추가 2%</p>
+    </div>
+    <div class="grade-bottom">
+      <div class="grade-bottom-title">북셸프 통합 포인트</div>
+     
+      <div class="grade-bottom-li">
+        <div class="grade-bottom-box-3000">
+          <div class="grade-bottom-box-3000-back1"></div>
+          <div class="grade-bottom-box-3000-back2"></div>
+          <div class="grade-bottom-left-box">
+            <div class="grade-bottom-left-box-logo">
+              <img src="../static/img/icon/logo.png">
+              <span class="grade-bottom-left-box-logo-text">BookShelf</span>
+            </div>
+            <span class="grade-bottom-left-box-point">3,000</span>
+            <span class="grade-bottom-left-box-point-text">P</span>
+          </div>
+        </div>
+          <div class="grade-bottom-info">5만원 이상 구매 시</div>
+      </div>
+      <div class="grade-bottom-li">
+        <div class="grade-bottom-box-2000">
+          <div class="grade-bottom-box-2000-back1"></div>
+          <div class="grade-bottom-box-2000-back2"></div>
+          <div class="grade-bottom-left-box">
+            <div class="grade-bottom-left-box-logo">
+              <img src="../static/img/icon/logo.png">
+              <span class="grade-bottom-left-box-logo-text">BookShelf</span>
+            </div>
+            <span class="grade-bottom-left-box-point">2,000</span>
+            <span class="grade-bottom-left-box-point-text">P</span>
+          </div>
+        </div>
+          <div class="grade-bottom-info">3만원 이상 구매 시</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grade">
+    <div class="grade-top">
+      <div class="new-logo">N</div>
+      <div class="grade-top-title">NEW</div>
+      <p >최근 3개월 순수 구매액<br>10만원 미만</p>
+    </div>
+    <div class="grade-middle">
+      <p class="new-top-text">매장 포인트 2% 셸프트랙스 1%</p>
+    </div>
+    <div class="grade-bottom">
+      <div class="grade-bottom-title">북셸프 통합 포인트</div>
+      
+      <div class="grade-bottom-li">
+        <div class="grade-bottom-box-2000">
+          <div class="grade-bottom-box-2000-back1"></div>
+          <div class="grade-bottom-box-2000-back2"></div>
+          <div class="grade-bottom-left-box">
+            <div class="grade-bottom-left-box-logo">
+              <img src="../static/img/icon/logo.png">
+              <span class="grade-bottom-left-box-logo-text">BookShelf</span>
+            </div>
+            <span class="grade-bottom-left-box-point">2,000</span>
+            <span class="grade-bottom-left-box-point-text">P</span>
+          </div>
+        </div>
+          <div class="grade-bottom-info">3만원 이상 구매 시</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="check-wrapper">
+    <div class="check-title-wrapper">
+      <div class="check-title-sub">한달 최대 4000포인트 증정!</div>
+      <div class="check-title">
+        <img src="../static/img/icon/calendar-check.svg">
+        <span>출석 체크 이벤트</span>
+      </div>
+    </div>
+
+    <div class="check-box-rings-wrapper">
+      <div class="ring-wrapper">
+        <div class="check-box-ring">
+          <div class="check-box-ring-cover">
+          </div>
+        </div>
+      </div>
+      <div class="ring-wrapper">
+        <div class="check-box-ring">
+          <div class="check-box-ring-cover"></div>
+        </div>
+      </div>
+      <div class="ring-wrapper">
+        <div class="check-box-ring">
+          <div class="check-box-ring-cover"></div>
+        </div>
+      </div>
+      <div class="ring-wrapper">
+        <div class="check-box-ring">
+          <div class="check-box-ring-cover"></div>
+        </div>
+      </div>
+      <div class="ring-wrapper">
+        <div class="check-box-ring">
+          <div class="check-box-ring-cover"></div>
+        </div>
+      </div>
+      <div class="ring-wrapper">
+        <div class="check-box-ring">
+          <div class="check-box-ring-cover"></div>
+        </div>
+      </div>
+      <div class="ring-wrapper">
+        <div class="check-box-ring">
+          <div class="check-box-ring-cover"></div>
+        </div>
+      </div>
+      <div class="ring-wrapper">
+        <div class="check-box-ring">
+          <div class="check-box-ring-cover"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="check-box-wrapper">
+      <div class="check-box-top">
+        <div class="check-box-top-contents">
+          <div class="check-box-top-total">이달의 출석일</div>
+          <div class="check-fill-box">
+            <div class="check-fill">
+            </div>
+          </div>
+          <div class="check-fill-end"></div>
+          <div class="check-box-top-current">0일</div>
+        </div>
+        <div class="check-box-top-text">
+          7일 연속 출석하면 <h2>1000포인트!</h2>
+        </div>
+      </div>
+      <div class="check-box-bottom">
+        <div class="check-row">
+          <div class="check-day-wrapper" id="check-day1-wrapper"><div class="check-day1">1</div></div>
+          <div class="check-day-wrapper" id="check-day2-wrapper"><div class="check-day2">2</div></div>
+          <div class="check-day-wrapper" id="check-day3-wrapper"><div class="check-day3">3</div></div>
+          <div class="check-day-wrapper" id="check-day4-wrapper"><div class="check-day4">4</div></div>
+          <div class="check-day-wrapper" id="check-day5-wrapper"><div class="check-day5">5</div></div>
+          <div class="check-day-wrapper" id="check-day6-wrapper"><div class="check-day6">6</div></div>
+          <div class="check-day-wrapper" id="check-day7-wrapper"><div class="check-day7">7</div></div>
+        </div>
+        <div class="check-row">
+          <div class="check-day-wrapper" id="check-day8-wrapper"><div class="check-day8">8</div></div>
+          <div class="check-day-wrapper" id="check-day9-wrapper"><div class="check-day9">9</div></div>
+          <div class="check-day-wrapper" id="check-day10-wrapper"><div class="check-day10">10</div></div>
+          <div class="check-day-wrapper" id="check-day11-wrapper"><div class="check-day11">11</div></div>
+          <div class="check-day-wrapper" id="check-day12-wrapper"><div class="check-day12">12</div></div>
+          <div class="check-day-wrapper" id="check-day13-wrapper"><div class="check-day13">13</div></div>
+          <div class="check-day-wrapper" id="check-day14-wrapper"><div class="check-day14">14</div></div>
+        </div>
+        <div class="check-row">
+          <div class="check-day-wrapper" id="check-day15-wrapper"><div class="check-day15">15</div></div>
+          <div class="check-day-wrapper" id="check-day16-wrapper"><div class="check-day16">16</div></div>
+          <div class="check-day-wrapper" id="check-day17-wrapper"><div class="check-day17">17</div></div>
+          <div class="check-day-wrapper" id="check-day18-wrapper"><div class="check-day18">18</div></div>
+          <div class="check-day-wrapper" id="check-day19-wrapper"><div class="check-day19">19</div></div>
+          <div class="check-day-wrapper" id="check-day20-wrapper"><div class="check-day20">20</div></div>
+          <div class="check-day-wrapper" id="check-day21-wrapper"><div class="check-day21">21</div></div>
+        </div>
+        <div class="check-row">
+          <div class="check-day-wrapper" id="check-day22-wrapper"><div class="check-day22">22</div></div>
+          <div class="check-day-wrapper" id="check-day23-wrapper"><div class="check-day23">23</div></div>
+          <div class="check-day-wrapper" id="check-day24-wrapper"><div class="check-day24">24</div></div>
+          <div class="check-day-wrapper" id="check-day25-wrapper"><div class="check-day25">25</div></div>
+          <div class="check-day-wrapper" id="check-day26-wrapper"><div class="check-day26">26</div></div>
+          <div class="check-day-wrapper" id="check-day27-wrapper"><div class="check-day27">27</div></div>
+          <div class="check-day-wrapper" id="check-day28-wrapper"><div class="check-day28">28</div></div>
+        </div>
+        <div class="check-row">
+          <div class="check-day-wrapper" id="check-day29-wrapper"><div class="check-day29">29</div></div>
+          <div class="check-day-wrapper" id="check-day30-wrapper"><div class="check-day30">30</div></div>
+          <div class="check-day-wrapper" id="check-day31-wrapper"><div class="check-day31">31</div></div>
+          <div class="check-day-wrapper"><div class="check-day32"></div></div>
+          <div class="check-day-wrapper"><div class="check-day33"></div></div>
+          <div class="check-day-wrapper"><div class="check-day34"></div></div>
+          <div class="check-day-wrapper"><div class="check-day35"></div></div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+<div class="notice-wrapper">
+  <div class="notice">
+  <div class="notice-title">
+    <h1>당첨자 발표</h1>
+    <h4>더보기 +</h4>
+  </div>
+  <div class="notice-box">
+    <ul>
+      <li>
+        <span>이벤트4 당첨자 발표</span>
+        <p>다음 달부터 서울 등 규제지역에서<br>
+          15억 원 초과 아파트의 주택담보대출이 가능해지고<br>
+          무주택자와 1주택자에 대한 주택담보인정비율(LTV)이<br>
+          50%로 일괄 높아진다.
+        </p>
+        <span>2022.11.11</span>
+      </li>
+      <li>
+        <span>이벤트3 당첨자 발표</span>
+        <p>다음 달부터 서울 등 규제지역에서<br>
+          15억 원 초과 아파트의 주택담보대출이 가능해지고<br>
+          무주택자와 1주택자에 대한 주택담보인정비율(LTV)이<br>
+          50%로 일괄 높아진다.
+        </p>
+        <span>2022.10.29</span>
+      </li>
+      <li>
+        <span>이벤트2 당첨자 발표</span>
+        <p>다음 달부터 서울 등 규제지역에서<br>
+          15억 원 초과 아파트의 주택담보대출이 가능해지고<br>
+          무주택자와 1주택자에 대한 주택담보인정비율(LTV)이<br>
+          50%로 일괄 높아진다.
+        </p>
+        <span>2022.10.04</span>
+      </li>
+      <li>
+        <span>이벤트1 당첨자 발표</span>
+        <p>다음 달부터 서울 등 규제지역에서<br>
+          15억 원 초과 아파트의 주택담보대출이 가능해지고<br>
+          무주택자와 1주택자에 대한 주택담보인정비율(LTV)이<br>
+          50%로 일괄 높아진다.
+        </p>
+        <span>2022.9.30</span>
+      </li>
+    </ul>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff -->
+
+<div class="footer-wrapper">
+  <footer>
+    <img src="../static/img/icon/logo.png">
+    <div class="footer-title">Bookshelf</div>
+    <span class="footer-infor-title">사업자 정보 열기 ∨</span>
+    <p class="footer-infor">대표이사:최원석&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      사업자등록번호:123-45-6789&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      호스팅 제공자:(주)북셸프<br>
+      통신판매업 신고번호:2022-서울영등포-2000호<br>
+      주소:서울특별시 영등포구 국회대로37길6,10층(유경빌딩)<br><br>
+      고객정보보호 책임자:최원석(nicui@bookshelf.com)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      마케팅 제휴 문의:business@booshelf.com<br></p>
+    <ul>
+      <li>이용약관</li>
+      <li>개인정보처리방침</li>
+      <li>고객센터</li>
+      <li>환불신청</li>
+      <li>콘텐츠 제휴문의</li>
+      <li>저작권/도서오류 신고</li>
+      <li>회사 소개</li>
+    </ul>
+    <div class="footer-last">Copyright © 2022 북셸프 All Rights Reserved.</div>
+  </footer>
+</div>
+
+<div class="bottom-nav-wrapper">
+  <nav class="bottom-nav">
+    <ul>
+      <div id="overbar"></div>
+      <li onclick="location.href='../templates/home.html'">
+        <img src="../static/img/icon/logo.png">
+        <div>NOW</div>
+      </li>
+      <li onclick="location.href='../templates/search.html'">
+        <a href="../templates/search.html"><img src="../static/img/icon/search.svg"></a>
+        <div>책찾기</div>
+      </li>
+      <li onclick="location.href='../templates/event.html'">
+        <img src="../static/img/icon/event.svg">
+        <div>이벤트</div>
+      </li>
+      <li onclick="location.href='../templates/myshelf.html'">
+        <img src="../static/img/icon/shelf.svg">
+        <div>내책장</div>
+      </li>
+      <li onclick="location.href='../templates/board-review.html'">
+        <img src="../static/img/icon/list.svg">
+        <div>게시판</div>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+  <div class="top-move-button">
+    <div>∧</div>
+    <div>TOP</div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>공지사항 | BookShelf</title>
+  <link rel="stylesheet" href="../static/css/board-notice.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+  <script src="../static/js/board-notice.js"></script>
+  
+</head>
+
+<body>
+
+<header>
+  <div class="top-nav-background"></div>
+  <div class="top-nav-wrapper">
+    <div class="top-logo-wrapper" onclick="location.href='../templates/home.html'"> 
+    <img id="top-logo" src="../static/img/icon/logo.png">
+    <span class="top-title">BookShelf</span>
+    </div>
+    <div class="news-wrapper">
+      <img src="../static/img/icon/bell.svg" id="news">
+      <div id="news-n">N</div>
+    </div>
+    <img src="../static/img/icon/cart.svg" id="cart">
+    <button class="login-button" onclick="location.href='../templates/login.html'">로그인</button>
+    <nav class="top-nav">
+      <div id="underbar"></div>
+      <ul>
+        <li onclick="location.href='../templates/home.html'">NOW</li>
+        <li onclick="location.href='../templates/search.html'">책찾기</li>
+        <li onclick="location.href='../templates/event.html'">이벤트</li>
+        <li onclick="location.href='../templates/myshelf.html'">내책장</li>
+        <li onclick="location.href='../templates/board-review.html'">게시판</li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="top-back-wrapper">
+    <div class="top-back-title">ㅣ 공지사항 ㅣ</div>
+</div>
+ 
+<div class="top-space"></div>
+
+<div class="middle-nav-wrapper">
+  <div class="middle-nav-container">
+    <div class="middle-nav">
+      <div onclick="location.href='../templates/board-review.html'">책리뷰</div>
+      <div onclick="location.href='../templates/board-inquire.html'">상품문의</div>
+      <div onclick="location.href='../templates/board-notice.html'">공지사항</div>
+      <div onclick="location.href='../templates/board-winner.html'">당첨자발표</div>
+      <div class="middle-nav-underbar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt -->
+
+<div class="meta-wrapper">
+
+<div class="write-wrapper-back"></div>
+
+<div class="notice-wrapper">
+  <div class="notice-title-wrapper">
+    <div class="title">공지사항</div>
+    <button class="notice-write">공지 등록</button>
+  </div>
+
+  <div class="notice-middle-wrapper">
+    <span class="number">12</span>
+    <span class="text">건</span>
+    <div class="notice-search-wrapper">
+      <div class="search">
+          <input type="text" name="notice-search-input" class="notice-search-input"
+          placeholder="검색어를 입력하세요.">
+          <img src="../static/img/icon/search.svg">
+      </div>
+    </div>
+    <select name="notice-middle-type" id="notice-middle-type">
+      <option value="001">북셸프</option>
+      <option value="002">고객센터</option>
+    </select>
+  </div>
+
+
+  <form role="form" action="#" method="post" class="notice-write-wrapper">
+    <div class="notice-write-top">
+      <span class="notice-write-top-text">공지사항 등록</span>
+      <img class="notice-write-top-icon" src="../static/img/icon/btn_dialog_close@2x.png">
+    </div>
+    <div class="notice-write-contents">
+      <div class="notice-write-header">
+        <div class="title">ㅣ 제목</div>
+        <textarea name="notice-input-header" class="notice-input-header" maxlength="30" placeholder="제목을 입력하세요." ></textarea>
+      </div>
+      <div class="notice-write-main">
+        <div class="notice-write-main-title">ㅣ내용</div>
+        <div class="notice-write-frame">
+          <textarea name="notice-input-main" class="notice-input-main" maxlength="3000"
+            placeholder="내용을 입력해주세요."></textarea>
+          <div class="write-number">0/3000</div>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="regist-button disable">등록</button>
+  </form>
+
+
+  <div class="notices">
+    <div class="header">
+        <div class="number">NO</div>
+        <div class="title">공지제목</div>
+        <div class="type">유형</div>
+        <div class="date">등록일</div>
+    </div>
+    <div class="body">
+      <div class="my-notice">
+        <div class="number">1</div>
+        <div class="title" onclick="location.href='../templates/notice-detail.html'">
+          <span class="text">공지 안내글 일시적 변경사항  </span> 
+        </div>
+        <div class="type">북셸프</div>
+        <div class="date">2022.12.02</div>
+      </div>
+      <div class="my-notice">
+        <div class="number">2</div>
+        <div class="title" onclick="location.href='../templates/notice-detail.html'">
+          <span class="text">공지 안내글 일시적 변경사항  </span> 
+        </div>
+        <div class="type">북셸프</div>
+        <div class="date">2022.12.02</div>
+      </div>
+      <div class="my-notice">
+        <div class="number">3</div>
+        <div class="title" onclick="location.href='../templates/notice-detail.html'">
+          <span class="text">공지 안내글 일시적 변경사항  </span> 
+        </div>
+        <div class="type">북셸프</div>
+        <div class="date">2022.12.02</div>
+      </div>
+      <div class="my-notice">
+        <div class="number">4</div>
+        <div class="title" onclick="location.href='../templates/notice-detail.html'">
+          <span class="text">공지 안내글 일시적 변경사항  </span> 
+        </div>
+        <div class="type">고객센터</div>
+        <div class="date">2022.12.02</div>
+      </div>
+      <div class="my-notice">
+        <div class="number">5</div>
+        <div class="title" onclick="location.href='../templates/notice-detail.html'">
+          <span class="text">공지 안내글 일시적 변경사항  </span> 
+        </div>
+        <div class="type">고객센터</div>
+        <div class="date">2022.12.02</div>
+      </div>
+      <div class="my-notice">
+        <div class="number">6</div>
+        <div class="title" onclick="location.href='../templates/notice-detail.html'">
+          <span class="text">공지 안내글 일시적 변경사항  </span> 
+        </div>
+        <div class="type">고객센터</div>
+        <div class="date">2022.12.02</div>
+      </div>
+      <div class="my-notice">
+        <div class="number">7</div>
+        <div class="title" onclick="location.href='../templates/notice-detail.html'">
+          <span class="text">공지 안내글 일시적 변경사항  </span> 
+        </div>
+        <div class="type">고객센터</div>
+        <div class="date">2022.12.02</div>
+      </div>
+      <div class="my-notice">
+        <div class="number">8</div>
+        <div class="title" onclick="location.href='../templates/notice-detail.html'">
+          <span class="text">공지 안내글 일시적 변경사항  </span> 
+        </div>
+        <div class="type">고객센터</div>
+        <div class="date">2022.12.02</div>
+      </div>
+      <div class="my-notice">
+        <div class="number">9</div>
+        <div class="title" onclick="location.href='../templates/notice-detail.html'">
+          <span class="text">공지 안내글 일시적 변경사항  </span> 
+        </div>
+        <div class="type">고객센터</div>
+        <div class="date">2022.12.02</div>
+      </div>
+      <div class="my-notice">
+        <div class="number">10</div>
+        <div class="title" onclick="location.href='../templates/notice-detail.html'">
+          <span class="text">공지 안내글 일시적 변경사항  </span> 
+        </div>
+        <div class="type">고객센터</div>
+        <div class="date">2022.12.02</div>
+      </div>
+      <div class="my-notice">
+        <div class="number">11</div>
+        <div class="title" onclick="location.href='../templates/notice-detail.html'">
+          <span class="text">공지 안내글 일시적 변경사항  </span> 
+        </div>
+        <div class="type">고객센터</div>
+        <div class="date">2022.12.02</div>
+      </div>
+      <div class="my-notice">
+        <div class="number">12</div>
+        <div class="title" onclick="location.href='../templates/notice-detail.html'">
+          <span class="text">공지 안내글 일시적 변경사항  </span> 
+        </div>
+        <div class="type">고객센터</div>
+        <div class="date">2022.12.02</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notice-controller">
+    <span class="controller">
+      <img class="controller-btn-left" src="../static/img/icon/btn_pagination_prev@2x.png">
+      <a class="index-1 index-active">1</a>
+      <span class="first-ellipsis">...</span>
+      <a class="index-2">2</a>
+      <a class="index-3">3</a>
+      <a class="index-4">4</a>
+      <a class="index-5">5</a>
+      <span class="last-ellipsis">...</span>
+      <a class="index-6">13</a>
+      <img class="controller-btn-right" src="../static/img/icon/btn_pagination_next@2x.png">
+    </span>
+  </div>
+  
+</div>
+
+
+<div class="close-alert">
+  <div class="text">
+    작성한 내용은 저장되지 않습니다.<br>
+    취소하겠습니까?
+  </div>
+  <button class="cancel" onclick="hide(this)">취소</button>
+  <button class="okay" onclick="formClose(this)">확인</button>
+</div>
+
+<!-- <div class="regist-alert">
+  <div class="text">
+    작성한 글을 등록하겠습니까?
+  </div>
+  <button class="cancel" onclick="hide(this)">취소</button>
+  <button class="okay" onclick="">확인</button>
+</div> -->
+
+<!-- ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff -->
+
+<div class="footer-wrapper">
+  <footer>
+    <img src="../static/img/icon/logo.png">
+    <div class="footer-title">Bookshelf</div>
+    <span class="footer-infor-title">사업자 정보 열기 ∨</span>
+    <p class="footer-infor">대표이사:최원석&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      사업자등록번호:123-45-6789&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      호스팅 제공자:(주)북셸프<br>
+      통신판매업 신고번호:2022-서울영등포-2000호<br>
+      주소:서울특별시 영등포구 국회대로37길6,10층(유경빌딩)<br><br>
+      고객정보보호 책임자:최원석(nicui@bookshelf.com)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      마케팅 제휴 문의:business@booshelf.com<br></p>
+    <ul>
+      <li>이용약관</li>
+      <li>개인정보처리방침</li>
+      <li>고객센터</li>
+      <li>환불신청</li>
+      <li>콘텐츠 제휴문의</li>
+      <li>저작권/도서오류 신고</li>
+      <li>회사 소개</li>
+    </ul>
+    <div class="footer-last">Copyright © 2022 북셸프 All Rights Reserved.</div>
+  </footer>
+</div>
+
+<div class="bottom-nav-wrapper">
+  <nav class="bottom-nav">
+    <ul>
+      <div id="overbar"></div>
+      <li onclick="location.href='../templates/home.html'">
+        <img src="../static/img/icon/logo.png">
+        <div>NOW</div>
+      </li>
+      <li onclick="location.href='../templates/search.html'">
+        <a href="../templates/search.html"><img src="../static/img/icon/search.svg"></a>
+        <div>책찾기</div>
+      </li>
+      <li onclick="location.href='../templates/event.html'">
+        <img src="../static/img/icon/event.svg">
+        <div>이벤트</div>
+      </li>
+      <li onclick="location.href='../templates/myshelf.html'">
+        <img src="../static/img/icon/shelf.svg">
+        <div>내책장</div>
+      </li>
+      <li onclick="location.href='../templates/board-review.html'">
+        <img src="../static/img/icon/list.svg">
+        <div>게시판</div>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+  <div class="top-move-button">
+    <div>∧</div>
+    <div>TOP</div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>검색 | Bookshelf</title>
+
+    <link rel="stylesheet" href="../static/css/book-detail.css">
+    <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script src="../static/js/book-detail.js"></script>
+  </head>
+
+
+<body>
+  <header>
+    <div class="top-nav-background"></div>
+    <div class="top-nav-wrapper">
+      <div class="top-logo-wrapper" onclick="location.href='../templates/home.html'"> 
+      <img id="top-logo" src="../static/img/icon/logo.png">
+      <span class="top-title">BookShelf</span>
+      </div>
+      <div class="news-wrapper">
+        <img src="../static/img/icon/bell.svg" id="news">
+        <div id="news-n">N</div>
+      </div>
+      <img src="../static/img/icon/cart.svg" id="cart">
+      <button class="login-button" onclick="location.href='../templates/login.html'">로그인</button>
+      <nav class="top-nav">
+        <div id="underbar"></div>
+        <ul>
+          <li onclick="location.href='../templates/home.html'">NOW</li>
+          <li onclick="location.href='../templates/search.html'">책찾기</li>
+          <li onclick="location.href='../templates/event.html'">이벤트</li>
+          <li onclick="location.href='../templates/myshelf.html'">내책장</li>
+          <li onclick="location.href='../templates/board-review.html'">게시판</li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+
+<div class="meta-wrapper">
+
+<div class="main-wrapper">
+  <div class="header">
+    <div class="left-box">
+    <img class="book-img" src="../static/img/book-cover/54.jpg">
+  </div>
+    <div class="right-box">
+      <div class="top">
+        <div class="title">나의 문화유산답사기 - 서울편 3</div>
+        <div class="author">IT 교재팀</div>
+      </div>
+      <div class="box">
+        <div class="inner-box">
+        <div class="shelves">
+          <div class="profile">
+          <li><img src="../static/img/icon/img_no_profile@2x.png"></li>
+          <li><img src="../static/img/icon/img_no_profile@2x.png"></li>
+          <li><img src="../static/img/icon/img_no_profile@2x.png"></li>
+          </div>
+        <div class="text">책장에 담은 사람</div>
+        <div class="number">1,560명</div>
+        </div>
+        <div class="reviews">
+          <img class="icon" src="../static/img/icon/search-list-theme.svg">
+          <div class="text">이 책의 리뷰</div>
+          <div class="number">3개</div>
+        </div>
+        <div class="first-review">
+          <img class="icon" src="../static/img/icon/search-list-editor.svg">
+          <div class="text">
+            리뷰 작성하고<br>
+            +200포인트
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="body">
+      <div class="book-intro-wrapper">
+        <div class="title">책 소개</div>
+        <p class="content">
+          ● 변경된 최신 출제 기준 반영!!<br>
+          ● 최신 출제 경향을 분석하여 주요 학습 포인트만 정리한 핵심 이론<br>
+          ● Section별 제공하는 기출 유형 문제로 중간 테스트 & 시험 유형 맛보기<br>
+          ● 실전에 대비한 최신 기출 문제로 시험 준비하기<br>
+          ● 최종 정리를 위한 Summary 제공
+        </p>
+        <div class="box">
+          <div class="category">
+            <div class="text">카테고리</div>
+            <div class="data">IT</div>
+          </div>
+          <div class="publisher">
+            <div class="text">출판사</div>
+            <div class="data">KH기획</div>
+          </div>
+          <div class="release-date">
+            <div class="text">출간일</div>
+            <div class="data">2021.07.02</div>
+          </div>
+          <div class="ISBN">
+            <div class="text">ISBN</div>
+            <div class="data">97921458301240</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="book-index-wrapper">
+        <span class="title">목차</span>
+        <img class="fold-btn" src="../static/img/icon/down-arr.png">
+        <p>
+            Chapter 01 PC 운영체제<br>
+            Section 01 Windows 기초<br>
+            Section 02 폴더 관리<br>
+            Section 03 파일 탐색기와 보조프로그램<br>
+            Section 04 제어판 활용<br>
+            Chapter 02 컴퓨터 시스템 설정 변경<br>
+            Section 01 시스템 관리<br>
+            Section 02 네트워크 관리<br>
+            Chapter 03 컴퓨터 시스템 관리<br>
+            Section 01 컴퓨터의 개념 및 분류<br>
+            Section 02 자료의 구성단위 및 표현 방식<br>
+            Section 03 중앙처리장치<br>
+            Section 04 주기억장치와 보조 기억장치<br>
+            Section 05 입출력장치와 기타장치<br>
+            Section 06 운영체제 사용<br>
+            Section 07 PC 유지와 보수<br>
+            Section 08 프로그래밍 언어<br>
+            Chapter 04 인터넷과 멀티미디어 활용<br>
+            Section 01 인터넷 활용<br>
+            Section 02 멀티미디어 활용<br>
+            Chapter 05 최신 정보통신 기술 활용<br>
+            Section 01 정보통신 기술<br>
+            Section 02 모바일 기기<br>
+            Chapter 06 정보 보안과 시스템 보안 유지<br>
+            Section 01 정보 보안 유지<br>
+            Section 02 시스템 보안 유지
+        </p>
+      </div>
+
+      <div class="author-intro-wrapper">
+        <span class="title">저자 소개</span>
+        <img class="fold-btn" src="../static/img/icon/down-arr.png">
+        <span class="data">IT 교재팀</span>
+      </div>
+
+      <div class="publisher-review-wrapper">
+        <span class="title">출판사 서평</span>
+        <img class="fold-btn" src="../static/img/icon/down-arr.png">
+        <p>
+          초스피드로 단기간에 합격의 기틀을 잡아주는 컴퓨터 활용능력 1급 필기 수험서<br><br>
+          수험자의 효율적인 학습을 위해 최소한의 투자로 최대의 효과를 얻을 수 있도록 출제 기준과 기출 문제의 출제 경향을 분석하여 꼭 필요한 내용만을 선별하여 구성하였습니다.<br>
+          핵심 요약된 이론이 아닌 핵심 내용만 선별한 이론 구성으로 기초를 튼튼하게 하고, 학습한 이론을 바탕으로 기출 유형 문제를 풀어봄으로써 실전에 대비한 응용력을 키우며 학습 내용을 점검할 수 있도록 구성하였습니다.
+        </p>
+      </div>
+
+      <div class="review-wrapper">
+        <span class="title">이 책의 리뷰</span>
+        <div class="my-review">
+          <div class="header">
+            <div class="buyer">구매자</div>
+            <div class="id">us******</div>
+            <div class="date">2022.11.28</div>
+            <div class="notify">신고</div>
+            <div class="tag">#재밌어요</div>
+            <div class="rating">
+              <div class="star-empty">
+                <img src="../static/img/icon/star-empty.svg">
+                <img src="../static/img/icon/star-empty.svg">
+                <img src="../static/img/icon/star-empty.svg">
+                <img src="../static/img/icon/star-empty.svg">
+                <img src="../static/img/icon/star-empty.svg">
+              </div>
+              <div class="star-fill">
+                <img src="../static/img/icon/star-fill.svg">
+                <img src="../static/img/icon/star-fill.svg">
+                <img src="../static/img/icon/star-fill.svg">
+                <img src="../static/img/icon/star-fill.svg">
+                <img src="../static/img/icon/star-fill.svg">
+              </div>
+            </div>
+          </div>
+    
+          <div class="body">
+            <div class="review">
+              <span>
+                이 책은 이준익 감독, 신하균과 하지민 주연으로 티빙에서 SF로맨스로 선보인다.
+                이번에 신간처럼 나오는 이 책은 22년 트렌드로 문장과 흐름을 섬세하게 다듬고
+                작가의 후기를 추가로 이 책이 탄생했다. 과학과 사랑, SF적인 상황에서 어떤 이야기가 펼쳐질까.
+                예전에 이 책이 나왔을 때보다 현재 개정판으로 나오면서 사람들은 어떤 반응을 보일까.
+              </span>
+            </div>
+            <div class="frame"></div>
+            <div class="photos">
+              <div class="close">x</div>
+              <img src="../static/img/background/top-background.jpg">
+              <img src="../static/img/book-cover/30.jpg">
+            <div class="number"></div>
+            <div class="btn-left"><</div>
+            <div class="btn-right">></div>
+            <div class="plus">더보기</div>
+            </div>
+            <div class="fold-button">
+              <div class="text">펼치기</div>
+              <img class="icon" src="../static/img/icon/down.png">
+            </div>
+          </div>
+        </div>
+    
+        <div class="my-review">
+          <div class="header">
+            <div class="buyer">구매자</div>
+            <div class="id">us******</div>
+            <div class="date">2022.11.28</div>
+            <div class="notify">신고</div>
+            <div class="tag">#재밌어요</div>
+            <div class="rating">
+              <div class="star-empty">
+                <img src="../static/img/icon/star-empty.svg">
+                <img src="../static/img/icon/star-empty.svg">
+                <img src="../static/img/icon/star-empty.svg">
+                <img src="../static/img/icon/star-empty.svg">
+                <img src="../static/img/icon/star-empty.svg">
+              </div>
+              <div class="star-fill">
+                <img src="../static/img/icon/star-fill.svg">
+                <img src="../static/img/icon/star-fill.svg">
+                <img src="../static/img/icon/star-fill.svg">
+                <img src="../static/img/icon/star-fill.svg">
+                <img src="../static/img/icon/star-fill.svg">
+              </div>
+            </div>
+          </div>
+    
+          <div class="body" >
+            <div class="review">
+              <span>
+                이 책은 이준익 감독, 신하균과 하지민 주연으로 티빙에서 SF로맨스로 선보인다.
+                이번에 신간처럼 나오는 이 책은 22년 트렌드로 문장과 흐름을 섬세하게 다듬고
+                작가의 후기를 추가로 이 책이 탄생했다. 과학과 사랑, SF적인 상황에서 어떤 이야기가 펼쳐질까.
+                예전에 이 책이 나왔을 때보다 현재 개정판으로 나오면서 사람들은 어떤 반응을 보일까.
+    
+                이 책은 이준익 감독, 신하균과 하지민 주연으로 티빙에서 SF로맨스로 선보인다.
+                이번에 신간처럼 나오는 이 책은 22년 트렌드로 문장과 흐름을 섬세하게 다듬고
+                작가의 후기를 추가로 이 책이 탄생했다. 과학과 사랑, SF적인 상황에서 어떤 이야기가 펼쳐질까.
+                예전에 이 책이 나왔을 때보다 현재 개정판으로 나오면서 사람들은 어떤 반응을 보일까.
+                
+                이 책은 이준익 감독, 신하균과 하지민 주연으로 티빙에서 SF로맨스로 선보인다.
+                이번에 신간처럼 나오는 이 책은 22년 트렌드로 문장과 흐름을 섬세하게 다듬고
+                작가의 후기를 추가로 이 책이 탄생했다. 과학과 사랑, SF적인 상황에서 어떤 이야기가 펼쳐질까.
+                예전에 이 책이 나왔을 때보다 현재 개정판으로 나오면서 사람들은 어떤 반응을 보일까.
+              </span>
+            </div>
+            <div class="frame"></div>
+            <div class="photos">
+                <div class="close">x</div>
+                <img src="../static/img/book-cover/14.jpg">
+                <img src="../static/img/book-cover/15.jpg">
+                <img src="../static/img/book-cover/16.jpg">
+                <img src="../static/img/book-cover/17.jpg">
+                <img src="../static/img/book-cover/18.jpg">
+                <div class="number"></div>
+                <div class="btn-left"><</div>
+                <div class="btn-right">></div>
+                <div class="plus">더보기</div>
+            </div>
+            <div class="fold-button">
+              <div class="text">펼치기</div>
+              <img class="icon" src="../static/img/icon/down.png">
+            </div>
+          </div>
+        </div>
+    
+        <div class="my-review">
+          <div class="header">
+            <div class="buyer">구매자</div>
+            <div class="id">us******</div>
+            <div class="date">2022.11.28</div>
+            <div class="notify">신고</div>
+            <div class="tag">#재밌어요</div>
+            <div class="rating">
+              <div class="star-empty">
+                <img src="../static/img/icon/star-empty.svg">
+                <img src="../static/img/icon/star-empty.svg">
+                <img src="../static/img/icon/star-empty.svg">
+                <img src="../static/img/icon/star-empty.svg">
+                <img src="../static/img/icon/star-empty.svg">
+              </div>
+              <div class="star-fill">
+                <img src="../static/img/icon/star-fill.svg">
+                <img src="../static/img/icon/star-fill.svg">
+                <img src="../static/img/icon/star-fill.svg">
+                <img src="../static/img/icon/star-fill.svg">
+                <img src="../static/img/icon/star-fill.svg">
+              </div>
+            </div>
+          </div>
+    
+          <div class="body">
+            <div class="review">
+              <span>
+                이 책은 이준익 감독, 신하균과 하지민 주연으로 티빙에서 SF로맨스로 선보인다.
+                이번에 신간처럼 나오는 이 책은 22년 트렌드로 문장과 흐름을 섬세하게 다듬고
+                작가의 후기를 추가로 이 책이 탄생했다. 과학과 사랑, SF적인 상황에서 어떤 이야기가 펼쳐질까.
+                예전에 이 책이 나왔을 때보다 현재 개정판으로 나오면서 사람들은 어떤 반응을 보일까.
+              </span>
+            </div>
+            <div class="frame"></div>
+            <div class="photos">
+              <div class="close">x</div>
+              <img src="../static/img/book-cover/15.jpg">
+              <img src="../static/img/book-cover/16.jpg">
+              <img src="../static/img/book-cover/17.jpg">
+              <img src="../static/img/book-cover/18.jpg">
+              <div class="number"></div>
+              <div class="btn-left"><</div>
+              <div class="btn-right">></div>
+              <div class="plus">더보기</div>
+           </div>
+            <div class="fold-button">
+              <div class="text">펼치기</div>
+              <img class="icon" src="../static/img/icon/down.png">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="other-reviews">
+        <button onclick="location.href='../templates/board-review.html'">다른 리뷰들 보러가기</button>
+      </div>
+
+  </div>
+
+  <div class="side-wrapper">
+    <div class="put-myshelf">
+      <img src="../static/img/icon/search-list-series.svg">
+      <span>내 책장에 담기</span>
+    </div>
+    <div class="bookmark">
+      <img src="../static/img/icon/bookmark.svg">
+      <span>북마크하기</span>
+    </div>
+    <div class="write-review">
+      <img src="../static/img/icon/search-list-editor.svg">
+      <span>리뷰 남기기</span>
+    </div>
+    <button class="cart-btn">장바구니에 넣기</button>
+    <button class="buy-btn">구매하기</button>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<form role="form" action="#" method="post" class="review-write-wrapper">
+  <div class="review-write-top">
+    <span class="review-write-top-text">리뷰작성</span>
+    <img class="review-write-top-icon" src="../static/img/icon/btn_dialog_close@2x.png">
+  </div>
+  <div class="review-write-contents">
+    <div class="review-write-book-wrapper">
+      <img class="review-book-img" src="../static/img/book-cover/54.jpg">
+      <div class="review-book-info">
+        <div class="review-book-name">책이름</div>
+        <div class="review-book-rating">
+          <div class="star-empty">
+            <img src="../static/img/icon/star-empty.svg">
+            <img src="../static/img/icon/star-empty.svg">
+            <img src="../static/img/icon/star-empty.svg">
+            <img src="../static/img/icon/star-empty.svg">
+            <img src="../static/img/icon/star-empty.svg">
+          </div>
+          <div class="star-fill">
+            <img src="../static/img/icon/star-fill.svg">
+            <img src="../static/img/icon/star-fill.svg">
+            <img src="../static/img/icon/star-fill.svg">
+            <img src="../static/img/icon/star-fill.svg">
+            <img src="../static/img/icon/star-fill.svg">
+          </div>
+        </div>
+        <div class="review-book-rating-number">
+          <span class="rating-number">0</span>
+          <span class="max-number">/ 5</span>
+        </div>
+      </div>
+    </div>
+    <div class="review-write-tag">
+      <div class="review-write-tag-info">
+        ㅣ 가장 공감되는 키워드를 선택해주세요. *
+      </div>
+      <span class="tag">#유익해요</span>
+      <span class="tag">#재밌어요</span>
+      <span class="tag">#공감돼요</span>
+      <span class="tag">#최고에요</span>
+      <span class="tag">#아쉬워요</span>
+    </div>
+    <div class="review-write-main">
+      <div class="review-write-main-title">ㅣ 리뷰 작성 *</div>
+      <div class="review-write-frame">
+        <textarea name="review-write" class="review-write" maxlength="3000"
+          placeholder="내용을 10자 이상 입력해주세요. 주제와 무관한 글은 임의로 삭제될 수 있습니다."></textarea>
+        <div class="write-number">0/3000</div>
+      </div>
+    </div>
+    <div class="review-write-attach">
+      <div class="review-write-attach-title">
+        <span>ㅣ 사진 첨부 (선택)</span>
+        <span>0/5</span>
+      </div>
+      <div class="review-write-attach-photo">
+
+        <div class="review-write-attach-photo-button">
+          <input class="review-write-photo-input" name="review-write-photo-input" type="file" accept=".jpg, .jpeg, .png, .gif"
+            onchange="setThumbnail(event);">
+        </div>
+
+      </div>
+      <div class="review-write-attach-guide">
+        * JPG, PNG, GIF 파일만 최대 5장 업로드 가능합니다.
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="regist-button disable">등록</button>
+</form>
+
+<div class="write-wrapper-back"></div>
+
+<div class="close-alert">
+  <div class="text">
+    작성한 내용은 저장되지 않습니다.<br>
+    취소하겠습니까?
+  </div>
+  <button class="cancel" onclick="hide(this)">취소</button>
+  <button class="okay" onclick="formClose(this)">확인</button>
+</div>
+
+<!-- fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff -->
+
+
+
+
+<div class="bottom-nav-sub-wrapper">
+  <div class="bottom-nav-sub">
+    <div class="put-myshelf">
+      <div class="inner">
+        <img src="../static/img/icon/search-list-series.svg">
+        <span>담기</span>
+      </div>
+    </div>
+    <div class="bookmark">
+      <div class="inner">
+        <img src="../static/img/icon/bookmark.svg">
+        <span>북마크</span>
+      </div>
+    </div>
+    <div class="write-review">
+      <div class="inner">
+        <img src="../static/img/icon/search-list-editor.svg">
+        <span>리뷰</span>
+      </div>
+    </div>
+    <div class="cart-btn-sub">
+      <button>장바구니에 넣기</button>
+    </div>
+    <div class="buy-btn-sub">
+      <button>구매하기</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="bottom-nav-wrapper">
+  <nav class="bottom-nav">
+    <ul>
+      <div id="overbar"></div>
+      <li onclick="location.href='../templates/home.html'">
+        <img src="../static/img/icon/logo.png">
+        <div>NOW</div>
+      </li>
+      <li onclick="location.href='../templates/search.html'">
+        <img src="../static/img/icon/search.svg">
+        <div>책찾기</div>
+      </li>
+      <li onclick="location.href='../templates/event.html'">
+        <img src="../static/img/icon/event.svg">
+        <div>이벤트</div>
+      </li>
+      <li onclick="location.href='../templates/myshelf.html'">
+        <img src="../static/img/icon/shelf.svg">
+        <div>내책장</div>
+      </li>
+      <li onclick="location.href='../templates/board-review.html'">
+        <img src="../static/img/icon/list.svg">
+        <div>게시판</div>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+
+</div>
+
+
+</body>
+
+</html>

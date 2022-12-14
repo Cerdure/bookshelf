@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BookShelf</title>
+  <link rel="stylesheet" href="../static/css/home.css">
+  <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+  <script src="../static/js/home.js"></script>
+</head>
+
+<body>
+
+<header>
+  <div class="top-nav-background"></div>
+  <div class="top-nav-wrapper">
+    <div class="top-logo-wrapper" onclick="location.href='../templates/home.html'"> 
+    <img id="top-logo" src="../static/img/icon/logo.png">
+    <span class="top-title">BookShelf</span>
+    </div>
+
+    <div class="news-wrapper">
+      <img src="../static/img/icon/bell.svg" id="news">
+      <div id="news-n">N</div>
+    </div>
+    <img src="../static/img/icon/cart.svg" id="cart">
+    
+    <button class="login-button" onclick="location.href='../templates/login.html'">로그인</button>
+    <nav class="top-nav">
+      <div id="underbar"></div>
+      <ul>
+        <li onclick="location.href='../templates/home.html'">NOW</li>
+        <li onclick="location.href='../templates/search.html'">책찾기</li>
+        <li onclick="location.href='../templates/event.html'">이벤트</li>
+        <li onclick="location.href='../templates/myshelf.html'">내책장</li>
+        <li onclick="location.href='../templates/board-review.html'">게시판</li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<div class="banner-wrapper">
+  <div class="banner">
+    <div class="banner-img-wrapper">
+      <img class="banner-img-0" src="../static/img/book-cover/1.jpg" alt="">
+      <img class="banner-img-1" src="../static/img/book-cover/2.jpg" alt="">
+      <img class="banner-img-2" src="../static/img/book-cover/3.jpg" alt="">
+      <img class="banner-img-3" src="../static/img/book-cover/4.jpg" alt="">
+      <img class="banner-img-4" src="../static/img/book-cover/5.jpg" alt="">
+      <img class="banner-img-5" src="../static/img/book-cover/6.jpg" alt="">
+    </div>
+    <div class="banner-font-wrapper">
+      <li>
+        <h1 class="bf-big-0">배너 타이틀1</h1>
+        <h4 class="bf-small-0">배너 내용1</span>
+      </li>
+      <li>
+        <h1 class="bf-big-1">배너 타이틀2</h1>
+        <h4 class="bf-small-1">배너 내용2</span>
+      </li>
+      <li>
+        <h1 class="bf-big-2">배너 타이틀3</h1>
+        <h4 class="bf-small-2">배너 내용3</span>
+      </li>
+      <li>
+        <h1 class="bf-big-3">배너 타이틀4</h1>
+        <h4 class="bf-small-3">배너 내용4</span>
+      </li>
+      <li>
+        <h1 class="bf-big-4">배너 타이틀5</h1>
+        <h4 class="bf-small-4">배너 내용5</span>
+      </li>
+      <li>
+        <h1 class="bf-big-5">배너 타이틀6</h1>
+        <h4 class="bf-small-5">배너 내용6</span>
+      </li>
+    </div>
+    <div class="banner-button-wrapper">
+      <button class="btn-left"><</button>
+      <button class="btn-right">></button>
+    </div>
+    <div class="banner-index-wrapper">
+      <div class="banner-current-index">1</div>
+      <div class="banner-index-fill-box">
+        <div class="banner-index-fill"></div>
+      </div>
+      <div class="banner-last-index">6</div>
+      <div class="banner-stop"></div>
+      <div class="banner-play"></div>
+    </div>
+  </div>
+</div>
+ <div class="simple-search-wrapper">
+    <div class="simple-search">
+      <div class="simple-search-title">User 님,</div>
+      <div class="simple-search-input">
+      <input type="text" placeholder="찾으시는 책이 있나요?">
+      <img src="../static/img/icon/search.svg" alt="">
+      </div>
+    </div>
+  </div>
+  <div class="today-book-wrapper">
+    <div class="today-book-title-wrapper">
+      <span class="today-book-title">오늘의 책</span>
+      <span class="today-book-title2">무엇을 읽을지 고민이라면?</span>
+    </div>
+    <div class="slides">
+      <ul>
+      <li>
+        <div><span class="today-book-background-1"></span></div>
+        <img class="today-book-img-1">
+        <p class="today-book-name-1">책이름1</p>
+        <p class="today-book-author-1">작가1</p>
+      </li><li>
+        <div><span class="today-book-background-2"></span></div>
+        <img class="today-book-img-2">
+        <p class="today-book-name-2">책이름2</p>
+        <p class="today-book-author-2">작가2</p>
+      </li><li>
+        <div><span class="today-book-background-3"></span></div>
+        <img class="today-book-img-3">
+        <p class="today-book-name-3">책이름3</p>
+        <p class="today-book-author-3">작가3</p>
+      </li><li>
+        <div><span class="today-book-background-4"></span></div>
+        <img class="today-book-img-4">
+        <p class="today-book-name-4">책이름4</p>
+        <p class="today-book-author-4">작가4</p>
+      </li><li>
+        <div><span class="today-book-background-5"></span></div>
+        <img class="today-book-img-5">
+        <p class="today-book-name-5">책이름5</p>
+        <p class="today-book-author-5">작가5</p>
+      </li>
+      </ul>
+      <div class="tb-button-wrapper">
+        <div class="tb-button">
+          <button class="tb-btn-left"><</button>
+              <button class="tb-btn-right">></button>
+        </div>
+      </div>
+    </div>
+    <div class="tb-reset-wrapper">
+      <div class="tb-reset-box">
+      <img class="tb-reset-icon" src="../static/img/icon/arrow-clockwise.svg">
+      <div class="tb-reset-text">다른 책 찾아보기</div>
+      </div>
+    </div>
+ </div>
+<div class="best-wrapper">
+    <div class="best-title-wrapper">
+      <ul class="best-title-1">
+        <li class="title-best">베스트</li>
+        <li class="best-title-center">|</li>
+        <li class="title-steady">스테디</li>
+        <li class="top-10">서점 3사 top10 북셸프에서 만나보세요!</li>
+      </ul>
+      <ul class="best-title-2">
+        <li class="title-entire">전체</li>
+        <li class="title-domestic">국내도서</li>
+        <li class="title-foreign">외국도서</li>
+      </ul>
+    </div>
+    <div class="best-books-wrapper">
+    <div class="best-row-1">
+      <img class="best-img-1">
+      <img class="best-img-2">
+      <img class="best-img-3">
+      <img class="best-img-4">
+      <img class="best-img-5">
+    </div>
+    <div class="best-row-num1">
+      <div>1</div>
+      <div>2</div>
+      <div>3</div>
+      <div>4</div>
+      <div>5</div>
+    </div>
+    <div class="best-row-2">
+      <img class="best-img-6">
+      <img class="best-img-7">
+      <img class="best-img-8">
+      <img class="best-img-9">
+      <img class="best-img-10">
+    </div>
+    <div class="best-row-num2">
+    <div>6</div>
+    <div>7</div>
+    <div>8</div>
+    <div>9</div>
+    <div>10</div>
+  </div>
+</div>
+</div>
+<div class="picks-wrapper">
+  <div class="picks">
+    <ul>
+      <li>
+        <h1 class="picks-title-1">Picks</h1><h1 class="picks-title-2">!</h1>
+        <h5>새로운 즐거움을 드립니다.</h5>
+        <h2>취향에 꼭 맞는 책<br>북셸프가 찾아드려요!</h2>
+        <button onclick="location.href='../templates/login.html'">로그인하고 추천받기</button>
+      </li>
+      <li>
+        <img src="../static/img/background/img_welcome_picks_item_01.png" alt="">
+        <span>종합추천</span>
+        <span>고객님의 취향을 분석해<br>
+          이틀밤낮 고민하여<br>
+          고른 책을 확인하세요.</span>
+      </li>
+      <li>
+        <img src="../static/img/background/img_welcome_picks_item_02.png" alt="">
+        <span>작가 Picks</span>
+        <span>픽스를 통해 고객님의<br>
+          선호 작가와 비슷한<br>
+          새로운 작가를 만나보세요!</span>
+      </li>
+      <li>
+        <img src="../static/img/background/img_welcome_picks_item_03.png" alt="">
+        <span>내 마음대로 Picks</span>
+        <span>오늘은<br>
+          내 맘대로 이 책 한 권<br>
+          어때요?</span>
+      </li>
+      <li>
+        <img src="../static/img/background/img_welcome_picks_item_04.png" alt="">
+        <span>소울메이트 Picks</span>
+        <span>고객님과 취향이 비슷한<br>
+          소울메이트들은<br>
+          어떤 책을 읽고 있을까요?</span>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="notice-wrapper">
+  <div class="notice">
+  <div class="notice-title">
+    <h1>공지사항</h1>
+    <h4>더보기 +</h4>
+  </div>
+  <div class="notice-box">
+    <ul>
+      <li>
+        <span>공지사항 1</span>
+        <p>다음 달부터 서울 등 규제지역에서<br>
+          15억 원 초과 아파트의 주택담보대출이 가능해지고<br>
+          무주택자와 1주택자에 대한 주택담보인정비율(LTV)이<br>
+          50%로 일괄 높아진다.
+        </p>
+        <span>2022.11.11</span>
+      </li>
+      <li>
+        <span>공지사항 2</span>
+        <p>다음 달부터 서울 등 규제지역에서<br>
+          15억 원 초과 아파트의 주택담보대출이 가능해지고<br>
+          무주택자와 1주택자에 대한 주택담보인정비율(LTV)이<br>
+          50%로 일괄 높아진다.
+        </p>
+        <span>2022.10.29</span>
+      </li>
+      <li>
+        <span>공지사항 3</span>
+        <p>다음 달부터 서울 등 규제지역에서<br>
+          15억 원 초과 아파트의 주택담보대출이 가능해지고<br>
+          무주택자와 1주택자에 대한 주택담보인정비율(LTV)이<br>
+          50%로 일괄 높아진다.
+        </p>
+        <span>2022.10.04</span>
+      </li>
+      <li>
+        <span>공지사항 4</span>
+        <p>다음 달부터 서울 등 규제지역에서<br>
+          15억 원 초과 아파트의 주택담보대출이 가능해지고<br>
+          무주택자와 1주택자에 대한 주택담보인정비율(LTV)이<br>
+          50%로 일괄 높아진다.
+        </p>
+        <span>2022.9.30</span>
+      </li>
+    </ul>
+  </div>
+</div>
+</div>
+<div class="bottom-banner">
+  <div class="bottom-banner-title">오늘의 문장</div>
+  <div class="bottom-banner-button">></div>
+  <div class="bottom-banner-inner-box">
+    <div class="bottom-banner-inner-title">오늘은 무비데이!</div>
+    <img class="bottom-banner-qutoes-left" src="../static/img/icon/qutoes-top-gray.left.png">
+    <div class="bottom-banner-inner-text">
+      새삼스러울 것 없는<br>
+      얘기지만,<br>
+      우리가 본 영화는<br>
+      우리의 인생과 붙어 있다.<br>
+      몸으로 영화를 본다.</div>
+      <img class="bottom-banner-qutoes-right" src="../static/img/icon/qutoes-bottom-gray.right.png">
+      <span class="bottom-banner-booktitle">정희진, <혼자서 본 영화></span>
+  </div>
+</div>
+<div class="footer-wrapper">
+  <footer>
+    <img src="../static/img/icon/logo.png">
+    <div class="footer-title">Bookshelf</div>
+    <span class="footer-infor-title">사업자 정보 열기 ∨</span>
+    <p class="footer-infor">대표이사:최원석&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      사업자등록번호:123-45-6789&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      호스팅 제공자:(주)북셸프<br>
+      통신판매업 신고번호:2022-서울영등포-2000호<br>
+      주소:서울특별시 영등포구 국회대로37길6,10층(유경빌딩)<br><br>
+      고객정보보호 책임자:최원석(nicui@bookshelf.com)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      마케팅 제휴 문의:business@booshelf.com<br></p>
+    <ul>
+      <li>이용약관</li>
+      <li>개인정보처리방침</li>
+      <li>고객센터</li>
+      <li>환불신청</li>
+      <li>콘텐츠 제휴문의</li>
+      <li>저작권/도서오류 신고</li>
+      <li>회사 소개</li>
+    </ul>
+    <div class="footer-last">Copyright © 2022 북셸프 All Rights Reserved.</div>
+  </footer>
+</div>
+
+<div class="bottom-nav-wrapper">
+  <nav class="bottom-nav">
+    <ul>
+      <div id="overbar"></div>
+      <li onclick="location.href='../templates/home.html'">
+        <img src="../static/img/icon/logo.png">
+        <div>NOW</div>
+      </li>
+      <li onclick="location.href='../templates/search.html'">
+        <a href="../templates/search.html"><img src="../static/img/icon/search.svg"></a>
+        <div>책찾기</div>
+      </li>
+      <li onclick="location.href='../templates/event.html'">
+        <img src="../static/img/icon/event.svg">
+        <div>이벤트</div>
+      </li>
+      <li onclick="location.href='../templates/myshelf.html'">
+        <img src="../static/img/icon/shelf.svg">
+        <div>내책장</div>
+      </li>
+      <li onclick="location.href='../templates/board-review.html'">
+        <img src="../static/img/icon/list.svg">
+        <div>게시판</div>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+  <div class="top-move-button">
+    <div>∧</div>
+    <div>TOP</div>
+  </div>
+
+</body>
+</html>

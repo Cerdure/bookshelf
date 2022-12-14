@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/join.css">
+    <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script src="../static/js/join.js"></script>
+    <title>회원가입 | Bookshelf</title>
+</head>
+
+<body>
+
+    <div class="meta-wrapper">
+        <div class="inner-wrapper">
+            <div class="header">
+                <img class="back-btn" src="../static/img/icon/arrow-left-circle.svg"
+                    onclick="location.href='../templates/login.html'">
+                <div class="text">회원가입</div>
+                <div class="sub-text">휴대폰 번호가 아이디로 사용됩니다.</div>
+            </div>
+
+            <div class="contents">
+                <form action="../templates/home.html">
+
+                    <div class="form-group">
+                        <label>닉네임</label>
+                        <input class="id" type="text" placeholder="닉네임 입력" spellcheck="false">
+                        <img class="clear-btn" src="../static/img/icon/x-circle-fill.svg">
+                    </div>
+
+                    <div class="form-group">
+                        <label>이름</label>
+                        <input class="name" type="text" placeholder="이름 입력" spellcheck="false">
+                        <img class="clear-btn" src="../static/img/icon/x-circle-fill.svg">
+                    </div>
+
+                    <div class="form-group">
+                        <label>생년월일</label>
+                        <input class="birth-1" type="number" placeholder="123456" maxlength="6">
+                        <div class="birth-line">ㅡ</div>
+                        <input class="birth-2" type="number" placeholder="1" maxlength="1">
+                        <span class="birth-dot">●●●●●●</span>
+                        <img class="clear-btn" src="../static/img/icon/x-circle-fill.svg">
+                    </div>
+
+                    <div class="form-group">
+                        <label>전화번호</label>
+                        <input class="phone" type="number" placeholder="01012345678">
+                        <img class="clear-btn left-move" src="../static/img/icon/x-circle-fill.svg">
+                        <div class="vertical-line"></div>
+                        <div class="code-send">인증번호 발송</div>
+                        <div class="timer">03:00</div>
+                    </div>
+
+                    <div class="verify form-group">
+                        <label>인증번호</label>
+                        <input class="code" type="text" placeholder="인증번호 입력">
+                        <img class="clear-btn left-move" src="../static/img/icon/x-circle-fill.svg">
+                        <div class="vertical-line"></div>
+                        <div class="code-check">확인</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>비밀번호</label>
+                        <span class="pw-info">영문, 숫자, 특수문자 8~14글자</span>
+                        <input class="pw" type="password" placeholder="비밀번호 입력">
+                        <img class="view" src="../static/img/icon/ico_eye@2x.png">
+                        <img class="clear-btn" src="../static/img/icon/x-circle-fill.svg">
+                    </div>
+
+                    <div class="form-group">
+                        <label>비밀번호 확인</label>
+                        <input class="pw-check" type="password" placeholder="비밀번호 재입력">
+                        <img class="view" src="../static/img/icon/ico_eye@2x.png">
+                        <img class="clear-btn" src="../static/img/icon/x-circle-fill.svg">
+                    </div>
+
+                    <div class="form-group">
+                        <label>주소</label>
+                        <input class="code address" type="text" placeholder="주소 입력">
+                        <img class="clear-btn" src="../static/img/icon/x-circle-fill.svg">
+                    </div>
+
+                    <input class="join" type="submit" value="가입하기" disabled>
+
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-wrapper">
+            <div class="footer">
+                © BOOKSHELF CENTRE
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+
+</html>
