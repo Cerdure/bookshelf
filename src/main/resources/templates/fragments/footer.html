@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div class="footer-wrapper" th:fragment="footerFragment">
+    <footer>
+        <img src="/img/icon/logo.png">
+        <div class="footer-title">Bookshelf</div>
+        <span class="footer-infor-title">사업자 정보 열기 ∨</span>
+        <p class="footer-infor">대표이사:최원석&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            사업자등록번호:123-45-6789&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            호스팅 제공자:(주)북셸프<br>
+            통신판매업 신고번호:2022-서울영등포-2000호<br>
+            주소:서울특별시 영등포구 국회대로37길6,10층(유경빌딩)<br><br>
+            고객정보보호 책임자:최원석(nicui@bookshelf.com)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            마케팅 제휴 문의:business@booshelf.com<br></p>
+        <ul>
+            <li>이용약관</li>
+            <li>개인정보처리방침</li>
+            <li>고객센터</li>
+            <li>환불신청</li>
+            <li>콘텐츠 제휴문의</li>
+            <li>저작권/도서오류 신고</li>
+            <li>회사 소개</li>
+        </ul>
+        <div class="footer-last">Copyright © 2022 북셸프 All Rights Reserved.</div>
+    </footer>
+</div>
+
+<div class="bottom-nav-wrapper">
+    <nav class="bottom-nav">
+        <ul>
+            <div id="overbar"></div>
+            <li onclick="location.href='/home'">
+                <img src="/img/icon/logo.png">
+                <div>NOW</div>
+            </li>
+            <li onclick="location.href='/search'">
+                <a href="/search"><img src="/img/icon/search.svg"></a>
+                <div>책찾기</div>
+            </li>
+            <li onclick="location.href='/event'">
+                <img src="/img/icon/event.svg">
+                <div>이벤트</div>
+            </li>
+            <li onclick="location.href='/myshelf'">
+                <img src="/img/icon/shelf.svg">
+                <div>내책장</div>
+            </li>
+            <li onclick="location.href='/board-review'">
+                <img src="/img/icon/list.svg">
+                <div>게시판</div>
+            </li>
+        </ul>
+    </nav>
+</div>

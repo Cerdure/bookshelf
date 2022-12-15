@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -31,32 +31,32 @@
             </div>
 
             <div class="contents">
-                <form action="/">
+                <form  action="" method="post">
 
                     <div class="form-group">
                         <label>닉네임</label>
-                        <input class="id" type="text" placeholder="닉네임 입력" spellcheck="false">
+                        <input name="nickname" id="nickname" class="id" type="text" placeholder="닉네임 입력" spellcheck="false">
                         <img class="clear-btn" src="/img/icon/x-circle-fill.svg">
                     </div>
 
                     <div class="form-group">
                         <label>이름</label>
-                        <input class="name" type="text" placeholder="이름 입력" spellcheck="false">
+                        <input name="name" id="name" class="name" type="text" placeholder="이름 입력" spellcheck="false">
                         <img class="clear-btn" src="/img/icon/x-circle-fill.svg">
                     </div>
 
                     <div class="form-group">
                         <label>생년월일</label>
-                        <input class="birth-1" type="number" placeholder="123456" maxlength="6">
+                        <input name="birth" id="birth" class="birth-1" type="number" placeholder="123456" maxlength="6">
                         <div class="birth-line">ㅡ</div>
-                        <input class="birth-2" type="number" placeholder="1" maxlength="1">
+                        <input name="sex" class="birth-2" id="sex" type="number" placeholder="1" maxlength="1">
                         <span class="birth-dot">●●●●●●</span>
                         <img class="clear-btn" src="/img/icon/x-circle-fill.svg">
                     </div>
 
                     <div class="form-group">
                         <label>전화번호</label>
-                        <input class="phone" type="number" placeholder="01012345678">
+                        <input name="phone" id="phone" class="phone" type="number" placeholder="01012345678">
                         <img class="clear-btn left-move" src="/img/icon/x-circle-fill.svg">
                         <div class="vertical-line"></div>
                         <div class="code-send">인증번호 발송</div>
@@ -74,7 +74,7 @@
                     <div class="form-group">
                         <label>비밀번호</label>
                         <span class="pw-info">영문, 숫자, 특수문자 8~14글자</span>
-                        <input class="pw" type="password" placeholder="비밀번호 입력">
+                        <input name="pw" id="pw" class="pw" type="password" placeholder="비밀번호 입력">
                         <img class="view" src="/img/icon/ico_eye@2x.png">
                         <img class="clear-btn" src="/img/icon/x-circle-fill.svg">
                     </div>

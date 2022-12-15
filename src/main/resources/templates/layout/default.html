@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html   lang="en"
+         xmlns:th="http://www.thymeleaf.org"
+         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!-- [head] 영역 시작 -->
+<head th:replace="fragments/header :: headFragment">
+    <title layout:title-pattern="$LAYOUT_TITLE : $CONTENT_TITLE">BookShelf</title>
+</head>
+<!-- [head] 영역 끝 -->
+
+<body>
+
+<!-- [header] 영역 시작 -->
+<header th:replace="fragments/bodyHeader :: headerFragment"></header>
+<!-- [header] 영역 끝 -->
+
+<!-- [content] 영역 시작 -->
+<div layout:fragment="content"></div>
+<!-- [content] 영역 끝 -->
+
+<!-- [footer] 영역 시작 -->
+<footer th:replace="fragments/footer :: footerFragment"></footer>
+<!-- [footer] 영역 끝 -->
+
+</body>
+</html>

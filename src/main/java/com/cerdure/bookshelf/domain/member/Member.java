@@ -17,6 +17,7 @@ import static javax.persistence.FetchType.LAZY;
 
 @Entity @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString(of = {"name","phone","birth","sex"})
 public class Member {
 
     @Id @GeneratedValue
@@ -27,6 +28,7 @@ public class Member {
     private String name;
     private String nickname;
     private String birth;
+    private char sex;
     private String phone;
 
     @Embedded
@@ -58,6 +60,16 @@ public class Member {
 
     public Member(String name) {
         this.name = name;
+    }
+
+    public Member(Long id, String pw, String name, String nickname, String birth, char sex, String phone) {
+        this.id = id;
+        this.pw = pw;
+        this.name = name;
+        this.nickname = nickname;
+        this.birth = birth;
+        this.sex = sex;
+        this.phone = phone;
     }
 
     @Builder

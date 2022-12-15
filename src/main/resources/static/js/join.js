@@ -128,7 +128,7 @@ $(".code-check").click(function(){
   .addClass("clicked")
   .fadeIn(300);
   $(".timer").hide();
-  $('.phone').attr('disabled','true');
+  // $('.phone').attr('disabled','true');
   
   $('.phone, .code').parent().addClass('passed');
   $('.phone').parent().find('.clear-btn').remove();
