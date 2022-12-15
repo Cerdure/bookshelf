@@ -373,7 +373,7 @@ header {
   transform: translateY(-50%);
   width: 20px;
   height: 20px;
-  background-image: url("../img/icon/play.svg");
+  background-image: url("/img/icon/play.svg");
   background-size: 100%;
   opacity: 0.3;
   display: none;
@@ -1179,7 +1179,7 @@ footer ul li {
   margin: auto;
   margin-top: 60px;
   margin-bottom: 80px;
-  background-image: url("../img/background/bottom-banner-img.jpg");
+  background-image: url("/img/background/bottom-banner-img.jpg");
   background-size: 1280px;
   top: 50%;
   background-position: center;

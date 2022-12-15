@@ -1207,7 +1207,7 @@ header {
   width: 100px;
   height: 100px;
   background-color: #ebebeb;
-  background-image: url("../img/icon/plus-simple.svg");
+  background-image: url("/img/icon/plus-simple.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 40%;

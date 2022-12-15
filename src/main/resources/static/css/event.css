@@ -449,7 +449,7 @@ header {
   transform: translateY(-50%);
   width: 18px;
   height: 18px;
-  background-image: url("../img/icon/play_white.png");
+  background-image: url("/img/icon/play_white.png");
   background-size: 60%;
   background-repeat: no-repeat;
   display: none;
