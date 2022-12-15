@@ -53,7 +53,7 @@ $(function () {
     let randNum = Math.floor(Math.random() * 62 + 1);
     while (arr.indexOf(randNum) != -1) randNum = Math.floor(Math.random() * 62 + 1);
     arr.push(randNum);
-    $(".bi-"+i+" img").attr('src',"../static/img/book-cover/"+randNum+".jpg");
+    $(".bi-"+i+" img").attr('src',"/img/book-cover/"+randNum+".jpg");
   }
 
   function bannerSlide(speed){
@@ -369,7 +369,7 @@ $(function () {
 
   for (var j = 0; j < 2; j++) {
     for (var k = 0; k < 9; k++) {
-      $(".sale-row-" + j + " li:nth-child(" + (k + 1) + ") img").attr('src', "../static/img/book-cover/" + row[j][k] + ".jpg");
+      $(".sale-row-" + j + " li:nth-child(" + (k + 1) + ") img").attr('src', "/img/book-cover/" + row[j][k] + ".jpg");
       $(".sale-row-" + j + " li:nth-child(" + (k + 1) + ") span:nth-child(2)").text("책이름" + row[j][k]);
       $(".sale-row-" + j + " li:nth-child(" + (k + 1) + ") span:nth-child(3)").text("작가" + row[j][k]);
     }
@@ -387,7 +387,7 @@ $(function () {
       reverseCount += 8; 
       for (var k = 0; k < 9; k++) {
         $(".sale-row-1 li:nth-child(" + (k + 1) + ") img")
-          .attr('src', "../static/img/book-cover/" + row[1][(k + reverseCount) % 9] + ".jpg");
+          .attr('src', "/img/book-cover/" + row[1][(k + reverseCount) % 9] + ".jpg");
         $(".sale-row-1 li:nth-child(" + (k + 1) + ") span:nth-child(2)").text("책이름" + row[1][(k + reverseCount) % 9]);
         $(".sale-row-1 li:nth-child(" + (k + 1) + ") span:nth-child(3)").text("작가" + row[1][(k + reverseCount) % 9]);
       }
@@ -404,7 +404,7 @@ $(function () {
       count++; 
       for (var k = 0; k < 9; k++) {
         $(".sale-row-0 li:nth-child(" + (k + 1) + ") img")
-          .attr('src', "../static/img/book-cover/" + row[0][(k + 1 + count) % 9] + ".jpg");
+          .attr('src', "/img/book-cover/" + row[0][(k + 1 + count) % 9] + ".jpg");
         $(".sale-row-0 li:nth-child(" + (k + 1) + ") span:nth-child(2)").text("책이름" + row[0][(k +1+ count) % 9]);
         $(".sale-row-0 li:nth-child(" + (k + 1) + ") span:nth-child(3)").text("작가" + row[0][(k +1+ count) % 9]);
       }
@@ -437,7 +437,7 @@ $(function(){
     }
   }
 
-  const checkImg = "../static/img/icon/patch-check-fill.svg";
+  const checkImg = "/img/icon/patch-check-fill.svg";
 
   $(window).scroll(function(){
     if(!checked && $(this).scrollTop()>3042 && $(this).scrollTop()<3480){

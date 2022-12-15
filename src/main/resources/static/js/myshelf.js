@@ -278,7 +278,7 @@ $(window).resize(function(){
   ebnfadeinCount = 1;
   ebnfadeOutCount = 4;
   if(!ebnClicked){
-    $(".entire-book-number img").attr('src','../static/img/icon/up-arr.png')
+    $(".entire-book-number img").attr('src','/img/icon/up-arr.png')
     .css({'bottom':'3px','left':'2px','width':'9px'});
     $(".entire-book-number-text").animate({'color':'#ffbb00'},300);
     $(".entire-book-number-list").stop().animate({'height':'65px'},0, function(){
@@ -291,7 +291,7 @@ $(window).resize(function(){
     });
     ebnClicked = true;
   } else {
-    $(".entire-book-number img").attr('src','../static/img/icon/down-arr.png')
+    $(".entire-book-number img").attr('src','/img/icon/down-arr.png')
     .css({'bottom':'-3px','left':'0px','width':'14px'});
     $(".entire-book-number-text").animate({'color':'black'},300);
 
@@ -338,7 +338,7 @@ $(window).resize(function(){
   eboFadeinCount = 1;
   eboFadeOutCount = 6;
   if(!eboClicked){
-    $(".entire-book-order img").attr('src','../static/img/icon/up-arr.png')
+    $(".entire-book-order img").attr('src','/img/icon/up-arr.png')
     .css({'bottom':'-11px','right':'2px','width':'9px','margin-left':'10px'});
     $(".entire-book-order span").animate({'color':'#ffbb00'},300);
     $(".entire-book-order-list").animate({'height':'105px'},0,function(){
@@ -351,7 +351,7 @@ $(window).resize(function(){
     });
     eboClicked = true;
   } else {
-    $(".entire-book-order img").attr('src','../static/img/icon/down-arr.png')
+    $(".entire-book-order img").attr('src','/img/icon/down-arr.png')
     .css({'bottom':'-7px','right':'0px','width':'14px','margin-left':'5px'});
     $(".entire-book-order span").animate({'color':'black'},300);
     $(".entire-book-order-list li").each(e => {

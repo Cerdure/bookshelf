@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>검색 | Bookshelf</title>
 
-    <link rel="stylesheet" href="../static/css/book-detail.css">
+    <link rel="stylesheet" href="/css/book-detail.css">
     <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-    <script src="../static/js/book-detail.js"></script>
+    <script src="/js/book-detail.js"></script>
   </head>
 
 
@@ -25,24 +25,24 @@
   <header>
     <div class="top-nav-background"></div>
     <div class="top-nav-wrapper">
-      <div class="top-logo-wrapper" onclick="location.href='../templates/home.html'"> 
-      <img id="top-logo" src="../static/img/icon/logo.png">
+      <div class="top-logo-wrapper" onclick="location.href='/'">
+      <img id="top-logo" src="/img/icon/logo.png">
       <span class="top-title">BookShelf</span>
       </div>
       <div class="news-wrapper">
-        <img src="../static/img/icon/bell.svg" id="news">
+        <img src="/img/icon/bell.svg" id="news">
         <div id="news-n">N</div>
       </div>
-      <img src="../static/img/icon/cart.svg" id="cart">
-      <button class="login-button" onclick="location.href='../templates/login.html'">로그인</button>
+      <img src="/img/icon/cart.svg" id="cart">
+      <button class="login-button" onclick="location.href='/login'">로그인</button>
       <nav class="top-nav">
         <div id="underbar"></div>
         <ul>
-          <li onclick="location.href='../templates/home.html'">NOW</li>
-          <li onclick="location.href='../templates/search.html'">책찾기</li>
-          <li onclick="location.href='../templates/event.html'">이벤트</li>
-          <li onclick="location.href='../templates/myshelf.html'">내책장</li>
-          <li onclick="location.href='../templates/board-review.html'">게시판</li>
+          <li onclick="location.href='/'">NOW</li>
+          <li onclick="location.href='/search'">책찾기</li>
+          <li onclick="location.href='/event'">이벤트</li>
+          <li onclick="location.href='/myshelf'">내책장</li>
+          <li onclick="location.href='/review'">게시판</li>
         </ul>
       </nav>
     </div>
@@ -54,7 +54,7 @@
 <div class="main-wrapper">
   <div class="header">
     <div class="left-box">
-    <img class="book-img" src="../static/img/book-cover/54.jpg">
+    <img class="book-img" src="/img/book-cover/54.jpg">
   </div>
     <div class="right-box">
       <div class="top">
@@ -65,20 +65,20 @@
         <div class="inner-box">
         <div class="shelves">
           <div class="profile">
-          <li><img src="../static/img/icon/img_no_profile@2x.png"></li>
-          <li><img src="../static/img/icon/img_no_profile@2x.png"></li>
-          <li><img src="../static/img/icon/img_no_profile@2x.png"></li>
+          <li><img src="/img/icon/img_no_profile@2x.png"></li>
+          <li><img src="/img/icon/img_no_profile@2x.png"></li>
+          <li><img src="/img/icon/img_no_profile@2x.png"></li>
           </div>
         <div class="text">책장에 담은 사람</div>
         <div class="number">1,560명</div>
         </div>
         <div class="reviews">
-          <img class="icon" src="../static/img/icon/search-list-theme.svg">
+          <img class="icon" src="/img/icon/search-list-theme.svg">
           <div class="text">이 책의 리뷰</div>
           <div class="number">3개</div>
         </div>
         <div class="first-review">
-          <img class="icon" src="../static/img/icon/search-list-editor.svg">
+          <img class="icon" src="/img/icon/search-list-editor.svg">
           <div class="text">
             리뷰 작성하고<br>
             +200포인트
@@ -121,7 +121,7 @@
 
       <div class="book-index-wrapper">
         <span class="title">목차</span>
-        <img class="fold-btn" src="../static/img/icon/down-arr.png">
+        <img class="fold-btn" src="/img/icon/down-arr.png">
         <p>
             Chapter 01 PC 운영체제<br>
             Section 01 Windows 기초<br>
@@ -154,13 +154,13 @@
 
       <div class="author-intro-wrapper">
         <span class="title">저자 소개</span>
-        <img class="fold-btn" src="../static/img/icon/down-arr.png">
+        <img class="fold-btn" src="/img/icon/down-arr.png">
         <span class="data">IT 교재팀</span>
       </div>
 
       <div class="publisher-review-wrapper">
         <span class="title">출판사 서평</span>
-        <img class="fold-btn" src="../static/img/icon/down-arr.png">
+        <img class="fold-btn" src="/img/icon/down-arr.png">
         <p>
           초스피드로 단기간에 합격의 기틀을 잡아주는 컴퓨터 활용능력 1급 필기 수험서<br><br>
           수험자의 효율적인 학습을 위해 최소한의 투자로 최대의 효과를 얻을 수 있도록 출제 기준과 기출 문제의 출제 경향을 분석하여 꼭 필요한 내용만을 선별하여 구성하였습니다.<br>
@@ -179,18 +179,18 @@
             <div class="tag">#재밌어요</div>
             <div class="rating">
               <div class="star-empty">
-                <img src="../static/img/icon/star-empty.svg">
-                <img src="../static/img/icon/star-empty.svg">
-                <img src="../static/img/icon/star-empty.svg">
-                <img src="../static/img/icon/star-empty.svg">
-                <img src="../static/img/icon/star-empty.svg">
+                <img src="/img/icon/star-empty.svg">
+                <img src="/img/icon/star-empty.svg">
+                <img src="/img/icon/star-empty.svg">
+                <img src="/img/icon/star-empty.svg">
+                <img src="/img/icon/star-empty.svg">
               </div>
               <div class="star-fill">
-                <img src="../static/img/icon/star-fill.svg">
-                <img src="../static/img/icon/star-fill.svg">
-                <img src="../static/img/icon/star-fill.svg">
-                <img src="../static/img/icon/star-fill.svg">
-                <img src="../static/img/icon/star-fill.svg">
+                <img src="/img/icon/star-fill.svg">
+                <img src="/img/icon/star-fill.svg">
+                <img src="/img/icon/star-fill.svg">
+                <img src="/img/icon/star-fill.svg">
+                <img src="/img/icon/star-fill.svg">
               </div>
             </div>
           </div>
@@ -207,8 +207,8 @@
             <div class="frame"></div>
             <div class="photos">
               <div class="close">x</div>
-              <img src="../static/img/background/top-background.jpg">
-              <img src="../static/img/book-cover/30.jpg">
+              <img src="/img/background/top-background.jpg">
+              <img src="/img/book-cover/30.jpg">
             <div class="number"></div>
             <div class="btn-left"><</div>
             <div class="btn-right">></div>
@@ -216,7 +216,7 @@
             </div>
             <div class="fold-button">
               <div class="text">펼치기</div>
-              <img class="icon" src="../static/img/icon/down.png">
+              <img class="icon" src="/img/icon/down.png">
             </div>
           </div>
         </div>
@@ -230,18 +230,18 @@
             <div class="tag">#재밌어요</div>
             <div class="rating">
               <div class="star-empty">
-                <img src="../static/img/icon/star-empty.svg">
-                <img src="../static/img/icon/star-empty.svg">
-                <img src="../static/img/icon/star-empty.svg">
-                <img src="../static/img/icon/star-empty.svg">
-                <img src="../static/img/icon/star-empty.svg">
+                <img src="/img/icon/star-empty.svg">
+                <img src="/img/icon/star-empty.svg">
+                <img src="/img/icon/star-empty.svg">
+                <img src="/img/icon/star-empty.svg">
+                <img src="/img/icon/star-empty.svg">
               </div>
               <div class="star-fill">
-                <img src="../static/img/icon/star-fill.svg">
-                <img src="../static/img/icon/star-fill.svg">
-                <img src="../static/img/icon/star-fill.svg">
-                <img src="../static/img/icon/star-fill.svg">
-                <img src="../static/img/icon/star-fill.svg">
+                <img src="/img/icon/star-fill.svg">
+                <img src="/img/icon/star-fill.svg">
+                <img src="/img/icon/star-fill.svg">
+                <img src="/img/icon/star-fill.svg">
+                <img src="/img/icon/star-fill.svg">
               </div>
             </div>
           </div>
@@ -268,11 +268,11 @@
             <div class="frame"></div>
             <div class="photos">
                 <div class="close">x</div>
-                <img src="../static/img/book-cover/14.jpg">
-                <img src="../static/img/book-cover/15.jpg">
-                <img src="../static/img/book-cover/16.jpg">
-                <img src="../static/img/book-cover/17.jpg">
-                <img src="../static/img/book-cover/18.jpg">
+                <img src="/img/book-cover/14.jpg">
+                <img src="/img/book-cover/15.jpg">
+                <img src="/img/book-cover/16.jpg">
+                <img src="/img/book-cover/17.jpg">
+                <img src="/img/book-cover/18.jpg">
                 <div class="number"></div>
                 <div class="btn-left"><</div>
                 <div class="btn-right">></div>
@@ -280,7 +280,7 @@
             </div>
             <div class="fold-button">
               <div class="text">펼치기</div>
-              <img class="icon" src="../static/img/icon/down.png">
+              <img class="icon" src="/img/icon/down.png">
             </div>
           </div>
         </div>
@@ -294,18 +294,18 @@
             <div class="tag">#재밌어요</div>
             <div class="rating">
               <div class="star-empty">
-                <img src="../static/img/icon/star-empty.svg">
-                <img src="../static/img/icon/star-empty.svg">
-                <img src="../static/img/icon/star-empty.svg">
-                <img src="../static/img/icon/star-empty.svg">
-                <img src="../static/img/icon/star-empty.svg">
+                <img src="/img/icon/star-empty.svg">
+                <img src="/img/icon/star-empty.svg">
+                <img src="/img/icon/star-empty.svg">
+                <img src="/img/icon/star-empty.svg">
+                <img src="/img/icon/star-empty.svg">
               </div>
               <div class="star-fill">
-                <img src="../static/img/icon/star-fill.svg">
-                <img src="../static/img/icon/star-fill.svg">
-                <img src="../static/img/icon/star-fill.svg">
-                <img src="../static/img/icon/star-fill.svg">
-                <img src="../static/img/icon/star-fill.svg">
+                <img src="/img/icon/star-fill.svg">
+                <img src="/img/icon/star-fill.svg">
+                <img src="/img/icon/star-fill.svg">
+                <img src="/img/icon/star-fill.svg">
+                <img src="/img/icon/star-fill.svg">
               </div>
             </div>
           </div>
@@ -322,10 +322,10 @@
             <div class="frame"></div>
             <div class="photos">
               <div class="close">x</div>
-              <img src="../static/img/book-cover/15.jpg">
-              <img src="../static/img/book-cover/16.jpg">
-              <img src="../static/img/book-cover/17.jpg">
-              <img src="../static/img/book-cover/18.jpg">
+              <img src="/img/book-cover/15.jpg">
+              <img src="/img/book-cover/16.jpg">
+              <img src="/img/book-cover/17.jpg">
+              <img src="/img/book-cover/18.jpg">
               <div class="number"></div>
               <div class="btn-left"><</div>
               <div class="btn-right">></div>
@@ -333,28 +333,28 @@
            </div>
             <div class="fold-button">
               <div class="text">펼치기</div>
-              <img class="icon" src="../static/img/icon/down.png">
+              <img class="icon" src="/img/icon/down.png">
             </div>
           </div>
         </div>
       </div>
       <div class="other-reviews">
-        <button onclick="location.href='../templates/board-review.html'">다른 리뷰들 보러가기</button>
+        <button onclick="location.href='/review'">다른 리뷰들 보러가기</button>
       </div>
 
   </div>
 
   <div class="side-wrapper">
     <div class="put-myshelf">
-      <img src="../static/img/icon/search-list-series.svg">
+      <img src="/img/icon/search-list-series.svg">
       <span>내 책장에 담기</span>
     </div>
     <div class="bookmark">
-      <img src="../static/img/icon/bookmark.svg">
+      <img src="/img/icon/bookmark.svg">
       <span>북마크하기</span>
     </div>
     <div class="write-review">
-      <img src="../static/img/icon/search-list-editor.svg">
+      <img src="/img/icon/search-list-editor.svg">
       <span>리뷰 남기기</span>
     </div>
     <button class="cart-btn">장바구니에 넣기</button>
@@ -380,27 +380,27 @@
 <form role="form" action="#" method="post" class="review-write-wrapper">
   <div class="review-write-top">
     <span class="review-write-top-text">리뷰작성</span>
-    <img class="review-write-top-icon" src="../static/img/icon/btn_dialog_close@2x.png">
+    <img class="review-write-top-icon" src="/img/icon/btn_dialog_close@2x.png">
   </div>
   <div class="review-write-contents">
     <div class="review-write-book-wrapper">
-      <img class="review-book-img" src="../static/img/book-cover/54.jpg">
+      <img class="review-book-img" src="/img/book-cover/54.jpg">
       <div class="review-book-info">
         <div class="review-book-name">책이름</div>
         <div class="review-book-rating">
           <div class="star-empty">
-            <img src="../static/img/icon/star-empty.svg">
-            <img src="../static/img/icon/star-empty.svg">
-            <img src="../static/img/icon/star-empty.svg">
-            <img src="../static/img/icon/star-empty.svg">
-            <img src="../static/img/icon/star-empty.svg">
+            <img src="/img/icon/star-empty.svg">
+            <img src="/img/icon/star-empty.svg">
+            <img src="/img/icon/star-empty.svg">
+            <img src="/img/icon/star-empty.svg">
+            <img src="/img/icon/star-empty.svg">
           </div>
           <div class="star-fill">
-            <img src="../static/img/icon/star-fill.svg">
-            <img src="../static/img/icon/star-fill.svg">
-            <img src="../static/img/icon/star-fill.svg">
-            <img src="../static/img/icon/star-fill.svg">
-            <img src="../static/img/icon/star-fill.svg">
+            <img src="/img/icon/star-fill.svg">
+            <img src="/img/icon/star-fill.svg">
+            <img src="/img/icon/star-fill.svg">
+            <img src="/img/icon/star-fill.svg">
+            <img src="/img/icon/star-fill.svg">
           </div>
         </div>
         <div class="review-book-rating-number">
@@ -468,19 +468,19 @@
   <div class="bottom-nav-sub">
     <div class="put-myshelf">
       <div class="inner">
-        <img src="../static/img/icon/search-list-series.svg">
+        <img src="/img/icon/search-list-series.svg">
         <span>담기</span>
       </div>
     </div>
     <div class="bookmark">
       <div class="inner">
-        <img src="../static/img/icon/bookmark.svg">
+        <img src="/img/icon/bookmark.svg">
         <span>북마크</span>
       </div>
     </div>
     <div class="write-review">
       <div class="inner">
-        <img src="../static/img/icon/search-list-editor.svg">
+        <img src="/img/icon/search-list-editor.svg">
         <span>리뷰</span>
       </div>
     </div>
@@ -498,24 +498,24 @@
   <nav class="bottom-nav">
     <ul>
       <div id="overbar"></div>
-      <li onclick="location.href='../templates/home.html'">
-        <img src="../static/img/icon/logo.png">
+      <li onclick="location.href='/'">
+        <img src="/img/icon/logo.png">
         <div>NOW</div>
       </li>
-      <li onclick="location.href='../templates/search.html'">
-        <img src="../static/img/icon/search.svg">
+      <li onclick="location.href='/search'">
+        <img src="/img/icon/search.svg">
         <div>책찾기</div>
       </li>
-      <li onclick="location.href='../templates/event.html'">
-        <img src="../static/img/icon/event.svg">
+      <li onclick="location.href='/event'">
+        <img src="/img/icon/event.svg">
         <div>이벤트</div>
       </li>
-      <li onclick="location.href='../templates/myshelf.html'">
-        <img src="../static/img/icon/shelf.svg">
+      <li onclick="location.href='/myshelf'">
+        <img src="/img/icon/shelf.svg">
         <div>내책장</div>
       </li>
-      <li onclick="location.href='../templates/board-review.html'">
-        <img src="../static/img/icon/list.svg">
+      <li onclick="location.href='/review'">
+        <img src="/img/icon/list.svg">
         <div>게시판</div>
       </li>
     </ul>

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>당첨자발표 | BookShelf</title>
-  <link rel="stylesheet" href="../static/css/board-winner.css">
+  <link rel="stylesheet" href="/css/board-winner.css">
 
   <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-  <script src="../static/js/board-winner.js"></script>
+  <script src="/js/board-winner.js"></script>
   
 </head>
 
@@ -28,24 +28,24 @@
 <header>
   <div class="top-nav-background"></div>
   <div class="top-nav-wrapper">
-    <div class="top-logo-wrapper" onclick="location.href='../templates/home.html'"> 
-    <img id="top-logo" src="../static/img/icon/logo.png">
+    <div class="top-logo-wrapper" onclick="location.href='/'">
+    <img id="top-logo" src="/img/icon/logo.png">
     <span class="top-title">BookShelf</span>
     </div>
     <div class="news-wrapper">
-      <img src="../static/img/icon/bell.svg" id="news">
+      <img src="/img/icon/bell.svg" id="news">
       <div id="news-n">N</div>
     </div>
-    <img src="../static/img/icon/cart.svg" id="cart">
-    <button class="login-button" onclick="location.href='../templates/login.html'">로그인</button>
+    <img src="/img/icon/cart.svg" id="cart">
+    <button class="login-button" onclick="location.href='/login'">로그인</button>
     <nav class="top-nav">
       <div id="underbar"></div>
       <ul>
-        <li onclick="location.href='../templates/home.html'">NOW</li>
-        <li onclick="location.href='../templates/search.html'">책찾기</li>
-        <li onclick="location.href='../templates/event.html'">이벤트</li>
-        <li onclick="location.href='../templates/myshelf.html'">내책장</li>
-        <li onclick="location.href='../templates/board-review.html'">게시판</li>
+        <li onclick="location.href='/'">NOW</li>
+        <li onclick="location.href='/search'">책찾기</li>
+        <li onclick="location.href='/event'">이벤트</li>
+        <li onclick="location.href='/myshelf'">내책장</li>
+        <li onclick="location.href='/review'">게시판</li>
       </ul>
     </nav>
   </div>
@@ -60,10 +60,10 @@
 <div class="middle-nav-wrapper">
   <div class="middle-nav-container">
     <div class="middle-nav">
-      <div onclick="location.href='../templates/board-review.html'">책리뷰</div>
-      <div onclick="location.href='../templates/board-inquire.html'">상품문의</div>
-      <div onclick="location.href='../templates/board-notice.html'">공지사항</div>
-      <div onclick="location.href='../templates/board-winner.html'">당첨자발표</div>
+      <div onclick="location.href='/review'">책리뷰</div>
+      <div onclick="location.href='/inquire'">상품문의</div>
+      <div onclick="location.href='/notice'">공지사항</div>
+      <div onclick="location.href='/winner'">당첨자발표</div>
       <div class="middle-nav-underbar"></div>
     </div>
   </div>
@@ -88,7 +88,7 @@
       <div class="search">
           <input type="text" name="winner-search-input" class="winner-search-input"
           placeholder="검색어를 입력하세요.">
-          <img src="../static/img/icon/search.svg">
+          <img src="/img/icon/search.svg">
       </div>
     </div>
     <select name="winner-middle-type" id="winner-middle-type">
@@ -103,7 +103,7 @@
   <form role="form" action="#" method="post" class="winner-write-wrapper">
     <div class="winner-write-top">
       <span class="winner-write-top-text">당첨자 발표글 작성</span>
-      <img class="winner-write-top-icon" src="../static/img/icon/btn_dialog_close@2x.png">
+      <img class="winner-write-top-icon" src="/img/icon/btn_dialog_close@2x.png">
     </div>
     <div class="winner-write-contents">
       <div class="winner-write-header">
@@ -133,56 +133,56 @@
     <div class="body">
       <div class="my-winner">
         <div class="category">국내도서</div>
-        <div class="title" onclick="location.href='../templates/winner-detail.html'">
+        <div class="title" onclick="location.href='/winner-detail'">
           <span class="text">세계문학전집 라이브 커머스 참여 이벤트 당첨자 발표</span> 
         </div>
         <div class="date">2022.12.06</div>
       </div>
       <div class="my-winner">
         <div class="category">국내도서</div>
-        <div class="title" onclick="location.href='../templates/winner-detail.html'">
+        <div class="title" onclick="location.href='/winner-detail'">
           <span class="text">세계문학전집 라이브 커머스 참여 이벤트 당첨자 발표</span> 
         </div>
         <div class="date">2022.12.06</div>
       </div>
       <div class="my-winner">
         <div class="category">외국도서</div>
-        <div class="title" onclick="location.href='../templates/winner-detail.html'">
+        <div class="title" onclick="location.href='/winner-detail'">
           <span class="text">세계문학전집 라이브 커머스 참여 이벤트 당첨자 발표</span> 
         </div>
         <div class="date">2022.12.06</div>
       </div>
       <div class="my-winner">
         <div class="category">외국도서</div>
-        <div class="title" onclick="location.href='../templates/winner-detail.html'">
+        <div class="title" onclick="location.href='/winner-detail'">
           <span class="text">세계문학전집 라이브 커머스 참여 이벤트 당첨자 발표</span> 
         </div>
         <div class="date">2022.12.06</div>
       </div>
       <div class="my-winner">
         <div class="category">외국도서</div>
-        <div class="title" onclick="location.href='../templates/winner-detail.html'">
+        <div class="title" onclick="location.href='/winner-detail'">
           <span class="text">세계문학전집 라이브 커머스 참여 이벤트 당첨자 발표</span> 
         </div>
         <div class="date">2022.12.06</div>
       </div>
       <div class="my-winner">
         <div class="category">국내도서</div>
-        <div class="title" onclick="location.href='../templates/winner-detail.html'">
+        <div class="title" onclick="location.href='/winner-detail'">
           <span class="text">세계문학전집 라이브 커머스 참여 이벤트 당첨자 발표</span> 
         </div>
         <div class="date">2022.12.06</div>
       </div>
       <div class="my-winner">
         <div class="category">국내도서</div>
-        <div class="title" onclick="location.href='../templates/winner-detail.html'">
+        <div class="title" onclick="location.href='/winner-detail'">
           <span class="text">세계문학전집 라이브 커머스 참여 이벤트 당첨자 발표</span> 
         </div>
         <div class="date">2022.12.06</div>
       </div>
       <div class="my-winner">
         <div class="category">국내도서</div>
-        <div class="title" onclick="location.href='../templates/winner-detail.html'">
+        <div class="title" onclick="location.href='/winner-detail'">
           <span class="text">세계문학전집 라이브 커머스 참여 이벤트 당첨자 발표</span> 
         </div>
         <div class="date">2022.12.06</div>
@@ -194,7 +194,7 @@
 
   <div class="winner-controller">
     <span class="controller">
-      <img class="controller-btn-left" src="../static/img/icon/btn_pagination_prev@2x.png">
+      <img class="controller-btn-left" src="/img/icon/btn_pagination_prev@2x.png">
       <a class="index-1 index-active">1</a>
       <span class="first-ellipsis">...</span>
       <a class="index-2">2</a>
@@ -203,7 +203,7 @@
       <a class="index-5">5</a>
       <span class="last-ellipsis">...</span>
       <a class="index-6">13</a>
-      <img class="controller-btn-right" src="../static/img/icon/btn_pagination_next@2x.png">
+      <img class="controller-btn-right" src="/img/icon/btn_pagination_next@2x.png">
     </span>
   </div>
 </div>
@@ -231,7 +231,7 @@
 
 <div class="footer-wrapper">
   <footer>
-    <img src="../static/img/icon/logo.png">
+    <img src="/img/icon/logo.png">
     <div class="footer-title">Bookshelf</div>
     <span class="footer-infor-title">사업자 정보 열기 ∨</span>
     <p class="footer-infor">대표이사:최원석&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -258,24 +258,24 @@
   <nav class="bottom-nav">
     <ul>
       <div id="overbar"></div>
-      <li onclick="location.href='../templates/home.html'">
-        <img src="../static/img/icon/logo.png">
+      <li onclick="location.href='/'">
+        <img src="/img/icon/logo.png">
         <div>NOW</div>
       </li>
-      <li onclick="location.href='../templates/search.html'">
-        <a href="../templates/search.html"><img src="../static/img/icon/search.svg"></a>
+      <li onclick="location.href='/search'">
+        <a href="/search"><img src="/img/icon/search.svg"></a>
         <div>책찾기</div>
       </li>
-      <li onclick="location.href='../templates/event.html'">
-        <img src="../static/img/icon/event.svg">
+      <li onclick="location.href='/event'">
+        <img src="/img/icon/event.svg">
         <div>이벤트</div>
       </li>
-      <li onclick="location.href='../templates/myshelf.html'">
-        <img src="../static/img/icon/shelf.svg">
+      <li onclick="location.href='/myshelf'">
+        <img src="/img/icon/shelf.svg">
         <div>내책장</div>
       </li>
-      <li onclick="location.href='../templates/board-review.html'">
-        <img src="../static/img/icon/list.svg">
+      <li onclick="location.href='/review'">
+        <img src="/img/icon/list.svg">
         <div>게시판</div>
       </li>
     </ul>

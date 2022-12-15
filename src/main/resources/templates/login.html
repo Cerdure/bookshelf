@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/login.css">
+    <link rel="stylesheet" href="/css/login.css">
     <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
@@ -15,20 +15,20 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-    <script src="../static/js/login.js"></script>
+    <script src="/js/login.js"></script>
     <title>로그인 | Bookshelf</title>
 </head>
 
 <body>
     <div class="meta-wrapper">
         <div class="inner-wrapper">
-            <header onclick="location.href='../templates/home.html'">
-                <img src="../static/img/icon/logo.png" alt="">
+            <header onclick="location.href='/'">
+                <img src="/img/icon/logo.png" alt="">
                 <div>Bookshelf</div>
             </header>
 
             <div class="container-wrapper">
-                <form action="../templates/home.html">
+                <form action="/">
                     <div class="form-group id-wrapper">
                         <input class="user-id" type="text" />
                         <label class="id-info">휴대폰 번호</label>
@@ -36,29 +36,29 @@
                     <div class="form-group pw-wrapper">
                         <input class="user-pw" type="password" />
                         <label class="pw-info">비밀번호</label>
-                        <img src="../static/img/icon/ico_eye@2x.png">
+                        <img src="/img/icon/ico_eye@2x.png">
                     </div>
                     <input id="login" type="submit" value="로그인" disabled>
                 </form>
             </div>
             <div class="option-wrapper">
                 <span class="id-save-wrapper">
-                    <img class="id-save-check" src="../static/img/icon/ico_checkbox@2x.png">
+                    <img class="id-save-check" src="/img/icon/ico_checkbox@2x.png">
                     <span class="id-save-text">아이디 저장</span>
                 </span>
                 <span class="find-idpw">아이디/비밀번호 찾기</span>
             </div>
             <div class="button-wrapper">
-                <img src="../static/img/icon/naver-icon.7128d171ea0b01233bb4b32a2b5ad260.svg">
-                <img src="../static/img/icon/kakao-icon.9c9940291430ca6ad83b9ae1f3cc81a8.svg">
-                <img src="../static/img/icon/facebook-icon.f3e1fcc7af9f4cac5be2179a846417f8.svg">
-                <img src="../static/img/icon/ico_sns_google@2x.png">
+                <img src="/img/icon/naver-icon.7128d171ea0b01233bb4b32a2b5ad260.svg">
+                <img src="/img/icon/kakao-icon.9c9940291430ca6ad83b9ae1f3cc81a8.svg">
+                <img src="/img/icon/facebook-icon.f3e1fcc7af9f4cac5be2179a846417f8.svg">
+                <img src="/img/icon/ico_sns_google@2x.png">
             </div>
 
             <div class="caution">개인정보 보호를 위해 공용 PC에서 사용 시<br>
                 SNS계정의 로그아웃 상태를 꼭 확인해 주세요.</div>
 
-            <div class="join" onclick="location.href='../templates/join.html'">회원가입</div>
+            <div class="join" onclick="location.href='/join'">회원가입</div>
 
             <div class="no-join">비회원 주문조회 ></div>
 
