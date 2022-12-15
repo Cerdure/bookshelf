@@ -17,8 +17,8 @@ public class Book {
 
     @Id
     @GeneratedValue
-    @Column(name = "Book_code")
-    private UUID code;
+    @Column(name = "book_id")
+    private Long id;
 
     private String name;
     private String category;
@@ -32,8 +32,8 @@ public class Book {
     private String publisherReview;
 
     @Builder
-    public Book(UUID code, String name, String category, String publisher, int originPrice, int discountRate, int discountPrice, int stock, String intro, String index, String publisherReview) {
-        this.code = code;
+    public Book(Long id, String name, String category, String publisher, int originPrice, int discountRate, int discountPrice, int stock, String intro, String index, String publisherReview) {
+        this.id = id;
         this.name = name;
         this.category = category;
         this.publisher = publisher;

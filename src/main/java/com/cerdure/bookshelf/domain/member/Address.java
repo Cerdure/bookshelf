@@ -1,4 +1,4 @@
-package com.cerdure.bookshelf.domain;
+package com.cerdure.bookshelf.domain.member;
 
 import lombok.Getter;
 
