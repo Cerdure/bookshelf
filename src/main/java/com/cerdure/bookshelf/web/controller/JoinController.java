@@ -3,6 +3,7 @@ package com.cerdure.bookshelf.web.controller;
 import com.cerdure.bookshelf.domain.DTO.MemberDto;
 import com.cerdure.bookshelf.domain.member.Member;
 import com.cerdure.bookshelf.repository.MemberRepository;
+import com.cerdure.bookshelf.service.interfaces.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,22 +19,19 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class JoinController {
 
-    @Autowired
-    private final MemberRepository memberRepository;
+    private final MemberService memberService;
 
     @GetMapping("/join")
-    public String join(){
+    public String joinForm(@ModelAttribute("memberDto") MemberDto memberDto, BindingResult bindingResult){
         return "join";
     }
 
     @PostMapping("/join")
-    public String save(@ModelAttribute MemberDto memberDto) {
-//        if (result.hasErrors()) {
-//            return "join";
-//        }
-        Member member = memberDto.toEntity();
-        memberRepository.save(member);
-        System.out.println(member.toString());
+    public String join(@ModelAttribute("memberDto") MemberDto memberDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "join";
+        }
+        memberService.join(memberDto);
         return "redirect:/";
     }
 }

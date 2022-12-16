@@ -4,18 +4,33 @@ import com.cerdure.bookshelf.domain.member.Member;
 import com.cerdure.bookshelf.repository.MemberRepository;
 import com.cerdure.bookshelf.service.interfaces.LoginService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-@Service
-@RequiredArgsConstructor
-public class LoginServiceImpl implements LoginService {
+import java.util.Optional;
 
-    private final MemberRepository memberRepository;
+@Service
+public class LoginServiceImpl implements UserDetailsService {
+
+    @Autowired
+    private MemberRepository memberRepository;
 
     @Override
-    public Member login(String phone, String pw) {
-        return memberRepository.findByPhone(phone)
-                .filter(m -> m.getPw().equals(pw))
-                .orElse(null);
+    public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
+        Member member = memberRepository.findByPhone(phone).get();
+
+        if (member == null) {
+            throw new UsernameNotFoundException(phone);
+        }
+
+        return User.builder()
+                .username(member.getPhone())
+                .password(member.getPw())
+                .roles(member.getAuthorities().toString())
+                .build();
     }
 }

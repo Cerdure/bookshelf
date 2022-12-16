@@ -122,7 +122,7 @@ header {
   right: 40px;
   width: 80px;
   height: 30px;
-  border-radius: 7px;
+  border-radius: 5px;
   background-color: gray;
   border: none;
   color: #ffffff;
@@ -163,7 +163,7 @@ header {
 .logout-button:hover,
 .logout-button:focus,
 .logout-button:active {
-  color: rgb(87, 87, 87);
+  color: #575757;
 }
 
 .login-button:hover:before,
@@ -181,6 +181,36 @@ header {
   transition: 0.1s;
 }
 
+.admin-button {
+  position: absolute;
+  top: 20px;
+  right: 140px;
+  width: 100px;
+  height: 30px;
+  border-radius: 5px;
+  background-color: white;
+  border: 1px solid silver;
+  color: #575757;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  overflow: hidden;
+}
+
+.admin-button:hover {
+  background-color: #f9f9f9;
+  color: #000000;
+  transition: 0.3s;
+}
+
+.admin-button:active {
+  transform: scale(0.95);
+  transition: 0.1s;
+}
 
 .top-nav {
   position: absolute;
@@ -1339,6 +1369,7 @@ footer ul li {
   background-color: rgba(255, 255, 255, 0.7);
   z-index: 20;
 }
+
 
 /* -------------------------------------------------------------------------------------------------------------------------cssss */
 

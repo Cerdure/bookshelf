@@ -7,10 +7,15 @@ import com.cerdure.bookshelf.domain.enums.MemberGrade;
 import com.cerdure.bookshelf.domain.order.Order;
 import lombok.*;
 import org.springframework.lang.Nullable;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static javax.persistence.FetchType.LAZY;
@@ -18,7 +23,7 @@ import static javax.persistence.FetchType.LAZY;
 @Entity @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
-public class Member {
+public class Member implements UserDetails {
 
     @Id @GeneratedValue
     @Column(name = "member_id")
@@ -54,8 +59,10 @@ public class Member {
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
+    private String role;
+
     @Builder
-    public Member(Long id, String pw, String name, String nickname, String birth, String sex, String phone, Address address, MemberGrade grade, int point, LocalDate regDate, Answer delflag, LocalDate delDate, List<Order> orders, Cart cart) {
+    public Member(Long id, String pw, String name, String nickname, String birth, String sex, String phone, Address address, MemberGrade grade, @Nullable Integer point, LocalDate regDate, Answer delflag, LocalDate delDate, List<Order> orders, Cart cart, String role) {
         this.id = id;
         this.pw = pw;
         this.name = name;
@@ -71,6 +78,7 @@ public class Member {
         this.delDate = delDate;
         this.orders = orders;
         this.cart = cart;
+        this.role = role;
     }
 
     @PrePersist
@@ -81,15 +89,43 @@ public class Member {
         this.regDate = this.regDate == null ? LocalDate.now() : this.regDate;
     }
 
-    public MemberDto toDto(){
-            return MemberDto.builder()
-                    .pw(this.pw)
-                    .name(this.name)
-                    .nickname(this.nickname)
-                    .birth(this.birth)
-                    .sex(this.sex)
-                    .phone(this.phone)
-                    .address(this.address)
-                    .build();
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Collection<GrantedAuthority> authorities = new ArrayList<>();
+
+        for(String role : role.split(",")){
+            authorities.add(new SimpleGrantedAuthority(role));
+        }
+        return authorities;
+    }
+
+    @Override
+    public String getPassword() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
     }
 }

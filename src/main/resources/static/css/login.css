@@ -134,6 +134,16 @@ input {
 }
 
 
+.field-error {
+  position: absolute;
+    top: -51px;
+    width: 100%;
+    color: rgb(255, 48, 90);
+    text-align: center;
+    font-family: 'Noto Sans KR', sans-serif;
+    -webkit-animation: shake-horizontal 0.3s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+    animation: shake-horizontal 0.3s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+}
 
 
 #login {
@@ -272,3 +282,26 @@ input {
   text-align: center;
 }
 
+@keyframes shake-horizontal {
+  0%,
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  20% {
+    -webkit-transform: translateX(-5px);
+            transform: translateX(-5px);
+  }
+  40% {
+    -webkit-transform: translateX(5px);
+            transform: translateX(5px);
+  }
+  60% {
+    -webkit-transform: translateX(3px);
+            transform: translateX(3px);
+  }
+  80% {
+    -webkit-transform: translateX(-3px);
+            transform: translateX(-3px);
+  }
+}
