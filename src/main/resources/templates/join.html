@@ -15,6 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="/js/join.js"></script>
     <title>회원가입 | Bookshelf</title>
 </head>
@@ -35,19 +36,19 @@
 
                     <div class="form-group">
                         <label>닉네임</label>
-                        <input name="nickname" id="nickname" class="id" type="text" placeholder="닉네임 입력" spellcheck="false">
+                        <input name="nickname" class="id" type="text" placeholder="닉네임 입력" spellcheck="false">
                         <img class="clear-btn" src="/img/icon/x-circle-fill.svg">
                     </div>
 
                     <div class="form-group">
                         <label>이름</label>
-                        <input name="name" id="name" class="name" type="text" placeholder="이름 입력" spellcheck="false">
+                        <input name="name" class="name" type="text" placeholder="이름 입력" spellcheck="false">
                         <img class="clear-btn" src="/img/icon/x-circle-fill.svg">
                     </div>
 
                     <div class="form-group">
                         <label>생년월일</label>
-                        <input name="birth" id="birth" class="birth-1" type="number" placeholder="123456" maxlength="6">
+                        <input name="birth" class="birth-1" type="number" placeholder="123456" maxlength="6">
                         <div class="birth-line">ㅡ</div>
                         <input name="sex" class="birth-2" id="sex" type="number" placeholder="1" maxlength="1">
                         <span class="birth-dot">●●●●●●</span>
@@ -56,7 +57,7 @@
 
                     <div class="form-group">
                         <label>전화번호</label>
-                        <input name="phone" id="phone" class="phone" type="number" placeholder="01012345678">
+                        <input name="phone" class="phone" type="number" placeholder="01012345678">
                         <img class="clear-btn left-move" src="/img/icon/x-circle-fill.svg">
                         <div class="vertical-line"></div>
                         <div class="code-send">인증번호 발송</div>
@@ -74,7 +75,7 @@
                     <div class="form-group">
                         <label>비밀번호</label>
                         <span class="pw-info">영문, 숫자, 특수문자 8~14글자</span>
-                        <input name="pw" id="pw" class="pw" type="password" placeholder="비밀번호 입력">
+                        <input name="pw" class="pw" type="password" placeholder="비밀번호 입력">
                         <img class="view" src="/img/icon/ico_eye@2x.png">
                         <img class="clear-btn" src="/img/icon/x-circle-fill.svg">
                     </div>
@@ -86,9 +87,21 @@
                         <img class="clear-btn" src="/img/icon/x-circle-fill.svg">
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group zipcode-wrapper">
+                        <label>우편번호</label>
+                        <input name="zipcode" class="zipcode" type="text" placeholder="우편번호 입력">
+                        <img class="clear-btn" src="/img/icon/x-circle-fill.svg">
+                    </div>
+
+                    <div class="form-group city-wrapper">
                         <label>주소</label>
-                        <input class="code address" type="text" placeholder="주소 입력">
+                        <input name="city" class="city" type="text" placeholder="주소 입력">
+                        <img class="clear-btn" src="/img/icon/x-circle-fill.svg">
+                    </div>
+
+                    <div class="form-group">
+                        <label>상세주소</label>
+                        <input name="street" class="street" type="text" placeholder="상세주소 입력">
                         <img class="clear-btn" src="/img/icon/x-circle-fill.svg">
                     </div>
 

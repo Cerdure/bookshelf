@@ -1,4 +1,4 @@
-package com.cerdure.bookshelf.exception;
+package com.cerdure.bookshelf.web.exception;
 
 public class NotEnoughStockException extends RuntimeException {
 

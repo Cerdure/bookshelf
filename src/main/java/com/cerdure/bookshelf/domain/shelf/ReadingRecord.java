@@ -1,7 +1,6 @@
 package com.cerdure.bookshelf.domain.shelf;
 
-import com.cerdure.bookshelf.domain.shelf.ReadingBook;
-import com.cerdure.bookshelf.domain.shelf.Shelf;
+import com.cerdure.bookshelf.domain.member.Member;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,8 +17,8 @@ public class ReadingRecord {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "shelf_id")
-    private Shelf shelf;
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reading_book_id")

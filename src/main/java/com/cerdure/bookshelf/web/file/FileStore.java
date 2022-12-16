@@ -1,4 +1,4 @@
-package com.cerdure.bookshelf.file;
+package com.cerdure.bookshelf.web.file;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.MultipartFile;

@@ -115,7 +115,8 @@ header {
 
 
 
-.login-button {
+.login-button,
+.logout-button {
   position: absolute;
   top: 20px;
   right: 40px;
@@ -138,7 +139,8 @@ header {
   z-index: 7;
 }
 
-.login-button:before {
+.login-button:before,
+.logout-button:before{
   content: "";
   position: absolute;
   z-index: -1;
@@ -153,25 +155,32 @@ header {
   transition-duration: 0.2s;
   transition-timing-function: ease-out;
   filter: blur(5px);
-
 }
 
 .login-button:hover,
 .login-button:focus,
-.login-button:active {
+.login-button:active,
+.logout-button:hover,
+.logout-button:focus,
+.logout-button:active {
   color: rgb(87, 87, 87);
 }
 
 .login-button:hover:before,
 .login-button:focus:before,
-.login-button:active:before {
+.login-button:active:before,
+.logout-button:hover:before,
+.logout-button:focus:before,
+.logout-button:active:before {
   transform: scale(4);
 }
 
-.login-button:active {
+.login-button:active,
+.logout-button:active {
   transform: scale(0.95);
   transition: 0.1s;
 }
+
 
 .top-nav {
   position: absolute;

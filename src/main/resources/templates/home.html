@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
   <meta charset="UTF-8">
@@ -35,7 +37,8 @@
     </div>
     <img src="/img/icon/cart.svg" id="cart">
 
-    <button class="login-button" onclick="location.href='/login'">로그인</button>
+    <button class="login-button" onclick="location.href='/login'" sec:authorize="!isAuthenticated()">로그인</button>
+
     <nav class="top-nav">
       <div id="underbar"></div>
       <ul>

@@ -1,23 +1,23 @@
 package com.cerdure.bookshelf.domain.member;
 
 import com.cerdure.bookshelf.domain.Cart;
+import com.cerdure.bookshelf.domain.DTO.MemberDto;
 import com.cerdure.bookshelf.domain.enums.Answer;
 import com.cerdure.bookshelf.domain.enums.MemberGrade;
 import com.cerdure.bookshelf.domain.order.Order;
-import com.cerdure.bookshelf.domain.shelf.Shelf;
 import lombok.*;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import static javax.persistence.FetchType.LAZY;
 
 @Entity @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(of = {"name","phone","birth","sex"})
+@ToString
 public class Member {
 
     @Id @GeneratedValue
@@ -28,7 +28,7 @@ public class Member {
     private String name;
     private String nickname;
     private String birth;
-    private char sex;
+    private String sex;
     private String phone;
 
     @Embedded
@@ -37,7 +37,8 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private MemberGrade grade;
 
-    private int point;
+    @Nullable
+    private Integer point;
 
     private LocalDate regDate;
 
@@ -50,35 +51,17 @@ public class Member {
     private List<Order> orders = new ArrayList<>();
 
     @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "shelf_id")
-    private Shelf shelf;
-
-    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-
-    public Member(String name) {
-        this.name = name;
-    }
-
-    public Member(Long id, String pw, String name, String nickname, String birth, char sex, String phone) {
+    @Builder
+    public Member(Long id, String pw, String name, String nickname, String birth, String sex, String phone, Address address, MemberGrade grade, int point, LocalDate regDate, Answer delflag, LocalDate delDate, List<Order> orders, Cart cart) {
         this.id = id;
         this.pw = pw;
         this.name = name;
         this.nickname = nickname;
         this.birth = birth;
         this.sex = sex;
-        this.phone = phone;
-    }
-
-    @Builder
-    public Member(Long id, String pw, String name, String nickname, String birth, String phone, Address address, MemberGrade grade, int point, LocalDate regDate, Answer delflag, LocalDate delDate, List<Order> orders, Shelf shelf, Cart cart) {
-        this.id = id;
-        this.pw = pw;
-        this.name = name;
-        this.nickname = nickname;
-        this.birth = birth;
         this.phone = phone;
         this.address = address;
         this.grade = grade;
@@ -87,7 +70,26 @@ public class Member {
         this.delflag = delflag;
         this.delDate = delDate;
         this.orders = orders;
-        this.shelf = shelf;
         this.cart = cart;
+    }
+
+    @PrePersist
+    public void prePersist() {
+        this.point = this.point == null ? 0 : this.point;
+        this.grade = this.grade == null ? MemberGrade.NEW : this.grade;
+        this.delflag = this.delflag == null ? Answer.N : this.delflag;
+        this.regDate = this.regDate == null ? LocalDate.now() : this.regDate;
+    }
+
+    public MemberDto toDto(){
+            return MemberDto.builder()
+                    .pw(this.pw)
+                    .name(this.name)
+                    .nickname(this.nickname)
+                    .birth(this.birth)
+                    .sex(this.sex)
+                    .phone(this.phone)
+                    .address(this.address)
+                    .build();
     }
 }

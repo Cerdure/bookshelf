@@ -78,66 +78,6 @@ $(function () {
   });
 
 
-  const idRegex = /^[0-9]{11}$/;
-  const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,14}$/;
-  let login = document.getElementById("login");
-
-  $(".user-id").keyup(function() {
-    let value = $(this).val();
-    if (idRegex.test(value)) {
-      $(this).css('border', "1px solid rgb(101, 168, 255)")
-             .addClass('passed used');
-      $(this).next().css('color', "rgb(101, 168, 255)");
-    } else if (!idRegex.test(value) && value != "") {
-      $(this).css('border', "1px solid #ff3873")
-             .removeClass('passed')
-             .addClass('used');
-      $(this).next().css('color', "#ff3873");
-    } else {
-      $(this).css('border', "1px solid lightgray")
-             .removeClass('passed used');
-      $(this).next().css('color', "rgb(170, 170, 170)");
-    }
-    if ($('.user-id').hasClass('passed') && $('.user-pw').hasClass('passed')) {
-      login.disabled = false;
-    } else {
-      login.disabled = true;
-    }
-  });
-
-  $(".user-pw").keyup(function() {
-    let value = $(this).val();
-    if (pwRegex.test(value)) {
-      $(this).css('border', "1px solid rgb(101, 168, 255)")
-             .addClass('passed used');
-      $(this).next().css('color', "rgb(101, 168, 255)");
-    } else if (!pwRegex.test(value) && value != "") {
-      $(this).css('border', "1px solid #ff3873")
-             .removeClass('passed')
-             .addClass('used');
-      $(this).next().css('color', "#ff3873");
-    } else {
-      $(this).css('border', "1px solid lightgray")
-             .removeClass('passed used');
-      $(this).next().css('color', "rgb(170, 170, 170)");
-    }
-    if ($('.user-id').hasClass('passed') && $('.user-pw').hasClass('passed')) {
-      login.disabled = false;
-    } else {
-      login.disabled = true;
-    }
-  });
-
-
-  
-
-
-
-
-
-
-
-
 
 
 });

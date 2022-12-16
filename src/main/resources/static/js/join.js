@@ -155,14 +155,13 @@ function pwCheck() {
   let thisValue = $('.pw-check').val();
   if (thisValue==originValue && thisValue != "") {
     $('.pw-check').parent().css('border', "1px solid rgb(101, 168, 255)")
-                  .addClass('passed used');
+                  .addClass('passed');
   } else if (thisValue != "") {
     $('.pw-check').parent().css('border', "1px solid #ff3873")
-                  .removeClass('passed')
-                  .addClass('used');
+                  .removeClass('passed');
   } else {
     $('.pw-check').parent().css('border', "1px solid lightgray")
-                  .removeClass('passed used');
+                  .removeClass('passed');
   }
   join();
 }
@@ -171,16 +170,15 @@ $(".pw").on('keyup focus',function() {
   let value = $(this).val();
   if (pwRegex.test(value)) {
     $(this).parent().css('border', "1px solid rgb(101, 168, 255)")
-           .addClass('passed used');
+           .addClass('passed');
     $('.pw-info').css('color', "rgb(101, 168, 255)");
   } else if (value != "") {
     $(this).parent().css('border', "1px solid #ff3873")
-           .removeClass('passed')
-           .addClass('used');
+           .removeClass('passed');
     $('.pw-info').css('color', "#ff3873");
   } else {
     $(this).parent().css('border', "1px solid lightgray")
-           .removeClass('passed used');
+           .removeClass('passed');
     $('.pw-info').css('color', "rgb(170, 170, 170)");
   }
   pwCheck();
@@ -190,9 +188,30 @@ $(".pw-check").on('keyup focus',function() {
 });
 
 
-$('.address').parent().addClass('passed');
+$('.zipcode, .city').on('keyup focus',function(){ 
+        $('.street').focus();
+        new daum.Postcode({
+            oncomplete: function(data) {
+                $('.zipcode').val(data.zonecode);
+                $('.city').val(data.address);
+                
+            }
+        }).open();
+        $('.zipcode').parent().addClass($('.zipcode').val()==""?'':'passed');
+        $('.city').parent().addClass($('.city').val()==""?'':'passed');
+        $('.street').parent().addClass($('.street').val()==""?'':'passed');
+  join();
+});
 
+$('.street').on('keyup focus', function(){
+      $('.zipcode').parent().addClass($('.zipcode').val()==""?'':'passed');
+      $('.city').parent().addClass($('.city').val()==""?'':'passed');
+      $('.street').parent().addClass($('.street').val()==""?'':'passed');
+  join();
+});
 
 
 });
+
+
 

@@ -32,3 +32,8 @@ thymeleaf:
   prefix: classpath:/templates/
   suffix: .html
   enabled: true
+
+server:
+  servlet:
+    session:
+      tracking-modes: cookie
