@@ -3,6 +3,7 @@ package com.cerdure.bookshelf.domain.shelf;
 import com.cerdure.bookshelf.domain.Book;
 import com.cerdure.bookshelf.domain.member.Member;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,4 +25,11 @@ public class Bookmark {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id")
     private Book book;
+
+    @Builder
+    public Bookmark(Long id, Member member, Book book) {
+        this.id = id;
+        this.member = member;
+        this.book = book;
+    }
 }

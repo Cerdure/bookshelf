@@ -32,7 +32,13 @@ public class Event {
     private String content;
 
     private LocalDate regDate;
+
     private LocalDate modDate;
+
+    @PrePersist
+    public void prePersist() {
+        this.regDate = this.regDate == null ? LocalDate.now() : this.regDate;
+    }
 
     @Builder
     public Event(Long id, Member member, String title, String content, LocalDate regDate, LocalDate modDate) {

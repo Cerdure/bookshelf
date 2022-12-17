@@ -2,16 +2,12 @@ package com.cerdure.bookshelf.service;
 
 import com.cerdure.bookshelf.domain.member.Member;
 import com.cerdure.bookshelf.repository.MemberRepository;
-import com.cerdure.bookshelf.service.interfaces.LoginService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class LoginServiceImpl implements UserDetailsService {

@@ -1,327 +1,243 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout/default}">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>검색 | Bookshelf</title>
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/search.css}">
+</th:block>
 
-    <link rel="stylesheet" href="/css/search.css">
-    <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-    <script src="/js/search.js"></script>
-  </head>
+<th:block layout:fragment="script">
+  <script th:src="@{/js/search.js}"></script>
+</th:block>
 
 
-<body>
-  <header>
-    <div class="top-nav-background"></div>
-    <div class="top-nav-wrapper">
-      <div class="top-logo-wrapper" onclick="location.href='/'">
-      <img id="top-logo" src="/img/icon/logo.png">
-      <span class="top-title">BookShelf</span>
-      </div>
-      <div class="news-wrapper">
-        <img src="/img/icon/bell.svg" id="news">
-        <div id="news-n">N</div>
-      </div>
-      <img src="/img/icon/cart.svg" id="cart">
-      <button class="login-button" onclick="location.href='/login'">로그인</button>
-      <nav class="top-nav">
-        <div id="underbar"></div>
+<div layout:fragment="content">
+
+  <div class="search-input-wrapper">
+    <div class="search-input">
+      <img onclick="location.href='/search-result'" src="/img/icon/search.svg">
+      <input type="text" placeholder="검색어를 입력하세요">
+    </div>
+  </div>
+
+  <div class="wrapper">
+
+    <div class="recommend-wrapper">
+      <div class="recommend-title">북셸프 추천검색어</div>
+      <ul>
+        <li>2022 노벨문학상</li>
+        <li>매거진 베스트셀러</li>
+        <li>북셸프 온리</li>
+        <li>글쓰기</li>
+        <li>데일리 연재</li>
+        <li>영화</li>
+        <li>김연수</li>
+        <li>북셸프 선정</li>
+        <li>영화</li>
+        <li>에세이</li>
+        <li>북셸프 시리즈</li>
+      </ul>
+    </div>
+
+    <div class="trend-and-short-cut">
+
+      <div class="short-cut-wrapper">
+        <div class="short-cut-title">바로가기</div>
         <ul>
-          <li onclick="location.href='/'">NOW</li>
-          <li onclick="location.href='/search'">책찾기</li>
-          <li onclick="location.href='/event'">이벤트</li>
-          <li onclick="location.href='/myshelf'">내책장</li>
-          <li onclick="location.href='/review'">게시판</li>
+          <li><img src="/img/icon/search-best.png"><span>베스트</span></li>
+          <li><img src="/img/icon/search-new.png"><span>최신 작품</span></li>
+          <li><img src="/img/icon/search-open.png"><span>공개 예정</span></li>
+          <li><img src="/img/icon/search-close.png"><span>종료 예정</span></li>
         </ul>
-      </nav>
-    </div>
-    <div class="search-input-wrapper">
-      <div class="search-input">
-        <img onclick="location.href='/search-result'" src="/img/icon/search.svg">
-        <input type="text" placeholder="검색어를 입력하세요">
+      </div>
+
+      <div class="trend-wrapper">
+        <div class="trend-title">
+          <span>인기 검색어</span>
+          <span class="trend-current-time">11.14 11:00 기준</span>
+        </div>
+        <ul>
+          <li><span>1</span><span>북엔</span></li>
+          <li><span>2</span><span>부동산</span></li>
+          <li><span>3</span><span>경매</span></li>
+          <li><span>4</span><span>시집</span></li>
+          <li><span>5</span><span>유홍준</span></li>
+        </ul>
+        <ul>
+          <li><span>6</span><span>파이썬</span></li>
+          <li><span>7</span><span>새마을금고</span></li>
+          <li><span>8</span><span>가계부</span></li>
+          <li><span>9</span><span>행정법</span></li>
+          <li><span>10</span><span>토익</span></li>
+        </ul>
       </div>
     </div>
-  </header>
-
-<div class="wrapper">
-<div class="recommend-wrapper">
-  <div class="recommend-title">북셸프 추천검색어</div>
-  <ul>
-    <li>2022 노벨문학상</li>
-    <li>매거진 베스트셀러</li>
-    <li>북셸프 온리</li>
-    <li>글쓰기</li>
-    <li>데일리 연재</li>
-    <li>영화</li>
-    <li>김연수</li>
-    <li>북셸프 선정</li>
-    <li>영화</li>
-    <li>에세이</li>
-    <li>북셸프 시리즈</li>
-  </ul>
-</div>
 
 
 
 
-<div class="trend-and-short-cut">
+    <div class="category-wrapper">
+      <div class="category-title">카테고리</div>
+      <ul class="category-ul-1">
+        <li>
+          <div class="category-name">북셸프 오리지널</div>
+          <div class="category-info">연재 작품, 정기구독 라인업, 소설, SF, 스릴러, 에세이</div>
+          <img src="/img/book-cover/search-category-original.jpg">
+        </li>
+        <li>
+          <div class="category-name">시 / 에세이</div>
+          <div class="category-info">시, 일상, 위로, 직업, 관계, 자연, 사랑, 가족</div>
+          <img src="/img/book-cover/search-category-essay.jpg">
+        </li>
+        <li>
+          <div class="category-name">소설</div>
+          <div class="category-info">추리 스릴러, SF, 판타지, 법의학 스릴러, 로맨스</div>
+          <img src="/img/book-cover/search-category-novel.jpg">
+        </li>
+        <li>
+          <div class="category-name">인문</div>
+          <div class="category-info">인문학, 문명, 문화, 심리학, 인간, 언어</div>
+          <img src="/img/book-cover/search-category-human.jpg">
+        </li>
+        <li>
+          <div class="category-name">건강</div>
+          <div class="category-info">신체, 라이프 스타일, 스포츠, 생활, 나이</div>
+          <img src="/img/book-cover/search-category-health.jpg">
+        </li>
+        <li>
+          <div class="category-name">요리</div>
+          <div class="category-info">식사, 끼니, 카페, 식재료, 술, 와인, 베이커리</div>
+          <img src="/img/book-cover/search-category-cook.jpg">
+        </li>
+        <li>
+          <div class="category-name">경제 / 경영</div>
+          <div class="category-info">4차 산업혁명, IT, 마케팅, 세계, 경제학, 기업, 재테크</div>
+          <img src="/img/book-cover/search-category-economy.jpg">
+        </li>
+        <li>
+          <div class="category-name">자기계발</div>
+          <div class="category-info">성공, 말하기, 협상, 프레젠테이션, 시간 관리, 습관, 글쓰기</div>
+          <img src="/img/book-cover/search-category-self.jpg">
+        </li>
+        <li>
+          <div class="category-name">정치 / 사회</div>
+          <div class="category-info">사회학, 법, 노동, 국가, 교육, 범죄, 환경, 세계</div>
+          <img src="/img/book-cover/search-category-politics.jpg">
+        </li>
+        <li>
+          <div class="category-name">역사 / 문화</div>
+          <div class="category-info">한국 고대사, 조선사, 근현대사, 세계사, 역사 소설</div>
+          <img src="/img/book-cover/search-category-history.jpg">
+        </li>
+      </ul>
 
-  <div class="short-cut-wrapper">
-  <div class="short-cut-title">바로가기</div>
-  <ul>
-    <li><img src="/img/icon/search-best.png"><span>베스트</span></li>
-    <li><img src="/img/icon/search-new.png"><span>최신 작품</span></li>
-    <li><img src="/img/icon/search-open.png"><span>공개 예정</span></li>
-    <li><img src="/img/icon/search-close.png"><span>종료 예정</span></li>
-  </ul>
+      <ul class="category-ul-2">
+        <li>
+          <div class="category-name">만화</div>
+          <div class="category-info">액션, 역사 시대물, 스포츠, 로맨스, 무협, 판타지</div>
+          <img src="/img/book-cover/search-category-comic.jpg">
+        </li>
+        <li>
+          <div class="category-name">컴퓨터 / IT</div>
+          <div class="category-info">개발, 프로그래밍, IT, 교양, 그래픽, 멀티미디어, e비즈니스</div>
+          <img src="/img/book-cover/search-category-it.jpg">
+        </li>
+        <li>
+          <div class="category-name">과학</div>
+          <div class="category-info">물리학, 공학, 생명과학, 천문학, 지구과학, 인체, 화학</div>
+          <img src="/img/book-cover/search-category-science.jpg">
+        </li>
+        <li>
+          <div class="category-name">여행</div>
+          <div class="category-info">여행 에세이, 한국, 제주도, 미국, 일본, 중국, 유럽, 동남아</div>
+          <img src="/img/book-cover/search-category-travel.jpg">
+        </li>
+        <li>
+          <div class="category-name">예술 / 대중문화</div>
+          <div class="category-info">디자인, 아트, 소셜미디어, 뮤지컬, 연극, 영화</div>
+          <img src="/img/book-cover/search-category-art.jpg">
+        </li>
+        <li>
+          <div class="category-name">취미 / 실용 / 스포츠</div>
+          <div class="category-info">DIY, 레져, 축구, 낚시, 가이드, 물생활, 캠핑</div>
+          <img src="/img/book-cover/search-category-hobby.jpg">
+        </li>
+        <li>
+          <div class="category-name">종교</div>
+          <div class="category-info">기독교, 학술 연구, 성경, 기도, 묵상, 불교, 카톨릭</div>
+          <img src="/img/book-cover/search-category-religion.jpg">
+        </li>
+        <li>
+          <div class="category-name">외국어</div>
+          <div class="category-info">영어, 일본어, 독해, 문법, 작문, 회화, 수험영어</div>
+          <img src="/img/book-cover/search-category-foreign.jpg">
+        </li>
+        <li>
+          <div class="category-name">철학</div>
+          <div class="category-info">동양, 서양, 삶, 예술, 문화, 정치, 경제</div>
+          <img src="/img/book-cover/search-category-philosophy.jpg">
+        </li>
+        <li>
+          <div class="category-name">어린이 / 청소년</div>
+          <div class="category-info">동화, 어린이 교육도서, 뽀로로, 디즈니 그림 명작, 마법천자문</div>
+          <img src="/img/book-cover/search-category-child.jpg">
+        </li>
+      </ul>
+    </div>
+
+    <div class="recommendlist-wrapper">
+      <div class="recommendlist-title-wrapper">
+        <div class="recommendlist-title">아티클 List</div>
+        <div class="recommendlist-info">북셸프의 여러가지 관심사를 읽어보세요!</div>
+      </div>
+      <ul>
+        <li>
+          <img src="/img/icon/search-list-must.svg">
+          <span>머스트 리드</span>
+        </li>
+        <li>
+          <img src="/img/icon/search-list-editor.svg">
+          <span>북셸프 에디터</span>
+        </li>
+        <li>
+          <img src="/img/icon/search-list-new.svg">
+          <span>책방 최신 소식</span>
+        </li>
+        <li>
+          <img src="/img/icon/search-list-author.svg">
+          <span>주목의 작가</span>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <img src="/img/icon/search-list-series.svg">
+          <span>연재 시리즈</span>
+        </li>
+        <li>
+          <img src="/img/icon/search-list-book.svg">
+          <span>요즘 이 책</span>
+        </li>
+        <li>
+          <img src="/img/icon/search-list-theme.svg">
+          <span>시즌별 테마</span>
+        </li>
+        <li>
+          <img src="/img/icon/search-list-store.svg">
+          <span>동네 책방</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="top-move-button">
+      <div>∧</div>
+      <div>TOP</div>
+    </div>
+
   </div>
-
-<div class="trend-wrapper">
-  <div class="trend-title">
-    <span>인기 검색어</span>
-    <span class="trend-current-time">11.14 11:00 기준</span>
-  </div>
-    <ul>
-      <li><span>1</span><span>북엔</span></li>
-      <li><span>2</span><span>부동산</span></li>
-      <li><span>3</span><span>경매</span></li>
-      <li><span>4</span><span>시집</span></li>
-      <li><span>5</span><span>유홍준</span></li>
-    </ul>
-    <ul>
-      <li><span>6</span><span>파이썬</span></li>
-      <li><span>7</span><span>새마을금고</span></li>
-      <li><span>8</span><span>가계부</span></li>
-      <li><span>9</span><span>행정법</span></li>
-      <li><span>10</span><span>토익</span></li>
-    </ul>
+  
 </div>
-</div>
-
-
-
-
-<div class="category-wrapper">
-  <div class="category-title">카테고리</div>
-  <ul class="category-ul-1">
-    <li>
-      <div class="category-name">북셸프 오리지널</div>
-      <div class="category-info">연재 작품, 정기구독 라인업, 소설, SF, 스릴러, 에세이</div>
-      <img src="/img/book-cover/search-category-original.jpg">
-    </li>
-    <li>
-      <div class="category-name">시 / 에세이</div>
-      <div class="category-info">시, 일상, 위로, 직업, 관계, 자연, 사랑, 가족</div>
-      <img src="/img/book-cover/search-category-essay.jpg">
-    </li>
-    <li>
-      <div class="category-name">소설</div>
-      <div class="category-info">추리 스릴러, SF, 판타지, 법의학 스릴러, 로맨스</div>
-      <img src="/img/book-cover/search-category-novel.jpg">
-    </li>
-    <li>
-      <div class="category-name">인문</div>
-      <div class="category-info">인문학, 문명, 문화, 심리학, 인간, 언어</div>
-      <img src="/img/book-cover/search-category-human.jpg">
-    </li>
-    <li>
-      <div class="category-name">건강</div>
-      <div class="category-info">신체, 라이프 스타일, 스포츠, 생활, 나이</div>
-      <img src="/img/book-cover/search-category-health.jpg">
-    </li>
-    <li>
-      <div class="category-name">요리</div>
-      <div class="category-info">식사, 끼니, 카페, 식재료, 술, 와인, 베이커리</div>
-      <img src="/img/book-cover/search-category-cook.jpg">
-    </li>
-    <li>
-      <div class="category-name">경제 / 경영</div>
-      <div class="category-info">4차 산업혁명, IT, 마케팅, 세계, 경제학, 기업, 재테크</div>
-      <img src="/img/book-cover/search-category-economy.jpg">
-    </li>
-    <li>
-      <div class="category-name">자기계발</div>
-      <div class="category-info">성공, 말하기, 협상, 프레젠테이션, 시간 관리, 습관, 글쓰기</div>
-      <img src="/img/book-cover/search-category-self.jpg">
-    </li>
-    <li>
-      <div class="category-name">정치 / 사회</div>
-      <div class="category-info">사회학, 법, 노동, 국가, 교육, 범죄, 환경, 세계</div>
-      <img src="/img/book-cover/search-category-politics.jpg">
-    </li>
-    <li>
-      <div class="category-name">역사 / 문화</div>
-      <div class="category-info">한국 고대사, 조선사, 근현대사, 세계사, 역사 소설</div>
-      <img src="/img/book-cover/search-category-history.jpg">
-    </li>
-  </ul>
-
-  <ul class="category-ul-2">
-    <li>
-      <div class="category-name">만화</div>
-      <div class="category-info">액션, 역사 시대물, 스포츠, 로맨스, 무협, 판타지</div>
-      <img src="/img/book-cover/search-category-comic.jpg">
-    </li>
-    <li>
-      <div class="category-name">컴퓨터 / IT</div>
-      <div class="category-info">개발, 프로그래밍, IT, 교양, 그래픽, 멀티미디어, e비즈니스</div>
-      <img src="/img/book-cover/search-category-it.jpg">
-    </li>
-    <li>
-      <div class="category-name">과학</div>
-      <div class="category-info">물리학, 공학, 생명과학, 천문학, 지구과학, 인체, 화학</div>
-      <img src="/img/book-cover/search-category-science.jpg">
-    </li>
-    <li>
-      <div class="category-name">여행</div>
-      <div class="category-info">여행 에세이, 한국, 제주도, 미국, 일본, 중국, 유럽, 동남아</div>
-      <img src="/img/book-cover/search-category-travel.jpg">
-    </li>
-    <li>
-      <div class="category-name">예술 / 대중문화</div>
-      <div class="category-info">디자인, 아트, 소셜미디어, 뮤지컬, 연극, 영화</div>
-      <img src="/img/book-cover/search-category-art.jpg">
-    </li>
-    <li>
-      <div class="category-name">취미 / 실용 / 스포츠</div>
-      <div class="category-info">DIY, 레져, 축구, 낚시, 가이드, 물생활, 캠핑</div>
-      <img src="/img/book-cover/search-category-hobby.jpg">
-    </li>
-    <li>
-      <div class="category-name">종교</div>
-      <div class="category-info">기독교, 학술 연구, 성경, 기도, 묵상, 불교, 카톨릭</div>
-      <img src="/img/book-cover/search-category-religion.jpg">
-    </li>
-    <li>
-      <div class="category-name">외국어</div>
-      <div class="category-info">영어, 일본어, 독해, 문법, 작문, 회화, 수험영어</div>
-      <img src="/img/book-cover/search-category-foreign.jpg">
-    </li>
-    <li>
-      <div class="category-name">철학</div>
-      <div class="category-info">동양, 서양, 삶, 예술, 문화, 정치, 경제</div>
-      <img src="/img/book-cover/search-category-philosophy.jpg">
-    </li>
-    <li>
-      <div class="category-name">어린이 / 청소년</div>
-      <div class="category-info">동화, 어린이 교육도서, 뽀로로, 디즈니 그림 명작, 마법천자문</div>
-      <img src="/img/book-cover/search-category-child.jpg">
-    </li>
-  </ul>
-</div>
-
-<div class="recommendlist-wrapper">
-  <div class="recommendlist-title-wrapper">
-    <div class="recommendlist-title">아티클 List</div>
-    <div class="recommendlist-info">북셸프의 여러가지 관심사를 읽어보세요!</div>
-  </div>
-  <ul>
-    <li>
-      <img src="/img/icon/search-list-must.svg">
-      <span>머스트 리드</span>
-    </li>
-    <li>
-      <img src="/img/icon/search-list-editor.svg">
-      <span>북셸프 에디터</span>
-    </li>
-    <li>
-      <img src="/img/icon/search-list-new.svg">
-      <span>책방 최신 소식</span>
-    </li>
-    <li>
-      <img src="/img/icon/search-list-author.svg">
-      <span>주목의 작가</span>
-    </li>
-  </ul>
-  <ul>
-    <li>
-      <img src="/img/icon/search-list-series.svg">
-      <span>연재 시리즈</span>
-    </li>
-    <li>
-      <img src="/img/icon/search-list-book.svg">
-      <span>요즘 이 책</span>
-    </li>
-    <li>
-      <img src="/img/icon/search-list-theme.svg">
-      <span>시즌별 테마</span>
-    </li>
-    <li>
-      <img src="/img/icon/search-list-store.svg">
-      <span>동네 책방</span>
-    </li>
-  </ul>
-</div>
-
-<div class="bottom-nav-wrapper">
-  <nav class="bottom-nav">
-    <ul>
-      <div id="overbar"></div>
-      <li onclick="location.href='/'">
-        <img src="/img/icon/logo.png">
-        <div>NOW</div>
-      </li>
-      <li onclick="location.href='/search'">
-        <img src="/img/icon/search.svg">
-        <div>책찾기</div>
-      </li>
-      <li onclick="location.href='/event'">
-        <img src="/img/icon/event.svg">
-        <div>이벤트</div>
-      </li>
-      <li onclick="location.href='/myshelf'">
-        <img src="/img/icon/shelf.svg">
-        <div>내책장</div>
-      </li>
-      <li  onclick="location.href='/review'">
-        <img src="/img/icon/list.svg">
-        <div>게시판</div>
-      </li>
-    </ul>
-  </nav>
-</div>
-<div class="top-move-button">
-  <div>∧</div>
-  <div>TOP</div>
-</div>
-
-</div>
-
-<div class="footer-wrapper">
-  <footer>
-    <img src="/img/icon/logo.png">
-    <div class="footer-title">Bookshelf</div>
-    <span class="footer-infor-title">사업자 정보 열기 ∨</span>
-    <p class="footer-infor">대표이사:최원석&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      사업자등록번호:123-45-6789&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      호스팅 제공자:(주)북셸프<br>
-      통신판매업 신고번호:2022-서울영등포-2000호<br>
-      주소:서울특별시 영등포구 국회대로37길6,10층(유경빌딩)<br><br>
-      고객정보보호 책임자:최원석(nicui@bookshelf.com)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      마케팅 제휴 문의:business@booshelf.com<br></p>
-    <ul>
-      <li>이용약관</li>
-      <li>개인정보처리방침</li>
-      <li>고객센터</li>
-      <li>환불신청</li>
-      <li>콘텐츠 제휴문의</li>
-      <li>저작권/도서오류 신고</li>
-      <li>회사 소개</li>
-    </ul>
-    <div class="footer-last">Copyright © 2022 북셸프 All Rights Reserved.</div>
-  </footer>
-</div>
-</body>
 
 </html>

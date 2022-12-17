@@ -32,13 +32,15 @@ public class Inquire {
     private String content;
 
     private LocalDate regDate;
+
     private LocalDate modDate;
 
     @Enumerated(EnumType.STRING)
     private Answer closed;  // 비밀글 여부
 
     private String pw;
-    private int hits;
+
+    private Integer hits;
 
     @Enumerated(EnumType.STRING)
     private Answer reFlag; //답변 여부
@@ -46,8 +48,16 @@ public class Inquire {
     @OneToMany(mappedBy = "inquire")
     private List<Reply> replies = new ArrayList<>();
 
+    @PrePersist
+    public void prePersist() {
+        this.closed = this.closed == null ? Answer.N : this.closed;
+        this.regDate = this.regDate == null ? LocalDate.now() : this.regDate;
+        this.hits = this.hits == null ? 0 : this.hits;
+        this.reFlag = this.reFlag == null ? Answer.N : this.reFlag;
+    }
+
     @Builder
-    public Inquire(Long id, Member member, String title, String content, LocalDate regDate, LocalDate modDate, Answer closed, String pw, int hits, Answer reFlag, List<Reply> replies) {
+    public Inquire(Long id, Member member, String title, String content, LocalDate regDate, LocalDate modDate, Answer closed, String pw, Integer hits, Answer reFlag, List<Reply> replies) {
         this.id = id;
         this.member = member;
         this.title = title;

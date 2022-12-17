@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,14 +33,20 @@ public class Order {
 
     private String phone;
     private String requirement;
-    private int totalPrice;
-    private LocalDateTime date;
+    private Integer totalPrice;
+
+    private LocalDateTime regDate;
 
     @OneToMany(mappedBy = "order")
     private List<OrderDetail> orderdetails = new ArrayList<>();
 
+    @PrePersist
+    public void prePersist() {
+        this.regDate = this.regDate == null ? LocalDateTime.now() : this.regDate;
+    }
+
     @Builder
-    public Order(Long id, Member member, String name, Address address, String phone, String requirement, int totalPrice, LocalDateTime date, List<OrderDetail> orderdetails) {
+    public Order(Long id, Member member, String name, Address address, String phone, String requirement, int totalPrice, LocalDateTime regDate, List<OrderDetail> orderdetails) {
         this.id = id;
         this.member = member;
         this.name = name;
@@ -47,7 +54,7 @@ public class Order {
         this.phone = phone;
         this.requirement = requirement;
         this.totalPrice = totalPrice;
-        this.date = date;
+        this.regDate = regDate;
         this.orderdetails = orderdetails;
     }
 }

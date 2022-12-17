@@ -24,8 +24,8 @@ public class OrderDetail {
     @JoinColumn(name = "book_id")
     private Book book;
 
-    private int amount;
-    private int price;
+    private Integer amount;
+    private Integer price;
 
     @Builder
     public OrderDetail(Long id, Order order, Book book, int amount, int price) {

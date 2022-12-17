@@ -2,6 +2,8 @@ package com.cerdure.bookshelf.domain.board;
 
 import com.cerdure.bookshelf.domain.Book;
 import com.cerdure.bookshelf.domain.File;
+import com.cerdure.bookshelf.domain.enums.Answer;
+import com.cerdure.bookshelf.domain.enums.MemberGrade;
 import com.cerdure.bookshelf.domain.member.Member;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -31,30 +33,46 @@ public class Review {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    private String title;
-
     @Size(max=10000)
     private String content;
 
     private String tag;
-    private int rating;
+
+    private Integer rating;
+
     private LocalDate regDate;
-    private LocalDate modDate;
 
     @OneToMany(mappedBy = "review")
     private List<File> files = new ArrayList<>();
 
+    @PrePersist
+    public void prePersist() {
+        this.regDate = this.regDate == null ? LocalDate.now() : this.regDate;
+    }
+
     @Builder
-    public Review(Long id, Book book, Member member, String title, String content, String tag, int rating, LocalDate regDate, LocalDate modDate, List<File> files) {
+    public Review(Long id, Book book, Member member, String content, String tag, Integer rating, LocalDate regDate, List<File> files) {
         this.id = id;
         this.book = book;
         this.member = member;
-        this.title = title;
         this.content = content;
         this.tag = tag;
         this.rating = rating;
         this.regDate = regDate;
-        this.modDate = modDate;
         this.files = files;
     }
+
+    public void changeRating(Integer rating){
+        this.rating = rating;
+    }
+    public void changeTag(String tag){
+        this.tag = tag;
+    }
+    public void changeContent(String content){
+        this.content = content;
+    }
+    public void changeFiles(List<File> files){
+        this.files = files;
+    }
+
 }

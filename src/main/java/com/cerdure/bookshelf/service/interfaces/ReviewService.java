@@ -1,0 +1,18 @@
+package com.cerdure.bookshelf.service.interfaces;
+
+import com.cerdure.bookshelf.dto.board.ReviewDto;
+import com.cerdure.bookshelf.domain.board.Review;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import java.util.List;
+
+public interface ReviewService {
+
+    public Long create(ReviewDto reviewDto);
+    public List<Review> findAll();
+    public Page <Review> findByBookId(Long bookId, Pageable pageable);
+    public Page <Review> findByWriter(String memberNickname, Pageable pageable);
+    public void modify(ReviewDto reviewDto);
+    public void delete(Long reviewId);
+}

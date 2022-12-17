@@ -1,27 +1,42 @@
 <!DOCTYPE html>
-<html   lang="en"
-         xmlns:th="http://www.thymeleaf.org"
-         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:th="http://www.thymeleaf.org"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<!-- [head] 영역 시작 -->
-<head th:replace="fragments/header :: headFragment">
-    <title layout:title-pattern="$LAYOUT_TITLE : $CONTENT_TITLE">BookShelf</title>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    
+
+    <link rel="stylesheet" th:href="@{/css/default.css}">
+    <script th:src="@{/js/default.js}"></script>
+    
+    <!-- content script -->
+    <th:block layout:fragment="css"></th:block>
+    <!-- content script -->
+    <th:block layout:fragment="script"></th:block>
 </head>
-<!-- [head] 영역 끝 -->
 
 <body>
 
-<!-- [header] 영역 시작 -->
-<header th:replace="fragments/bodyHeader :: headerFragment"></header>
-<!-- [header] 영역 끝 -->
+    <header th:replace="fragments/header :: header"></header>
 
-<!-- [content] 영역 시작 -->
-<div layout:fragment="content"></div>
-<!-- [content] 영역 끝 -->
+    <div layout:fragment="content"></div>
 
-<!-- [footer] 영역 시작 -->
-<footer th:replace="fragments/footer :: footerFragment"></footer>
-<!-- [footer] 영역 끝 -->
+    <div th:replace="fragments/footer :: footer"></div>
 
 </body>
+
 </html>

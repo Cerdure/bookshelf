@@ -7,7 +7,4 @@ import java.util.List;
 import java.util.UUID;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
-
-    public List<Book> findByName(String name);
-    public List<Book> findByCategory(String category);
 }

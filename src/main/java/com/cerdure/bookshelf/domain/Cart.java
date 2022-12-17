@@ -24,8 +24,8 @@ public class Cart {
     @JoinColumn(name = "book_id")
     private Book book;
 
-    private int amount;
-    private int price;
+    private Integer amount;
+    private Integer price;
 
     @Builder
     public Cart(Long id, Member member, Book book, int amount, int price) {

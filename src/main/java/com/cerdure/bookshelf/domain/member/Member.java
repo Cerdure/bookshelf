@@ -1,7 +1,6 @@
 package com.cerdure.bookshelf.domain.member;
 
 import com.cerdure.bookshelf.domain.Cart;
-import com.cerdure.bookshelf.domain.DTO.MemberDto;
 import com.cerdure.bookshelf.domain.enums.Answer;
 import com.cerdure.bookshelf.domain.enums.MemberGrade;
 import com.cerdure.bookshelf.domain.order.Order;
@@ -10,7 +9,6 @@ import org.springframework.lang.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -30,10 +28,15 @@ public class Member implements UserDetails {
     private Long id;
 
     private String pw;
+
     private String name;
+
     private String nickname;
+
     private String birth;
+
     private String sex;
+
     private String phone;
 
     @Embedded
@@ -42,10 +45,9 @@ public class Member implements UserDetails {
     @Enumerated(EnumType.STRING)
     private MemberGrade grade;
 
-    @Nullable
     private Integer point;
 
-    private LocalDate regDate;
+    private LocalDate regDate = LocalDate.now();
 
     @Enumerated(EnumType.STRING)
     private Answer delflag;
@@ -61,8 +63,16 @@ public class Member implements UserDetails {
 
     private String role;
 
+    @PrePersist
+    public void prePersist() {
+        this.grade = this.grade == null ? MemberGrade.NEW : this.grade;
+        this.delflag = this.delflag == null ? Answer.N : this.delflag;
+        this.point = this.point == null ? 0 : this.point;
+        this.regDate = this.regDate == null ? LocalDate.now() : this.regDate;
+    }
+
     @Builder
-    public Member(Long id, String pw, String name, String nickname, String birth, String sex, String phone, Address address, MemberGrade grade, @Nullable Integer point, LocalDate regDate, Answer delflag, LocalDate delDate, List<Order> orders, Cart cart, String role) {
+    public Member(Long id, String pw, String name, String nickname, String birth, String sex, String phone, Address address, MemberGrade grade, Integer point, LocalDate regDate, Answer delflag, LocalDate delDate, List<Order> orders, Cart cart, String role) {
         this.id = id;
         this.pw = pw;
         this.name = name;
@@ -79,14 +89,6 @@ public class Member implements UserDetails {
         this.orders = orders;
         this.cart = cart;
         this.role = role;
-    }
-
-    @PrePersist
-    public void prePersist() {
-        this.point = this.point == null ? 0 : this.point;
-        this.grade = this.grade == null ? MemberGrade.NEW : this.grade;
-        this.delflag = this.delflag == null ? Answer.N : this.delflag;
-        this.regDate = this.regDate == null ? LocalDate.now() : this.regDate;
     }
 
     @Override

@@ -28,7 +28,7 @@
             </header>
 
             <div class="container-wrapper">
-                <form action="/loginProc" th:object="${loginForm}" method="post">
+                <form action="/loginProc" th:object="${loginDto}" method="post">
 
                    <div th:if="${#fields.hasGlobalErrors()}">
                         <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류 메시지</p>

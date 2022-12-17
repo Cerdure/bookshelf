@@ -1,17 +1,45 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="headFragment">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout/default}">
 
-</head>
+<header th:fragment="header">
+
+    <div class="top-nav-background"></div>
+    <div class="top-nav-wrapper">
+        <div class="top-logo-wrapper" onclick="location.href='/'">
+            <img id="top-logo" src="/img/icon/logo.png">
+            <span class="top-title">BookShelf</span>
+        </div>
+
+        <button class="login-button" onclick="location.href='/login'" sec:authorize="!isAuthenticated()">로그인</button>
+
+        <div class="login-active-user" sec:authorize="hasRole('USER')">
+            <div class="news-wrapper">
+                <img src="/img/icon/bell.svg" id="news">
+                <div id="news-n">N</div>
+            </div>
+            <img src="/img/icon/cart.svg" id="cart">
+            <button class="logout-button" onclick="location.href='/logout'">로그아웃</button>
+        </div>
+
+        <div class="login-active-admin" sec:authorize="hasRole('ADMIN')">
+            <button class="admin-button" onclick="location.href='/admin'">관리자페이지</button>
+            <button class="logout-button" onclick="location.href='/logout'">로그아웃</button>
+        </div>
+
+        <nav class="top-nav">
+            <div id="underbar"></div>
+            <ul>
+                <li onclick="location.href='/'">NOW</li>
+                <li onclick="location.href='/search'">책찾기</li>
+                <li onclick="location.href='/event'">이벤트</li>
+                <li onclick="location.href='/myshelf'">내책장</li>
+                <li onclick="location.href='/review'">게시판</li>
+            </ul>
+        </nav>
+    </div>
+    
+</header>

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -22,12 +23,17 @@ public class Attendance {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    private LocalDate date;
+    private LocalDate regDate = LocalDate.now();
+
+    @PrePersist
+    public void prePersist() {
+        this.regDate = this.regDate == null ? LocalDate.now() : this.regDate;
+    }
 
     @Builder
-    public Attendance(Long id, Member member, LocalDate date) {
+    public Attendance(Long id, Member member, LocalDate regDate) {
         this.id = id;
         this.member = member;
-        this.date = date;
+        this.regDate = regDate;
     }
 }

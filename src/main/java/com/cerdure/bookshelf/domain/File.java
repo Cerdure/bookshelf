@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -21,16 +22,23 @@ public class File {
     @JoinColumn(name = "review_id")
     private Review review;
 
-    private String originFileName;
-    private String storeFileName;
+    private String fileName;
+
+    private String extension;
+
     private String fullPath;
 
+    @PrePersist
+    public void prePersist() {
+        this.fullPath = this.fullPath == null ? "/img/review-img/" + fileName + extension : this.fullPath;
+    }
+
     @Builder
-    public File(Long id, Review review, String originFileName, String storeFileName, String fullPath) {
+    public File(Long id, Review review, String fileName, String fullPath, String extension) {
         this.id = id;
         this.review = review;
-        this.originFileName = originFileName;
-        this.storeFileName = storeFileName;
+        this.fileName = fileName;
+        this.extension = extension;
         this.fullPath = fullPath;
     }
 }

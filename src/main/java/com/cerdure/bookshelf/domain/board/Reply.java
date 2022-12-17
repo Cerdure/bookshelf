@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity @Getter
@@ -27,22 +28,28 @@ public class Reply {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    private LocalDateTime date;
+    private LocalDateTime regDate = LocalDateTime.now();
 
     @Size(max = 3000)
     private String content;
 
-    private int level;
+    private Integer level;
 
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int seq;
+    private Integer seq;
+
+    @PrePersist
+    public void prePersist() {
+        this.regDate = this.regDate == null ? LocalDateTime.now() : this.regDate;
+        this.level = this.level == null ? 1 : this.level;
+    }
 
     @Builder
-    public Reply(Long id, Inquire inquire, Member member, LocalDateTime date, String content, int level, int seq) {
+    public Reply(Long id, Inquire inquire, Member member, LocalDateTime regDate, String content, int level, int seq) {
         this.id = id;
         this.inquire = inquire;
         this.member = member;
-        this.date = date;
+        this.regDate = regDate;
         this.content = content;
         this.level = level;
         this.seq = seq;

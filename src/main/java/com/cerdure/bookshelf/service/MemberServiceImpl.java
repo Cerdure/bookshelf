@@ -1,13 +1,12 @@
 package com.cerdure.bookshelf.service;
 
-import com.cerdure.bookshelf.domain.DTO.MemberDto;
+import com.cerdure.bookshelf.dto.member.MemberDto;
 import com.cerdure.bookshelf.domain.member.Member;
+import com.cerdure.bookshelf.mapper.MemberMapper;
 import com.cerdure.bookshelf.repository.MemberRepository;
 import com.cerdure.bookshelf.service.interfaces.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,15 +21,12 @@ public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    /**
-     * 회원 가입
-     */
     @Transactional
     public Long join(MemberDto memberDto) {
         validateDuplicateMember(memberDto);
         String encodedPw = passwordEncoder.encode(memberDto.getPw());
         memberDto.setPw(encodedPw);
-        Member member = memberDto.toEntity();
+        Member member = MemberMapper.MAPPER.toEntity(memberDto);
         member.getAuthorities();
         memberRepository.save(member);
         return member.getId();

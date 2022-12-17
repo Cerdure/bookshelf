@@ -1,6 +1,6 @@
 package com.cerdure.bookshelf.service.interfaces;
 
-import com.cerdure.bookshelf.domain.DTO.MemberDto;
+import com.cerdure.bookshelf.dto.member.MemberDto;
 import com.cerdure.bookshelf.domain.member.Member;
 
 import java.util.List;
