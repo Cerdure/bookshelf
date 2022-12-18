@@ -8,14 +8,14 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-18T00:46:45+0900",
+    date = "2022-12-18T20:14:59+0900",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 11.0.16.1 (Oracle Corporation)"
 )
 public class WinnerMapperImpl implements WinnerMapper {
 
     @Override
-    public Winner toEntity(WinnerDto dto) {
-        if ( dto == null ) {
+    public Winner toEntity(WinnerDto arg0) {
+        if ( arg0 == null ) {
             return null;
         }
 
@@ -32,8 +32,8 @@ public class WinnerMapperImpl implements WinnerMapper {
     }
 
     @Override
-    public WinnerDto toDto(Winner entity) {
-        if ( entity == null ) {
+    public WinnerDto toDto(Winner arg0) {
+        if ( arg0 == null ) {
             return null;
         }
 

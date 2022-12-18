@@ -2,7 +2,7 @@
   position: absolute;
   left: 422px;
   /* 122 222 322 422*/
-  top: 40px;
+  top: 37px;
   background: #ffd16d;
   width: 80px;
   height: 4px;
@@ -522,7 +522,7 @@
   cursor: pointer;
 }
 .review-write-tag .tag:hover {
-  border: 1px solid cornflowerblue;
+  border: 2px solid cornflowerblue;
   transition: 0.3s;
 }
 .tag-active {
@@ -752,6 +752,7 @@
 .my-review .body {
   position: relative;
   width: 100%;
+  min-height: 70px;
   margin-bottom: 20px;
 }
 .my-review .review {
@@ -822,27 +823,34 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  left: -40px;
+  left: -50px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  font-size: 40px;
-  background-color: rgba(0, 0, 0, 0.0);
+  background-color: rgba(0, 0, 0, 0);
   border: none;
-  color: rgb(255, 255, 255);
   text-shadow: 0px 0px 4px black;
+  color: white;
+  font-size: 50px;
+  font-stretch: ultra-condensed;
+  line-height: 10px;
   display: none;
 }
 .photos .btn-right {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: -40px;
+  right: -50px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  font-size: 40px;
-  background-color: rgba(0, 0, 0, 0.0);
+  background-color: rgba(0, 0, 0, 0);
   border: none;
-  color: rgb(255, 255, 255);
-  filter: none;
   text-shadow: 0px 0px 4px black;
+  color: white;
+  font-size: 50px;
+  font-stretch: ultra-condensed;
+  line-height: 10px;
   display: none;
 }
 .photos .plus {
@@ -924,14 +932,12 @@
 }
 .controller a{
   display: inline-block;
-  width: 22px;
-  height: 22px;
+  width: 19px;
   border-radius: 50%;
   line-height: 19px;
   cursor: pointer;
-}
-.controller .first-ellipsis {
-  display: none;
+  text-decoration: none;
+  font-weight: 900;
 }
 .index-active {
  background-color: cornflowerblue;

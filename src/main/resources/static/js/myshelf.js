@@ -47,7 +47,7 @@ $(function () {
   if(st>210){
     $(".middle-nav-wrapper").css({
       'position':'fixed',
-      'top':'70px',
+      'top':'60px',
       'border-top': 'none',
       'border-bottom':'1px solid #ebebeb',
       'box-shadow':'none'
@@ -126,7 +126,7 @@ $(function () {
     if(st>210){
       $(".middle-nav-wrapper").css({
         'position':'fixed',
-        'top':'70px',
+        'top':'60px',
         'border-top': 'none',
         'border-bottom':'1px solid #ebebeb',
         'box-shadow':'none'

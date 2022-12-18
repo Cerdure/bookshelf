@@ -28,7 +28,7 @@ header {
 .top-nav-background {
   position: relative;
   top: 0px;
-  height: 70px;
+  height: 60px;
   background-color: #ffffff;
   border-bottom: 1px solid #ebebeb;
 }
@@ -36,24 +36,29 @@ header {
 .top-nav-wrapper {
   position: relative;
   width: 1280px;
-  height: 70px;
+  height: 60px;
   margin: auto;
-  bottom: 70px;
-  padding: 20px;
+  bottom: 60px;
 }
 .top-logo-wrapper {
-  width: 140px;
+  position: absolute;
+  left: 20px;
+  height: 100%;
 }
 #top-logo {
-  position: relative;
-  left: 10px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
   width: 30px;
   cursor: pointer;
 }
 
 .top-title {
   position: absolute;
-  left: 62px;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 36px;
   font-family: 'Oswald', sans-serif;
   font-size: 20px;
   cursor: pointer;
@@ -64,7 +69,7 @@ header {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: 180px;
+  right: 220px;
   width: 20px;
   height: 20px;
   cursor: pointer;
@@ -100,7 +105,7 @@ header {
   position: absolute;
   top: 49%;
   transform: translateY(-50%);
-  right: 142px;
+  right: 175px;
   width: 20px;
   opacity: 0.5;
   cursor: pointer;
@@ -115,107 +120,94 @@ header {
 
 
 
-.login-button,
-.logout-button {
-  position: absolute;
-  top: 20px;
-  right: 40px;
-  width: 80px;
-  height: 30px;
-  border-radius: 5px;
-  background-color: gray;
-  border: none;
-  color: #ffffff;
-  font-family: 'Noto Sans KR', sans-serif;
-  font-size: 14px;
-  display: inline-block;
-  vertical-align: middle;
-  transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  overflow: hidden;
-  transition-property: color;
-  transition-duration: 0.3s;
-  cursor: pointer;
-  z-index: 7;
-}
 
-.login-button:before,
-.logout-button:before{
-  content: "";
+.spot {
   position: absolute;
-  z-index: -1;
+  width: 100%;
+  height: 100%;
   top: 0;
-  right: 0;
   left: 0;
-  bottom: 0;
-  background: #ffcd60;
-  border-radius: 100%;
-  transform: scale(0);
-  transition-property: transform;
-  transition-duration: 0.2s;
-  transition-timing-function: ease-out;
-  filter: blur(5px);
 }
-
-.login-button:hover,
-.login-button:focus,
-.login-button:active,
-.logout-button:hover,
-.logout-button:focus,
-.logout-button:active {
-  color: #575757;
-}
-
-.login-button:hover:before,
-.login-button:focus:before,
-.login-button:active:before,
-.logout-button:hover:before,
-.logout-button:focus:before,
-.logout-button:active:before {
-  transform: scale(4);
-}
-
-.login-button:active,
-.logout-button:active {
-  transform: scale(0.95);
-  transition: 0.1s;
-}
-
-.admin-button {
+.svg-wrapper {
   position: absolute;
-  top: 20px;
-  right: 140px;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 40px;
   width: 100px;
   height: 30px;
-  border-radius: 5px;
-  background-color: white;
-  border: 1px solid silver;
-  color: #575757;
-  font-family: 'Noto Sans KR', sans-serif;
-  font-size: 14px;
   display: inline-block;
-  vertical-align: middle;
-  -webkit-transform: perspective(1px) translateZ(0);
-  transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  overflow: hidden;
+  border-radius: 3px;
+  margin-top: 0;
+  margin-left: 5px;
+  margin-right: 5px
+}
+#shape-wrapper {
+  height: 30px;
+  width: 100px;
+  border-radius: 5px;
+}
+#shape {
+  height: 30px;
+  width: 100px;
+  stroke-width: 6px;
+  fill: #565656;
+  stroke: #565656;
+  stroke-dasharray: 80 420;
+  stroke-dashoffset: -120;
+  transition: 1s all ease;
+  rx: 5px;
+  ry: 5px;
+}
+#text {
+  margin-top: -30px;
+  text-align: center;
+  font-family: 'Noto Sans KR', sans-serif;
+  color: white;
+  text-indent: 3px;
+  letter-spacing: 2px;
+  font-size: 14px;
+}
+.svg-wrapper:hover #shape {
+  fill: transparent;
+  stroke-dasharray: 50 0;
+  stroke-width: 2px;
+  stroke-dashoffset: 0;
+  stroke: #ffb700;
+}
+.svg-wrapper:hover #text {
+  color: #525252;
+  transition: 0.5s;
 }
 
-.admin-button:hover {
-  background-color: #f9f9f9;
-  color: #000000;
-  transition: 0.3s;
+.admin-btn {
+  position: absolute;
+  right: 160px;
+}
+.admin-btn #shape {
+  fill: transparent;
+  stroke: transparent;
+}
+.admin-btn #text {
+  color: gray;
+}
+.svg-wrapper:hover .admin-btn #text {
+  color: #252525;
+  transition: 0.5s;
 }
 
-.admin-button:active {
-  transform: scale(0.95);
-  transition: 0.1s;
-}
+
+
+
+
+
+
+
 
 .top-nav {
   position: absolute;
-  top: 26px;
+  top: 50%;
   left: 180px;
+  transform: translateY(-50%);
 }
 
 .top-nav ul li:first-child {

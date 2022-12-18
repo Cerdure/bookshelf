@@ -7,14 +7,14 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-18T00:46:44+0900",
+    date = "2022-12-18T20:14:59+0900",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 11.0.16.1 (Oracle Corporation)"
 )
 public class FileMapperImpl implements FileMapper {
 
     @Override
-    public File toEntity(FileDto dto) {
-        if ( dto == null ) {
+    public File toEntity(FileDto arg0) {
+        if ( arg0 == null ) {
             return null;
         }
 
@@ -30,8 +30,8 @@ public class FileMapperImpl implements FileMapper {
     }
 
     @Override
-    public FileDto toDto(File entity) {
-        if ( entity == null ) {
+    public FileDto toDto(File arg0) {
+        if ( arg0 == null ) {
             return null;
         }
 

@@ -47,7 +47,7 @@ $(function () {
   if(st>150){
     $(".middle-nav-wrapper").css({
       'position':'fixed',
-      'top':'70px',
+      'top':'60px',
       'border-top': 'none',
       'border-bottom':'1px solid #ebebeb',
       'box-shadow':'none'
@@ -75,7 +75,7 @@ $(function () {
     if(st>150){
       $(".middle-nav-wrapper").css({
         'position':'fixed',
-        'top':'70px',
+        'top':'60px',
         'border-top': 'none',
         'border-bottom':'1px solid #ebebeb',
         'box-shadow':'none'
@@ -160,13 +160,6 @@ $(function(){
       rfbClicked = false;
     }
   });
-
-  let phNum = $(".photos").length;
-  for(var i=1; i<=phNum; i++){
-    let photos =".my-review:nth-child("+i+") .photos";
-    $(photos).css("background-image",'url('+$(photos+" img:nth-child(2)").attr('src')+')');
-    $(photos+" .number").text('+'+($(photos+" img").length-1));
-  }
 
 
   $(".photos").mouseover(function(){
@@ -289,139 +282,37 @@ $(function(){
     }
   });
 
-
-  let notFist = false;
-  $(".controller a").click(function () {
-    let last = Number($(this).parent().children(".index-6").text());
-    $(this).parent().find("a").removeClass("index-active");
-
-    if(notFist && $(this).hasClass("index-1")) {
-      for (var i = 1; i < 6; i++) {
-        $(this).parent().children(".index-"+i).text(i);
-      }
-      $(this).parent().children(".index-6").show();
-      $(this).parent().find(".first-ellipsis").hide();
-      $(this).parent().find(".last-ellipsis").show();
-
-    }
-    if ($(this).hasClass("index-6")) {
-      for (var i = 1; i < 6; i++) {
-        $(this).parent().children(".index-"+i).text(i==1?1:last-5+i);
-      }
-      $(this).parent().children(".index-5").addClass("index-active");
-      $(this).parent().children(".index-6").hide();
-      $(this).parent().find(".first-ellipsis").show();
-      $(this).parent().find(".last-ellipsis").hide();
-      notFist = true;
-    } else {
-      $(this).addClass("index-active");
-    }
+  $(document).ready(function () {
+    $(document).on("click", ".search-result .select", function () {
+      let bookId = $(this).parent().find(".book-id").val();
+      let bookImg = $(this).parent().find("img").attr('src');
+      let bookName =  $(this).parent().find(".name").text();
+      $(".review-book-id").val(bookId);
+      $(".review-book-img").attr('src', bookImg);
+      $(".review-book-name").text(bookName);
+      $(".review-write-book-wrapper").show();
+      $(".review-write-search-wrapper").hide();
+      swOpened = false;
+      $(".review-write-find").animate({'backgroundColor':'lightgray'},500);
+      $(".review-write-find-text").text('상품 재검색');
+    });
+    $(document).on("change","#sortOrder", function(){
+      bookSearch();
+    });
+    $(document).on("click",".search-controller .controller-btn-left", function(){
+      let page = Number($(".search-controller .index-active").text()) -1;
+      bookSearch(page);
+    });
+    $(document).on("click",".search-controller .controller-btn-right", function(){
+      let page = Number($(".search-controller .index-active").text()) +1;
+      bookSearch(page);
+    });
+    $(document).on("click",".search-controller #idx", function(){
+      let page = $(this).text();
+      bookSearch(page);
+    });
   });
 
-
-  $(".controller-btn-right").click(function () {
-    let currentActive = $(this).parent().find(".index-active");
-    let currentActiveIndex = Number(currentActive.attr('class').substr(6,1));  
-    let nextActive = $(this).parent().find(".index-"+(currentActiveIndex+1));
-    if (currentActive.text() != $(this).parent().children(".index-6").text()) {
-      currentActive.removeClass("index-active");
-      if (Number(currentActive.attr('class').substr(6,1)) >= 5) {
-        for (var i = 1; i < 6; i++) {
-          let orgText = Number($(this).parent().children(".index-"+i).text());
-          $(this).parent().children(".index-"+i).text(i==1?1:orgText + 3);
-        }
-        $(this).parent().children(".index-3").addClass("index-active");
-        $(this).parent().find(".first-ellipsis").show();
-
-
-        let lastPrev = Number($(this).parent().children(".index-5").text());
-        let last = Number($(this).parent().children(".index-6").text());
-        if (lastPrev + 1 >= last) {
-          for (var i = 1; i < 6; i++) {
-            let orgText = Number($(this).parent().children(".index-"+i).text());
-            $(this).parent().children(".index-"+i).text(i==1?1:orgText + (last - lastPrev));
-          }
-          $(this).parent().children(".index-6").hide();
-          $(this).parent().find(".last-ellipsis").hide();
-        }
-        notFist = true;
-      } else {
-        nextActive.addClass("index-active");
-      }
-    }
-  });
-
-  $(".controller-btn-left").click(function () {
-    let currentActive = $(this).parent().find(".index-active");
-    let currentActiveIndex = Number(currentActive.attr('class').substr(6,1));  
-    let currentActiveText = currentActive.text();
-    let prevActive = $(this).parent().find(".index-"+(currentActiveIndex-1));
-
-    
-    if (currentActive.text() != 1) {
-      currentActive.removeClass("index-active");
-
-      if (currentActiveText!=2 && currentActiveIndex == 2) { console.log(2);
-        switch(currentActiveText){
-          case '6':        
-            for (var i = 1; i < 6; i++) {
-              $(this).parent().children(".index-"+i).text(i);
-            }
-            $(this).parent().children(".index-5").addClass("index-active");
-            $(this).parent().find(".first-ellipsis").hide();
-            break;
-          case '5':
-            for (var i = 1; i < 6; i++) {
-              $(this).parent().children(".index-"+i).text(i);
-            }
-            $(this).parent().children(".index-4").addClass("index-active");
-            $(this).parent().find(".first-ellipsis").hide();
-            notFist = false;
-            break; 
-          case '4':
-            for (var i = 1; i < 6; i++) {
-              $(this).parent().children(".index-"+i).text(i);
-            }
-            $(this).parent().children(".index-3").addClass("index-active");
-            $(this).parent().find(".first-ellipsis").hide();
-            notFist = false;
-            break;  
-          default:
-            for (var i = 1; i < 6; i++) {
-              let orgText = Number($(this).parent().children(".index-"+i).text());
-              $(this).parent().children(".index-"+i).text(i==1?1:orgText - 2);
-            }
-            $(this).parent().children(".index-3").addClass("index-active");
-            break;
-        }
- 
-        let lastPrev = Number($(this).parent().children(".index-5").text());
-        let last = Number($(this).parent().children(".index-6").text());
-        if (lastPrev != last) {
-          $(this).parent().children(".index-6").show();
-          $(this).parent().find(".last-ellipsis").show();
-        }
-      } else {
-        prevActive.addClass("index-active");
-      }
-    }
-  });
-
-
-
-
-  $(".search-result .select").click(function(){
-    let bookImg = $(this).parent().find("img").attr('src');
-    let bookName =  $(this).parent().find(".name").text();
-    $(".review-book-img").attr('src', bookImg);
-    $(".review-book-name").text(bookName);
-    $(".review-write-book-wrapper").show();
-    $(".review-write-search-wrapper").hide();
-    swOpened = false;
-    $(".review-write-find").animate({'backgroundColor':'lightgray'},500);
-    $(".review-write-find-text").text('상품 재검색');
-    
-  });
 
   $(".review-write-tag .tag").click(function(){
     $(".review-write-tag .tag").removeClass("tag-active");
@@ -454,12 +345,42 @@ $(function(){
     $(".close-alert").show();
   });
 
+  function bookSearch(_page) {
+    let data = {
+      name : $("#search-input").val(),
+      sortOrder : $('#sortOrder option:selected').val()
+    };
+    $.ajax({
+      url: "/review/book-search?page="+_page,
+      type: "get",
+      data: data,
+      dataType: "html",
+      async: true,
+    error : function(xhr, status, error) {
+      console.log(error);
+    }
+  }).done(function (books) {
+      $('#search-results').replaceWith(books);
+      $('.search-result-info .input-value').text("'" + data.name + "'");
+      $("#sortOrder").val(data.sortOrder).prop("selected", true);
+    });
+  }
 
-
-  $(".review-write-find").click(function(){
+  $(".review-write-find").click(function () {
     $(".review-write-search-wrapper").fadeIn(200);
     swOpened = true;
   });
+
+  $("#search-input").keyup(function(key){
+    if(key.keyCode==13) {
+      bookSearch(0);
+    }
+  });
+  $("#search-icon").click(function(){
+    bookSearch(0);
+  });
+
+
 
   $(".search-title img").click(function(){
     $(".review-write-search-wrapper").hide();
@@ -478,7 +399,11 @@ $(function(){
     }
   }
 
-  $(".my-review .rating").css('width',Number($(this).find(".my-rating-num").text())*20 + '%');
+  let reviewsRating = $(".my-review .rating").toArray();
+
+  reviewsRating.forEach(e => 
+    e.querySelector(".star-fill").style.width = Number(e.querySelector(".my-rating-num").innerText)*20 + "%"
+    );
 
 });
 
@@ -538,6 +463,7 @@ $(function(){
     $(".review-write-book-wrapper").hide();
     $("form").css('filter','brightness(100%)');
     $(".review-write-find-text").text("상품 검색");
+    $(".review-book-id").val('');
     $(".review-book-rating .star-fill").stop().css('width','0px');
     $(".review-book-rating-number .rating-number").text(0); 
     $(".review-write-tag .tag").removeClass("tag-active");

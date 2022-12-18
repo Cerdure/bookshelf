@@ -9,14 +9,14 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-18T00:46:45+0900",
+    date = "2022-12-18T20:14:59+0900",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 11.0.16.1 (Oracle Corporation)"
 )
 public class ReplyMapperImpl implements ReplyMapper {
 
     @Override
-    public Reply toEntity(ReplyDto dto) {
-        if ( dto == null ) {
+    public Reply toEntity(ReplyDto arg0) {
+        if ( arg0 == null ) {
             return null;
         }
 
@@ -34,8 +34,8 @@ public class ReplyMapperImpl implements ReplyMapper {
     }
 
     @Override
-    public ReplyDto toDto(Reply entity) {
-        if ( entity == null ) {
+    public ReplyDto toDto(Reply arg0) {
+        if ( arg0 == null ) {
             return null;
         }
 

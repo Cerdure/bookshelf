@@ -10,7 +10,7 @@ import java.util.List;
 public interface ReviewService {
 
     public Long create(ReviewDto reviewDto);
-    public List<Review> findAll();
+    public Page <Review> findAll(Pageable pageable);
     public Page <Review> findByBookId(Long bookId, Pageable pageable);
     public Page <Review> findByWriter(String memberNickname, Pageable pageable);
     public void modify(ReviewDto reviewDto);

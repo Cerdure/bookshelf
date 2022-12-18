@@ -13,14 +13,14 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-18T00:46:45+0900",
+    date = "2022-12-18T20:14:59+0900",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 11.0.16.1 (Oracle Corporation)"
 )
 public class MemberMapperImpl implements MemberMapper {
 
     @Override
-    public Member toEntity(MemberDto dto) {
-        if ( dto == null ) {
+    public Member toEntity(MemberDto arg0) {
+        if ( arg0 == null ) {
             return null;
         }
 
@@ -37,18 +37,17 @@ public class MemberMapperImpl implements MemberMapper {
         LocalDate regDate = null;
         Answer delflag = null;
         LocalDate delDate = null;
-        List<Order> orders = null;
         Cart cart = null;
         String role = null;
 
-        Member member = new Member( id, pw, name, nickname, birth, sex, phone, address, grade, point, regDate, delflag, delDate, orders, cart, role );
+        Member member = new Member( id, pw, name, nickname, birth, sex, phone, address, grade, point, regDate, delflag, delDate, cart, role );
 
         return member;
     }
 
     @Override
-    public MemberDto toDto(Member entity) {
-        if ( entity == null ) {
+    public MemberDto toDto(Member arg0) {
+        if ( arg0 == null ) {
             return null;
         }
 

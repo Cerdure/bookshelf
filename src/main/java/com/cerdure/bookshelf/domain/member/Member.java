@@ -3,9 +3,7 @@ package com.cerdure.bookshelf.domain.member;
 import com.cerdure.bookshelf.domain.Cart;
 import com.cerdure.bookshelf.domain.enums.Answer;
 import com.cerdure.bookshelf.domain.enums.MemberGrade;
-import com.cerdure.bookshelf.domain.order.Order;
 import lombok.*;
-import org.springframework.lang.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +12,6 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import static javax.persistence.FetchType.LAZY;
 
@@ -54,9 +51,6 @@ public class Member implements UserDetails {
 
     private LocalDate delDate;
 
-    @OneToMany(mappedBy = "member")
-    private List<Order> orders = new ArrayList<>();
-
     @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_id")
     private Cart cart;
@@ -72,7 +66,7 @@ public class Member implements UserDetails {
     }
 
     @Builder
-    public Member(Long id, String pw, String name, String nickname, String birth, String sex, String phone, Address address, MemberGrade grade, Integer point, LocalDate regDate, Answer delflag, LocalDate delDate, List<Order> orders, Cart cart, String role) {
+    public Member(Long id, String pw, String name, String nickname, String birth, String sex, String phone, Address address, MemberGrade grade, Integer point, LocalDate regDate, Answer delflag, LocalDate delDate, Cart cart, String role) {
         this.id = id;
         this.pw = pw;
         this.name = name;
@@ -86,7 +80,6 @@ public class Member implements UserDetails {
         this.regDate = regDate;
         this.delflag = delflag;
         this.delDate = delDate;
-        this.orders = orders;
         this.cart = cart;
         this.role = role;
     }

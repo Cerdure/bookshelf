@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      layout:decorate="~{layout/default}">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    layout:decorate="~{layout/default}">
 
 <header th:fragment="header">
 
@@ -14,7 +12,14 @@
             <span class="top-title">BookShelf</span>
         </div>
 
-        <button class="login-button" onclick="location.href='/login'" sec:authorize="!isAuthenticated()">로그인</button>
+        <div class="svg-wrapper" onclick="location.href='/login'" sec:authorize="!isAuthenticated()">
+            <svg id="shape-wrapper" xmlns="http://www.w3.org/2000/svg">
+                <rect id="shape" />
+                <div id="text">
+                    <span class="spot"></span>로그인
+                </div>
+            </svg>
+        </div>
 
         <div class="login-active-user" sec:authorize="hasRole('USER')">
             <div class="news-wrapper">
@@ -22,12 +27,36 @@
                 <div id="news-n">N</div>
             </div>
             <img src="/img/icon/cart.svg" id="cart">
-            <button class="logout-button" onclick="location.href='/logout'">로그아웃</button>
+
+            <div class="svg-wrapper" onclick="location.href='/logout'">
+                <svg id="shape-wrapper" xmlns="http://www.w3.org/2000/svg">
+                    <rect id="shape" />
+                    <div id="text">
+                        <span class="spot"></span>로그아웃
+                    </div>
+                </svg>
+            </div>
         </div>
 
         <div class="login-active-admin" sec:authorize="hasRole('ADMIN')">
-            <button class="admin-button" onclick="location.href='/admin'">관리자페이지</button>
-            <button class="logout-button" onclick="location.href='/logout'">로그아웃</button>
+
+            <div class="svg-wrapper admin-btn" onclick="location.href='/admin'">
+                <svg id="shape-wrapper" xmlns="http://www.w3.org/2000/svg">
+                    <rect id="shape" />
+                    <div id="text">
+                        <span class="spot"></span>관리페이지
+                    </div>
+                </svg>
+            </div>
+
+            <div class="svg-wrapper" onclick="location.href='/logout'">
+                <svg id="shape-wrapper" xmlns="http://www.w3.org/2000/svg">
+                    <rect id="shape" />
+                    <div id="text">
+                        <span class="spot"></span>로그아웃
+                    </div>
+                </svg>
+            </div>
         </div>
 
         <nav class="top-nav">
@@ -37,9 +66,9 @@
                 <li onclick="location.href='/search'">책찾기</li>
                 <li onclick="location.href='/event'">이벤트</li>
                 <li onclick="location.href='/myshelf'">내책장</li>
-                <li onclick="location.href='/review'">게시판</li>
+                <li onclick="location.href='/review?page=0&size=3'">게시판</li>
             </ul>
         </nav>
     </div>
-    
+
 </header>

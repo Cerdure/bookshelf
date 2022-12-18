@@ -2,10 +2,7 @@ package com.cerdure.bookshelf.domain;
 
 import com.cerdure.bookshelf.domain.enums.Answer;
 import com.cerdure.bookshelf.domain.enums.MemberGrade;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -17,6 +14,7 @@ import java.util.UUID;
 
 @Entity @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString
 public class Book {
 
     @Id
@@ -58,6 +56,8 @@ public class Book {
     private Integer discountRate;
     private Integer discountPrice;
     private Integer stock;
+    private Integer sales;
+    private Integer rating;
 
     @Size(max = 3000)
     private String intro;
@@ -84,13 +84,15 @@ public class Book {
         this.discountRate = this.discountRate == null ? (int)(Math.random()*6)*10 : this.discountRate;
         this.discountPrice = this.discountPrice == null ? this.originPrice*(100-this.discountRate)/100 : this.discountPrice;
         this.stock = this.stock == null ? 20 : this.stock;
+        this.sales = this.sales == null ? (int)(Math.random()*100+1) : this.sales;
+        this.rating = this.rating == null ? (int)(Math.random()*5+1) : this.rating;
         this.intro = this.intro == null ? this.name+" 책 소개" : this.intro;
         this.bookIndex = this.bookIndex == null ? this.name+" 목차" : this.bookIndex;
         this.publisherReview = this.publisherReview == null ? this.name+" 서평" : this.publisherReview;
     }
 
     @Builder
-    public Book(Long id, String name, String imgPath, Integer category, String author, String publisher, String publishDate, Double ISBN, Integer originPrice, Integer discountRate, Integer discountPrice, Integer stock, String intro, String bookIndex, String publisherReview) {
+    public Book(Long id, String name, String imgPath, Integer category, String author, String publisher, String publishDate, Double ISBN, Integer originPrice, Integer discountRate, Integer discountPrice, Integer stock, Integer sales, Integer rating, String intro, String bookIndex, String publisherReview) {
         this.id = id;
         this.name = name;
         this.imgPath = imgPath;
@@ -106,6 +108,8 @@ public class Book {
         this.intro = intro;
         this.bookIndex = bookIndex;
         this.publisherReview = publisherReview;
+        this.sales = sales;
+        this.rating = rating;
     }
 
     public static String randomName() {

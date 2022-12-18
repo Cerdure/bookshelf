@@ -11,14 +11,14 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-18T00:46:45+0900",
+    date = "2022-12-18T20:14:59+0900",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 11.0.16.1 (Oracle Corporation)"
 )
 public class InquireMapperImpl implements InquireMapper {
 
     @Override
-    public Inquire toEntity(InquireDto dto) {
-        if ( dto == null ) {
+    public Inquire toEntity(InquireDto arg0) {
+        if ( arg0 == null ) {
             return null;
         }
 
@@ -40,8 +40,8 @@ public class InquireMapperImpl implements InquireMapper {
     }
 
     @Override
-    public InquireDto toDto(Inquire entity) {
-        if ( entity == null ) {
+    public InquireDto toDto(Inquire arg0) {
+        if ( arg0 == null ) {
             return null;
         }
 

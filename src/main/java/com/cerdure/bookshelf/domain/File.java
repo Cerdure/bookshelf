@@ -30,7 +30,7 @@ public class File {
 
     @PrePersist
     public void prePersist() {
-        this.fullPath = this.fullPath == null ? "/img/review-img/" + fileName + extension : this.fullPath;
+        this.fullPath = this.fullPath == null ? "/img/review-img/" + fileName + "." + extension : this.fullPath;
     }
 
     @Builder

@@ -739,7 +739,7 @@ public class InitDb {
                     .sex("1")
                     .pw("1q2w3e4r!")
                     .address(new Address("서울 당산동","145가","K013"))
-                    .role("ROLE_USER")
+                    .role("USER")
                     .build();
 
             em.persist(member);

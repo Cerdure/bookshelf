@@ -8,14 +8,14 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-18T00:46:44+0900",
+    date = "2022-12-18T20:14:59+0900",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 11.0.16.1 (Oracle Corporation)"
 )
 public class ReadingBookMapperImpl implements ReadingBookMapper {
 
     @Override
-    public ReadingBook toEntity(ReadingBookDto dto) {
-        if ( dto == null ) {
+    public ReadingBook toEntity(ReadingBookDto arg0) {
+        if ( arg0 == null ) {
             return null;
         }
 
@@ -29,8 +29,8 @@ public class ReadingBookMapperImpl implements ReadingBookMapper {
     }
 
     @Override
-    public ReadingBookDto toDto(ReadingBook entity) {
-        if ( entity == null ) {
+    public ReadingBookDto toDto(ReadingBook arg0) {
+        if ( arg0 == null ) {
             return null;
         }
 
