@@ -168,7 +168,7 @@ header {
   font-size: 14px;
 }
 .svg-wrapper:hover #shape {
-  fill: transparent;
+  fill: rgba(255, 255, 255, 0.3);
   stroke-dasharray: 50 0;
   stroke-width: 2px;
   stroke-dashoffset: 0;
@@ -184,7 +184,7 @@ header {
   right: 160px;
 }
 .admin-btn #shape {
-  fill: transparent;
+  fill: rgba(255, 255, 255, 0.3);
   stroke: transparent;
 }
 .admin-btn #text {
