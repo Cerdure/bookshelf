@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -26,6 +28,11 @@ public class BookServiceImpl implements BookService {
     @Override
     public void validateDuplicateBook(BookDto bookDto) {
 
+    }
+
+    @Override
+    public Book findById(String bookId) {
+        return bookRepository.findById(Long.getLong(bookId)).get();
     }
 
     @Override

@@ -24,7 +24,7 @@ logging.level:
 #  org.hibernate.type: trace
 
 file:
-  dir: '/resources/upload-images/'
+  dir: '/resources/upload-img/'
 
 thymeleaf:
   cache: false

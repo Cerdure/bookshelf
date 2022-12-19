@@ -112,6 +112,7 @@ public class Book {
         this.rating = rating;
     }
 
+
     public static String randomName() {
         List<String> 성 = Arrays.asList("김", "이", "박", "최", "정", "강", "조", "윤", "장", "임", "한", "오", "서", "신", "권", "황");
         List<String> 이름 = Arrays.asList("경", "관", "규", "근", "기", "길", "나", "단", "달", "담", "대", "덕", "명", "문", "민",

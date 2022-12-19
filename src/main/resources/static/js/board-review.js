@@ -114,11 +114,13 @@ $(function(){
 
   let starFill = $(".review-book-rating .star-fill");
   let ratingNum = $(".review-book-rating-number .rating-number");
+  let ratingNumInput = $(".review-book-rating-number .rating-number-input");
 
   $(".review-book-rating .star-empty img")
   .mouseover(function(){
     let index = $(this).index();
     starFill.stop().animate({'width':34.5*(index+1)+'px'},300);
+    ratingNumInput.val(index+1);
     ratingNum.text(index+1);
   })
   .click(function(){
@@ -128,6 +130,7 @@ $(function(){
   })
   .mouseleave(function(){
     starFill.stop().animate({'width':34.5*(starClickIndex+1)+'px'},300);
+    ratingNumInput.val(starClickIndex+1);
     ratingNum.text(starClickIndex+1);
   });
 
@@ -317,6 +320,7 @@ $(function(){
   $(".review-write-tag .tag").click(function(){
     $(".review-write-tag .tag").removeClass("tag-active");
     $(this).addClass("tag-active");
+    $(".review-write-tag-input").val($(this).text());
     tagPassed = true;
     registCheck(tagPassed,reviewPassed,bookPassed);
   });
@@ -382,6 +386,28 @@ $(function(){
 
 
 
+
+  $(".regist-button").click(function(){
+    let formData = $(".review-write-wrapper").serialize();
+
+    $.ajax({
+      url: "/review",
+      type: "post",
+      data: formData,
+      dataType: "html",
+      async: true,
+    error : function(xhr, status, error) {
+      console.log(error);
+    }
+  }).done(function (reviews) {
+      $('#review-wrapper').replaceWith(reviews);
+    });
+  });
+
+
+
+
+
   $(".search-title img").click(function(){
     $(".review-write-search-wrapper").hide();
     swOpened = false;
@@ -411,6 +437,7 @@ $(function(){
   let bookPassed = false;
   let tagPassed = false;
   let reviewPassed = false;
+  let swOpened = false;
   let rwOpened = false;
   let imgCount = 0;
  
@@ -425,35 +452,32 @@ $(function(){
 
   function setThumbnail(event) {
     for (var image of event.target.files) {
-      let reader = new FileReader();
-      reader.onload = function(event) {
-        let div = document.createElement("div");
-        div.setAttribute('class','review-write-photo-wrapper');
-        div.innerHTML = '<div class="review-write-photo-cancel" onclick="deleteImg(this)">X</div>';
-        let img = document.createElement("img");
-        img.setAttribute("src", event.target.result);
-        img.setAttribute("class", "review-write-photo");
-        document.querySelector(".review-write-attach-photo").appendChild(div).appendChild(img);
-      };
-      reader.readAsDataURL(image);
       imgCount++;
+      if(imgCount<6){
+        let reader = new FileReader();
+        reader.onload = function(event) {
+          let div = document.createElement("div");
+          div.setAttribute('class','review-write-photo-wrapper');
+          div.innerHTML = '<div class="review-write-photo-cancel" onclick="deleteImg(this)">X</div>';
+          let img = document.createElement("input");
+          img.setAttribute("style", "background-image: url(" + event.target.result + ")"); 
+          img.setAttribute("type","file");
+          img.setAttribute("class", "review-write-photo");
+          img.setAttribute("disabled",true);
+          document.querySelector(".review-write-attach-photo").appendChild(div).appendChild(img);
+        };
+        reader.readAsDataURL(image);
+        imgChange();
+      } else {
+        alert('이미지는 최대 5장까지 업로드 가능합니다.');
+      }
     }
-    imgChange();
   }
 
   function deleteImg(_this){
     $(_this).parent().remove();
     imgCount--;
     imgChange();
-  }
-
-  function myReviewSet(_this, myReview){
-    myReview.bookImg = $(_this).parent().find(".review-book-img").attr('src');
-    myReview.bookName = $(_this).parent().find(".review-book-name").text();
-    myReview.rating = $(_this).parent().find(".rating-number").text();
-    myReview.tag = $(_this).parent().find(".tag-active").text();
-    myReview.review = $(_this).parent().find(".review-write").val();
-    myReview.attach = $(_this).parent().find(".review-write-photo").toArray();
   }
 
   function formClose(_this){
@@ -465,8 +489,10 @@ $(function(){
     $(".review-write-find-text").text("상품 검색");
     $(".review-book-id").val('');
     $(".review-book-rating .star-fill").stop().css('width','0px');
+    $(".review-book-rating-number .rating-number-input").val(0); 
     $(".review-book-rating-number .rating-number").text(0); 
     $(".review-write-tag .tag").removeClass("tag-active");
+    $(".review-write-tag-input").val('');
     $("form textarea").val('');
     $(".write-number").text('0/3000');
     $(".review-write-photo-wrapper").remove();

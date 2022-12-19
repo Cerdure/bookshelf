@@ -27,6 +27,8 @@ dependencies {
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+	implementation 'commons-io:commons-io:2.8.0'
+	implementation 'commons-fileupload:commons-fileupload:1.4'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'

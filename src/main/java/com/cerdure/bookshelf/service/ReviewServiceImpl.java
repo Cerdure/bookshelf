@@ -8,14 +8,21 @@ import com.cerdure.bookshelf.repository.MemberRepository;
 import com.cerdure.bookshelf.repository.ReviewRepository;
 import com.cerdure.bookshelf.service.interfaces.ReviewService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import java.util.Iterator;
 import java.util.List;
 
+@Slf4j
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -25,16 +32,15 @@ public class ReviewServiceImpl implements ReviewService {
     private final ReviewRepository reviewRepository;
 
     @Override
-    public Long create(ReviewDto reviewDto) {
+    public void create(ReviewDto reviewDto) {
         Review review = ReviewMapper.MAPPER.toEntity(reviewDto);
         reviewRepository.save(review);
-        return review.getId();
     }
 
     @Override
     public Page<Review> findAll(Pageable pageable) {
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); // page는 index 처럼 0부터 시작
-        pageable= PageRequest.of(page,3);
+        pageable= PageRequest.of(page,3, Sort.by("regDate").descending());
         return reviewRepository.findAll(pageable);
     }
 

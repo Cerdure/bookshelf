@@ -611,10 +611,18 @@
   border-radius: 10px;
   overflow: hidden;
 }
-.review-write-attach-photo img {
+.review-write-photo {
   position: absolute;
   width: 98px;
   height: 98px;
+  background-size: cover;
+  background-position: center;
+  border: none;
+  outline: none;
+  color: rgba(0, 0, 0, 0);
+}
+.review-write-photo::-webkit-file-upload-button {
+  display: none;
 }
 .review-write-photo-cancel {
   position: absolute;

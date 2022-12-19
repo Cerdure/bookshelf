@@ -1,15 +1,14 @@
 package com.cerdure.bookshelf.domain.board;
 
 import com.cerdure.bookshelf.domain.Book;
-import com.cerdure.bookshelf.domain.File;
-import com.cerdure.bookshelf.domain.enums.Answer;
-import com.cerdure.bookshelf.domain.enums.MemberGrade;
+import com.cerdure.bookshelf.domain.UploadFile;
 import com.cerdure.bookshelf.domain.member.Member;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,18 +37,18 @@ public class Review {
 
     private Integer rating;
 
-    private LocalDate regDate;
+    private LocalDateTime regDate;
 
     @OneToMany(mappedBy = "review")
-    private List<File> files = new ArrayList<>();
+    private List<UploadFile> files = new ArrayList<>();
 
     @PrePersist
     public void prePersist() {
-        this.regDate = this.regDate == null ? LocalDate.now() : this.regDate;
+        this.regDate = this.regDate == null ? LocalDateTime.now() : this.regDate;
     }
 
     @Builder
-    public Review(Long id, Book book, Member member, String content, String tag, Integer rating, LocalDate regDate, List<File> files) {
+    public Review(Long id, Book book, Member member, String content, String tag, Integer rating, LocalDateTime regDate, List<UploadFile> files) {
         this.id = id;
         this.book = book;
         this.member = member;
@@ -69,7 +68,7 @@ public class Review {
     public void changeContent(String content){
         this.content = content;
     }
-    public void changeFiles(List<File> files){
+    public void changeFiles(List<UploadFile> files){
         this.files = files;
     }
 

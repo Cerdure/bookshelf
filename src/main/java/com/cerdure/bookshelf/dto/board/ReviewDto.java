@@ -2,9 +2,9 @@ package com.cerdure.bookshelf.dto.board;
 
 
 import com.cerdure.bookshelf.domain.Book;
-import com.cerdure.bookshelf.domain.File;
-import com.cerdure.bookshelf.domain.board.Review;
+import com.cerdure.bookshelf.domain.UploadFile;
 import com.cerdure.bookshelf.domain.member.Member;
+import com.cerdure.bookshelf.dto.UploadFileDto;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
@@ -34,10 +34,10 @@ public class ReviewDto {
     @NotBlank
     private Integer rating;
 
-    private List<File> files;
+    private List<UploadFile> files;
 
     @Builder
-    public ReviewDto(Long id, Book book, Member member, String content, String tag, Integer rating, List<File> files) {
+    public ReviewDto(Long id, Book book, Member member, String content, String tag, Integer rating, List<UploadFile> files) {
         this.id = id;
         this.book = book;
         this.member = member;

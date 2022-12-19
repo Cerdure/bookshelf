@@ -1,7 +1,7 @@
 package com.cerdure.bookshelf;
 
 import com.cerdure.bookshelf.domain.Book;
-import com.cerdure.bookshelf.domain.File;
+import com.cerdure.bookshelf.domain.UploadFile;
 import com.cerdure.bookshelf.domain.board.Review;
 import com.cerdure.bookshelf.domain.member.Address;
 import com.cerdure.bookshelf.domain.member.Member;
@@ -11,8 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * 종 주문 2개
@@ -843,94 +841,80 @@ public class InitDb {
                 em.persist(review);
             }
 
-            File[][] files = new File[10][5];
+            UploadFile[][] files = new UploadFile[10][5];
 
-            files[0][0] = File.builder()
+            files[0][0] = UploadFile.builder()
                     .review(reviews[0])
-                    .fileName("4b7ed0ca-e14b-44aa-ae99-cb5185f35e55-20221217-231325")
-                    .extension("jpeg")
+                    .storeFileName("4b7ed0ca-e14b-44aa-ae99-cb5185f35e55-20221217-231325.jpeg")
                     .build();
 
-            files[0][1] = File.builder()
+            files[0][1] = UploadFile.builder()
                     .review(reviews[0])
-                    .fileName("5bc32630-d64c-4062-92a8-2ef44448f856-20221217-230446")
-                    .extension("jpg")
+                    .storeFileName("5bc32630-d64c-4062-92a8-2ef44448f856-20221217-230446.jpg")
                     .build();
 
-            files[1][0] = File.builder()
+            files[1][0] = UploadFile.builder()
                     .review(reviews[1])
-                    .fileName("15b2d2c5-f890-490b-b4bf-270b747f3bd6-20221217-231332")
-                    .extension("jpg")
+                    .storeFileName("15b2d2c5-f890-490b-b4bf-270b747f3bd6-20221217-231332.jpg")
                     .build();
 
-            files[3][0] = File.builder()
+            files[3][0] = UploadFile.builder()
                     .review(reviews[3])
-                    .fileName("18d23924-df40-405e-a4cd-0ff13a04743b-20221217-231325")
-                    .extension("jpeg")
+                    .storeFileName("18d23924-df40-405e-a4cd-0ff13a04743b-20221217-231325.jpeg")
                     .build();
 
-            files[5][0] = File.builder()
+            files[5][0] = UploadFile.builder()
                     .review(reviews[5])
-                    .fileName("430df81a-02e2-481e-862c-201621abbff7-20221217-231822")
-                    .extension("jpg")
+                    .storeFileName("430df81a-02e2-481e-862c-201621abbff7-20221217-231822.jpg")
                     .build();
 
-            files[5][1] = File.builder()
+            files[5][1] = UploadFile.builder()
                     .review(reviews[5])
-                    .fileName("998c18fc-2dfc-4215-8eea-16dd3847f586-20221217-231332")
-                    .extension("jpg")
+                    .storeFileName("998c18fc-2dfc-4215-8eea-16dd3847f586-20221217-231332.jpg")
                     .build();
 
-            files[5][2] = File.builder()
+            files[5][2] = UploadFile.builder()
                     .review(reviews[5])
-                    .fileName("29580a3f-d52c-41c0-9310-1cc5632de0e7-20221217-230446")
-                    .extension("jpg")
+                    .storeFileName("29580a3f-d52c-41c0-9310-1cc5632de0e7-20221217-230446.jpg")
                     .build();
 
-            files[5][3] = File.builder()
+            files[5][3] = UploadFile.builder()
                     .review(reviews[5])
-                    .fileName("90481a1d-d592-4d29-b37c-aaacc876cc7b-20221217-234136")
-                    .extension("jpg")
+                    .storeFileName("90481a1d-d592-4d29-b37c-aaacc876cc7b-20221217-234136.jpg")
                     .build();
 
-            files[5][4] = File.builder()
+            files[5][4] = UploadFile.builder()
                     .review(reviews[5])
-                    .fileName("b8a399ac-141c-4e30-8712-53e94ecc2d1a-20221217-231332")
-                    .extension("jpg")
+                    .storeFileName("b8a399ac-141c-4e30-8712-53e94ecc2d1a-20221217-231332.jpg")
                     .build();
 
-            files[8][0] = File.builder()
+            files[8][0] = UploadFile.builder()
                     .review(reviews[8])
-                    .fileName("bcb76ec0-fc00-4a4c-a174-dce5e2998501-20221217-231332")
-                    .extension("jpg")
+                    .storeFileName("bcb76ec0-fc00-4a4c-a174-dce5e2998501-20221217-231332.jpg")
                     .build();
 
-            files[8][1] = File.builder()
+            files[8][1] = UploadFile.builder()
                     .review(reviews[8])
-                    .fileName("cc8319b1-75c6-42b9-8cf1-368254532f53-20221217-231131")
-                    .extension("jpeg")
+                    .storeFileName("cc8319b1-75c6-42b9-8cf1-368254532f53-20221217-231131.jpeg")
                     .build();
 
-            files[8][2] = File.builder()
+            files[8][2] = UploadFile.builder()
                     .review(reviews[8])
-                    .fileName("e19823ce-8fce-4063-aa6e-63540e4464cb-20221217-231325")
-                    .extension("jpeg")
+                    .storeFileName("e19823ce-8fce-4063-aa6e-63540e4464cb-20221217-231325.jpeg")
                     .build();
 
-            files[8][3] = File.builder()
+            files[8][3] = UploadFile.builder()
                     .review(reviews[8])
-                    .fileName("f486e6f2-757b-4ace-bad4-a948ab7a2e25-20221217-230427")
-                    .extension("jpg")
+                    .storeFileName("f486e6f2-757b-4ace-bad4-a948ab7a2e25-20221217-230427.jpg")
                     .build();
 
-            files[8][4] = File.builder()
+            files[8][4] = UploadFile.builder()
                     .review(reviews[8])
-                    .fileName("fdd317e1-4934-427f-a4c6-0501003bc128-20221217-231332")
-                    .extension("jpg")
+                    .storeFileName("fdd317e1-4934-427f-a4c6-0501003bc128-20221217-231332.jpg")
                     .build();
 
-            for (File[] file : files) {
-                for (File innerFile : file) {
+            for (UploadFile[] file : files) {
+                for (UploadFile innerFile : file) {
                     if(innerFile != null){
                         em.persist(innerFile);
                     }

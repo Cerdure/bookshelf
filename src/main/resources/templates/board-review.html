@@ -36,13 +36,16 @@
 
     <div class="write-wrapper-back"></div>
 
-    <div class="review-wrapper">
+    <div class="review-wrapper" id="review-wrapper">
       <div class="review-title-wrapper">
-        <div class="review-title">모두의 리뷰 (0)</div>
+        <div class="review-title" th:text="'모두의 리뷰 ('+${reviews?.totalElements} +')'"></div>
         <div class="review-title-write">리뷰 작성</div>
         <div class="review-title-my">내가 쓴 리뷰</div>
       </div>
-      <form role="form" action="#" method="post" class="review-write-wrapper">
+
+
+
+      <form th:object="${reviewDto}" role="form" action="#" method="post" class="review-write-wrapper" enctype="multipart/form-data">
         <div class="review-write-top">
           <span class="review-write-top-text">리뷰작성</span>
           <img class="review-write-top-icon" src="/img/icon/btn_dialog_close@2x.png">
@@ -53,7 +56,7 @@
             <span class="review-write-find-text">상품 검색</span>
           </div>
           <div class="review-write-book-wrapper">
-            <input type="hidden" class="review-book-id">
+            <input th:field="*{book}" type="hidden" class="review-book-id">
             <img class="review-book-img" src="/img/book-cover/12.jpg">
             <div class="review-book-info">
               <div class="review-book-name">책이름</div>
@@ -74,12 +77,14 @@
                 </div>
               </div>
               <div class="review-book-rating-number">
+                <input th:field="*{rating}" class="rating-number-input" type="text" value="0" hidden>
                 <span class="rating-number">0</span>
                 <span class="max-number">/ 5</span>
               </div>
             </div>
           </div>
           <div class="review-write-tag">
+            <input th:field="*{tag}" class="review-write-tag-input" type="hidden">
             <div class="review-write-tag-info">
               ㅣ 가장 공감되는 키워드를 선택해주세요. *
             </div>
@@ -92,7 +97,7 @@
           <div class="review-write-main">
             <div class="review-write-main-title">ㅣ 리뷰 작성 *</div>
             <div class="review-write-frame">
-              <textarea name="review-write" class="review-write" maxlength="3000"
+              <textarea th:field="*{content}" name="review-write" class="review-write" maxlength="3000"
                 placeholder="내용을 10자 이상 입력해주세요. 주제와 무관한 글은 임의로 삭제될 수 있습니다."></textarea>
               <div class="write-number">0/3000</div>
             </div>
@@ -105,7 +110,7 @@
             <div class="review-write-attach-photo">
 
               <div class="review-write-attach-photo-button">
-                <input class="review-write-photo-input" name="review-write-photo-input" type="file"
+                <input th:field="*{files}" class="review-write-photo-input" name="review-write-photo-input" type="file" multiple="multiple"
                   accept=".jpg, .jpeg, .png, .gif" onchange="setThumbnail(event);">
               </div>
 
@@ -115,8 +120,10 @@
             </div>
           </div>
         </div>
-        <button type="submit" class="regist-button disable">등록</button>
+        <div class="regist-button disable">등록</div>
       </form>
+
+
 
       <div class="review-write-search-wrapper">
         <div class="search-title">
