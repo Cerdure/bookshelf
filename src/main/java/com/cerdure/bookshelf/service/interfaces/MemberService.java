@@ -9,7 +9,8 @@ public interface MemberService {
     public Long join(MemberDto memberDto);
     void validateDuplicateMember(MemberDto memberDto);
     public List<Member> findMembers();
-    public Member findOne(Long memberId);
+    public Member findById(Long memberId);
+    public Member findByPhone(String phone);
     public void update(Long id, MemberDto memberDto);
     public void delete(Long id);
 }

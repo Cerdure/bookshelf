@@ -1,5 +1,6 @@
 package com.cerdure.bookshelf.domain;
 
+import com.cerdure.bookshelf.domain.board.Inquire;
 import com.cerdure.bookshelf.domain.board.Review;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -22,6 +23,10 @@ public class UploadFile {
     @JoinColumn(name = "review_id")
     private Review review;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "inquire_id")
+    private Inquire inquire;
+
     private String originalFilename;
 
     private String storeFileName;
@@ -39,9 +44,10 @@ public class UploadFile {
     }
 
     @Builder
-    public UploadFile(Long id, Review review, String originalFilename, String storeFileName, String fileDir, String fullPath) {
+    public UploadFile(Long id, Review review, Inquire inquire, String originalFilename, String storeFileName, String fileDir, String fullPath) {
         this.id = id;
         this.review = review;
+        this.inquire = inquire;
         this.originalFilename = originalFilename;
         this.storeFileName = storeFileName;
         this.fileDir = fileDir;

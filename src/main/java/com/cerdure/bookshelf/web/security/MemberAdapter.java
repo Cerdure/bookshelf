@@ -13,7 +13,7 @@ public class MemberAdapter extends User implements Serializable {
     private Member member;
 
     public MemberAdapter(Member member) {
-        super(String.valueOf(member.getId()), member.getPassword(), List.of(new SimpleGrantedAuthority(member.getRole())));
+        super(String.valueOf(member.getId()), member.getPassword(), List.of(new SimpleGrantedAuthority(member.getRole().toString())));
         this.member = member;
     }
 }

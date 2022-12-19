@@ -1,10 +1,7 @@
 package com.cerdure.bookshelf.service;
 
-import com.cerdure.bookshelf.dto.board.ReviewDto;
 import com.cerdure.bookshelf.domain.board.Review;
-import com.cerdure.bookshelf.domain.member.Member;
-import com.cerdure.bookshelf.mapper.ReviewMapper;
-import com.cerdure.bookshelf.repository.MemberRepository;
+import com.cerdure.bookshelf.dto.board.ReviewDto;
 import com.cerdure.bookshelf.repository.ReviewRepository;
 import com.cerdure.bookshelf.service.interfaces.ReviewService;
 import lombok.RequiredArgsConstructor;
@@ -15,12 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.ObjectUtils;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-
-import java.util.Iterator;
-import java.util.List;
 
 @Slf4j
 @Service
@@ -28,12 +19,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReviewServiceImpl implements ReviewService {
 
-    private final MemberRepository memberRepository;
     private final ReviewRepository reviewRepository;
+//    private final MemberRepository memberRepository;
 
-    @Override
+    @Transactional
     public void create(ReviewDto reviewDto) {
-        Review review = ReviewMapper.MAPPER.toEntity(reviewDto);
+
+        Review review = reviewDto.toEntity();
+
+        System.out.println("review.toString() = " + review.toString());
         reviewRepository.save(review);
     }
 
@@ -49,12 +43,12 @@ public class ReviewServiceImpl implements ReviewService {
         return reviewRepository.findByBookId(bookId, pageable);
     }
 
-    @Override
-    public Page<Review> findByWriter(String memberNickname, Pageable pageable) {
-        List<Member> member = memberRepository.findByNickname(memberNickname);
-        Long memberId = member.get(0).getId();
-        return reviewRepository.findByMemberId(memberId, pageable);
-    }
+//    @Override
+//    public Page<Review> findByWriter(String memberNickname, Pageable pageable) {
+//        List<Member> member = memberRepository.findByNickname(memberNickname);
+//        Long memberId = member.get(0).getId();
+//        return reviewRepository.findByMemberId(memberId, pageable);
+//    }
 
     @Override
     public void modify(ReviewDto reviewDto) {
@@ -62,7 +56,7 @@ public class ReviewServiceImpl implements ReviewService {
         review.changeRating(reviewDto.getRating());
         review.changeTag(reviewDto.getTag());
         review.changeContent(reviewDto.getContent());
-        review.changeFiles(reviewDto.getFiles());
+//        review.changeFiles(reviewDto.getFiles());
         reviewRepository.save(review);
     }
 

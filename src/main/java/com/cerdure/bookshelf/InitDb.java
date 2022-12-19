@@ -3,9 +3,11 @@ package com.cerdure.bookshelf;
 import com.cerdure.bookshelf.domain.Book;
 import com.cerdure.bookshelf.domain.UploadFile;
 import com.cerdure.bookshelf.domain.board.Review;
+import com.cerdure.bookshelf.domain.enums.MemberRole;
 import com.cerdure.bookshelf.domain.member.Address;
 import com.cerdure.bookshelf.domain.member.Member;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,6 +40,7 @@ public class InitDb {
     static class InitService {
 
         private final EntityManager em;
+        private final BCryptPasswordEncoder passwordEncoder;
 
         public void dbInitBooks() {
             Book[] books = new Book[93];
@@ -730,14 +733,14 @@ public class InitDb {
             }
 
             Member member = Member.builder()
-                    .name("테스터")
-                    .nickname("테스터")
+                    .name("테스터2")
+                    .nickname("테스터2")
                     .phone("01012345678")
                     .birth("901020")
                     .sex("1")
-                    .pw("1q2w3e4r!")
+                    .pw(passwordEncoder.encode("1234"))
                     .address(new Address("서울 당산동","145가","K013"))
-                    .role("USER")
+                    .role(MemberRole.USER)
                     .build();
 
             em.persist(member);

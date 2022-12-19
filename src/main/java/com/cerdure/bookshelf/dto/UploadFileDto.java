@@ -16,7 +16,7 @@ public class UploadFileDto {
     private Review review;
     private String originalFilename;
     private String storeFileName;
-    private String fileDir = "/resources/upload-img/";
+    private String fileDir = "/upload-img/";
     private String fullPath;
 
     @Builder

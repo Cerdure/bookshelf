@@ -1,6 +1,7 @@
 package com.cerdure.bookshelf.web.controller;
 
 import com.cerdure.bookshelf.dto.member.MemberDto;
+import com.cerdure.bookshelf.service.MemberServiceImpl;
 import com.cerdure.bookshelf.service.interfaces.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 public class JoinController {
 
-    private final MemberService memberService;
+    private final MemberServiceImpl memberService;
 
     @GetMapping("/join")
     public String joinForm(@ModelAttribute("memberDto") MemberDto memberDto, BindingResult bindingResult){

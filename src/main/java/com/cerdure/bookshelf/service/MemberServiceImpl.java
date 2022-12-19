@@ -1,8 +1,7 @@
 package com.cerdure.bookshelf.service;
 
-import com.cerdure.bookshelf.dto.member.MemberDto;
 import com.cerdure.bookshelf.domain.member.Member;
-import com.cerdure.bookshelf.mapper.MemberMapper;
+import com.cerdure.bookshelf.dto.member.MemberDto;
 import com.cerdure.bookshelf.repository.MemberRepository;
 import com.cerdure.bookshelf.service.interfaces.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -24,10 +23,7 @@ public class MemberServiceImpl implements MemberService {
     @Transactional
     public Long join(MemberDto memberDto) {
         validateDuplicateMember(memberDto);
-        String encodedPw = passwordEncoder.encode(memberDto.getPw());
-        memberDto.setPw(encodedPw);
-        Member member = MemberMapper.MAPPER.toEntity(memberDto);
-        member.getAuthorities();
+        Member member = memberDto.createMember(passwordEncoder);
         memberRepository.save(member);
         return member.getId();
     }
@@ -43,8 +39,13 @@ public class MemberServiceImpl implements MemberService {
         return memberRepository.findAll();
     }
 
-    public Member findOne(Long memberId) {
+    public Member findById(Long memberId) {
         return memberRepository.findById(memberId).get();
+    }
+
+    @Override
+    public Member findByPhone(String phone) {
+        return memberRepository.findByPhone(phone).get();
     }
 
     @Transactional

@@ -1,38 +1,28 @@
 package com.cerdure.bookshelf.service;
 
 import com.cerdure.bookshelf.domain.UploadFile;
+import com.cerdure.bookshelf.domain.board.Inquire;
 import com.cerdure.bookshelf.domain.board.Review;
-import com.cerdure.bookshelf.domain.member.Member;
-import com.cerdure.bookshelf.dto.UploadFileDto;
 import com.cerdure.bookshelf.dto.board.InquireDto;
 import com.cerdure.bookshelf.dto.board.ReviewDto;
-import com.cerdure.bookshelf.mapper.FileMapper;
-import com.cerdure.bookshelf.mapper.ReviewMapper;
 import com.cerdure.bookshelf.repository.FileRepository;
-import com.cerdure.bookshelf.repository.MemberRepository;
 import com.cerdure.bookshelf.service.interfaces.UploadFileService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.UUID;
 
 @Service
 @Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class UploadFileServiceImpl implements UploadFileService {
 
-    @Autowired
-    private FileRepository fileRepository;
-
-    private String fileDir = "/resources/upload-img/";
-
-    public UploadFileServiceImpl() {
-    }
+    private final FileRepository fileRepository;
+    private String fileDir = "/upload-img/";
 
     public String getFullPath(String filename) {
         return fileDir + filename;
@@ -40,31 +30,46 @@ public class UploadFileServiceImpl implements UploadFileService {
 
     @Override
     public void saveFiles(ReviewDto reviewDto) throws IOException {
-        if(reviewDto.getFiles() != null) {
-            List<UploadFile> uploadFiles = reviewDto.getFiles();
-
-            for (UploadFile uploadFile : uploadFiles) {
-                if (uploadFile != null) {
-                    saveFile(uploadFile, reviewDto);
-                }
-            }
+        for (MultipartFile file : reviewDto.getFiles()) {
+            saveFile(reviewDto, file);
         }
     }
 
     @Override
     public void saveFiles(InquireDto inquireDto) throws IOException {
-
+        for (MultipartFile file : inquireDto.getFiles()) {
+            saveFile(inquireDto, file);
+        }
     }
 
     @Override
-    public void saveFile(UploadFile uploadFile, ReviewDto reviewDto) throws IOException {
-        String storeFileName = createStoreFileName(uploadFile.getOriginalFilename());
-        Review review = ReviewMapper.MAPPER.toEntity(reviewDto);
-        uploadFile.changeStoreFileName(storeFileName);
-        uploadFile.changeReview(review);
+    public void saveFile(ReviewDto reviewDto, MultipartFile file) throws IOException {
+        String storeFileName = createStoreFileName(file.getOriginalFilename());
+        Review review = reviewDto.toEntity();
 
-        new File(getFullPath(storeFileName));
+        UploadFile uploadFile = UploadFile.builder()
+                                        .review(review)
+                                        .originalFilename(file.getOriginalFilename())
+                                        .storeFileName(storeFileName)
+                                        .build();
+
         fileRepository.save(uploadFile);
+        file.transferTo(new File(getFullPath(storeFileName)));
+    }
+
+    @Override
+    public void saveFile(InquireDto inquireDto, MultipartFile file) throws IOException {
+        String storeFileName = createStoreFileName(file.getOriginalFilename());
+        Inquire inquire = inquireDto.toEntity();
+
+        UploadFile uploadFile = UploadFile.builder()
+                .inquire(inquire)
+                .originalFilename(file.getOriginalFilename())
+                .storeFileName(storeFileName)
+                .build();
+
+        fileRepository.save(uploadFile);
+        file.transferTo(new File(getFullPath(storeFileName)));
     }
 
     private String createStoreFileName(String originalFilename) {

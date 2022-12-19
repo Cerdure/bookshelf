@@ -23,9 +23,6 @@ logging.level:
   org.hibernate.SQL: debug
 #  org.hibernate.type: trace
 
-file:
-  dir: '/resources/upload-img/'
-
 thymeleaf:
   cache: false
   check-template-location: true

@@ -3,6 +3,7 @@ package com.cerdure.bookshelf.domain.member;
 import com.cerdure.bookshelf.domain.Cart;
 import com.cerdure.bookshelf.domain.enums.Answer;
 import com.cerdure.bookshelf.domain.enums.MemberGrade;
+import com.cerdure.bookshelf.domain.enums.MemberRole;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -55,7 +56,7 @@ public class Member implements UserDetails {
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    private String role;
+    private MemberRole role;
 
     @PrePersist
     public void prePersist() {
@@ -66,7 +67,7 @@ public class Member implements UserDetails {
     }
 
     @Builder
-    public Member(Long id, String pw, String name, String nickname, String birth, String sex, String phone, Address address, MemberGrade grade, Integer point, LocalDate regDate, Answer delflag, LocalDate delDate, Cart cart, String role) {
+    public Member(Long id, String pw, String name, String nickname, String birth, String sex, String phone, Address address, MemberGrade grade, Integer point, LocalDate regDate, Answer delflag, LocalDate delDate, Cart cart, MemberRole role) {
         this.id = id;
         this.pw = pw;
         this.name = name;
@@ -87,10 +88,7 @@ public class Member implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> authorities = new ArrayList<>();
-
-        for(String role : role.split(",")){
-            authorities.add(new SimpleGrantedAuthority(role));
-        }
+            authorities.add(new SimpleGrantedAuthority(role.toString()));
         return authorities;
     }
 

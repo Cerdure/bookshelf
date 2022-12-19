@@ -314,6 +314,20 @@ $(function(){
       let page = $(this).text();
       bookSearch(page);
     });
+    $(document).on("click",".review-title-write", function(){
+      $(".write-wrapper-back").addClass("modal-background");
+      $(".review-write-wrapper").fadeIn(200);
+      $("body").css('overflow-y','hidden');
+      rwOpened = true;
+    });
+
+    // let photos = $(".my-review .photos").toArray();
+    // photos.forEach(e => e.style.backgroundImage='url(' + e.querySelector('img').src + ')');
+
+    // let reviewsRating = $(".my-review .rating").toArray();
+    // reviewsRating.forEach(e => e.querySelector(".star-fill").style.width = Number(e.querySelector(".my-rating-num").innerText)*20 + "%");
+
+    console.log('ready');
   });
 
 
@@ -338,12 +352,7 @@ $(function(){
 
   
 
-  $(".review-title-write").click(function(){
-    $(".write-wrapper-back").addClass("modal-background");
-    $(".review-write-wrapper").fadeIn(200);
-    $("body").css('overflow-y','hidden');
-    rwOpened = true;
-  });
+  
   $(".review-write-top-icon").click(function(){
     $(".review-write-wrapper").css('filter','brightness(0.5)');
     $(".close-alert").show();
@@ -388,12 +397,11 @@ $(function(){
 
 
   $(".regist-button").click(function(){
-    let formData = $(".review-write-wrapper").serialize();
-
+    let reviewDto = $(".review-write-wrapper").serialize();
     $.ajax({
-      url: "/review",
+      url: "/review?${_csrf.parameterName}=${_csrf.token}",
       type: "post",
-      data: formData,
+      data: reviewDto,
       dataType: "html",
       async: true,
     error : function(xhr, status, error) {
@@ -401,6 +409,7 @@ $(function(){
     }
   }).done(function (reviews) {
       $('#review-wrapper').replaceWith(reviews);
+      formClose();
     });
   });
 
@@ -425,11 +434,7 @@ $(function(){
     }
   }
 
-  let reviewsRating = $(".my-review .rating").toArray();
-
-  reviewsRating.forEach(e => 
-    e.querySelector(".star-fill").style.width = Number(e.querySelector(".my-rating-num").innerText)*20 + "%"
-    );
+ 
 
 });
 
@@ -497,6 +502,7 @@ $(function(){
     $(".write-number").text('0/3000');
     $(".review-write-photo-wrapper").remove();
     $(".review-write-attach-photo-button").show();
+    $(".regist-button").addClass("disable");
     bookPassed = false;
     tagPassed = false;
     reviewPassed = false;

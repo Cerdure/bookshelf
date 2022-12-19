@@ -13,7 +13,7 @@ public interface ReviewService {
     public void create(ReviewDto reviewDto);
     public Page <Review> findAll(Pageable pageable);
     public Page <Review> findByBookId(Long bookId, Pageable pageable);
-    public Page <Review> findByWriter(String memberNickname, Pageable pageable);
+//    public Page <Review> findByWriter(String memberNickname, Pageable pageable);
     public void modify(ReviewDto reviewDto);
     public void delete(Long reviewId);
 }

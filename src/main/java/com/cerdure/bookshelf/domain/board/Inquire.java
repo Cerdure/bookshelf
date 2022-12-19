@@ -1,5 +1,6 @@
 package com.cerdure.bookshelf.domain.board;
 
+import com.cerdure.bookshelf.domain.UploadFile;
 import com.cerdure.bookshelf.domain.member.Member;
 import com.cerdure.bookshelf.domain.enums.Answer;
 import lombok.AccessLevel;
@@ -47,6 +48,9 @@ public class Inquire {
 
     @OneToMany(mappedBy = "inquire")
     private List<Reply> replies = new ArrayList<>();
+
+    @OneToMany(mappedBy = "inquire")
+    private List<UploadFile> files = new ArrayList<>();
 
     @PrePersist
     public void prePersist() {

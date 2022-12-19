@@ -1,5 +1,6 @@
 package com.cerdure.bookshelf.dto.board;
 
+import com.cerdure.bookshelf.domain.board.Inquire;
 import com.cerdure.bookshelf.domain.board.Reply;
 import com.cerdure.bookshelf.domain.enums.Answer;
 import com.cerdure.bookshelf.domain.member.Member;
@@ -7,6 +8,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -46,8 +48,10 @@ public class InquireDto {
 
     private List<Reply> replies = new ArrayList<>();
 
+    private List<MultipartFile> files = new ArrayList<>();
+
     @Builder
-    public InquireDto(Long id, Member member, String title, String content, LocalDate regDate, LocalDate modDate, Answer closed, String pw, int hits, Answer reFlag, List<Reply> replies) {
+    public InquireDto(Long id, Member member, String title, String content, LocalDate regDate, LocalDate modDate, Answer closed, String pw, Integer hits, Answer reFlag, List<Reply> replies, List<MultipartFile> files) {
         this.id = id;
         this.member = member;
         this.title = title;
@@ -59,5 +63,21 @@ public class InquireDto {
         this.hits = hits;
         this.reFlag = reFlag;
         this.replies = replies;
+        this.files = files;
+    }
+
+    public Inquire toEntity(){
+        return Inquire.builder()
+                .member(this.member)
+                .title(this.title)
+                .content(this.content)
+                .regDate(this.regDate)
+                .modDate(this.modDate)
+                .closed(this.closed)
+                .pw(this.pw)
+                .hits(this.hits)
+                .reFlag(this.reFlag)
+                .replies(this.replies)
+                .build();
     }
 }
