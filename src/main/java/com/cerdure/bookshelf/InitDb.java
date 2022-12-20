@@ -735,6 +735,17 @@ public class InitDb {
             Member member = Member.builder()
                     .name("테스터2")
                     .nickname("테스터2")
+                    .phone("01011112222")
+                    .birth("901020")
+                    .sex("1")
+                    .pw(passwordEncoder.encode("1234"))
+                    .address(new Address("서울 당산동","145가","K013"))
+                    .role(MemberRole.USER)
+                    .build();
+
+            Member member2 = Member.builder()
+                    .name("테스터2")
+                    .nickname("테스터2")
                     .phone("01012345678")
                     .birth("901020")
                     .sex("1")
@@ -744,6 +755,7 @@ public class InitDb {
                     .build();
 
             em.persist(member);
+            em.persist(member2);
 
             Review[] reviews = new Review[10];
 

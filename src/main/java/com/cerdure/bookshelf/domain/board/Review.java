@@ -69,6 +69,7 @@ public class Review {
         this.content = content;
     }
     public void changeFiles(List<UploadFile> files){
+        System.out.println("changeFiles");
         this.files = files;
     }
 

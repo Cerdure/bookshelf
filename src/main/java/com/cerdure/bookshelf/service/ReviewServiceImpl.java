@@ -15,20 +15,21 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewRepository reviewRepository;
 //    private final MemberRepository memberRepository;
 
-    @Transactional
-    public void create(ReviewDto reviewDto) {
+    @Override
+    public Long create(ReviewDto reviewDto) {
 
         Review review = reviewDto.toEntity();
 
         System.out.println("review.toString() = " + review.toString());
         reviewRepository.save(review);
+
+        return review.getId();
     }
 
     @Override

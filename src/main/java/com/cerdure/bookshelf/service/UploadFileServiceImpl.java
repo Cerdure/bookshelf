@@ -6,6 +6,7 @@ import com.cerdure.bookshelf.domain.board.Review;
 import com.cerdure.bookshelf.dto.board.InquireDto;
 import com.cerdure.bookshelf.dto.board.ReviewDto;
 import com.cerdure.bookshelf.repository.FileRepository;
+import com.cerdure.bookshelf.repository.ReviewRepository;
 import com.cerdure.bookshelf.service.interfaces.UploadFileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,24 +15,25 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @Service
-@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class UploadFileServiceImpl implements UploadFileService {
 
     private final FileRepository fileRepository;
-    private String fileDir = "/upload-img/";
+    private final ReviewRepository reviewRepository;
+    private String fileDir = System.getProperty("user.dir") + "/src/main/resources/static/upload-img/";
 
     public String getFullPath(String filename) {
         return fileDir + filename;
     }
 
     @Override
-    public void saveFiles(ReviewDto reviewDto) throws IOException {
-        for (MultipartFile file : reviewDto.getFiles()) {
-            saveFile(reviewDto, file);
+    public void saveFiles(ReviewDto reviewDto, Long reviewId) throws IOException {
+        for (MultipartFile file : reviewDto.getImageFiles()) {
+            saveFile(reviewId, file);
         }
     }
 
@@ -43,9 +45,9 @@ public class UploadFileServiceImpl implements UploadFileService {
     }
 
     @Override
-    public void saveFile(ReviewDto reviewDto, MultipartFile file) throws IOException {
+    public void saveFile(Long reviewId, MultipartFile file) throws IOException {
         String storeFileName = createStoreFileName(file.getOriginalFilename());
-        Review review = reviewDto.toEntity();
+        Review review = reviewRepository.findById(reviewId).get();
 
         UploadFile uploadFile = UploadFile.builder()
                                         .review(review)
@@ -81,6 +83,12 @@ public class UploadFileServiceImpl implements UploadFileService {
     private String extractExt(String originalFilename) {
         int pos = originalFilename.lastIndexOf(".");
         return originalFilename.substring(pos + 1);
+    }
+
+    @Override
+    public List<UploadFile> findAllByReview(Review review) {
+        Long reviewId = review.getId();
+        return fileRepository.findAllByReviewId(reviewId);
     }
 
 }

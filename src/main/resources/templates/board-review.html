@@ -36,7 +36,7 @@
 
     <div class="write-wrapper-back"></div>
 
-    <form th:action method="post" class="review-write-wrapper" enctype="multipart/form-data">
+    <form action="/review" method="post" class="review-write-wrapper" enctype="multipart/form-data">
       <div class="review-write-top">
         <span class="review-write-top-text">리뷰작성</span>
         <img class="review-write-top-icon" src="/img/icon/btn_dialog_close@2x.png">
@@ -101,9 +101,8 @@
           <div class="review-write-attach-photo">
 
             <div class="review-write-attach-photo-button">
-<!--              <input name="files" class="review-write-photo-input" type="file" multiple="multiple"-->
-<!--                accept=".jpg, .jpeg, .png, .gif">-->
-              <input name="files[]" type="file" multiple="multiple">
+              <input name="imageFiles" class="review-write-photo-input" type="file" multiple="multiple"
+                accept=".jpg, .jpeg, .png, .gif" onchange="setThumbnail(event, this)">
             </div>
 
           </div>
@@ -112,7 +111,7 @@
           </div>
         </div>
       </div>
-      <div class="regist-button disable">등록</div>
+      <button type="submit" class="regist-button disable">등록</button>
     </form>
 
 
@@ -200,21 +199,23 @@
 
     <div class="review-wrapper" id="review-wrapper">
       <div class="review-title-wrapper">
-        <div class="review-title" th:text="'모두의 리뷰 ('+${reviews?.totalElements} +')'"></div>
-        <div class="review-title-write">리뷰 작성</div>
+        <div class="review-title" th:text="'모두의 리뷰 ('+${reviews?.totalElements} +')'" th:classappend="${#authentication.principal.authorities} == 'ADMIN'? 'disable':''"></div>
+        <div class="review-title-write" th:classappend="${#authentication.principal.authorities} == 'ADMIN'? 'disable':''">리뷰 작성</div>
         <div class="review-title-my">내가 쓴 리뷰</div>
       </div>
 
       <div class="reviews-wrapper">
 
         <div class="my-review" th:each="review: ${reviews}">
+          <input id="review_id" th:value="${review.id}" type="hidden">
           <div class="book-name" th:text="${review.book.name}"></div>
 
           <div class="header">
             <div class="buyer">구매자</div>
             <div class="id" th:text="${review.member.nickname}"></div>
             <div class="date" th:text="${#temporals.format(review.regDate, 'yyyy-MM-dd HH:mm:ss')}"></div>
-            <div class="notify">신고</div>
+            <div th:if="${#authentication.principal.username} == ${review.member.phone}" class="modify">수정</div>
+            <div th:if="${#authentication.principal.username} == ${review.member.phone}" class="delete">삭제</div>
             <div class="tag" th:text="${review.tag}"></div>
 
             <div class="rating">
@@ -241,7 +242,7 @@
               <span th:text="${review.content}"></span>
             </div>
             <div class="frame"></div>
-            <div th:unless="${#lists.isEmpty(review.files)}">
+            <div th:unless="${#lists.isEmpty(review.files) || review.files.size()==0 }">
             <div class="photos" th:style="'background-image:url(' + ${review.files[0].fullPath} + ');'">
               <div class="close">x</div>
               <img th:each="file: ${review.files}" th:src="${file.fullPath}">
@@ -300,13 +301,22 @@
           </span>
         </div>
 
-        <div class="close-alert">
+        <div class="alert-window close-alert">
           <div class="text">
             작성한 내용은 저장되지 않습니다.<br>
             취소하겠습니까?
           </div>
-          <button class="cancel" onclick="hide(this)">취소</button>
+          <button class="cancel" onclick="hideCloseAlert(this)">취소</button>
           <button class="okay" onclick="formClose(this)">확인</button>
+        </div>
+
+        <div class="alert-window delete-alert">
+          <input id="review-id" type="hidden">
+          <div class="text">
+            리뷰를 삭제하시겠습니까?
+          </div>
+          <button class="cancel" onclick="hideDeleteAlert(this)">취소</button>
+          <button class="okay" onclick="reviewDelete(this)">확인</button>
         </div>
 
         <div class="top-move-button">

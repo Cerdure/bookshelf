@@ -13,9 +13,9 @@ import java.util.List;
 
 public interface UploadFileService {
     public String getFullPath(String name);
-    public void saveFiles(ReviewDto reviewDto) throws IOException;
+    public void saveFiles(ReviewDto reviewDto, Long reviewId) throws IOException;
     public void saveFiles(InquireDto inquireDto) throws IOException;
-    public void saveFile(ReviewDto reviewDto, MultipartFile file) throws IOException;
+    public void saveFile(Long reviewId, MultipartFile file) throws IOException;
     public void saveFile(InquireDto inquireDto, MultipartFile file) throws IOException;
     private String createStoreFileName(String originalFilename) {
         return null;
@@ -23,4 +23,5 @@ public interface UploadFileService {
     private String extractExt(String originalFilename) {
         return null;
     }
+    public List<UploadFile> findAllByReview(Review review);
 }

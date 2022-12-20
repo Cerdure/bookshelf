@@ -56,16 +56,13 @@ public class ReviewController {
                                Authentication authentication,
                                Model model, Pageable pageable) throws Exception {
 
-        System.out.println("reviewDto.getFiles() = " + reviewDto.getFiles());
         Member member = memberService.findByPhone(authentication.getName());
         reviewDto.setMember(member);
-        reviewService.create(reviewDto);
-        uploadFileService.saveFiles(reviewDto);
-
-
+        Long reviewId =  reviewService.create(reviewDto);
+        uploadFileService.saveFiles(reviewDto, reviewId);
         Page<Review> reviews = reviewService.findAll(pageable);
         model.addAttribute("reviews",reviews);
-        return "board-review :: #review-wrapper";
+        return "redirect:/review";
     }
 
     @PutMapping("/review")

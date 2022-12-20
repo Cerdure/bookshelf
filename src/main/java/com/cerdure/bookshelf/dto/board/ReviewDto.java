@@ -2,24 +2,15 @@ package com.cerdure.bookshelf.dto.board;
 
 
 import com.cerdure.bookshelf.domain.Book;
-import com.cerdure.bookshelf.domain.UploadFile;
 import com.cerdure.bookshelf.domain.board.Review;
 import com.cerdure.bookshelf.domain.member.Member;
-import com.cerdure.bookshelf.dto.UploadFileDto;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -33,10 +24,10 @@ public class ReviewDto {
     private String tag;
     private Integer rating;
     private LocalDateTime regDate;
-    private List<MultipartFile> files = new ArrayList<>();
+    private List<MultipartFile> imageFiles;
 
     @Builder
-    public ReviewDto(Long id, Book book, Member member, String content, String tag, Integer rating, LocalDateTime regDate, List<MultipartFile> files) {
+    public ReviewDto(Long id, Book book, Member member, String content, String tag, Integer rating, LocalDateTime regDate, List<MultipartFile> imageFiles) {
         this.id = id;
         this.book = book;
         this.member = member;
@@ -44,7 +35,7 @@ public class ReviewDto {
         this.tag = tag;
         this.rating = rating;
         this.regDate = regDate;
-        this.files = files;
+        this.imageFiles = imageFiles;
     }
 
     public Review toEntity(){

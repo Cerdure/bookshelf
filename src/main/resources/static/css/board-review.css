@@ -655,6 +655,7 @@
   border-radius: 10px;
   border: none;
   outline: none;
+  cursor: pointer;
 }
 
 .disable {
@@ -712,12 +713,16 @@
   line-height: 30px;
   float: left;
   margin-left: 10px;
+  margin-right: 10px;
 }
-.my-review .notify {
+.my-review .modify,
+.my-review .delete {
   position: relative;
   line-height: 30px;
   float: left;
   margin-left: 10px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
 }
 .my-review .tag {
   position: relative;
@@ -968,7 +973,7 @@
 }
 
 
-.close-alert {
+.alert-window {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -983,14 +988,14 @@
   border: 1px solid silver;
   display: none;
 }
-.close-alert .text{
+.alert-window .text{
   position: absolute;
   top: 35%;
   left: 50%;
   transform: translate(-50%,-50%);
   width: 100%;
 }
-.close-alert .cancel{
+.alert-window .cancel{
   position: absolute;
   bottom: 40px;
   left: 50px;
@@ -1005,11 +1010,11 @@
   font-size: 16px;
   cursor: pointer;
 }
-.close-alert .cancel:hover{
+.alert-window .cancel:hover{
   background-color: rgb(97, 97, 97);
   transition: 0.2s;
 }
-.close-alert .okay{
+.alert-window .okay{
   position: absolute;
   bottom: 40px;
   right: 50px;
@@ -1024,9 +1029,12 @@
   font-size: 16px;
   cursor: pointer;
 } 
-.close-alert .okay:hover {
+.alert-window .okay:hover {
   background-color: rgb(80, 140, 253);
   transition: 0.2s;
+}
+.delete-alert {
+  display: none;
 }
 
 @media only screen and (max-width:1333px) {
