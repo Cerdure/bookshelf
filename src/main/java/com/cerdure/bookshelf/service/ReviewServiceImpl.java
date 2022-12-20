@@ -1,7 +1,9 @@
 package com.cerdure.bookshelf.service;
 
+import com.cerdure.bookshelf.domain.UploadFile;
 import com.cerdure.bookshelf.domain.board.Review;
 import com.cerdure.bookshelf.dto.board.ReviewDto;
+import com.cerdure.bookshelf.repository.FileRepository;
 import com.cerdure.bookshelf.repository.ReviewRepository;
 import com.cerdure.bookshelf.service.interfaces.ReviewService;
 import lombok.RequiredArgsConstructor;
@@ -10,8 +12,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.io.File;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -19,16 +25,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewRepository reviewRepository;
-//    private final MemberRepository memberRepository;
+    private final FileRepository fileRepository;
+    private final UploadFileServiceImpl uploadFileService;
 
     @Override
     public Long create(ReviewDto reviewDto) {
-
         Review review = reviewDto.toEntity();
-
-        System.out.println("review.toString() = " + review.toString());
         reviewRepository.save(review);
-
         return review.getId();
     }
 
@@ -40,30 +43,39 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    public Review findById(Long reviewId) {
+        return reviewRepository.findById(reviewId).get();
+    }
+
+    @Override
     public Page<Review> findByBookId(Long bookId, Pageable pageable) {
         return reviewRepository.findByBookId(bookId, pageable);
     }
 
-//    @Override
-//    public Page<Review> findByWriter(String memberNickname, Pageable pageable) {
-//        List<Member> member = memberRepository.findByNickname(memberNickname);
-//        Long memberId = member.get(0).getId();
-//        return reviewRepository.findByMemberId(memberId, pageable);
-//    }
-
     @Override
-    public void modify(ReviewDto reviewDto) {
-        Review review = reviewRepository.findById(reviewDto.getId()).get();
-        review.changeRating(reviewDto.getRating());
-        review.changeTag(reviewDto.getTag());
-        review.changeContent(reviewDto.getContent());
-//        review.changeFiles(reviewDto.getFiles());
-        reviewRepository.save(review);
+    public void modify(Long reviewId, ReviewDto reviewDto, Authentication authentication) throws Exception {
+        Review review = reviewRepository.findById(reviewId).get();
+//        System.out.println("review.getMember().getPhone() = " + review.getMember().getPhone());
+//        System.out.println("authentication.getName() = " + authentication.getName());
+//        if(review.getMember().getPhone() == authentication.getName()){
+            review.changeRating(reviewDto.getRating());
+            review.changeTag(reviewDto.getTag());
+            review.changeContent(reviewDto.getContent());
+            reviewRepository.save(review);
+//        } else {
+//            throw new Exception("작성자가 일치하지 않습니다.");
+//        }
     }
 
     @Override
-    public void delete(Long reviewId) {
+    public void delete(Long reviewId, Authentication authentication) throws Exception {
         Review review = reviewRepository.findById(reviewId).get();
-        reviewRepository.delete(review);
+//        System.out.println("review.getMember().getPhone() = " + review.getMember().getPhone());
+//        System.out.println("authentication.getName() = " + authentication.getName());
+//        if(review.getMember().getPhone() == authentication.getName()){
+            reviewRepository.delete(review);
+//        } else {
+//            throw new Exception("작성자가 일치하지 않습니다.");
+//        }
     }
 }

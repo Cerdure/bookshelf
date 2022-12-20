@@ -91,4 +91,11 @@ public class UploadFileServiceImpl implements UploadFileService {
         return fileRepository.findAllByReviewId(reviewId);
     }
 
+    @Override
+    public void deleteFilesByReviewId(Long reviewId) {
+        List<UploadFile> uploadFiles = fileRepository.findAllByReviewId(reviewId);
+        uploadFiles.forEach(uploadFile -> new File(uploadFile.getFullPath()).delete());
+        uploadFiles.forEach(uploadFile -> fileRepository.delete(uploadFile));
+    }
+
 }

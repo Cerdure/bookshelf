@@ -43,7 +43,7 @@ $(function () {
       }
     });
 
-  if(st>150){
+  if(st>160){
     $(".middle-nav-wrapper").css({
       'position':'fixed',
       'top':'60px',
@@ -71,7 +71,7 @@ $(function () {
   $(window)
   .scroll(function(){
     st = $(this).scrollTop();
-    if(st>150){
+    if(st>160){
       $(".middle-nav-wrapper").css({
         'position':'fixed',
         'top':'60px',

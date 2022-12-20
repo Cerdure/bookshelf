@@ -1,6 +1,7 @@
 package com.cerdure.bookshelf.web.controller;
 
 import com.cerdure.bookshelf.domain.Book;
+import com.cerdure.bookshelf.domain.UploadFile;
 import com.cerdure.bookshelf.domain.board.Review;
 import com.cerdure.bookshelf.domain.member.Member;
 import com.cerdure.bookshelf.dto.board.ReviewDto;
@@ -10,6 +11,7 @@ import com.cerdure.bookshelf.service.ReviewServiceImpl;
 import com.cerdure.bookshelf.service.UploadFileServiceImpl;
 import com.cerdure.bookshelf.web.security.MemberAdapter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,6 +27,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -44,6 +47,13 @@ public class ReviewController {
         return "board-review";
     }
 
+    @GetMapping("/review/{reviewId}")
+    public String findReview(@PathVariable("reviewId") Long reviewId, Model model) {
+        Review modReview = reviewService.findById(reviewId);
+        model.addAttribute("modReview", modReview);
+        return "board-review :: #modify-wrapper";
+    }
+
     @GetMapping("/review/book-search")
     public String findBook(@RequestParam Map<String, Object> paramMap, Model model, Pageable pageable) {
         Page <Book> books = bookService.findByName(paramMap.get("name").toString(), paramMap.get("sortOrder").toString(), pageable);
@@ -52,26 +62,36 @@ public class ReviewController {
     }
 
     @PostMapping("/review")
-    public String createReview(@ModelAttribute ReviewDto reviewDto,
-                               Authentication authentication,
-                               Model model, Pageable pageable) throws Exception {
-
+    public String createReview(@ModelAttribute ReviewDto reviewDto, Authentication authentication, Model model, Pageable pageable) throws Exception {
         Member member = memberService.findByPhone(authentication.getName());
         reviewDto.setMember(member);
-        Long reviewId =  reviewService.create(reviewDto);
-        uploadFileService.saveFiles(reviewDto, reviewId);
+
+        if(reviewDto.getImageFiles().get(0).getSize() != 0){
+            Long reviewId =  reviewService.create(reviewDto);
+            uploadFileService.saveFiles(reviewDto, reviewId);
+        }
         Page<Review> reviews = reviewService.findAll(pageable);
         model.addAttribute("reviews",reviews);
         return "redirect:/review";
     }
 
-    @PutMapping("/review")
-    public void modify(ReviewDto reviewDto) throws Exception{
-        reviewService.modify(reviewDto);
+    @PostMapping("/review-modify/{reviewId}")
+    public String modify(@PathVariable("reviewId") Long reviewId, @ModelAttribute ReviewDto reviewDto, Authentication authentication, Model model, Pageable pageable) throws Exception{
+        System.out.println("reviewId = " + reviewId);
+        System.out.println("reviewDto = " + reviewDto);
+        reviewService.modify(reviewId, reviewDto, authentication);
+        uploadFileService.deleteFilesByReviewId(reviewId);
+        uploadFileService.saveFiles(reviewDto, reviewId);
+        Page<Review> reviews = reviewService.findAll(pageable);
+        model.addAttribute("reviews",reviews);
+        return "board-review";
     }
 
-    @DeleteMapping("/review/{reviewId}")
-    public void delete(@PathVariable("reviewId") Long reviewId) throws Exception{
-        reviewService.delete(reviewId);
+    @PostMapping("/review-delete/{reviewId}")
+    public String delete(@PathVariable("reviewId") Long reviewId, Authentication authentication, Model model, Pageable pageable) throws Exception{
+        reviewService.delete(reviewId, authentication);
+        Page<Review> reviews = reviewService.findAll(pageable);
+        model.addAttribute("reviews",reviews);
+        return "board-review";
     }
 }

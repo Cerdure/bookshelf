@@ -24,4 +24,5 @@ public interface UploadFileService {
         return null;
     }
     public List<UploadFile> findAllByReview(Review review);
+    public void deleteFilesByReviewId(Long reviewId);
 }

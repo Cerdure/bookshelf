@@ -39,7 +39,7 @@ public class Review {
 
     private LocalDateTime regDate;
 
-    @OneToMany(mappedBy = "review")
+    @OneToMany(mappedBy = "review", cascade = CascadeType.REMOVE)
     private List<UploadFile> files = new ArrayList<>();
 
     @PrePersist

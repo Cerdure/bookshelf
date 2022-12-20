@@ -44,7 +44,7 @@ $(function () {
     });
 
 
-  if(st>150){
+  if(st>160){
     $(".middle-nav-wrapper").css({
       'position':'fixed',
       'top':'60px',
@@ -72,7 +72,7 @@ $(function () {
   $(window)
   .scroll(function(){
     st = $(this).scrollTop();
-    if(st>150){
+    if(st>160){
       $(".middle-nav-wrapper").css({
         'position':'fixed',
         'top':'60px',
@@ -112,28 +112,7 @@ $(function() {
   $(".top-back-title").show();
   $(".middle-nav-underbar").css('left', '0%');
 
-  let starFill = $(".review-book-rating .star-fill");
-  let ratingNum = $(".review-book-rating-number .rating-number");
-  let ratingNumInput = $(".review-book-rating-number .rating-number-input");
-
-  $(".review-book-rating .star-empty img")
-      .mouseover(function () {
-        let index = $(this).index();
-        starFill.stop().animate({'width': 34.5 * (index + 1) + 'px'}, 300);
-        ratingNumInput.val(index + 1);
-        ratingNum.text(index + 1);
-      })
-      .click(function () {
-        starClickIndex = $(this).index();
-        bookPassed = true;
-        registCheck(tagPassed, reviewPassed, bookPassed);
-      })
-      .mouseleave(function () {
-        starFill.stop().animate({'width': 34.5 * (starClickIndex + 1) + 'px'}, 300);
-        ratingNumInput.val(starClickIndex + 1);
-        ratingNum.text(starClickIndex + 1);
-      });
-
+  
 
   let reviews = $(".my-review .body").toArray();
 
@@ -336,18 +315,30 @@ $(function() {
             e.querySelector(".fold-button").style.display = 'none'
         );
       });
+
+    $(document).on("mouseover", "form .star-empty img", function () {
+      let index = $(this).index();
+      $(this).closest(".review-book-rating").find(".star-fill").stop().animate({ 'width': 34.5 * (index + 1) + 'px' }, 300);
+      $(this).closest(".review-book-info").find(".rating-number").text(index + 1);
     });
-
-
-    $(".review-write-tag .tag").click(function () {
+    $(document).on("click", "form .star-empty img", function () {
+      $(this).closest(".review-book-info").find(".rating-number-input").val($(this).index()+1);
+      bookPassed = true;
+      registCheck(tagPassed, reviewPassed, bookPassed);
+    })
+    $(document).on("mouseleave", "form .star-empty img", function () {
+      let clickidx = $(this).closest(".review-book-info").find(".rating-number-input").val();
+      $(this).closest(".review-book-rating").find(".star-fill").stop().animate({ 'width': 34.5 * clickidx + 'px' }, 300);
+      $(this).closest(".review-book-info").find(".rating-number").text(clickidx);
+    });
+    $(document).on("click",".review-write-tag .tag", function () {
       $(".review-write-tag .tag").removeClass("tag-active");
       $(this).addClass("tag-active");
       $(".review-write-tag-input").val($(this).text());
       tagPassed = true;
       registCheck(tagPassed, reviewPassed, bookPassed);
     });
-
-    $(".review-write-wrapper textarea").keyup(function () {
+    $(document).on("keyup", "form textarea", function () {
       let reviewVal = $(this).val();
       $(".write-number").text(reviewVal.length + "/3000");
       if (reviewVal.length > 9) {
@@ -357,12 +348,42 @@ $(function() {
       }
       registCheck(tagPassed, reviewPassed, bookPassed);
     });
-
-
-    $(".review-write-top-icon").click(function () {
-      $(".review-write-wrapper").css('filter', 'brightness(0.5)');
+    $(document).on("click",".review-write-top-icon", function () {
+      $("form").css('filter', 'brightness(0.5)');
       $(".close-alert").show();
     });
+    $(document).on("change","#modify-wrapper .review-write-photo-input", function(event){
+        if (event.target.files.length > 0 && event.target.files.length < 6) {
+          imgCount = 0;
+          let imgs = document.querySelectorAll(".review-write-photo-wrapper");
+          if( imgs != null){imgs.forEach(e => e.remove());} 
+    
+          for (var image of event.target.files) {
+            imgCount++;
+              let reader = new FileReader();
+              reader.onload = function (event) {
+                let div = document.createElement("div");
+                div.setAttribute('class', 'review-write-photo-wrapper');
+                div.innerHTML = '<div class="review-write-photo-cancel" onclick="deleteImg(this)">X</div>';
+                let img = document.createElement("input");
+                img.setAttribute("style", "background-image: url(" + event.target.result + ")");
+                img.setAttribute("type", "file");
+                img.setAttribute("class", "review-write-photo");
+                img.setAttribute("disabled", true);
+                document.querySelector("#modify-wrapper .review-write-attach-photo").appendChild(div).appendChild(img);
+              }
+              reader.readAsDataURL(image);
+              imgChange();
+          }
+        } else if (event.target.files.length > 5) {
+          alert('이미지는 최대 5장까지 업로드 가능합니다.');
+          attchReset();
+      }
+    });
+    });       // doc---------------------------------------------------
+
+
+  
 
     function bookSearch(_page) {
       let data = {
@@ -400,25 +421,6 @@ $(function() {
     });
 
 
-    // $(".regist-button").click(function () {
-    //   $.ajax({
-    //     url: "/review",
-    //     type: "post",
-    //     data: new FormData($('.review-write-wrapper')[0]),
-    //     processData: false,
-    //     contentType: false,
-    //     dataType: "html",
-    //     async: true,
-    //     error: function (xhr, status, error) {
-    //       console.log(error);
-    //     }
-    //   }).done(function (reviews) {
-    //     $('#review-wrapper').replaceWith(reviews);
-    //     formClose();
-    //   });
-    // });
-
-
     $(".search-title img").click(function () {
       $(".review-write-search-wrapper").hide();
       swOpened = false;
@@ -437,11 +439,30 @@ $(function() {
     }
 
 
+    $(".my-review .modify").click(function(){
+      let mdReviewId = $(this).closest(".my-review").find("#review-id").val();
+      console.log(mdReviewId);
+      $.ajax({
+        url: "/review/"+mdReviewId,
+        type: "get",
+        dataType: "html",
+        error: function (xhr, status, error) {
+          console.log(error);
+        }
+      }).done(function(review){
+        $('#modify-wrapper').replaceWith(review);
+        $(".review-modify-wrapper").attr("action", "/review-modify/"+mdReviewId);
+        setInterval(function(){
+          $('#modify-wrapper').fadeIn(300);
+        },100); 
+        $(".review-title-write").css('pointer-events','none');
+      });
+    });
+
+
     $(".my-review .delete").click(function(){
-      console.log($(this).parent().find("#review-id").val());
-      $(".delete-alert #review-id").val($(this).parent().parent().find("#review-id").val());
-      $(".write-wrapper-back").addClass("modal-background");
-      $(".delete-alert").show();
+      let mdReviewId = $(this).closest(".my-review").find("#review-id").val();
+      deleteAlert(mdReviewId);
     });
 
   });
@@ -511,6 +532,7 @@ $(function() {
 
   function formClose(_this) {
     $(".write-wrapper-back").removeClass("modal-background");
+    $("#modify-wrapper .modal-background").hide();
     $("form").hide();
     $("body").css('overflow-y', 'scroll');
     $(".review-write-book-wrapper").hide();
@@ -527,13 +549,14 @@ $(function() {
     $(".review-write-photo-wrapper").remove();
     $(".review-write-attach-photo-button").show();
     $(".regist-button").addClass("disable");
+    $(".review-title-write").css('pointer-events','all');
     bookPassed = false;
     tagPassed = false;
     reviewPassed = false;
     rwOpened = false;
     imgCount = 0;
     starClickIndex = -1;
-    hide(_this)
+    hideCloseAlert(_this)
   }
 
 
@@ -555,16 +578,24 @@ $(function() {
     }
   }
 
-  function reviewDelete(_this) {
+
+
+  function deleteAlert(_reviewId) {
+    console.log("deleteAlert " + reviewId);
+    reviewId = _reviewId;
+    $(".write-wrapper-back").addClass("modal-background");
+    $(".delete-alert").show();
+  }
+  let reviewId;
+
+  function reviewDelete() {
     $.ajax({
-      url: "/review/" + $(_this).parent().find("#review-id").val(),
-      type: "delete",
-      dataType: "html",
-      // async: true,
+      url: "/review-delete/"+reviewId,
+      type: "post",
       error: function (xhr, status, error) {
         console.log(error);
       }
+    }).done(function(result){
+      document.location.replace("/review");
     });
   }
-
-
