@@ -65,9 +65,9 @@ public class ReviewController {
     public String createReview(@ModelAttribute ReviewDto reviewDto, Authentication authentication, Model model, Pageable pageable) throws Exception {
         Member member = memberService.findByPhone(authentication.getName());
         reviewDto.setMember(member);
+        Long reviewId =  reviewService.create(reviewDto);
 
-        if(reviewDto.getImageFiles().get(0).getSize() != 0){
-            Long reviewId =  reviewService.create(reviewDto);
+        if (reviewDto.getImageFiles().get(0).getOriginalFilename() != "") {
             uploadFileService.saveFiles(reviewDto, reviewId);
         }
         Page<Review> reviews = reviewService.findAll(pageable);
@@ -77,8 +77,6 @@ public class ReviewController {
 
     @PostMapping("/review-modify/{reviewId}")
     public String modify(@PathVariable("reviewId") Long reviewId, @ModelAttribute ReviewDto reviewDto, Authentication authentication, Model model, Pageable pageable) throws Exception{
-        System.out.println("reviewId = " + reviewId);
-        System.out.println("reviewDto = " + reviewDto);
         reviewService.modify(reviewId, reviewDto, authentication);
         uploadFileService.deleteFilesByReviewId(reviewId);
         uploadFileService.saveFiles(reviewDto, reviewId);

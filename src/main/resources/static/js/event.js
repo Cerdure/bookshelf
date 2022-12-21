@@ -230,7 +230,7 @@ $(function () {
   if (st > 557) {
     $(".category-title-wrapper").css({
       'position': 'fixed',
-      'top': '70px',
+      'top': '60px',
       'background': 'white',
       'border-bottom': '1px solid #ebebeb',
       'z-index': '5'
@@ -266,7 +266,7 @@ $(function () {
     if (st > 557) {
       $(".category-title-wrapper").css({
         'position': 'fixed',
-        'top': '70px',
+        'top': '60px',
         'background': 'white',
         'border-bottom': '1px solid #ebebeb',
         'z-index': '5'

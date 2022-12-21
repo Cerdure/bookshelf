@@ -43,13 +43,14 @@
                         <label class="pw-info">비밀번호</label>
                         <img src="/img/icon/ico_eye@2x.png">
                     </div>
+                    <input type="checkbox" name="remember-me" id="rememberMe" th:checked="${rememeberMe}">
                     <input id="login" type="submit" value="로그인">
                 </form>
             </div>
             <div class="option-wrapper">
                 <span class="id-save-wrapper">
                     <img class="id-save-check" src="/img/icon/ico_checkbox@2x.png">
-                    <span class="id-save-text">아이디 저장</span>
+                    <span class="id-save-text">자동 로그인</span>
                 </span>
                 <span class="find-idpw">아이디/비밀번호 찾기</span>
             </div>

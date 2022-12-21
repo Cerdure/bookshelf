@@ -65,11 +65,13 @@ $(function () {
 
   $(".id-save-check").click(function () {
     if (!$(this).hasClass('clicked')) {
+      $("#rememberMe").prop('checked',true);
       $(this).attr('src', "/img/icon/ico_checkbox_active@2x.png")
         .css({ 'border': 'none', 'width': '12px', 'height': '12px' })
         .animate({ 'backgroundColor': 'rgb(101, 168, 255)' }, 200)
         .addClass('clicked');
     } else {
+      $("#rememberMe").prop('checked',false);
       $(this).attr('src', "/img/icon/ico_checkbox@2x.png")
         .css({ 'border': '1px solid rgb(211, 211, 211)', 'width': '10px', 'height': '10px' })
         .animate({ 'backgroundColor': 'white' }, 200)

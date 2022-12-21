@@ -7,7 +7,9 @@ import java.time.LocalDate;
 
 @Data
 public class DataUtils {
+    private String name;
     private String sortOrder;
+    private String category;
     private LocalDate now;
     private LocalDate oneMonthAgo;
     private LocalDate threeMonthAgo;

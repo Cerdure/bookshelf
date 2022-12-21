@@ -45,15 +45,14 @@
 
 
   $(function(){
-    $(".search-input .reset").click(function(){
-      $(this).parent().find('input').val('');
-     });
+    // $(".search-input .reset").click(function(){
+    //   $(this).parent().find('input').val('');
+    //  });
 
     $(".side-wrapper").css('transform', 'translateY('+$(window).scrollTop()+'px)');
 
     $(window).scroll(function(){
       let sct = $(this).scrollTop();
-      let mainHeight = $('.main-wrapper').height();
       $(".side-wrapper").css('transform', 'translateY('+sct+'px)');
     });
 
@@ -74,25 +73,6 @@
         $(".side-wrapper").css('transform', 'translateY('+sct+'px)');
     });
 
-
-    let starFill = $(".review-book-rating .star-fill");
-    let ratingNum = $(".review-book-rating-number .rating-number");
-  
-    $(".review-book-rating .star-empty img")
-    .mouseover(function(){
-      let index = $(this).index();
-      starFill.stop().animate({'width':34.5*(index+1)+'px'},300);
-      ratingNum.text(index+1);
-    })
-    .click(function(){
-      starClickIndex = $(this).index();
-      bookPassed = true;
-      registCheck(tagPassed,reviewPassed,bookPassed);
-    })
-    .mouseleave(function(){
-      starFill.stop().animate({'width':34.5*(starClickIndex+1)+'px'},300);
-      ratingNum.text(starClickIndex+1);
-    });
 
     let reviews = $(".my-review .body").toArray();
   
@@ -253,37 +233,95 @@
   });
 
 
-
-  $(".review-write-tag .tag").click(function(){
-    $(".review-write-tag .tag").removeClass("tag-active");
-    $(this).addClass("tag-active");
-    tagPassed = true;
-    registCheck(tagPassed,reviewPassed,bookPassed);
-  });
-
-  $(".review-write-wrapper textarea").keyup(function(){
-    let reviewVal = $(this).val();
-    $(".write-number").text(reviewVal.length+"/3000");
-    if(reviewVal.length>9){
-      reviewPassed = true;
-    } else {
-      reviewPassed = false;
-    }
-    registCheck(tagPassed,reviewPassed,bookPassed);
-  });
-
-  
-
   $(".write-review, .first-review").click(function(){
     $(".write-wrapper-back").addClass("modal-background");
     $(".review-write-wrapper").fadeIn(200);
     $("body").css('overflow-y','hidden');
     rwOpened = true;
   });
-  $(".review-write-top-icon").click(function(){
-    $(".review-write-wrapper").css('filter','brightness(0.5)');
-    $(".close-alert").show();
-  });
+
+
+  $(document).ready(function () {
+
+      let reviews = $(".my-review .body").toArray();
+
+      reviews.forEach(e => e.querySelector(".review").offsetHeight < e.querySelector("span").offsetHeight ?
+          e.querySelector(".fold-button").style.display = 'block' :
+          e.querySelector(".fold-button").style.display = 'none'
+      );
+      $(document).on("resize", window, function () {
+        reviews.forEach(e => e.querySelector(".review").offsetHeight < e.querySelector("span").offsetHeight ?
+            e.querySelector(".fold-button").style.display = 'block' :
+            e.querySelector(".fold-button").style.display = 'none'
+        );
+      });
+
+    $(document).on("mouseover", "form .star-empty img", function () {
+      let index = $(this).index();
+      $(this).closest(".review-book-rating").find(".star-fill").stop().animate({ 'width': 34.5 * (index + 1) + 'px' }, 300);
+      $(this).closest(".review-book-info").find(".rating-number").text(index + 1);
+    });
+    $(document).on("click", "form .star-empty img", function () {
+      $(this).closest(".review-book-info").find(".rating-number-input").val($(this).index()+1);
+      bookPassed = true;
+      registCheck(tagPassed, reviewPassed, bookPassed);
+    })
+    $(document).on("mouseleave", "form .star-empty img", function () {
+      let clickidx = $(this).closest(".review-book-info").find(".rating-number-input").val();
+      $(this).closest(".review-book-rating").find(".star-fill").stop().animate({ 'width': 34.5 * clickidx + 'px' }, 300);
+      $(this).closest(".review-book-info").find(".rating-number").text(clickidx);
+    });
+    $(document).on("click",".review-write-tag .tag", function () {
+      $(".review-write-tag .tag").removeClass("tag-active");
+      $(this).addClass("tag-active");
+      $(".review-write-tag-input").val($(this).text());
+      tagPassed = true;
+      registCheck(tagPassed, reviewPassed, bookPassed);
+    });
+    $(document).on("keyup", "form textarea", function () {
+      let reviewVal = $(this).val();
+      $(".write-number").text(reviewVal.length + "/3000");
+      if (reviewVal.length > 9) {
+        reviewPassed = true;
+      } else {
+        reviewPassed = false;
+      }
+      registCheck(tagPassed, reviewPassed, bookPassed);
+    });
+    $(document).on("click",".review-write-top-icon", function () {
+      $("form").css('filter', 'brightness(0.5)');
+      $(".close-alert").show();
+    });
+    $(document).on("change","#modify-wrapper .review-write-photo-input", function(event){
+        if (event.target.files.length > 0 && event.target.files.length < 6) {
+          imgCount = 0;
+          let imgs = document.querySelectorAll(".review-write-photo-wrapper");
+          if( imgs != null){imgs.forEach(e => e.remove());} 
+    
+          for (var image of event.target.files) {
+            imgCount++;
+              let reader = new FileReader();
+              reader.onload = function (event) {
+                let div = document.createElement("div");
+                div.setAttribute('class', 'review-write-photo-wrapper');
+                div.innerHTML = '<div class="review-write-photo-cancel" onclick="deleteImg(this)">X</div>';
+                let img = document.createElement("input");
+                img.setAttribute("style", "background-image: url(" + event.target.result + ")");
+                img.setAttribute("type", "file");
+                img.setAttribute("class", "review-write-photo");
+                img.setAttribute("disabled", true);
+                document.querySelector("#modify-wrapper .review-write-attach-photo").appendChild(div).appendChild(img);
+              }
+              reader.readAsDataURL(image);
+              imgChange();
+          }
+        } else if (event.target.files.length > 5) {
+          alert('이미지는 최대 5장까지 업로드 가능합니다.');
+          attchReset();
+      }
+    });
+    });       // doc---------------------------------------------------
+
 
 
 
@@ -295,94 +333,164 @@
     }
   }
 
-
+  $(".my-review .modify").click(function(){
+    let mdReviewId = $(this).closest(".my-review").find("#review-id").val();
+    console.log(mdReviewId);
+    $.ajax({
+      url: "/bookReview/"+mdReviewId,
+      type: "get",
+      dataType: "html",
+      error: function (xhr, status, error) {
+        console.log(error);
+      }
+    }).done(function(review){
+      $('#modify-wrapper').replaceWith(review);
+      $(".review-modify-wrapper").attr("action", "/bookReview-modify/"+mdReviewId);
+      setInterval(function(){
+        $('#modify-wrapper').fadeIn(300);
+      },100); 
+      $(".review-title-write").css('pointer-events','none');
+    });
   });
 
-   
+
+  $(".my-review .delete").click(function(){
+    let mdReviewId = $(this).closest(".my-review").find("#review-id").val();
+    deleteAlert(mdReviewId);
+  });
+
+  });
 
   let starClickIndex = -1;
   let bookPassed = false;
   let tagPassed = false;
   let reviewPassed = false;
   let rwOpened = false;
+  let swOpened = false;
   let imgCount = 0;
- 
-  function imgChange(){
-      if(imgCount==5){
-        $(".review-write-attach-photo-button").hide();
-      } else {
-        $(".review-write-attach-photo-button").show();
-      }
-    $(".review-write-attach-title span:last-child").text(imgCount+'/5');
+
+  function imgChange() {
+    if (imgCount == 5) {
+      $(".review-write-attach-photo-button").hide();
+    } else {
+      $(".review-write-attach-photo-button").show();
+    }
+    $(".review-write-attach-title span:last-child").text(imgCount + '/5');
   }
 
   function setThumbnail(event) {
-    for (var image of event.target.files) {
-      let reader = new FileReader();
-      reader.onload = function(event) {
-        let div = document.createElement("div");
-        div.setAttribute('class','review-write-photo-wrapper');
-        div.innerHTML = '<div class="review-write-photo-cancel" onclick="deleteImg(this)">X</div>';
-        let img = document.createElement("img");
-        img.setAttribute("src", event.target.result);
-        img.setAttribute("class", "review-write-photo");
-        document.querySelector(".review-write-attach-photo").appendChild(div).appendChild(img);
-      };
-      reader.readAsDataURL(image);
-      imgCount++;
+    if (event.target.files.length > 0 && event.target.files.length < 6) {
+      imgCount = 0;
+      let imgs = document.querySelectorAll(".review-write-photo-wrapper");
+      if( imgs != null){imgs.forEach(e => e.remove());} 
+
+      for (var image of event.target.files) {
+        imgCount++;
+          let reader = new FileReader();
+          reader.onload = function (event) {
+            let div = document.createElement("div");
+            div.setAttribute('class', 'review-write-photo-wrapper');
+            div.innerHTML = '<div class="review-write-photo-cancel" onclick="deleteImg(this)">X</div>';
+            let img = document.createElement("input");
+            img.setAttribute("style", "background-image: url(" + event.target.result + ")");
+            img.setAttribute("type", "file");
+            img.setAttribute("class", "review-write-photo");
+            img.setAttribute("disabled", true);
+            document.querySelector(".review-write-attach-photo").appendChild(div).appendChild(img);
+          }
+          reader.readAsDataURL(image);
+          imgChange();
+      }
+    } else if (event.target.files.length > 5) {
+      alert('이미지는 최대 5장까지 업로드 가능합니다.');
+      attchReset();
     }
-    imgChange();
   }
 
-  function deleteImg(_this){
+  function attchReset() {
+    imgCount = 0;
+    let imgs = document.querySelectorAll(".review-write-photo-wrapper");
+    if( imgs != null){imgs.forEach(e => e.remove());} 
+
+    let parent = document.querySelector(".review-write-attach-photo-button");
+    document.querySelector(".review-write-photo-input").remove();  
+
+    parent.innerHTML = '<input name="imageFiles" class="review-write-photo-input" type="file" multiple="multiple" accept=".jpg, .jpeg, .png, .gif" onchange="setThumbnail(event, this)"></input>';
+  }
+
+  function deleteImg(_this) {
     $(_this).parent().remove();
     imgCount--;
     imgChange();
   }
 
-  function myReviewSet(_this, myReview){
-    myReview.bookImg = $(_this).parent().find(".review-book-img").attr('src');
-    myReview.bookName = $(_this).parent().find(".review-book-name").text();
-    myReview.rating = $(_this).parent().find(".rating-number").text();
-    myReview.tag = $(_this).parent().find(".tag-active").text();
-    myReview.review = $(_this).parent().find(".review-write").val();
-    myReview.attach = $(_this).parent().find(".review-write-photo").toArray();
-  }
-
-  function formClose(_this){
+  function formClose(_this) {
     $(".write-wrapper-back").removeClass("modal-background");
+    $("#modify-wrapper .modal-background").hide();
     $("form").hide();
-    $("body").css('overflow-y','scroll');
-    $("form").css('filter','brightness(100%)');
-    $(".review-book-rating .star-fill").stop().css('width','0px');
-    $(".review-book-rating-number .rating-number").text(0); 
+    $("body").css('overflow-y', 'scroll');
+    $("form").css('filter', 'brightness(100%)');
+    $(".review-write-find-text").text("상품 검색");
+    $(".review-book-id").val('');
+    $(".review-book-rating .star-fill").stop().css('width', '0px');
+    $(".review-book-rating-number .rating-number-input").val(0);
+    $(".review-book-rating-number .rating-number").text(0);
     $(".review-write-tag .tag").removeClass("tag-active");
+    $(".review-write-tag-input").val('');
     $("form textarea").val('');
     $(".write-number").text('0/3000');
     $(".review-write-photo-wrapper").remove();
     $(".review-write-attach-photo-button").show();
+    $(".regist-button").addClass("disable");
+    $(".review-title-write").css('pointer-events','all');
     bookPassed = false;
     tagPassed = false;
     reviewPassed = false;
     rwOpened = false;
     imgCount = 0;
     starClickIndex = -1;
-    hide(_this)
+    hideCloseAlert(_this)
   }
 
 
-
-  function hide(_this){
-    $("form").css('filter','brightness(100%)');
+  function hideCloseAlert(_this) {
+    $("form").css('filter', 'brightness(100%)');
     $(_this).parent().hide();
   }
 
-  function registCheck(...passed){
-    if(passed.every(e => {return e;})) {
+  function hideDeleteAlert(_this) {
+    $(".write-wrapper-back").removeClass("modal-background");
+    $(_this).parent().hide();
+  }
+
+  function registCheck(...passed) {
+    if (passed.every(e => {return e;})) {
       $(".regist-button").removeClass("disable");
     } else {
       $(".regist-button").addClass("disable");
     }
+  }
+
+
+
+  function deleteAlert(_reviewId) {
+    console.log("deleteAlert " + reviewId);
+    reviewId = _reviewId;
+    $(".write-wrapper-back").addClass("modal-background");
+    $(".delete-alert").show();
+  }
+  let reviewId;
+
+  function reviewDelete(bookId) {
+    $.ajax({
+      url: "/bookReview-delete/"+reviewId+"/"+bookId,
+      type: "post",
+      error: function (xhr, status, error) {
+        console.log(error);
+      }
+    }).done(function(result){
+      document.location.replace("/book?id="+bookId);
+    });
   }
 
 
@@ -421,3 +529,8 @@
 
   
   });
+
+
+  
+
+

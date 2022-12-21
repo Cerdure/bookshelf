@@ -20,20 +20,20 @@
 <div class="main-wrapper">
   <div class="header">
     <div class="left-box">
-    <img class="book-img" src="/img/book-cover/54.jpg">
+    <img class="book-img" th:src="${book.imgPath}">
   </div>
     <div class="right-box">
       <div class="top">
-        <div class="title">나의 문화유산답사기 - 서울편 3</div>
-        <div class="author">IT 교재팀</div>
+        <div class="title" th:text="${book.name}"></div>
+        <div class="author" th:text="${book.author}"></div>
       </div>
       <div class="box">
         <div class="inner-box">
         <div class="shelves">
           <div class="profile">
-          <li><img src="/img/icon/img_id_profile@2x.png"></li>
-          <li><img src="/img/icon/img_id_profile@2x.png"></li>
-          <li><img src="/img/icon/img_id_profile@2x.png"></li>
+          <li><img src="/img/book-cover/search-category-essay.jpg"></li>
+          <li><img src="/img/book-cover/search-category-comic.jpg"></li>
+          <li><img src="/img/book-cover/search-category-politics.jpg"></li>
           </div>
         <div class="text">책장에 담은 사람</div>
         <div class="number">1,560명</div>
@@ -41,7 +41,7 @@
         <div class="reviews">
           <img class="icon" src="/img/icon/search-list-theme.svg">
           <div class="text">이 책의 리뷰</div>
-          <div class="number">3개</div>
+          <div class="number" th:text="${book.reviews?.size()}+'개'">3개</div>
         </div>
         <div class="first-review">
           <img class="icon" src="/img/icon/search-list-editor.svg">
@@ -58,29 +58,23 @@
   <div class="body">
       <div class="book-intro-wrapper">
         <div class="title">책 소개</div>
-        <p class="content">
-          ● 변경된 최신 출제 기준 반영!!<br>
-          ● 최신 출제 경향을 분석하여 주요 학습 포인트만 정리한 핵심 이론<br>
-          ● Section별 제공하는 기출 유형 문제로 중간 테스트 & 시험 유형 맛보기<br>
-          ● 실전에 대비한 최신 기출 문제로 시험 준비하기<br>
-          ● 최종 정리를 위한 Summary 제공
-        </p>
+        <p class="content" th:text="${book.intro}"></p>
         <div class="box">
           <div class="category">
             <div class="text">카테고리</div>
-            <div class="data">IT</div>
+            <div class="data" th:text="${dataUtils.category}"></div>
           </div>
           <div class="publisher">
             <div class="text">출판사</div>
-            <div class="data">KH기획</div>
+            <div class="data" th:text="${book.publisher}"></div>
           </div>
           <div class="release-date">
             <div class="text">출간일</div>
-            <div class="data">2021.07.02</div>
+            <div class="data" th:text="${book.publishDate}"></div>
           </div>
           <div class="ISBN">
             <div class="text">ISBN</div>
-            <div class="data">97921458301240</div>
+            <div class="data" th:text="${book.ISBN}"></div>
           </div>
         </div>
       </div>
@@ -88,61 +82,36 @@
       <div class="book-index-wrapper">
         <span class="title">목차</span>
         <img class="fold-btn" src="/img/icon/down-arr.png">
-        <p>
-            Chapter 01 PC 운영체제<br>
-            Section 01 Windows 기초<br>
-            Section 02 폴더 관리<br>
-            Section 03 파일 탐색기와 보조프로그램<br>
-            Section 04 제어판 활용<br>
-            Chapter 02 컴퓨터 시스템 설정 변경<br>
-            Section 01 시스템 관리<br>
-            Section 02 네트워크 관리<br>
-            Chapter 03 컴퓨터 시스템 관리<br>
-            Section 01 컴퓨터의 개념 및 분류<br>
-            Section 02 자료의 구성단위 및 표현 방식<br>
-            Section 03 중앙처리장치<br>
-            Section 04 주기억장치와 보조 기억장치<br>
-            Section 05 입출력장치와 기타장치<br>
-            Section 06 운영체제 사용<br>
-            Section 07 PC 유지와 보수<br>
-            Section 08 프로그래밍 언어<br>
-            Chapter 04 인터넷과 멀티미디어 활용<br>
-            Section 01 인터넷 활용<br>
-            Section 02 멀티미디어 활용<br>
-            Chapter 05 최신 정보통신 기술 활용<br>
-            Section 01 정보통신 기술<br>
-            Section 02 모바일 기기<br>
-            Chapter 06 정보 보안과 시스템 보안 유지<br>
-            Section 01 정보 보안 유지<br>
-            Section 02 시스템 보안 유지
-        </p>
+        <p th:text="${book.bookIndex}"></p>
       </div>
 
       <div class="author-intro-wrapper">
         <span class="title">저자 소개</span>
         <img class="fold-btn" src="/img/icon/down-arr.png">
-        <span class="data">IT 교재팀</span>
+        <span class="data" th:text="${book.author}"></span>
       </div>
 
       <div class="publisher-review-wrapper">
         <span class="title">출판사 서평</span>
         <img class="fold-btn" src="/img/icon/down-arr.png">
-        <p>
-          초스피드로 단기간에 합격의 기틀을 잡아주는 컴퓨터 활용능력 1급 필기 수험서<br><br>
-          수험자의 효율적인 학습을 위해 최소한의 투자로 최대의 효과를 얻을 수 있도록 출제 기준과 기출 문제의 출제 경향을 분석하여 꼭 필요한 내용만을 선별하여 구성하였습니다.<br>
-          핵심 요약된 이론이 아닌 핵심 내용만 선별한 이론 구성으로 기초를 튼튼하게 하고, 학습한 이론을 바탕으로 기출 유형 문제를 풀어봄으로써 실전에 대비한 응용력을 키우며 학습 내용을 점검할 수 있도록 구성하였습니다.
-        </p>
+        <p th:text="${book.publisherReview}"></p>
       </div>
 
       <div class="review-wrapper">
         <span class="title">이 책의 리뷰</span>
-        <div class="my-review">
+
+        <div class="my-review" th:each="review: ${book.reviews}">
+          <input id="review-id" th:value="${review.id}" type="hidden">
+          <div class="book-name" th:text="${review.book.name}"></div>
+
           <div class="header">
             <div class="buyer">구매자</div>
-            <div class="id">us******</div>
-            <div class="date">2022.11.28</div>
-            <div class="notify">신고</div>
-            <div class="tag">#재밌어요</div>
+            <div class="id" th:text="${review.member.nickname}"></div>
+            <div class="date" th:text="${#temporals.format(review.regDate, 'yyyy-MM-dd HH:mm:ss')}"></div>
+            <div th:if="${#authentication.principal.username} == ${review.member.phone}" class="modify">수정</div>
+            <div th:if="${#authentication.principal.username} == ${review.member.phone}" class="delete">삭제</div>
+            <div class="tag" th:text="${review.tag}"></div>
+
             <div class="rating">
               <div class="star-empty">
                 <img src="/img/icon/star-empty.svg">
@@ -151,7 +120,7 @@
                 <img src="/img/icon/star-empty.svg">
                 <img src="/img/icon/star-empty.svg">
               </div>
-              <div class="star-fill">
+              <div class="star-fill" th:style="'width:' + ${review.rating}*20 + '%'">
                 <img src="/img/icon/star-fill.svg">
                 <img src="/img/icon/star-fill.svg">
                 <img src="/img/icon/star-fill.svg">
@@ -159,150 +128,32 @@
                 <img src="/img/icon/star-fill.svg">
               </div>
             </div>
+
           </div>
-    
+
           <div class="body">
             <div class="review">
-              <span>
-                이 책은 이준익 감독, 신하균과 하지민 주연으로 티빙에서 SF로맨스로 선보인다.
-                이번에 신간처럼 나오는 이 책은 22년 트렌드로 문장과 흐름을 섬세하게 다듬고
-                작가의 후기를 추가로 이 책이 탄생했다. 과학과 사랑, SF적인 상황에서 어떤 이야기가 펼쳐질까.
-                예전에 이 책이 나왔을 때보다 현재 개정판으로 나오면서 사람들은 어떤 반응을 보일까.
-              </span>
+              <span th:text="${review.content}"></span>
             </div>
             <div class="frame"></div>
-            <div class="photos">
-              <div class="close">x</div>
-              <img src="/img/background/top-background.jpg">
-              <img src="/img/book-cover/30.jpg">
-            <div class="number"></div>
-            <div class="btn-left"><</div>
-            <div class="btn-right">></div>
-            <div class="plus">더보기</div>
-            </div>
-            <div class="fold-button">
-              <div class="text">펼치기</div>
-              <img class="icon" src="/img/icon/down.png">
-            </div>
-          </div>
-        </div>
-    
-        <div class="my-review">
-          <div class="header">
-            <div class="buyer">구매자</div>
-            <div class="id">us******</div>
-            <div class="date">2022.11.28</div>
-            <div class="notify">신고</div>
-            <div class="tag">#재밌어요</div>
-            <div class="rating">
-              <div class="star-empty">
-                <img src="/img/icon/star-empty.svg">
-                <img src="/img/icon/star-empty.svg">
-                <img src="/img/icon/star-empty.svg">
-                <img src="/img/icon/star-empty.svg">
-                <img src="/img/icon/star-empty.svg">
-              </div>
-              <div class="star-fill">
-                <img src="/img/icon/star-fill.svg">
-                <img src="/img/icon/star-fill.svg">
-                <img src="/img/icon/star-fill.svg">
-                <img src="/img/icon/star-fill.svg">
-                <img src="/img/icon/star-fill.svg">
-              </div>
-            </div>
-          </div>
-    
-          <div class="body" >
-            <div class="review">
-              <span>
-                이 책은 이준익 감독, 신하균과 하지민 주연으로 티빙에서 SF로맨스로 선보인다.
-                이번에 신간처럼 나오는 이 책은 22년 트렌드로 문장과 흐름을 섬세하게 다듬고
-                작가의 후기를 추가로 이 책이 탄생했다. 과학과 사랑, SF적인 상황에서 어떤 이야기가 펼쳐질까.
-                예전에 이 책이 나왔을 때보다 현재 개정판으로 나오면서 사람들은 어떤 반응을 보일까.
-    
-                이 책은 이준익 감독, 신하균과 하지민 주연으로 티빙에서 SF로맨스로 선보인다.
-                이번에 신간처럼 나오는 이 책은 22년 트렌드로 문장과 흐름을 섬세하게 다듬고
-                작가의 후기를 추가로 이 책이 탄생했다. 과학과 사랑, SF적인 상황에서 어떤 이야기가 펼쳐질까.
-                예전에 이 책이 나왔을 때보다 현재 개정판으로 나오면서 사람들은 어떤 반응을 보일까.
-                
-                이 책은 이준익 감독, 신하균과 하지민 주연으로 티빙에서 SF로맨스로 선보인다.
-                이번에 신간처럼 나오는 이 책은 22년 트렌드로 문장과 흐름을 섬세하게 다듬고
-                작가의 후기를 추가로 이 책이 탄생했다. 과학과 사랑, SF적인 상황에서 어떤 이야기가 펼쳐질까.
-                예전에 이 책이 나왔을 때보다 현재 개정판으로 나오면서 사람들은 어떤 반응을 보일까.
-              </span>
-            </div>
-            <div class="frame"></div>
-            <div class="photos">
+            <div th:unless="${#lists.isEmpty(review.files) || review.files.size()==0 }">
+              <div class="photos" th:style="'background-image:url(' + ${review.files[0].fullPath} + ');'">
                 <div class="close">x</div>
-                <img src="/img/book-cover/14.jpg">
-                <img src="/img/book-cover/15.jpg">
-                <img src="/img/book-cover/16.jpg">
-                <img src="/img/book-cover/17.jpg">
-                <img src="/img/book-cover/18.jpg">
-                <div class="number"></div>
-                <div class="btn-left"><</div>
-                <div class="btn-right">></div>
+                <img th:each="file: ${review.files}" th:src="${file.fullPath}">
+                <div class="number" th:text="${'+' + #strings.toString(review.files.size()-1)}" th:style="${review.files.size() < 2 ? 'display:none' : ''}"></div>
+                <button class="btn-left">&lt;</button>
+                <button class="btn-right">&gt;</button>
                 <div class="plus">더보기</div>
+              </div>
             </div>
             <div class="fold-button">
-              <div class="text">펼치기</div>
+              <span class="text">펼치기</span>
               <img class="icon" src="/img/icon/down.png">
             </div>
           </div>
+
         </div>
-    
-        <div class="my-review">
-          <div class="header">
-            <div class="buyer">구매자</div>
-            <div class="id">us******</div>
-            <div class="date">2022.11.28</div>
-            <div class="notify">신고</div>
-            <div class="tag">#재밌어요</div>
-            <div class="rating">
-              <div class="star-empty">
-                <img src="/img/icon/star-empty.svg">
-                <img src="/img/icon/star-empty.svg">
-                <img src="/img/icon/star-empty.svg">
-                <img src="/img/icon/star-empty.svg">
-                <img src="/img/icon/star-empty.svg">
-              </div>
-              <div class="star-fill">
-                <img src="/img/icon/star-fill.svg">
-                <img src="/img/icon/star-fill.svg">
-                <img src="/img/icon/star-fill.svg">
-                <img src="/img/icon/star-fill.svg">
-                <img src="/img/icon/star-fill.svg">
-              </div>
-            </div>
-          </div>
-    
-          <div class="body">
-            <div class="review">
-              <span>
-                이 책은 이준익 감독, 신하균과 하지민 주연으로 티빙에서 SF로맨스로 선보인다.
-                이번에 신간처럼 나오는 이 책은 22년 트렌드로 문장과 흐름을 섬세하게 다듬고
-                작가의 후기를 추가로 이 책이 탄생했다. 과학과 사랑, SF적인 상황에서 어떤 이야기가 펼쳐질까.
-                예전에 이 책이 나왔을 때보다 현재 개정판으로 나오면서 사람들은 어떤 반응을 보일까.
-              </span>
-            </div>
-            <div class="frame"></div>
-            <div class="photos">
-              <div class="close">x</div>
-              <img src="/img/book-cover/15.jpg">
-              <img src="/img/book-cover/16.jpg">
-              <img src="/img/book-cover/17.jpg">
-              <img src="/img/book-cover/18.jpg">
-              <div class="number"></div>
-              <div class="btn-left"><</div>
-              <div class="btn-right">></div>
-              <div class="plus">더보기</div>
-           </div>
-            <div class="fold-button">
-              <div class="text">펼치기</div>
-              <img class="icon" src="/img/icon/down.png">
-            </div>
-          </div>
-        </div>
+
       </div>
       <div class="other-reviews">
         <button onclick="location.href='/review?page=0&size=3'">다른 리뷰들 보러가기</button>
@@ -328,103 +179,6 @@
   </div>
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<form role="form" action="#" method="post" class="review-write-wrapper">
-  <div class="review-write-top">
-    <span class="review-write-top-text">리뷰작성</span>
-    <img class="review-write-top-icon" src="/img/icon/btn_dialog_close@2x.png">
-  </div>
-  <div class="review-write-contents">
-    <div class="review-write-book-wrapper">
-      <img class="review-book-img" src="/img/book-cover/54.jpg">
-      <div class="review-book-info">
-        <div class="review-book-name">책이름</div>
-        <div class="review-book-rating">
-          <div class="star-empty">
-            <img src="/img/icon/star-empty.svg">
-            <img src="/img/icon/star-empty.svg">
-            <img src="/img/icon/star-empty.svg">
-            <img src="/img/icon/star-empty.svg">
-            <img src="/img/icon/star-empty.svg">
-          </div>
-          <div class="star-fill">
-            <img src="/img/icon/star-fill.svg">
-            <img src="/img/icon/star-fill.svg">
-            <img src="/img/icon/star-fill.svg">
-            <img src="/img/icon/star-fill.svg">
-            <img src="/img/icon/star-fill.svg">
-          </div>
-        </div>
-        <div class="review-book-rating-number">
-          <span class="rating-number">0</span>
-          <span class="max-number">/ 5</span>
-        </div>
-      </div>
-    </div>
-    <div class="review-write-tag">
-      <div class="review-write-tag-info">
-        ㅣ 가장 공감되는 키워드를 선택해주세요. *
-      </div>
-      <span class="tag">#유익해요</span>
-      <span class="tag">#재밌어요</span>
-      <span class="tag">#공감돼요</span>
-      <span class="tag">#최고에요</span>
-      <span class="tag">#아쉬워요</span>
-    </div>
-    <div class="review-write-main">
-      <div class="review-write-main-title">ㅣ 리뷰 작성 *</div>
-      <div class="review-write-frame">
-        <textarea name="review-write" class="review-write" maxlength="3000"
-          placeholder="내용을 10자 이상 입력해주세요. 주제와 무관한 글은 임의로 삭제될 수 있습니다."></textarea>
-        <div class="write-number">0/3000</div>
-      </div>
-    </div>
-    <div class="review-write-attach">
-      <div class="review-write-attach-title">
-        <span>ㅣ 사진 첨부 (선택)</span>
-        <span>0/5</span>
-      </div>
-      <div class="review-write-attach-photo">
-
-        <div class="review-write-attach-photo-button">
-          <input class="review-write-photo-input" name="review-write-photo-input" type="file" accept=".jpg, .jpeg, .png, .gif"
-            onchange="setThumbnail(event);">
-        </div>
-
-      </div>
-      <div class="review-write-attach-guide">
-        * JPG, PNG, GIF 파일만 최대 5장 업로드 가능합니다.
-      </div>
-    </div>
-  </div>
-  <button type="submit" class="regist-button disable">등록</button>
-</form>
-
-<div class="write-wrapper-back"></div>
-
-<div class="close-alert">
-  <div class="text">
-    작성한 내용은 저장되지 않습니다.<br>
-    취소하겠습니까?
-  </div>
-  <button class="cancel" onclick="hide(this)">취소</button>
-  <button class="okay" onclick="formClose(this)">확인</button>
-</div>
-
 
 <div class="bottom-nav-sub-wrapper">
   <div class="bottom-nav-sub">
@@ -456,6 +210,188 @@
 </div>
 
 </div>
+
+<div class="write-wrapper-back"></div>
+
+
+
+<form action="/book" method="post" class="review-write-wrapper" enctype="multipart/form-data">
+  <div class="review-write-top">
+    <span class="review-write-top-text">리뷰 작성</span>
+    <img class="review-write-top-icon" src="/img/icon/btn_dialog_close@2x.png">
+  </div>
+  <div class="review-write-contents">
+    <div class="review-write-book-wrapper">
+      <input name="book" type="hidden" class="review-book-id" th:value="${book.id}" >
+      <img class="review-book-img" th:src="${book.imgPath}">
+      <div class="review-book-info">
+        <div class="review-book-name" th:text="${book.name}"></div>
+        <div class="review-book-rating">
+          <div class="star-empty">
+            <img src="/img/icon/star-empty.svg">
+            <img src="/img/icon/star-empty.svg">
+            <img src="/img/icon/star-empty.svg">
+            <img src="/img/icon/star-empty.svg">
+            <img src="/img/icon/star-empty.svg">
+          </div>
+          <div class="star-fill">
+            <img src="/img/icon/star-fill.svg">
+            <img src="/img/icon/star-fill.svg">
+            <img src="/img/icon/star-fill.svg">
+            <img src="/img/icon/star-fill.svg">
+            <img src="/img/icon/star-fill.svg">
+          </div>
+        </div>
+        <div class="review-book-rating-number">
+          <input name="rating" class="rating-number-input" type="text" value=0 hidden>
+          <span class="rating-number">0</span>
+          <span class="max-number">/ 5</span>
+        </div>
+      </div>
+    </div>
+    <div class="review-write-tag">
+      <input name="tag" class="review-write-tag-input" type="hidden">
+      <div class="review-write-tag-info">
+        ㅣ 가장 공감되는 키워드를 선택해주세요. *
+      </div>
+      <span class="tag">#유익해요</span>
+      <span class="tag">#재밌어요</span>
+      <span class="tag">#공감돼요</span>
+      <span class="tag">#최고에요</span>
+      <span class="tag">#아쉬워요</span>
+    </div>
+    <div class="review-write-main">
+      <div class="review-write-main-title">ㅣ 리뷰 작성 *</div>
+      <div class="review-write-frame">
+        <textarea name="content" class="review-write" maxlength="3000"
+          placeholder="내용을 10자 이상 입력해주세요. 주제와 무관한 글은 임의로 삭제될 수 있습니다."></textarea>
+        <div class="write-number">0/3000</div>
+      </div>
+    </div>
+    <div class="review-write-attach">
+      <div class="review-write-attach-title">
+        <span>ㅣ 사진 첨부 (선택)</span>
+        <span>0/5</span>
+      </div>
+      <div class="review-write-attach-photo">
+
+        <div class="review-write-attach-photo-button">
+          <input name="imageFiles" class="review-write-photo-input" type="file" multiple="multiple"
+            accept=".jpg, .jpeg, .png, .gif" onchange="setThumbnail(event,this)">
+        </div>
+
+      </div>
+      <div class="review-write-attach-guide">
+        * JPG, PNG, GIF 파일만 최대 5장 업로드 가능합니다.
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="regist-button disable">등록</button>
+</form>
+
+
+
+<div id="modify-wrapper">
+  <div class="modal-background"></div>
+  <form action="" method="post" class="review-modify-wrapper" enctype="multipart/form-data">
+  <div class="review-write-top">
+    <span class="review-write-top-text">리뷰 수정</span>
+    <img class="review-write-top-icon" src="/img/icon/btn_dialog_close@2x.png">
+  </div>
+  <div class="review-write-contents">
+    <div class="review-modify-book-wrapper">
+      <input th:value="${modReview!=null?modReview.book.id:''}" name="book" type="hidden" class="review-book-id">
+      <img class="review-book-img" th:src="${modReview!=null?modReview.book.imgPath:''}">
+      <div class="review-book-info">
+        <div th:text="${modReview!=null?modReview.book.name:''}" class="review-book-name">책이름</div>
+        <div class="review-book-rating">
+          <div class="star-empty">
+            <img src="/img/icon/star-empty.svg">
+            <img src="/img/icon/star-empty.svg">
+            <img src="/img/icon/star-empty.svg">
+            <img src="/img/icon/star-empty.svg">
+            <img src="/img/icon/star-empty.svg">
+          </div>
+          <div class="star-fill" th:style="'width:'+34.5*${modReview!=null?modReview.rating:0}+'px'">
+            <img src="/img/icon/star-fill.svg">
+            <img src="/img/icon/star-fill.svg">
+            <img src="/img/icon/star-fill.svg">
+            <img src="/img/icon/star-fill.svg">
+            <img src="/img/icon/star-fill.svg">
+          </div>
+        </div>
+        <div class="review-book-rating-number">
+          <input name="rating" th:value="${modReview!=null?modReview.rating:0}" class="rating-number-input" type="text" hidden>
+          <span class="rating-number" th:text="${modReview!=null?modReview.rating:0}">0</span>
+          <span class="max-number">/ 5</span>
+        </div>
+      </div>
+    </div>
+    <div class="review-write-tag">
+      <input name="tag" class="review-write-tag-input" type="hidden">
+      <div class="review-write-tag-info">
+        ㅣ 가장 공감되는 키워드를 선택해주세요. *
+      </div>
+      <span class="tag" th:classappend="${modReview!=null?modReview.tag:''}=='#유익해요'?'tag-active':''">#유익해요</span>
+      <span class="tag" th:classappend="${modReview!=null?modReview.tag:''}=='#재밌어요'?'tag-active':''">#재밌어요</span>
+      <span class="tag" th:classappend="${modReview!=null?modReview.tag:''}=='#공감돼요'?'tag-active':''">#공감돼요</span>
+      <span class="tag" th:classappend="${modReview!=null?modReview.tag:''}=='#최고에요'?'tag-active':''">#최고에요</span>
+      <span class="tag" th:classappend="${modReview!=null?modReview.tag:''}=='#아쉬워요'?'tag-active':''">#아쉬워요</span>
+    </div>
+    <div class="review-write-main">
+      <div class="review-write-main-title">ㅣ 리뷰 작성 *</div>
+      <div class="review-write-frame">
+        <textarea name="content" class="review-write" maxlength="3000" th:value="${modReview!=null?modReview.content:''}"
+                  th:text="${modReview!=null?modReview.content:''}" placeholder="내용을 10자 이상 입력해주세요. 주제와 무관한 글은 임의로 삭제될 수 있습니다."></textarea>
+        <div class="write-number" th:text="${#strings.length((modReview!=null?modReview.content:''))} + '/3000'">0/3000</div>
+      </div>
+    </div>
+    <div class="review-write-attach">
+      <div class="review-write-attach-title">
+        <span>ㅣ 사진 첨부 (선택)</span>
+        <span th:text="${modReview!=null?modReview.files.size():0}+'/5'">0/5</span>
+      </div>
+      <div class="review-write-attach-photo">
+
+        <div class="review-write-attach-photo-button">
+          <input name="imageFiles" class="review-write-photo-input" type="file" multiple="multiple" th:if="${(modReview!=null?modReview.files.size():0) < 5}"
+            accept=".jpg, .jpeg, .png, .gif" th:value="${modReview!=null?modReview.files:null}">
+        </div>
+
+        <div class="review-write-photo-wrapper" th:each="file: ${modReview!=null?modReview.files:null}">
+          <div class="review-write-photo-cancel" onclick="deleteImg(this)">X</div>
+          <input class="review-write-photo" onchange="setThumbnail(event,this)" th:style="'background-image:url(' + ${file.fullPath} + ');'" >
+        </div>
+
+      </div>
+      <div class="review-write-attach-guide">
+        * JPG, PNG, GIF 파일만 최대 5장 업로드 가능합니다.
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="regist-button disable">등록</button>
+</form>
+</div>
+
+<div class="alert-window close-alert">
+  <div class="text">
+    작성한 내용은 저장되지 않습니다.<br>
+    취소하겠습니까?
+  </div>
+  <button class="cancel" onclick="hideCloseAlert(this)">취소</button>
+  <button class="okay" onclick="formClose(this)">확인</button>
+</div>
+
+<div class="alert-window delete-alert">
+  <div class="text">
+    리뷰를 삭제하시겠습니까?
+  </div>
+  <button class="cancel" onclick="hideDeleteAlert(this)">취소</button>
+  <button class="okay" th:onclick="'reviewDelete('+${book.id}+')'">확인</button>
+</div>
+
+
+
 
 </div>
 

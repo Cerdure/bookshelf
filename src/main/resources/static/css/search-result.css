@@ -71,7 +71,7 @@
   position: relative;
   width: 1280px;
   margin: auto;
-  padding-top: 170px;
+  padding-top: 160px;
   border-left: 1px solid silver;
   border-right: 1px solid silver;
 }
@@ -79,6 +79,7 @@
 .main-wrapper {
   position: relative;
   width: 75%;
+  height: 1000px;
   border-right: 1px solid silver;
   display: inline-block;
   padding: 20px 40px;
@@ -107,7 +108,7 @@
 }
 .main-wrapper .header .order {
   float: right;
-  width: 80px;
+  width: 100px;
   height: 36px;
   border: none;
   outline: none;
@@ -120,14 +121,14 @@
   flex-wrap: wrap;
   align-items: baseline;
 }
-.main-wrapper .body li {
+.main-wrapper .body a {
   position: relative;
   float: left;
   width: 16.6%;
   height: 280px;
   list-style: none;
 }
-.main-wrapper .body li div {
+.main-wrapper .body a div {
   position: relative;
   bottom: 0px;
   left: 50%;
@@ -156,6 +157,10 @@
 .book-name span {
   font-family: 'Noto Sans KR', sans-serif;
   float: left;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .book-name img {
   position: relative;
@@ -272,15 +277,66 @@
   transition: 0.3s;
 }
 
+.search-controller {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  height: 40px;
+  text-align: center;
+  padding-top: 10px;
+}
+
+.search-controller .controller {
+  position: relative;
+  top: 10px;
+  display: inline-block;
+  width: 228px;
+}
+
+.controller-btn-left {
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  display: inline-block;
+  width: 20px;
+  cursor: pointer;
+}
+.controller-btn-right {
+  position: absolute;
+  top: 2px;
+  right: 0px;
+  display: inline-block;
+  width: 20px;
+  cursor: pointer;
+}
+.controller a{
+  display: inline-block;
+  width: 19px;
+  border-radius: 50%;
+  line-height: 19px;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 900;
+}
+.index-active {
+  background-color: cornflowerblue;
+  color: white;
+ }
 
 @media only screen and (max-width:1280px) {
   .wrapper {
+    width: 100%;
+  }
+  .search-input {
     width: 100%;
   }
 }
 
 @media only screen and (max-width:350px) {
   .wrapper {
+    width: 333px;
+  }
+  .search-input {
     width: 333px;
   }
 }

@@ -177,6 +177,9 @@ input {
   color: rgb(117, 117, 117);
 }
 
+#rememberMe {
+  display: none;
+}
 .id-save-wrapper {
   position: absolute;
   left: 0px;

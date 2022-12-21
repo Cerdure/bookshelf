@@ -17,173 +17,72 @@
 <div layout:fragment="content">
 
   <div class="search-input-wrapper">
-    <div class="search-input">
-      <img class="icon" src="/img/icon/search.svg">
-      <input type="text" placeholder="검색어를 입력하세요">
-      <img class="reset" src="/img/icon/x-circle-fill.svg">
-    </div>
+      <div class="search-input" id="search-form">
+        <img id="search-icon" class="icon" src="/img/icon/search.svg">
+        <input id="search-input" type="text" placeholder="검색어를 입력하세요">
+        <img class="reset" src="/img/icon/x-circle-fill.svg">
+      </div>
   </div>
 
-<div class="meta-wrapper">
+<form class="meta-wrapper">
 
-<div class="main-wrapper">
+<div class="main-wrapper" id="search-results">
+  <input name="name" type="hidden" id="search-input-hidden" th:value="${dataUtils.name}">
   <div class="header">
     <span class="left-text">검색결과</span>
-    <span class="left-number">12</span>
-    <select class="order" name="order">
-      <option value="popular">인기 순</option>
-      <option value="accuracy">정확도 순</option>
-      <option value="release-date">출간일 순</option>
-      <option value="low price">낮은 가격 순</option>
-      <option value="high price">높은 가격 순</option>
+    <span class="left-number" th:text="${books.totalElements}"></span>
+    <input name="sortOrder" type="hidden" id="sortOrder" th:value="${dataUtils.sortOrder} == null ? 'name' : ${dataUtils.sortOrder}">
+    <select id="sortOrderSelect" class="order">
+      <option value="name" th:selected="${dataUtils.sortOrder} == 'name'" selected>책이름 순</option>
+      <option value="sales" th:selected="${dataUtils.sortOrder} == 'sales'">판매량 순</option>
+      <option value="rating" th:selected="${dataUtils.sortOrder} == 'rating'">상품평 순</option>
+      <option value="publishDate" th:selected="${dataUtils.sortOrder} == 'publishDate'">출간일 순</option>
+<!--      <option value="low price">낮은 가격 순</option>-->
+<!--      <option value="high price">높은 가격 순</option>-->
     </select>
   </div>
   <div class="body">
-      <li onclick="location.href='/book-detail'">
-        <div class="book-img book-img-1"><img src="/img/book-cover/1.jpg"></div>
-        <div class="book-name book-name-1"><span>책이름 1</span>
+      <a th:each="book: ${books}" th:href="@{/book(id=${book.id})}">
+        <div class="book-img book-img"><img th:src="${book.imgPath}"></div>
+        <div class="book-name book-name"><span th:text="${book.name}"></span>
         </div>
-        <div class="book-author book-author-1"><span>작가 1</span></div>
-      </li>
-      <li onclick="location.href='/book-detail'">
-        <div class="book-img book-img-2"><img src="/img/book-cover/2.jpg"></div>
-        <div class="book-name book-name-2"><span>책이름 2</span>
-        </div>
-        <div class="book-author book-author-2"><span>작가 2</span></div>
-      </li>
-      <li onclick="location.href='/book-detail'">
-        <div class="book-img book-img-3"><img src="/img/book-cover/3.jpg"></div>
-        <div class="book-name book-name-3"><span>책이름 3</span>
-        </div>
-        <div class="book-author book-author-3"><span>작가 3</span></div>
-      </li>
-      <li onclick="location.href='/book-detail'">
-        <div class="book-img book-img-4"><img src="/img/book-cover/4.jpg"></div>
-        <div class="book-name book-name-4"><span>책이름 4</span>
-        </div>
-        <div class="book-author book-author-4"><span>작가 4</span></div>
-      </li>
-      <li onclick="location.href='/book-detail'">
-        <div class="book-img book-img-5"><img src="/img/book-cover/5.jpg"></div>
-        <div class="book-name book-name-5"><span>책이름 5</span>
-        </div>
-        <div class="book-author book-author-5"><span>작가 5</span></div>
-      </li>
-      <li onclick="location.href='/book-detail'">
-        <div class="book-img book-img-6"><img src="/img/book-cover/6.jpg"></div>
-        <div class="book-name book-name-6"><span>책이름 6</span>
-        </div>
-        <div class="book-author book-author-6"><span>작가 6</span></div>
-      </li>
-      <li onclick="location.href='/book-detail'">
-        <div class="book-img book-img-7"><img src="/img/book-cover/7.jpg"></div>
-        <div class="book-name book-name-7"><span>책이름 7</span>
-        </div>
-        <div class="book-author book-author-7"><span>작가 7</span></div>
-      </li>
-      <li onclick="location.href='/book-detail'">
-        <div class="book-img book-img-8"><img src="/img/book-cover/8.jpg"></div>
-        <div class="book-name book-name-8"><span>책이름 8</span>
-        </div>
-        <div class="book-author book-author-8"><span>작가 8</span></div>
-      </li>
-      <li onclick="location.href='/book-detail'">
-        <div class="book-img book-img-9"><img src="/img/book-cover/9.jpg"></div>
-        <div class="book-name book-name-9"><span>책이름 9</span>
-        </div>
-        <div class="book-author book-author-9"><span>작가 9</span></div>
-      </li>
-      <li onclick="location.href='/book-detail'">
-        <div class="book-img book-img-10"><img src="/img/book-cover/10.jpg"></div>
-        <div class="book-name book-name-10"><span>책이름 10</span>
-        </div>
-        <div class="book-author book-author-10"><span>작가 10</span></div>
-      </li>
-      <li onclick="location.href='/book-detail'">
-        <div class="book-img book-img-11"><img src="/img/book-cover/11.jpg"></div>
-        <div class="book-name book-name-11"><span>책이름 11</span>
-        </div>
-        <div class="book-author book-author-11"><span>작가 11</span></div>
-      </li>
-      <li onclick="location.href='/book-detail'">
-        <div class="book-img book-img-12"><img src="/img/book-cover/12.jpg"></div>
-        <div class="book-name book-name-12"><span>책이름 12</span>
-        </div>
-        <div class="book-author book-author-12"><span>작가 12</span></div>
-      </li>
-      <li onclick="location.href='/book-detail'">
-        <div class="book-img book-img-1"><img src="/img/book-cover/1.jpg"></div>
-        <div class="book-name book-name-1"><span>책이름 1</span>
-        </div>
-        <div class="book-author book-author-1"><span>작가 1</span></div>
-      </li>
-      <li onclick="location.href='/book-detail'">
-        <div class="book-img book-img-2"><img src="/img/book-cover/2.jpg"></div>
-        <div class="book-name book-name-2"><span>책이름 2</span>
-        </div>
-        <div class="book-author book-author-2"><span>작가 2</span></div>
-      </li>
-      <li onclick="location.href='/book-detail'">
-        <div class="book-img book-img-3"><img src="/img/book-cover/3.jpg"></div>
-        <div class="book-name book-name-3"><span>책이름 3</span>
-        </div>
-        <div class="book-author book-author-3"><span>작가 3</span></div>
-      </li>
-      <li onclick="location.href='/book-detail'">
-        <div class="book-img book-img-4"><img src="/img/book-cover/4.jpg"></div>
-        <div class="book-name book-name-4"><span>책이름 4</span>
-        </div>
-        <div class="book-author book-author-4"><span>작가 4</span></div>
-      </li>
-      <li onclick="location.href='/book-detail'">
-        <div class="book-img book-img-5"><img src="/img/book-cover/5.jpg"></div>
-        <div class="book-name book-name-5"><span>책이름 5</span>
-        </div>
-        <div class="book-author book-author-5"><span>작가 5</span></div>
-      </li>
-      <li onclick="location.href='/book-detail'">
-        <div class="book-img book-img-6"><img src="/img/book-cover/6.jpg"></div>
-        <div class="book-name book-name-6"><span>책이름 6</span>
-        </div>
-        <div class="book-author book-author-6"><span>작가 6</span></div>
-      </li>
-      <li onclick="location.href='/book-detail'">
-        <div class="book-img book-img-7"><img src="/img/book-cover/7.jpg"></div>
-        <div class="book-name book-name-7"><span>책이름 7</span>
-        </div>
-        <div class="book-author book-author-7"><span>작가 7</span></div>
-      </li>
-      <li onclick="location.href='/book-detail'">
-        <div class="book-img book-img-8"><img src="/img/book-cover/8.jpg"></div>
-        <div class="book-name book-name-8"><span>책이름 8</span>
-        </div>
-        <div class="book-author book-author-8"><span>작가 8</span></div>
-      </li>
-      <li onclick="location.href='/book-detail'">
-        <div class="book-img book-img-9"><img src="/img/book-cover/9.jpg"></div>
-        <div class="book-name book-name-9"><span>책이름 9</span>
-        </div>
-        <div class="book-author book-author-9"><span>작가 9</span></div>
-      </li>
-      <li onclick="location.href='/book-detail'">
-        <div class="book-img book-img-10"><img src="/img/book-cover/10.jpg"></div>
-        <div class="book-name book-name-10"><span>책이름 10</span>
-        </div>
-        <div class="book-author book-author-10"><span>작가 10</span></div>
-      </li>
-      <li onclick="location.href='/book-detail'">
-        <div class="book-img book-img-11"><img src="/img/book-cover/11.jpg"></div>
-        <div class="book-name book-name-11"><span>책이름 11</span>
-        </div>
-        <div class="book-author book-author-11"><span>작가 11</span></div>
-      </li>
-      <li onclick="location.href='/book-detail'">
-        <div class="book-img book-img-12"><img src="/img/book-cover/12.jpg"></div>
-        <div class="book-name book-name-12"><span>책이름 12</span>
-        </div>
-        <div class="book-author book-author-12"><span>작가 12</span></div>
-      </li>
+        <div class="book-author book-author"><span th:text="${book.author}"></span></div>
+      </a>
   </div>
+
+    <div class="search-controller">
+        <span class="controller"
+              th:with="start=${T(java.lang.Math).floor(books.number/10)*10 + 1}, last=(${books.totalPages})">
+
+           <a th:class="${books.first} ? 'disable'">
+             <img class="controller-btn-left" src="/img/icon/btn_pagination_prev@2x.png">
+           </a>
+
+          <a th:if="${books.number > 1}"
+             th:text="1" id="idx">
+          </a>
+
+          <span th:if="${books.number > 1}">...</span>
+
+           <a th:each="page: ${#numbers.sequence(start, last)}"
+              th:if="${books.first ? page < books.number +4 :
+              (books.last ? page > books.number -2 : (page < books.number +3) && (page > books.number -1))}"
+              th:class="${page == books.number + 1} ? 'index-active'" id="idx"
+              th:text="${page}">
+           </a>
+
+          <span th:if="${books.number < books.totalPages -2}">...</span>
+
+          <a th:if="${books.number < books.totalPages -2}"
+             th:text="${books.totalPages}" id="idx">
+          </a>
+
+          <a th:class="${books.last} ? 'disable'">
+            <img class="controller-btn-right" src="/img/icon/btn_pagination_next@2x.png">
+          </a>
+
+        </span>
+    </div>
 </div>
 
 <div class="side-wrapper">
@@ -195,42 +94,43 @@
     <div class="category-wrapper">
       <span class="title">카테고리</span>
     <ul>
-      <li><input type="checkbox" name="category" value="original">북셸프 오리지널</li>
-      <li><input type="checkbox" name="category" value="essay">시 / 에세이</li>
-      <li><input type="checkbox" name="category" value="novel">소설</li>
-      <li><input type="checkbox" name="category" value="human">인문</li>
-      <li><input type="checkbox" name="category" value="health">건강</li>
-      <li><input type="checkbox" name="category" value="cook">요리</li>
-      <li><input type="checkbox" name="category" value="economy">경제 / 경영</li>
-      <li><input type="checkbox" name="category" value="self">자기계발</li>
-      <li><input type="checkbox" name="category" value="politics">정치/사회</li>
-      <li><input type="checkbox" name="category" value="history">역사 / 문화</li>
-      <li><input type="checkbox" name="category" value="comic">만화</li>
-      <li><input type="checkbox" name="category" value="it">컴퓨터</li>
-      <li><input type="checkbox" name="category" value="science">과학</li>
-      <li><input type="checkbox" name="category" value="travel">여행</li>
-      <li><input type="checkbox" name="category" value="art">예술 / 대중문화</li>
-      <li><input type="checkbox" name="category" value="hobby">취미 / 실용 / 스포츠</li>
-      <li><input type="checkbox" name="category" value="religion">종교</li>
-      <li><input type="checkbox" name="category" value="foreign">외국어</li>
-      <li><input type="checkbox" name="category" value="philosophy">철학</li>
-      <li><input type="checkbox" name="category" value="child">어린이 / 청소년</li>
+      <li><input name="categories" type="checkbox" class="category" value="1">북셸프 오리지널</li>
+      <li><input name="categories" type="checkbox" class="category" value="2">시 / 에세이</li>
+      <li><input name="categories" type="checkbox" class="category" value="3">소설</li>
+      <li><input name="categories" type="checkbox" class="category" value="4">인문</li>
+      <li><input name="categories" type="checkbox" class="category" value="5">건강</li>
+      <li><input name="categories" type="checkbox" class="category" value="6">요리</li>
+      <li><input name="categories" type="checkbox" class="category" value="7">경제 / 경영</li>
+      <li><input name="categories" type="checkbox" class="category" value="8">자기계발</li>
+      <li><input name="categories" type="checkbox" class="category" value="9">정치/사회</li>
+      <li><input name="categories" type="checkbox" class="category" value="10">역사 / 문화</li>
+      <li><input name="categories" type="checkbox" class="category" value="11">만화</li>
+      <li><input name="categories" type="checkbox" class="category" value="12">컴퓨터</li>
+      <li><input name="categories" type="checkbox" class="category" value="13">과학</li>
+      <li><input name="categories" type="checkbox" class="category" value="14">여행</li>
+      <li><input name="categories" type="checkbox" class="category" value="15">예술 / 대중문화</li>
+      <li><input name="categories" type="checkbox" class="category" value="16">취미 / 실용 / 스포츠</li>
+      <li><input name="categories" type="checkbox" class="category" value="17">종교</li>
+      <li><input name="categories" type="checkbox" class="category" value="18">외국어</li>
+      <li><input name="categories" type="checkbox" class="category" value="19">철학</li>
+      <li><input name="categories" type="checkbox" class="category" value="20">어린이 / 청소년</li>
     </ul>
     </div>
     <div class="release-date-wrapper">
       <span class="title">출간일</span>
       <ul>
-        <li><input type="radio" name="release-date" value="one-month">1개월 이내</li>
-        <li><input type="radio" name="release-date" value="three-month">3개월 이내</li>
-        <li><input type="radio" name="release-date" value="six-month">6개월 이내</li>
-        <li><input type="radio" name="release-date" value="one-year">1년 이내</li>
+        <li><input name="publishDate" type="radio" class="publish-date" th:value="null" checked>전체</li>
+        <li><input name="publishDate" type="radio" class="publish-date" th:value="${dataUtils.getOneMonthAgo()}">1개월 이내</li>
+        <li><input name="publishDate" type="radio" class="publish-date" th:value="${dataUtils.getThreeMonthAgo()}">3개월 이내</li>
+        <li><input name="publishDate" type="radio" class="publish-date" th:value="${dataUtils.getSixMonthAgo()}">6개월 이내</li>
+        <li><input name="publishDate" type="radio" class="publish-date" th:value="${dataUtils.getOneYearAgo()}">1년 이내</li>
       </ul>
     </div>
     <button class="reset-btn">초기화</button>
   </div>
 </div>
 
-</div>
+</form>
 
 </div>
 

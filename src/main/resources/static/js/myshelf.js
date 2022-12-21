@@ -57,7 +57,7 @@ $(function () {
     });
     $(".entire-book-title").css({
       'position':'fixed',
-      'top':'115px',
+      'top':'105px',
       'left':'50%',
       'transform':'translateX(-50%)'
     });
@@ -136,7 +136,7 @@ $(function () {
       });
       $(".entire-book-title").css({
         'position':'fixed',
-        'top':'115px',
+        'top':'105px',
         'left':'50%',
         'transform':'translateX(-50%)'
       });

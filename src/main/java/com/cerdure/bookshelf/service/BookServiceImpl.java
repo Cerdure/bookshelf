@@ -9,6 +9,7 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -31,6 +32,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public Book findById(Long bookId) {
+        return bookRepository.findById(bookId).get();
+    }
+
+    @Override
     public Book findById(String bookId) {
         return bookRepository.findById(Long.getLong(bookId)).get();
     }
@@ -40,6 +46,35 @@ public class BookServiceImpl implements BookService {
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable= PageRequest.of(page,5, Sort.by(sortOrder).descending());
         return bookRepository.findByNameContainingIgnoreCase(name, pageable);
+    }
+
+    @Override
+    public Page<Book> findByNamePaging(String name, String sortOrder, Integer maxNum, Pageable pageable) {
+        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
+        pageable= PageRequest.of(page,maxNum, Sort.by(sortOrder).descending());
+        return bookRepository.findByNameContainingIgnoreCase(name, pageable);
+    }
+
+    @Override
+    public Page<Book> findByNameWithCategoriesAndPublishDate(String name, List<Integer> categories, LocalDate publishDate, String sortOrder, Pageable pageable) {
+        System.out.println("name = " + name);
+        System.out.println("categories = " + categories);
+        System.out.println("publishDate = " + publishDate);
+        System.out.println("sortOrder = " + sortOrder);
+        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
+        Sort nameSort = Sort.by("name").ascending();
+        pageable= PageRequest.of(page,18, sortOrder==null || sortOrder=="" || sortOrder=="name"? nameSort : Sort.by(sortOrder).descending());
+        if(publishDate == null){
+            if(categories == null){
+                return bookRepository.findByNameContainingIgnoreCase(name, pageable);
+            }
+            return bookRepository.findByNameContainingIgnoreCaseAndCategoryIn(name, categories, pageable);
+        } else {
+            if (categories == null){
+                return bookRepository.findByNameContainingIgnoreCaseAndPublishDateAfter(name, publishDate, pageable);
+            }
+            return bookRepository.findByNameContainingIgnoreCaseAndCategoryInAndPublishDateAfter(name, categories, publishDate, pageable);
+        }
     }
 
     @Override

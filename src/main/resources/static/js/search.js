@@ -41,6 +41,13 @@ $(function () {
       }
     });
 
+
+  $("#search-input").keyup(function (key){
+    if (key.keyCode == 13) {
+      $("#search-form").submit();
+    }
+  })
+
   let startTime;
   for (startTime = 1; startTime < 6; startTime++) {
     $(".trend-wrapper ul:nth-child(3) li:nth-child(" + startTime + ")")

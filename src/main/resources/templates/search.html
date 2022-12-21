@@ -17,10 +17,10 @@
 <div layout:fragment="content">
 
   <div class="search-input-wrapper">
-    <div class="search-input">
-      <img onclick="location.href='/search-result'" src="/img/icon/search.svg">
-      <input type="text" placeholder="검색어를 입력하세요">
-    </div>
+    <form action="/search-result" method="get" class="search-input" id="search-form">
+      <img onclick="document.getElementById('search-form').submit();" src="/img/icon/search.svg">
+      <input id="search-input" name="name" type="text" placeholder="검색어를 입력하세요">
+    </form>
   </div>
 
   <div class="wrapper">
