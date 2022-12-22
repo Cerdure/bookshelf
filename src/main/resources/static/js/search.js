@@ -41,12 +41,38 @@ $(function () {
       }
     });
 
+  $(".search-input .reset").click(function () {
+    $(this).parent().find('input').val('');
+    $(".search-result-category").remove();
+    $(".search-result-book").remove();
+  });
 
-  $("#search-input").keyup(function (key){
+  function bookSearch() {
+    $.ajax({                                                      //한글이라 오류남?
+      url: "/search-input",
+      type: "get",
+      data: $("#search-form").serialize(),
+      dataType: "html",
+      async: true,
+    }).done(function (data) {
+      $('#search-input-results').replaceWith(data);
+    });
+  }
+
+  $("#search-input").keyup(function(key){
     if (key.keyCode == 13) {
       $("#search-form").submit();
+    } else {
+      bookSearch();
     }
-  })
+  });
+
+  $(document).ready(function (){
+    $(document).on("click","#category-box",function (){
+       $("#category-id-input").val($(this).find("#category-id").val());
+        $("#search-form").submit();
+    });
+  });
 
   let startTime;
   for (startTime = 1; startTime < 6; startTime++) {
@@ -64,5 +90,6 @@ $(function () {
   hour = date.getHours();
   minute = date.getMinutes();
   $(".trend-current-time").text(month + '.' + day + " " + hour + ":" + minute + " 기준");
+
 });
 

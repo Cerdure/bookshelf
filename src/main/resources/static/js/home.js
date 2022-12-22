@@ -149,6 +149,42 @@ $(function () {
   });
 
 
+
+  function bookSearch() {
+    $.ajax({                                                      //한글이라 오류남?
+      url: "/home-search-input",
+      type: "get",
+      data: $("#search-form").serialize(),
+      dataType: "html",
+      async: true,
+    }).done(function (data) {
+      $('#search-input-results').replaceWith(data);
+    });
+  }
+
+  $("#search-input").keyup(function(key){
+    if (key.keyCode == 13) {
+      $("#search-form").submit();
+    } else {
+      bookSearch();
+    }
+  });
+
+  $(".search-input .reset").click(function () {
+    $(this).parent().find('input').val('');
+    $(".search-result-category").remove();
+    $(".search-result-book").remove();
+  });
+
+  $(document).ready(function (){
+    $(document).on("click","#category-box",function (){
+       $("#category-id-input").val($(this).find("#category-id").val());
+        $("#search-form").submit();
+    });
+  });
+
+
+
   let tbArr1 = new Array(5);
   for (var i = 1; i < 6; i++) {
     let randNum = Math.floor(Math.random() * 62 + 1);

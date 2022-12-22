@@ -1,6 +1,6 @@
 package com.cerdure.bookshelf.domain.order;
 
-import com.cerdure.bookshelf.domain.Book;
+import com.cerdure.bookshelf.domain.book.Book;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

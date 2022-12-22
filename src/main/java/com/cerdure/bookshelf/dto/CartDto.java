@@ -1,6 +1,6 @@
 package com.cerdure.bookshelf.dto;
 
-import com.cerdure.bookshelf.domain.Book;
+import com.cerdure.bookshelf.domain.book.Book;
 import com.cerdure.bookshelf.domain.member.Member;
 import lombok.Builder;
 import lombok.Data;

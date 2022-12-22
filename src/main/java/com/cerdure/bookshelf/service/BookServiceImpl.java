@@ -1,6 +1,7 @@
 package com.cerdure.bookshelf.service;
 
-import com.cerdure.bookshelf.domain.Book;
+import com.cerdure.bookshelf.domain.book.Book;
+import com.cerdure.bookshelf.domain.book.Category;
 import com.cerdure.bookshelf.dto.BookDto;
 import com.cerdure.bookshelf.repository.BookRepository;
 import com.cerdure.bookshelf.service.interfaces.BookService;
@@ -11,8 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -49,6 +48,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List <Book> findByName(String name) {
+        return bookRepository.findByNameContainingIgnoreCase(name);
+    }
+
+    @Override
     public Page<Book> findByNamePaging(String name, String sortOrder, Integer maxNum, Pageable pageable) {
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable= PageRequest.of(page,maxNum, Sort.by(sortOrder).descending());
@@ -56,25 +60,26 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Page<Book> findByNameWithCategoriesAndPublishDate(String name, List<Integer> categories, LocalDate publishDate, String sortOrder, Pageable pageable) {
-        System.out.println("name = " + name);
-        System.out.println("categories = " + categories);
-        System.out.println("publishDate = " + publishDate);
-        System.out.println("sortOrder = " + sortOrder);
+    public Page<Book> findByNameWithCategoryAndPublishDate(String name, List<Integer> categoryIds, LocalDate publishDate, String sortOrder, Pageable pageable) {
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         Sort nameSort = Sort.by("name").ascending();
         pageable= PageRequest.of(page,18, sortOrder==null || sortOrder=="" || sortOrder=="name"? nameSort : Sort.by(sortOrder).descending());
         if(publishDate == null){
-            if(categories == null){
+            if(categoryIds == null){
                 return bookRepository.findByNameContainingIgnoreCase(name, pageable);
             }
-            return bookRepository.findByNameContainingIgnoreCaseAndCategoryIn(name, categories, pageable);
+            return bookRepository.findByNameContainingIgnoreCaseAndCategoryIdIn(name, categoryIds, pageable);
         } else {
-            if (categories == null){
+            if (categoryIds == null){
                 return bookRepository.findByNameContainingIgnoreCaseAndPublishDateAfter(name, publishDate, pageable);
             }
-            return bookRepository.findByNameContainingIgnoreCaseAndCategoryInAndPublishDateAfter(name, categories, publishDate, pageable);
+            return bookRepository.findByNameContainingIgnoreCaseAndCategoryIdInAndPublishDateAfter(name, categoryIds, publishDate, pageable);
         }
+    }
+
+    @Override
+    public Page<Book> findByCategory(Integer categoryId, Pageable pageable) {
+        return bookRepository.findByCategoryId(categoryId, pageable);
     }
 
     @Override

@@ -18,10 +18,33 @@
 
   <div class="search-input-wrapper">
     <form action="/search-result" method="get" class="search-input" id="search-form">
-      <img onclick="document.getElementById('search-form').submit();" src="/img/icon/search.svg">
-      <input id="search-input" name="name" type="text" placeholder="검색어를 입력하세요">
+      <img class="icon" onclick="document.getElementById('search-form').submit();" src="/img/icon/search.svg">
+      <input id="search-input" name="name" type="text" placeholder="검색어를 입력하세요" autocomplete="off">
+      <input id="category-id-input" name="categoryIds" type="hidden">
+      <img class="reset" src="/img/icon/x-circle-fill.svg">
     </form>
+
+    <div class="search-result-wrapper" id="search-input-results">
+
+      <div class="search-result-category" th:each="category : ${ipCategories}">
+        <div class="title">카테고리</div>
+        <a id="category-box">
+          <span class="data" th:utext="${category.name}"></span>
+          <input id="category-id" th:value="${category.id}" type="hidden">
+        </a>
+      </div>
+
+      <div class="search-result-book" th:each="book : ${ipBooks}">
+        <img src="/img/icon/search.svg">
+        <a th:href="'/book?id=' + ${book.id}">
+          <span class="data" th:utext="${book.name}"></span>
+        </a>
+      </div>
+
+    </div>
   </div>
+
+
 
   <div class="wrapper">
 

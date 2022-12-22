@@ -1,8 +1,7 @@
 package com.cerdure.bookshelf.dto.shelf;
 
-import com.cerdure.bookshelf.domain.Book;
+import com.cerdure.bookshelf.domain.book.Book;
 import com.cerdure.bookshelf.domain.member.Member;
-import com.cerdure.bookshelf.dto.BookDto;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;

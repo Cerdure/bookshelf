@@ -1,16 +1,20 @@
-package com.cerdure.bookshelf.domain;
+package com.cerdure.bookshelf.domain.book;
 
 import com.cerdure.bookshelf.domain.board.Review;
-import com.cerdure.bookshelf.domain.enums.Answer;
-import com.cerdure.bookshelf.domain.enums.MemberGrade;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 @Entity @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -22,7 +26,6 @@ public class Book {
     private Long id;
     private String name;
     private String imgPath;
-    private Integer category;
     private String author;
     private String publisher;
     private LocalDate publishDate;
@@ -33,6 +36,10 @@ public class Book {
     private Integer stock;
     private Integer sales;
     private Integer rating;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.REMOVE)
     private List<Review> reviews = new ArrayList<>();
@@ -77,7 +84,7 @@ public class Book {
     }
 
     @Builder
-    public Book(Long id, String name, String imgPath, Integer category, String author, String publisher, LocalDate publishDate, String ISBN, Integer originPrice, Integer discountRate, Integer discountPrice, Integer stock, Integer sales, Integer rating, String intro, String bookIndex, String publisherReview) {
+    public Book(Long id, String name, String imgPath, Category category, String author, String publisher, LocalDate publishDate, String ISBN, Integer originPrice, Integer discountRate, Integer discountPrice, Integer stock, Integer sales, Integer rating, String intro, String bookIndex, String publisherReview) {
         this.id = id;
         this.name = name;
         this.imgPath = imgPath;
@@ -109,32 +116,14 @@ public class Book {
         return 성.get(0) + 이름.get(0) + 이름.get(1);
     }
 
-    public String getCategoryToString() throws Exception{
-        switch (this.category){
-            case 1: return "북셸프 오리지널";
-            case 2: return "시 / 에세이";
-            case 3: return "소설";
-            case 4: return "인문";
-            case 5: return "건강";
-            case 6: return "요리";
-            case 7: return "경제 / 경영";
-            case 8: return "자기계발";
-            case 9: return "정치 / 사회";
-            case 10: return "역사 / 문화";
-            case 11: return "만화";
-            case 12: return "컴퓨터 / IT";
-            case 13: return "과학";
-            case 14: return "여행";
-            case 15: return "예술 / 대중문화";
-            case 16: return "취미 / 실용 / 스포츠";
-            case 17: return "종교";
-            case 18: return "외국어";
-            case 19: return "철학";
-            case 20: return "어린이 / 청소년";
-            default: throw new Exception("일치하는 카테고리가 없습니다.");
-        }
+    public void coincidenceHighlight(String input){
+            input = input.toUpperCase();
+            int startIndex = this.name.toUpperCase().indexOf(input);
+            int endIndex = startIndex + input.length();
+            String coincidenceStr = "<strong>" + this.name.substring(startIndex, endIndex) + "</strong>";
+            String prevStr = this.name.substring(0, startIndex);
+            String nextStr = this.name.substring(endIndex, this.name.length());
+            this.name = prevStr + coincidenceStr + nextStr;
     }
-
-
 
 }

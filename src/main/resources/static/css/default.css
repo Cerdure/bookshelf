@@ -152,7 +152,7 @@ header {
   stroke-width: 6px;
   fill: #565656;
   stroke: #565656;
-  stroke-dasharray: 80 420;
+  stroke-dasharray: 110 420;
   stroke-dashoffset: -120;
   transition: 1s all ease;
   rx: 5px;

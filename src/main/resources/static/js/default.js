@@ -1,6 +1,5 @@
 
 $(function () {
-
   let st = $(window).scrollTop();
   let width = $(window).width();
 
@@ -49,6 +48,4 @@ $(function () {
   $(".top-move-button").click(function () {
     $('html').stop().animate({ scrollTop: 0 }, 1000);
   });
-
-
 });

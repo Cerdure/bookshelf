@@ -1,7 +1,6 @@
 package com.cerdure.bookshelf.web.controller;
 
-import com.cerdure.bookshelf.domain.Book;
-import com.cerdure.bookshelf.domain.UploadFile;
+import com.cerdure.bookshelf.domain.book.Book;
 import com.cerdure.bookshelf.domain.board.Review;
 import com.cerdure.bookshelf.domain.member.Member;
 import com.cerdure.bookshelf.dto.board.ReviewDto;
@@ -9,25 +8,15 @@ import com.cerdure.bookshelf.service.BookServiceImpl;
 import com.cerdure.bookshelf.service.MemberServiceImpl;
 import com.cerdure.bookshelf.service.ReviewServiceImpl;
 import com.cerdure.bookshelf.service.UploadFileServiceImpl;
-import com.cerdure.bookshelf.web.security.MemberAdapter;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Slice;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.io.File;
-import java.util.List;
 import java.util.Map;
 
 @Slf4j

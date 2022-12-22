@@ -62,7 +62,7 @@
         <div class="box">
           <div class="category">
             <div class="text">카테고리</div>
-            <div class="data" th:text="${dataUtils.category}"></div>
+            <div class="data" th:text="${book.category.name}"></div>
           </div>
           <div class="publisher">
             <div class="text">출판사</div>
@@ -99,6 +99,8 @@
 
       <div class="review-wrapper">
         <span class="title">이 책의 리뷰</span>
+
+        <div class="review-null" th:if="${book.reviews!=null}">이 책의 첫 리뷰어가 되어주세요.</div>
 
         <div class="my-review" th:each="review: ${book.reviews}">
           <input id="review-id" th:value="${review.id}" type="hidden">

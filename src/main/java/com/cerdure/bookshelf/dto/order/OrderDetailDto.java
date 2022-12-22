@@ -1,8 +1,7 @@
 package com.cerdure.bookshelf.dto.order;
 
-import com.cerdure.bookshelf.domain.Book;
+import com.cerdure.bookshelf.domain.book.Book;
 import com.cerdure.bookshelf.domain.order.Order;
-import com.cerdure.bookshelf.dto.BookDto;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;

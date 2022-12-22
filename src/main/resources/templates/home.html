@@ -67,15 +67,39 @@
       </div>
     </div>
   </div>
+
   <div class="simple-search-wrapper">
     <div class="simple-search">
       <div class="simple-search-title">User 님,</div>
-      <div class="simple-search-input">
-        <input type="text" placeholder="찾으시는 책이 있나요?">
-        <img src="/img/icon/search.svg" alt="">
-      </div>
+      <form class="simple-search-input search-input" action="/search-result" method="get" id="search-form">
+        <input id="search-input" name="name" type="text" autocomplete="off" placeholder="찾으시는 책이 있나요?">
+        <img class="icon" onclick="document.getElementById('search-form').submit();" src="/img/icon/search.svg">
+        <input id="category-id-input" name="categoryIds" type="hidden">
+        <img class="reset" src="/img/icon/x-circle-fill.svg">
+      </form>
     </div>
   </div>
+
+  <div class="search-result-outer-wrapper">
+  <div class="search-result-wrapper" id="search-input-results">
+    <div class="search-result-category" th:each="category : ${ipCategories}">
+      <div class="title">카테고리</div>
+      <a id="category-box">
+        <span class="data" th:utext="${category.name}"></span>
+        <input id="category-id" th:value="${category.id}" type="hidden">
+      </a>
+    </div>
+
+    <div class="search-result-book" th:each="book : ${ipBooks}">
+      <img src="/img/icon/search.svg">
+      <a th:href="'/book?id=' + ${book.id}">
+        <span class="data" th:utext="${book.name}"></span>
+      </a>
+    </div>
+  </div>
+  </div>
+
+
   <div class="today-book-wrapper">
     <div class="today-book-title-wrapper">
       <span class="today-book-title">오늘의 책</span>

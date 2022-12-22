@@ -17,11 +17,29 @@
 <div layout:fragment="content">
 
   <div class="search-input-wrapper">
-      <div class="search-input" id="search-form">
-        <img id="search-icon" class="icon" src="/img/icon/search.svg">
-        <input id="search-input" type="text" placeholder="검색어를 입력하세요">
-        <img class="reset" src="/img/icon/x-circle-fill.svg">
-      </div>
+    <form action="/search-result" method="get" class="search-input" id="search-form">
+      <img class="icon" onclick="document.getElementById('search-form').submit();" src="/img/icon/search.svg">
+      <input id="search-input" name="name" type="text" placeholder="검색어를 입력하세요" autocomplete="off" th:value="${dataUtils.name}">
+      <img class="reset" src="/img/icon/x-circle-fill.svg">
+    </form>
+
+  <div class="search-result-wrapper" id="search-input-results">
+
+    <div class="search-result-category" th:each="category : ${ipCategories}">
+      <div class="title">카테고리</div>
+      <a id="category-box">
+        <span class="data" th:utext="${category.name}"></span>
+        <input id="category-id" th:value="${category.id}" type="hidden">
+      </a>
+    </div>
+
+    <div class="search-result-book" th:each="book : ${ipBooks}">
+      <img src="/img/icon/search.svg">
+      <a th:href="'/book?id=' + ${book.id}">
+        <span class="data" th:utext="${book.name}"></span>
+      </a>
+    </div>
+  </div>
   </div>
 
 <form class="meta-wrapper">
@@ -94,39 +112,39 @@
     <div class="category-wrapper">
       <span class="title">카테고리</span>
     <ul>
-      <li><input name="categories" type="checkbox" class="category" value="1">북셸프 오리지널</li>
-      <li><input name="categories" type="checkbox" class="category" value="2">시 / 에세이</li>
-      <li><input name="categories" type="checkbox" class="category" value="3">소설</li>
-      <li><input name="categories" type="checkbox" class="category" value="4">인문</li>
-      <li><input name="categories" type="checkbox" class="category" value="5">건강</li>
-      <li><input name="categories" type="checkbox" class="category" value="6">요리</li>
-      <li><input name="categories" type="checkbox" class="category" value="7">경제 / 경영</li>
-      <li><input name="categories" type="checkbox" class="category" value="8">자기계발</li>
-      <li><input name="categories" type="checkbox" class="category" value="9">정치/사회</li>
-      <li><input name="categories" type="checkbox" class="category" value="10">역사 / 문화</li>
-      <li><input name="categories" type="checkbox" class="category" value="11">만화</li>
-      <li><input name="categories" type="checkbox" class="category" value="12">컴퓨터</li>
-      <li><input name="categories" type="checkbox" class="category" value="13">과학</li>
-      <li><input name="categories" type="checkbox" class="category" value="14">여행</li>
-      <li><input name="categories" type="checkbox" class="category" value="15">예술 / 대중문화</li>
-      <li><input name="categories" type="checkbox" class="category" value="16">취미 / 실용 / 스포츠</li>
-      <li><input name="categories" type="checkbox" class="category" value="17">종교</li>
-      <li><input name="categories" type="checkbox" class="category" value="18">외국어</li>
-      <li><input name="categories" type="checkbox" class="category" value="19">철학</li>
-      <li><input name="categories" type="checkbox" class="category" value="20">어린이 / 청소년</li>
+      <li><input name="categoryIds" type="checkbox" class="category" value="1" th:checked="${dataUtils.categoryId} == 1">북셸프 오리지널</li>
+      <li><input name="categoryIds" type="checkbox" class="category" value="2" th:checked="${dataUtils.categoryId} == 2">시 / 에세이</li>
+      <li><input name="categoryIds" type="checkbox" class="category" value="3" th:checked="${dataUtils.categoryId} == 3">소설</li>
+      <li><input name="categoryIds" type="checkbox" class="category" value="4" th:checked="${dataUtils.categoryId} == 4">인문</li>
+      <li><input name="categoryIds" type="checkbox" class="category" value="5" th:checked="${dataUtils.categoryId} == 5">건강</li>
+      <li><input name="categoryIds" type="checkbox" class="category" value="6" th:checked="${dataUtils.categoryId} == 6">요리</li>
+      <li><input name="categoryIds" type="checkbox" class="category" value="7" th:checked="${dataUtils.categoryId} == 7">경제 / 경영</li>
+      <li><input name="categoryIds" type="checkbox" class="category" value="8" th:checked="${dataUtils.categoryId} == 8">자기계발</li>
+      <li><input name="categoryIds" type="checkbox" class="category" value="9" th:checked="${dataUtils.categoryId} == 9">정치/사회</li>
+      <li><input name="categoryIds" type="checkbox" class="category" value="10" th:checked="${dataUtils.categoryId} == 10">역사 / 문화</li>
+      <li><input name="categoryIds" type="checkbox" class="category" value="11" th:checked="${dataUtils.categoryId} == 11">만화</li>
+      <li><input name="categoryIds" type="checkbox" class="category" value="12" th:checked="${dataUtils.categoryId} == 12">컴퓨터</li>
+      <li><input name="categoryIds" type="checkbox" class="category" value="13" th:checked="${dataUtils.categoryId} == 13">과학</li>
+      <li><input name="categoryIds" type="checkbox" class="category" value="14" th:checked="${dataUtils.categoryId} == 14">여행</li>
+      <li><input name="categoryIds" type="checkbox" class="category" value="15" th:checked="${dataUtils.categoryId} == 15">예술 / 대중문화</li>
+      <li><input name="categoryIds" type="checkbox" class="category" value="16" th:checked="${dataUtils.categoryId} == 16">취미 / 실용 / 스포츠</li>
+      <li><input name="categoryIds" type="checkbox" class="category" value="17" th:checked="${dataUtils.categoryId} == 17">종교</li>
+      <li><input name="categoryIds" type="checkbox" class="category" value="18" th:checked="${dataUtils.categoryId} == 18">외국어</li>
+      <li><input name="categoryIds" type="checkbox" class="category" value="19" th:checked="${dataUtils.categoryId} == 19">철학</li>
+      <li><input name="categoryIds" type="checkbox" class="category" value="20" th:checked="${dataUtils.categoryId} == 20">어린이 / 청소년</li>
     </ul>
     </div>
-    <div class="release-date-wrapper">
+    <div class="publish-date-wrapper">
       <span class="title">출간일</span>
       <ul>
-        <li><input name="publishDate" type="radio" class="publish-date" th:value="null" checked>전체</li>
+        <li><input name="publishDate" type="radio" class="publish-date default" th:value="null" checked>전체</li>
         <li><input name="publishDate" type="radio" class="publish-date" th:value="${dataUtils.getOneMonthAgo()}">1개월 이내</li>
         <li><input name="publishDate" type="radio" class="publish-date" th:value="${dataUtils.getThreeMonthAgo()}">3개월 이내</li>
         <li><input name="publishDate" type="radio" class="publish-date" th:value="${dataUtils.getSixMonthAgo()}">6개월 이내</li>
         <li><input name="publishDate" type="radio" class="publish-date" th:value="${dataUtils.getOneYearAgo()}">1년 이내</li>
       </ul>
     </div>
-    <button class="reset-btn">초기화</button>
+    <div class="reset-btn">초기화</div>
   </div>
 </div>
 

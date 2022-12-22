@@ -1,8 +1,8 @@
 package com.cerdure.bookshelf.web.controller.detail;
 
 import com.cerdure.bookshelf.DataUtils;
-import com.cerdure.bookshelf.domain.Book;
 import com.cerdure.bookshelf.domain.board.Review;
+import com.cerdure.bookshelf.domain.book.Book;
 import com.cerdure.bookshelf.domain.member.Member;
 import com.cerdure.bookshelf.dto.board.ReviewDto;
 import com.cerdure.bookshelf.service.BookServiceImpl;
@@ -10,7 +10,6 @@ import com.cerdure.bookshelf.service.MemberServiceImpl;
 import com.cerdure.bookshelf.service.ReviewServiceImpl;
 import com.cerdure.bookshelf.service.UploadFileServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -30,7 +29,6 @@ public class BookController {
     public String bookDetail(@RequestParam("id") Long id, Model model) throws Exception {
         Book book = bookService.findById(id);
         DataUtils dataUtils = new DataUtils();
-        dataUtils.setCategory(book.getCategoryToString());
         model.addAttribute("book", book);
         model.addAttribute("dataUtils", dataUtils);
         return "book-detail";
@@ -47,7 +45,6 @@ public class BookController {
         }
         Book book = bookService.findById(reviewDto.getBook().getId());
         DataUtils dataUtils = new DataUtils();
-        dataUtils.setCategory(book.getCategoryToString());
         model.addAttribute("reviews", book);
         model.addAttribute("dataUtils", dataUtils);
         return "redirect:/book?id="+book.getId();
@@ -67,7 +64,6 @@ public class BookController {
         uploadFileService.saveFiles(reviewDto, reviewId);
         Book book = bookService.findById(reviewDto.getBook().getId());
         DataUtils dataUtils = new DataUtils();
-        dataUtils.setCategory(book.getCategoryToString());
         model.addAttribute("reviews", book);
         model.addAttribute("dataUtils", dataUtils);
         return "redirect:/book?id="+reviewDto.getBook().getId();
@@ -78,7 +74,6 @@ public class BookController {
         reviewService.delete(reviewId, authentication);
         Book book = bookService.findById(bookId);
         DataUtils dataUtils = new DataUtils();
-        dataUtils.setCategory(book.getCategoryToString());
         model.addAttribute("reviews", book);
         model.addAttribute("dataUtils", dataUtils);
         return "redirect:/book?id="+bookId;

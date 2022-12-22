@@ -1,13 +1,12 @@
 package com.cerdure.bookshelf.domain.board;
 
-import com.cerdure.bookshelf.domain.Book;
+import com.cerdure.bookshelf.domain.book.Book;
 import com.cerdure.bookshelf.domain.UploadFile;
 import com.cerdure.bookshelf.domain.member.Member;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
