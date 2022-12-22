@@ -247,6 +247,7 @@
   width: 1280px;
   padding: 0 40px;
   z-index: 1;
+  display: none;
 }
 .search-result-wrapper {
   position: relative;

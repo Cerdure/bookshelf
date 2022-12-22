@@ -177,10 +177,20 @@ $(function () {
   });
 
   $(document).ready(function (){
+
     $(document).on("click","#category-box",function (){
        $("#category-id-input").val($(this).find("#category-id").val());
         $("#search-form").submit();
     });
+
+    $(document).on("keyup ready", ".simple-search input", function () {
+        if($(".search-result-outer-wrapper").height() < 5) {
+          $(".search-result-outer-wrapper").hide();
+        } else {
+          $(".search-result-outer-wrapper").show();
+        }
+    });
+
   });
 
 
