@@ -1,7 +1,6 @@
 package com.cerdure.bookshelf.domain.member;
 
 import com.cerdure.bookshelf.domain.Cart;
-import com.cerdure.bookshelf.domain.enums.Answer;
 import com.cerdure.bookshelf.domain.enums.MemberGrade;
 import com.cerdure.bookshelf.domain.enums.MemberRole;
 import lombok.*;
@@ -47,8 +46,7 @@ public class Member implements UserDetails {
 
     private LocalDate regDate = LocalDate.now();
 
-    @Enumerated(EnumType.STRING)
-    private Answer delflag;
+    private Integer delflag;
 
     private LocalDate delDate;
 
@@ -61,13 +59,13 @@ public class Member implements UserDetails {
     @PrePersist
     public void prePersist() {
         this.grade = this.grade == null ? MemberGrade.NEW : this.grade;
-        this.delflag = this.delflag == null ? Answer.N : this.delflag;
+        this.delflag = this.delflag == null ? 0 : this.delflag;
         this.point = this.point == null ? 0 : this.point;
         this.regDate = this.regDate == null ? LocalDate.now() : this.regDate;
     }
 
     @Builder
-    public Member(Long id, String pw, String name, String nickname, String birth, String sex, String phone, Address address, MemberGrade grade, Integer point, LocalDate regDate, Answer delflag, LocalDate delDate, Cart cart, MemberRole role) {
+    public Member(Long id, String pw, String name, String nickname, String birth, String sex, String phone, Address address, MemberGrade grade, Integer point, LocalDate regDate, Integer delflag, LocalDate delDate, Cart cart, MemberRole role) {
         this.id = id;
         this.pw = pw;
         this.name = name;

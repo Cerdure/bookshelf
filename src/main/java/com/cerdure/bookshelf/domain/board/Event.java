@@ -1,6 +1,5 @@
 package com.cerdure.bookshelf.domain.board;
 
-import com.cerdure.bookshelf.domain.enums.Answer;
 import com.cerdure.bookshelf.domain.member.Member;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -10,8 +9,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

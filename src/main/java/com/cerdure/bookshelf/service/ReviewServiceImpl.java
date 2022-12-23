@@ -53,6 +53,11 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    public Page<Review> findByMemberId(Long memberId, Pageable pageable) {
+        return reviewRepository.findByMemberId(memberId, pageable);
+    }
+
+    @Override
     public void modify(Long reviewId, ReviewDto reviewDto, Authentication authentication) throws Exception {
         Review review = reviewRepository.findById(reviewId).get();
 //        System.out.println("review.getMember().getPhone() = " + review.getMember().getPhone());

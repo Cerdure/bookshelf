@@ -38,14 +38,17 @@ public class Reply {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer seq;
 
+    private Integer childNum;
+
     @PrePersist
     public void prePersist() {
         this.regDate = this.regDate == null ? LocalDateTime.now() : this.regDate;
         this.level = this.level == null ? 1 : this.level;
+        this.childNum = this.childNum == null ? 0 : this.childNum;
     }
 
     @Builder
-    public Reply(Long id, Inquire inquire, Member member, LocalDateTime regDate, String content, int level, int seq) {
+    public Reply(Long id, Inquire inquire, Member member, LocalDateTime regDate, String content, Integer level, Integer seq, Integer childNum) {
         this.id = id;
         this.inquire = inquire;
         this.member = member;
@@ -53,5 +56,13 @@ public class Reply {
         this.content = content;
         this.level = level;
         this.seq = seq;
+        this.childNum = childNum;
+    }
+
+    public void changeSeq(Integer seq){
+        this.seq = seq;
+    }
+    public void changeChildNum(Integer childNum){
+        this.childNum = childNum;
     }
 }

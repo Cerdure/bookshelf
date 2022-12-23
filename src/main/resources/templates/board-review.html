@@ -93,6 +93,7 @@
             <div class="write-number">0/3000</div>
           </div>
         </div>
+
         <div class="review-write-attach">
           <div class="review-write-attach-title">
             <span>ㅣ 사진 첨부 (선택)</span>
@@ -110,6 +111,7 @@
             * JPG, PNG, GIF 파일만 최대 5장 업로드 가능합니다.
           </div>
         </div>
+
       </div>
       <button type="submit" class="regist-button disable">등록</button>
     </form>
@@ -126,7 +128,7 @@
       <div class="review-write-contents">
         <div class="review-modify-book-wrapper">
           <input th:value="${modReview!=null?modReview.book.id:''}" name="book" type="hidden" class="review-book-id">
-          <img class="review-book-img" src="/img/book-cover/12.jpg">
+          <img class="review-book-img" th:src="${modReview!=null?modReview.book.imgPath:''}">
           <div class="review-book-info">
             <div th:text="${modReview!=null?modReview.book.name:''}" class="review-book-name">책이름</div>
             <div class="review-book-rating">
@@ -174,7 +176,7 @@
         <div class="review-write-attach">
           <div class="review-write-attach-title">
             <span>ㅣ 사진 첨부 (선택)</span>
-            <span th:text="${modReview!=null?modReview.files.size():0}+'/5'">0/5</span>
+            <span th:text="${modReview!=null?modReview.files.size():0}+'/5'"></span>
           </div>
           <div class="review-write-attach-photo">
 
@@ -287,9 +289,9 @@
 
     <div class="review-wrapper" id="review-wrapper">
       <div class="review-title-wrapper">
-        <div class="review-title" th:text="'모두의 리뷰 ('+${reviews?.totalElements} +')'" th:classappend="${#authentication.principal.authorities} == 'ADMIN'? 'disable':''"></div>
+        <div class="review-title" th:text="'모두의 리뷰 ('+${reviews?.totalElements} +')'"></div>
         <div class="review-title-write" th:classappend="${#authentication.principal.authorities} == 'ADMIN'? 'disable':''">리뷰 작성</div>
-        <div class="review-title-my">내가 쓴 리뷰</div>
+        <div class="review-title-my" th:classappend="${#authentication.principal.authorities} == 'ADMIN'? 'disable':''">내가 쓴 리뷰</div>
       </div>
 
       <div class="reviews-wrapper">

@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface FileRepository extends JpaRepository<UploadFile, Long> {
     public List<UploadFile> findAllByReviewId(Long reviewId);
+    public List<UploadFile> findAllByInquireId(Long inquireId);
 }

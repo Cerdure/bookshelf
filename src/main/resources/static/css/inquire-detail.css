@@ -240,8 +240,15 @@
   position: absolute;
   top: 10px;
 }
+.inner-comment strong {
+  position: absolute;
+  top: 8px;
+  left: 25px;
+  color: cornflowerblue;
+  font-family: 'Noto Sans KR', sans-serif;
+}
 .inner-comment .comment {
-  padding-left: 30px;
+  padding-left: 100px;
 }
 .inner{
   margin-left: 60px;
@@ -286,6 +293,7 @@
   padding: 5px 0px;
   padding-bottom: 20px;
   margin-bottom: 20px;
+  line-height: 25px;
 }
 .my-comment .option {
   position: absolute;
@@ -330,6 +338,10 @@
   font-size: 14px;
   cursor: pointer;
 }
+.my-comment strong {
+  color: cornflowerblue;
+  font-family: 'Noto Sans KR', sans-serif;
+}
 
 .prev-detail {
   position: relative;
@@ -341,11 +353,12 @@
   line-height: 70px;
   color: dimgray;
 }
-.prev-detail img {
+.prev-detail .icon {
   position: relative;
   top: 2px;
   line-height: 70px;
   width: 15px;
+  transform: rotate(180deg);
 }
 .prev-detail .title {
   line-height: 70px;
@@ -364,12 +377,11 @@
   line-height: 70px;
   color: dimgray;
 }
-.next-detail img {
+.next-detail .icon {
   position: relative;
   top: 2px;
   line-height: 70px;
   width: 15px;
-  transform: rotate(180deg);
 }
 .next-detail .title {
   line-height: 70px;
@@ -391,6 +403,290 @@
   font-size: 18px;
   cursor: pointer;
 }
+
+
+.inquire-modify-wrapper {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 600px;
+  height: 742px;
+  background-color: white;
+  padding: 30px;
+  border: 1px solid silver;
+  z-index: 12;
+}
+#modify-wrapper {
+  display: none;
+}
+.inquire-write-contents {
+  width: 566px;
+  height: 580px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-right: 26px;
+  margin-bottom: 20px;
+}
+.inquire-write-contents::-webkit-scrollbar {
+  width: 3px;
+}
+.inquire-write-contents::-webkit-scrollbar-thumb {
+  height: 30%;
+  background: cornflowerblue;
+  border-radius: 10px;
+}
+.inquire-write-top {
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+.inquire-write-top-text {
+  position: relative;
+  font-size: 20px;
+  font-weight: 900;
+  display: inline-block;
+}
+.inquire-write-top-text div {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 5px;
+  height: 5px;
+  background-color: cornflowerblue;
+}
+.inquire-write-top-icon{
+  position: absolute;
+  right: 0px;
+  width: 20px;
+  display: inline-block;
+  cursor: pointer;
+}
+.inquire-write-main-title {
+  position: relative;
+  font-size: 14px;
+  margin-bottom: 10px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.inquire-write-frame {
+  width: 100%;
+  height: 160px;
+  border: 1px solid silver;
+  border-radius: 10px;
+  padding: 15px 20px;
+}
+.inquire-write {
+  width: 100%;
+  height: 110px;
+  font-size: 14px;
+  border: none;
+  resize: none;
+  outline: none;
+  line-height: 20px;
+}
+.inquire-write::placeholder {
+  color: rgb(150, 150, 150);
+}
+.write-number {
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+  font-size: 14px;
+}
+.inquire-write-attach {
+}
+.inquire-write-attach-title {
+  font-size: 14px;
+  margin-bottom: 10px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.inquire-write-attach-photo {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  margin-bottom: 10px;
+}
+.inquire-write-attach-photo-button {
+  width: 100px;
+  height: 100px;
+  background-color: #ebebeb;
+  background-image: url("/img/icon/plus-simple.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 40%;
+  opacity: 0.2;
+  border-radius: 10px;
+  border: 1px solid rgb(0, 0, 0);
+  float: left;
+  margin: 0 3px;
+}
+.inquire-write-photo-input {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  opacity: 0;
+}
+.inquire-write-photo-wrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  float: left;
+  margin: 0 3px;
+  border: 1px solid silver;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.inquire-write-photo {
+  position: absolute;
+  width: 98px;
+  height: 98px;
+  background-size: cover;
+  background-position: center;
+  border: none;
+  outline: none;
+  color: rgba(0, 0, 0, 0);
+}
+.inquire-write-photo::-webkit-file-upload-button {
+  display: none;
+}
+.inquire-write-photo-cancel {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 20px;
+  height: 20px;
+  background-color: rgba(0, 0, 0, 0.6);
+  text-align: center;
+  line-height: 20px;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  z-index: 1;
+}
+.inquire-write-attach-guide {
+  font-size: 12px;
+  color: gray;
+}
+.inquire-write-private {
+  position: relative;
+  height: 30px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.inquire-write-private label {
+  line-height: 30px;
+}
+.private-check {
+  position: absolute;
+  bottom: 0;
+  height: 30px;
+  margin-left: 10px;
+}
+.private-pw {
+  position: relative;
+  bottom: 0;
+  height: 30px;
+  width: 0px;
+  margin-left: 40px;
+  text-indent: 10px;
+  outline: none;
+  border: 1px solid silver;
+  border-radius: 5px;
+  display: none;
+}
+.private-pw::placeholder {
+  font-size: 12px;
+}
+.regist-button {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 40px;
+  background-color: rgb(83, 138, 240);
+  color: white;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+.disable {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+
+ 
+.alert-window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 360px;
+  height: 200px;
+  background-color: white;
+  border-radius: 20px;
+  z-index: 13;
+  text-align: center;
+  font-family: 'Noto Sans KR', sans-serif;
+  border: 1px solid silver;
+  display: none;
+}
+.alert-window .text{
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 100%;
+}
+.alert-window .cancel{
+  position: absolute;
+  bottom: 40px;
+  left: 50px;
+  width: 120px;
+  height: 40px;
+  border: none;
+  outline: none;
+  background-color: gray;
+  color: white;
+  border-radius: 10px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+}
+.alert-window .cancel:hover{
+  background-color: rgb(97, 97, 97);
+  transition: 0.2s;
+}
+.alert-window .okay{
+  position: absolute;
+  bottom: 40px;
+  right: 50px;
+  width: 120px;
+  height: 40px;
+  border: none;
+  outline: none;
+  background-color: cornflowerblue;
+  color: white;
+  border-radius: 10px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+} 
+.alert-window .okay:hover {
+  background-color: rgb(80, 140, 253);
+  transition: 0.2s;
+}
+.delete-alert {
+  display: none;
+}
+
+
+
 
 @media only screen and (max-width:1333px) {
   .top-background {

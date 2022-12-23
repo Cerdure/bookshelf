@@ -16,6 +16,7 @@ public interface ReviewService {
     public Page <Review> findAll(Pageable pageable);
     public Review findById(Long reviewId);
     public Page <Review> findByBookId(Long bookId, Pageable pageable);
+    public Page <Review> findByMemberId(Long memberId, Pageable pageable);
     public void modify(Long reviewId, ReviewDto reviewDto, Authentication authentication) throws Exception;
     public void delete(Long reviewId, Authentication authentication) throws Exception;
 }

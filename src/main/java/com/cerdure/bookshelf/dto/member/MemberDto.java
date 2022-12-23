@@ -2,7 +2,6 @@ package com.cerdure.bookshelf.dto.member;
 
 
 import com.cerdure.bookshelf.domain.Cart;
-import com.cerdure.bookshelf.domain.enums.Answer;
 import com.cerdure.bookshelf.domain.enums.MemberGrade;
 import com.cerdure.bookshelf.domain.enums.MemberRole;
 import com.cerdure.bookshelf.domain.member.Address;
@@ -62,8 +61,7 @@ public class MemberDto {
 
     private LocalDate regDate;
 
-    @Enumerated(EnumType.STRING)
-    private Answer delflag;
+    private Integer delflag;
 
     private LocalDate delDate;
 
@@ -73,7 +71,7 @@ public class MemberDto {
 
 
     @Builder
-    public MemberDto(Long id, String pw, String name, String nickname, String birth, String sex, String phone, String zipcode, String city, Address address, String street, MemberGrade grade, @Nullable Integer point, LocalDate regDate, Answer delflag, LocalDate delDate, List<Order> orders, Cart cart) {
+    public MemberDto(Long id, String pw, String name, String nickname, String birth, String sex, String phone, String zipcode, String city, Address address, String street, MemberGrade grade, @Nullable Integer point, LocalDate regDate, Integer delflag, LocalDate delDate, List<Order> orders, Cart cart) {
         this.id = id;
         this.pw = pw;
         this.name = name;

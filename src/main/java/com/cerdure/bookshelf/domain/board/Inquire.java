@@ -2,7 +2,6 @@ package com.cerdure.bookshelf.domain.board;
 
 import com.cerdure.bookshelf.domain.UploadFile;
 import com.cerdure.bookshelf.domain.member.Member;
-import com.cerdure.bookshelf.domain.enums.Answer;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,19 +32,17 @@ public class Inquire {
     @Size(max = 10000)
     private String content;
 
-    private LocalDate regDate;
+    private LocalDateTime regDate;
 
-    private LocalDate modDate;
+    private LocalDateTime modDate;
 
-    @Enumerated(EnumType.STRING)
-    private Answer closed;  // 비밀글 여부
+    private Integer closed;  // 비밀글 여부
 
     private String pw;
 
     private Integer hits;
 
-    @Enumerated(EnumType.STRING)
-    private Answer reFlag; //답변 여부
+    private Integer reFlag; //답변 여부
 
     @OneToMany(mappedBy = "inquire")
     private List<Reply> replies = new ArrayList<>();
@@ -54,14 +52,14 @@ public class Inquire {
 
     @PrePersist
     public void prePersist() {
-        this.closed = this.closed == null ? Answer.N : this.closed;
-        this.regDate = this.regDate == null ? LocalDate.now() : this.regDate;
+        this.closed = this.closed == null ? 0 : this.closed;
+        this.regDate = this.regDate == null ? LocalDateTime.now() : this.regDate;
         this.hits = this.hits == null ? 0 : this.hits;
-        this.reFlag = this.reFlag == null ? Answer.N : this.reFlag;
+        this.reFlag = this.reFlag == null ? 0 : this.reFlag;
     }
 
     @Builder
-    public Inquire(Long id, Member member, String title, String content, LocalDate regDate, LocalDate modDate, Answer closed, String pw, Integer hits, Answer reFlag, List<Reply> replies) {
+    public Inquire(Long id, Member member, String title, String content, LocalDateTime regDate, LocalDateTime modDate, Integer closed, String pw, Integer hits, Integer reFlag, List<Reply> replies) {
         this.id = id;
         this.member = member;
         this.title = title;
@@ -73,5 +71,21 @@ public class Inquire {
         this.hits = hits;
         this.reFlag = reFlag;
         this.replies = replies;
+    }
+
+    public void changeTitle(String title){
+        this.title = title;
+    }
+    public void changeContent(String content){
+        this.content = content;
+    }
+    public void changeClosed(Integer closed){
+        this.closed = closed;
+    }
+    public void changePw(String pw){
+        this.pw = pw;
+    }
+    public void changeReFlag(Integer reFlag){
+        this.reFlag = reFlag;
     }
 }

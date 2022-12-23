@@ -68,7 +68,9 @@ public class ReviewController {
     public String modify(@PathVariable("reviewId") Long reviewId, @ModelAttribute ReviewDto reviewDto, Authentication authentication, Model model, Pageable pageable) throws Exception{
         reviewService.modify(reviewId, reviewDto, authentication);
         uploadFileService.deleteFilesByReviewId(reviewId);
-        uploadFileService.saveFiles(reviewDto, reviewId);
+        if (reviewDto.getImageFiles().get(0).getOriginalFilename() != "") {
+            uploadFileService.saveFiles(reviewDto, reviewId);
+        }
         Page<Review> reviews = reviewService.findAll(pageable);
         model.addAttribute("reviews",reviews);
         return "board-review";
@@ -78,6 +80,15 @@ public class ReviewController {
     public String delete(@PathVariable("reviewId") Long reviewId, Authentication authentication, Model model, Pageable pageable) throws Exception{
         reviewService.delete(reviewId, authentication);
         Page<Review> reviews = reviewService.findAll(pageable);
+        model.addAttribute("reviews",reviews);
+        return "board-review";
+    }
+
+    @GetMapping("/review-my")
+    public String myReview(Authentication authentication, Model model, Pageable pageable) throws Exception{
+        String phone = authentication.getName();
+        Member member = memberService.findByPhone(phone);
+        Page<Review> reviews = reviewService.findByMemberId(member.getId(), pageable);
         model.addAttribute("reviews",reviews);
         return "board-review";
     }

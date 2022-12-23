@@ -513,10 +513,19 @@
   border-radius: 10px;
   overflow: hidden;
 }
-.inquire-write-attach-photo img {
+
+.inquire-write-photo {
   position: absolute;
   width: 98px;
   height: 98px;
+  background-size: cover;
+  background-position: center;
+  border: none;
+  outline: none;
+  color: rgba(0, 0, 0, 0);
+}
+.inquire-write-photo::-webkit-file-upload-button {
+  display: none;
 }
 .inquire-write-photo-cancel {
   position: absolute;
@@ -608,7 +617,8 @@
   transform: translate(-50%,-50%);
   width: 100%;
 }
-.close-alert .cancel{
+.close-alert .cancel,
+.pw-input .cancel{
   position: absolute;
   bottom: 40px;
   left: 50px;
@@ -623,11 +633,15 @@
   font-size: 16px;
   cursor: pointer;
 }
-.close-alert .cancel:hover{
+.close-alert .cancel:hover,
+.pw-input .cancel:hover
+{
   background-color: rgb(97, 97, 97);
   transition: 0.2s;
 }
-.close-alert .okay{
+.close-alert .okay,
+.pw-input .okay
+{
   position: absolute;
   bottom: 40px;
   right: 50px;
@@ -642,9 +656,41 @@
   font-size: 16px;
   cursor: pointer;
 } 
-.close-alert .okay:hover {
-  background-color: rgb(80, 140, 253);
+.close-alert .okay:hover, 
+.pw-input .okay:hover 
+{
+  background-color: rgb(40, 115, 255);
   transition: 0.2s;
+}
+
+.pw-input {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 360px;
+  height: 200px;
+  background-color: white;
+  border-radius: 20px;
+  border: 1px solid silver;
+  text-align: center;
+  font-family: 'Noto Sans KR', sans-serif;
+  z-index: 13;
+  padding: 0 50px;
+  padding-top: 30px;
+  display: none;
+}
+.pw-input .text {
+  margin-bottom: 15px;
+}
+.pw-input input {
+  position: relative;
+  width: 100%;
+  height: 30px;
+  border-radius: 5px;
+  outline: none;
+  font-size: 50px;
+  text-indent: 10px;
 }
 
 

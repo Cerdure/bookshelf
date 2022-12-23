@@ -1,7 +1,5 @@
 package com.cerdure.bookshelf.domain.shelf;
 
-import com.cerdure.bookshelf.domain.enums.Answer;
-import com.cerdure.bookshelf.domain.enums.MemberGrade;
 import com.cerdure.bookshelf.domain.member.Member;
 import lombok.AccessLevel;
 import lombok.Builder;

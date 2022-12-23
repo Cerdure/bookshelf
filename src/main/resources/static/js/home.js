@@ -159,6 +159,11 @@ $(function () {
       async: true,
     }).done(function (data) {
       $('#search-input-results').replaceWith(data);
+      if(data.length < 100) {
+        $(".search-result-outer-wrapper").hide();
+      } else {
+        $(".search-result-outer-wrapper").show();
+      }
     });
   }
 
@@ -184,11 +189,7 @@ $(function () {
     });
 
     $(document).on("keyup ready", ".simple-search input", function () {
-        if($(".search-result-outer-wrapper").height() < 5) {
-          $(".search-result-outer-wrapper").hide();
-        } else {
-          $(".search-result-outer-wrapper").show();
-        }
+
     });
 
   });

@@ -2,7 +2,6 @@ package com.cerdure.bookshelf.dto.board;
 
 import com.cerdure.bookshelf.domain.board.Inquire;
 import com.cerdure.bookshelf.domain.board.Reply;
-import com.cerdure.bookshelf.domain.enums.Answer;
 import com.cerdure.bookshelf.domain.member.Member;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -10,11 +9,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -22,36 +18,20 @@ import java.util.List;
 public class InquireDto {
 
     private Long id;
-
-    @NotBlank
     private Member member;
-
-    @NotBlank
     private String title;
-
-    @NotBlank
     private String content;
-
-    private LocalDate regDate;
-
-    private LocalDate modDate;
-
-    @Enumerated(EnumType.STRING)
-    private Answer closed;
-
+    private LocalDateTime regDate;
+    private LocalDateTime modDate;
+    private Integer closed;
     private String pw;
-
     private Integer hits;
-
-    @Enumerated(EnumType.STRING)
-    private Answer reFlag; //답변 여부
-
-    private List<Reply> replies = new ArrayList<>();
-
-    private List<MultipartFile> files = new ArrayList<>();
+    private Integer reFlag;
+    private List<Reply> replies;
+    private List<MultipartFile> imageFiles;
 
     @Builder
-    public InquireDto(Long id, Member member, String title, String content, LocalDate regDate, LocalDate modDate, Answer closed, String pw, Integer hits, Answer reFlag, List<Reply> replies, List<MultipartFile> files) {
+    public InquireDto(Long id, Member member, String title, String content, LocalDateTime regDate, LocalDateTime modDate, Integer closed, String pw, Integer hits, Integer reFlag, List<Reply> replies, List<MultipartFile> imageFiles) {
         this.id = id;
         this.member = member;
         this.title = title;
@@ -63,7 +43,7 @@ public class InquireDto {
         this.hits = hits;
         this.reFlag = reFlag;
         this.replies = replies;
-        this.files = files;
+        this.imageFiles = imageFiles;
     }
 
     public Inquire toEntity(){

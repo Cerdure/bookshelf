@@ -1,5 +1,7 @@
 package com.cerdure.bookshelf;
 
+import com.cerdure.bookshelf.domain.board.Inquire;
+import com.cerdure.bookshelf.domain.board.Reply;
 import com.cerdure.bookshelf.domain.book.Book;
 import com.cerdure.bookshelf.domain.UploadFile;
 import com.cerdure.bookshelf.domain.board.Review;
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
+import java.time.LocalDateTime;
 
 /**
  * 종 주문 2개
@@ -841,9 +844,20 @@ public class InitDb {
             }
 
             Member member = Member.builder()
-                    .name("테스터2")
-                    .nickname("테스터2")
+                    .name("테스터")
+                    .nickname("테스터")
                     .phone("01011112222")
+                    .birth("901020")
+                    .sex("1")
+                    .pw(passwordEncoder.encode("1234"))
+                    .address(new Address("서울 당산동","145가","K013"))
+                    .role(MemberRole.USER)
+                    .build();
+
+            Member member1 = Member.builder()
+                    .name("테스터1")
+                    .nickname("유저11")
+                    .phone("01012345678")
                     .birth("901020")
                     .sex("1")
                     .pw(passwordEncoder.encode("1234"))
@@ -853,8 +867,19 @@ public class InitDb {
 
             Member member2 = Member.builder()
                     .name("테스터2")
-                    .nickname("테스터2")
-                    .phone("01012345678")
+                    .nickname("유저22")
+                    .phone("01022222222")
+                    .birth("901020")
+                    .sex("1")
+                    .pw(passwordEncoder.encode("1234"))
+                    .address(new Address("서울 당산동","145가","K013"))
+                    .role(MemberRole.USER)
+                    .build();
+
+            Member member3 = Member.builder()
+                    .name("테스터3")
+                    .nickname("유저33")
+                    .phone("01033333333")
                     .birth("901020")
                     .sex("1")
                     .pw(passwordEncoder.encode("1234"))
@@ -863,7 +888,9 @@ public class InitDb {
                     .build();
 
             em.persist(member);
+            em.persist(member1);
             em.persist(member2);
+            em.persist(member3);
 
             Review[] reviews = new Review[10];
 
@@ -963,6 +990,118 @@ public class InitDb {
             for (Review review : reviews) {
                 em.persist(review);
             }
+
+            Inquire[] inquires = new Inquire[10];
+
+            inquires[0] = Inquire.builder()
+                    .member(member)
+                    .title("tt1111111111111")
+                    .content("ct11111111111")
+                    .closed(1).pw("1234")
+                    .regDate(LocalDateTime.now())
+                    .build();
+
+            inquires[1] = Inquire.builder()
+                    .member(member)
+                    .title("tt2222222222")
+                    .content("ct1222222222")
+                    .closed(1).pw("1234")
+                    .regDate(LocalDateTime.now().minusDays(1))
+                    .build();
+
+            inquires[2] = Inquire.builder()
+                    .member(member)
+                    .title("tt3333333333")
+                    .content("ct333333333")
+                    .closed(1).pw("1234")
+                    .regDate(LocalDateTime.now().minusDays(2))
+                    .build();
+
+            inquires[3] = Inquire.builder()
+                    .member(member)
+                    .title("tt44444444")
+                    .content("ct444444444")
+                    .closed(1).pw("1234")
+                    .regDate(LocalDateTime.now().minusDays(3))
+                    .build();
+
+            inquires[4] = Inquire.builder()
+                    .member(member)
+                    .title("tt55555555")
+                    .content("ct555555555")
+                    .closed(1).pw("1234")
+                    .regDate(LocalDateTime.now().minusDays(4))
+                    .build();
+
+            inquires[5] = Inquire.builder()
+                    .member(member)
+                    .title("tt6666666")
+                    .content("ct666666666")
+                    .closed(1).pw("1234")
+                    .regDate(LocalDateTime.now().minusDays(5))
+                    .build();
+
+            inquires[6] = Inquire.builder()
+                    .member(member)
+                    .title("tt7777777777")
+                    .content("ct777777777")
+                    .closed(1).pw("1234")
+                    .regDate(LocalDateTime.now().minusDays(6))
+                    .build();
+
+            inquires[7] = Inquire.builder()
+                    .member(member)
+                    .title("tt888888888")
+                    .content("ct88888888")
+                    .closed(1).pw("1234")
+                    .regDate(LocalDateTime.now().minusDays(7))
+                    .build();
+
+            inquires[8] = Inquire.builder()
+                    .member(member)
+                    .title("tt9999999999")
+                    .content("ct9999999999")
+                    .closed(1).pw("1234")
+                    .regDate(LocalDateTime.now().minusDays(8))
+                    .build();
+
+            inquires[9] = Inquire.builder()
+                    .member(member)
+                    .title("tt101010101010")
+                    .content("ct1010101010")
+                    .closed(1).pw("1234")
+                    .regDate(LocalDateTime.now().minusDays(9))
+                    .build();
+
+            for (Inquire inquire : inquires) {
+                em.persist(inquire);
+            }
+
+
+            Reply[] replies = new Reply[30];
+
+            for (int i=0; i<30; i++){
+                if(i%2==0){
+                    replies[i] = Reply.builder()
+                            .member(member2)
+                            .inquire(inquires[i/3])
+                            .content("계란을 삶을 때 몇 분을 삶아야 할까 고민하셨나요? 바로 " + i + "분<br>" +
+                                    "오늘은 맛있는 삶은 계란 만드는 방법으로 찾아왔습니다.")
+                            .seq(i%3).level(i%2)
+                            .childNum(i%3==0?1:0)
+                            .build();
+                } else {
+                    replies[i] = Reply.builder()
+                            .member(member3)
+                            .inquire(inquires[i/3])
+                            .content("<strong>@테스터2</strong> 계란을 삶을 때 몇 분을 삶아야 할까 고민하셨나요? 바로 " + i + "분<br>" +
+                                    "맨들맨들한 삶은 계란 만드는 방법으로 찾아왔습니다.")
+                            .seq(i%3).level(i%2)
+                            .build();
+                }
+                em.persist(replies[i]);
+            }
+
 
             UploadFile[][] files = new UploadFile[10][5];
 

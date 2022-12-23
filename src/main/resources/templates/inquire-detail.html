@@ -39,136 +39,159 @@
 
 <div class="meta-wrapper">
 
+  <div id="modify-wrapper">
+    <div class="modal-background"></div>
+    <form action="" method="post" class="inquire-modify-wrapper" enctype="multipart/form-data">
+      <div class="inquire-write-top">
+        <span class="inquire-write-top-text">문의글 수정</span>
+        <img class="inquire-write-top-icon" src="/img/icon/btn_dialog_close@2x.png">
+      </div>
+      <div class="inquire-write-contents">
+        <div class="inquire-write-header">
+          <div class="title">ㅣ 제목 *</div>
+          <textarea th:value="${modInquire!=null?modInquire.title:''}" name="title" class="inquire-input-header" maxlength="30" placeholder="제목을 입력하세요." ></textarea>
+        </div>
+        <div class="inquire-write-main">
+          <div class="inquire-write-main-title">ㅣ내용 *</div>
+          <div class="inquire-write-frame">
+          <textarea th:value="${modInquire!=null?modInquire.content:''}" name="content" class="inquire-input-main" maxlength="3000"
+                    placeholder="내용을 10자 이상 입력해주세요. 주제와 무관한 글은 임의로 삭제될 수 있습니다."></textarea>
+            <div class="write-number">0/3000</div>
+          </div>
+        </div>
+
+        <div class="inquire-write-attach">
+          <div class="inquire-write-attach-title">
+            <span>ㅣ 사진 첨부 (선택)</span>
+            <span th:text="${modInquire!=null?modInquire.files.size():0}+'/5'"></span>
+          </div>
+          <div class="inquire-write-attach-photo">
+
+            <div class="inquire-write-attach-photo-button">
+              <input name="imageFiles" class="inquire-write-photo-input" type="file" multiple="multiple"  th:if="${(modInquire!=null?modInquire.files.size():0) < 5}"
+                     accept=".jpg, .jpeg, .png, .gif" th:value="${modInquire!=null?modInquire.files:null}">
+            </div>
+
+            <div class="review-write-photo-wrapper" th:each="file: ${modInquire!=null?modInquire.files:null}">
+              <div class="review-write-photo-cancel" onclick="deleteImg(this)">X</div>
+              <input class="review-write-photo" onchange="setThumbnail(event,this)" th:style="'background-image:url(' + ${file.fullPath} + ');'" >
+            </div>
+
+          </div>
+          <div class="inquire-write-attach-guide">
+            * JPG, PNG, GIF 파일만 최대 5장 업로드 가능합니다.
+          </div>
+        </div>
+
+        <div class="inquire-write-private">
+          <label>ㅣ 비밀글<input th:checked="${modInquire!=null?modInquire.closed:0} == 1" name="closed" class="private-check" type="checkbox"  value="1"></label>
+          <input th:value="${modInquire!=null?modInquire.pw:''}" name="pw" class="private-pw" type="password"  maxlength="12" placeholder="비밀번호를 입력해주세요.">
+        </div>
+      </div>
+      <button type="submit" class="regist-button disable">등록</button>
+    </form>
+  </div>
+
+
+
+
 <div class="inquire-wrapper">
   <div class="inquire-title-wrapper">
     <div class="title">상품 문의</div>
   </div>
 
   <div class="detail-wrapper">
-    <span class="title">문의글1</span>
-    <img class="lock" src="/img/icon/lock.svg">
+    <input id="inquireId" th:value="${inquire.id}" type="hidden">
+    <span class="title" th:text="${inquire.title}"></span>
+    <img class="lock" src="/img/icon/lock.svg" th:if="${inquire.closed==1}">
     <div class="sub-title">
-      <span class="type">고객센터</span>
+      <span class="type" th:text="${inquire.member.nickname}"></span>
       <span class="split">ㅣ</span>
-      <span class="date">2022.12.02</span>
-      <span class="remove">삭제</span>
-      <span class="edit">수정</span>
+      <span class="date" th:text="${#temporals.format(inquire.regDate, 'yyyy.MM.dd')}"></span>
+      <span th:if="${#authentication.principal.username} == ${inquire.member.phone}" class="remove">삭제</span>
+      <span th:if="${#authentication.principal.username} == ${inquire.member.phone}" class="edit">수정</span>
     </div>
-    <div class="contents">
-      남녀노소 불문하고 사랑받는 크림빵의 인기는<br>
-      CU 편의점의 연세우유 크림빵으로 새로운 역사를 썼다고 해도 과언이 아니다.<br>
-      동네 빵집에서 사 먹던 길쭉한 모양의 크림빵도 아니고, 마트 매대에 있던 빵도 아니다. <br><br>
-      디저트 공간에 고스란히 자리 잡고 있으며, <br>
-      냉장 보관되고 있는 크림빵. 품절 대란이 일어나고, <br>
-      유튜브 및 SNS에 수없이 등장하며 많은 사람의 관심을 받았다. <br>
-      이에 타 편의점도 어김없이 비슷한 종류의 빵을 출시하기 시작했다. <br><br>
-      CU 편의점의 연세우유 크림빵과 함께 GS25 브레디크, 이마트24의 빵빵도넛까지 <br>
-      총 3종의 차이점이 무엇인지 낱낱이 파헤쳐 보기로 했다. <br>
-      초코, 딸기 등 다양한 맛이 있지만, <br>
-      공통적이면서도 기본인 오리지널(우유)을 선택했다.
-    </div>
+    <div class="contents" th:text="${inquire.content}"></div>
+
     <div class="comment-wrapper">
-
-      <div class="sum">댓글 1개</div>
-
-      <div>
+      <div class="sum" th:text="'댓글 '+${inquire.replies.size()}+'개'"></div>
+      <div class="comment-input">
+        <input id="commentSeq" th:value="${inquire.replies.size()}" type="hidden">
+        <input id="commentLevel" value="0" type="hidden">
       <textarea class="comment" name="comment" maxlength="300" onkeydown="resize(this)" onkeyup="resize(this)" onclick="commentClick(this)" onfocusout="commentFocusout(this)" placeholder="내용을 입력해주세요. 최대 300자까지 입력할 수 있습니다."></textarea>
       <div class="comment-underline"></div>
-      <button class="comment-button-save" type="submit" value="save">등록</button>
-      <button class="comment-button-cancel" onclick="commentCancel(this)">취소</button>
+      <div class="comment-button-save" value="save" onclick="replySave(this)">등록</div>
+      <div class="comment-button-cancel" onclick="commentCancel(this)">취소</div>
       </div>
 
-      <div class="my-comment">
+      <div class="my-comment" th:each="reply : ${inquire.replies}" th:style="${'padding-left:'+40*reply.level+'px;'}">
+        <input id="replyId" th:value="${reply.id}" type="hidden">
+        <input id="replySeq" th:value="${reply.seq}" type="hidden">
+        <input id="replyLevel" th:value="${reply.level}" type="hidden">
+        <input id="childNum" th:value="${reply.childNum}" type="hidden">
         <div class="main">
         <div class="header">
-          <span class="name">관리자</span>
+          <span class="name" th:text="${reply.member.nickname}"></span>
           <span class="split">ㅣ</span>
-          <span class="date">2022.12.07 16:16:20</span>
+          <span class="date" th:text="${#temporals.format(inquire.regDate, 'yyyy.MM.dd HH:mm:ss')}"></span>
         </div>
-        <div class="body">
-          계란을 삶을 때 몇 분을 삶아야 할까 고민하셨나요?<br>
-          오늘은 맛있고 맨들맨들한 삶은 계란 만드는 방법으로 찾아왔습니다.<br>
-          자세한 내용은 영상 참고해 주세요.
-        </div>
+        <div class="body" th:utext="${reply.content}"></div>
         <div class="option">
           <img class="opt-btn" src="/img/icon/three-dots-vertical.svg">
           <div class="box">
-            <div class="edit">수정</div>
-            <div class="remove">삭제</div>
-            <div class="reply">답글 달기</div>
-          </div>
-        </div>
-      </div>
-      </div>
-
-
-      <div class="my-comment inner">
-        <div class="main">
-        <div class="header">
-          <span class="name">작성자</span>
-          <span class="split">ㅣ</span>
-          <span class="date">2022.12.07 16:16:20</span>
-        </div>
-        <div class="body">
-          계란을 삶을 때 몇 분을 삶아야 할까 고민하셨나요?<br>
-          오늘은 맛있고 맨들맨들한 삶은 계란 만드는 방법으로 찾아왔습니다.<br>
-          자세한 내용은 영상 참고해 주세요.
-        </div>
-        <div class="option">
-          <img class="opt-btn" src="/img/icon/three-dots-vertical.svg">
-          <div class="box">
-            <div class="edit">수정</div>
-            <div class="remove">삭제</div>
-            <div class="reply">답글 달기</div>
-          </div>
-        </div>
-      </div>
-      </div>
-      <div class="my-comment">
-        <div class="main">
-        <div class="header">
-          <span class="name">관리자</span>
-          <span class="split">ㅣ</span>
-          <span class="date">2022.12.07 16:16:20</span>
-        </div>
-        <div class="body">
-          계란을 삶을 때 몇 분을 삶아야 할까 고민하셨나요?<br>
-          오늘은 맛있고 맨들맨들한 삶은 계란 만드는 방법으로 찾아왔습니다.<br>
-          자세한 내용은 영상 참고해 주세요.
-        </div>
-        <div class="option">
-          <img class="opt-btn" src="/img/icon/three-dots-vertical.svg">
-          <div class="box">
-            <div class="edit">수정</div>
-            <div class="remove">삭제</div>
+            <div class="edit" th:if="${#authentication.principal.username} == ${reply.member.phone}">수정</div>
+            <div class="remove" th:if="${#authentication.principal.username} == ${reply.member.phone}">삭제</div>
             <div class="reply">답글 달기</div>
           </div>
         </div>
       </div>
       </div>
     </div>
+  </div>
+
+  <div class="next-detail">
+    <span class="next">다음글</span>
+    <input class="inquireId" th:value="${nextInquire.id}" type="hidden">
+    <img class="icon" src="/img/icon/chevron-up.svg">
+    <a class="title" th:if="${nextInquire.id==null}">다음글이 없습니다.</a>
+    <a class="title" th:if="${nextInquire.id!=null}" onclick="inquireDetail(this)" th:text="${nextInquire.title}">다음 문의글</a>
+    <img class="lock" src="/img/icon/lock.svg" th:if="${nextInquire.closed==1}">
   </div>
 
   <div class="prev-detail">
     <span class="prev">이전글</span>
-    <img src="/img/icon/chevron-up.svg">
-    <a class="title" href="#">이전 문의글</a>
-  </div>
-
-  <div class="next-detail">
-    <span class="next">이전글</span>
-    <img src="/img/icon/chevron-up.svg">
-    <a class="title" href="#">다음 문의글</a>
+    <input class="inquireId" th:value="${prevInquire.id}" type="hidden">
+    <img class="icon" src="/img/icon/chevron-up.svg">
+    <a class="title" th:if="${prevInquire.id==null}">이전글이 없습니다.</a>
+    <a class="title" th:if="${prevInquire.id!=null}" onclick="inquireDetail(this)" th:text="${prevInquire.title}">이전 문의글</a>
+    <img class="lock" src="/img/icon/lock.svg" th:if="${prevInquire.closed==1}">
   </div>
 
   <div class="back-button" onclick="location.href='/inquire'">상품문의 목록</div>
  
-</div>  
+</div>
+
+
+  <div class="alert-window delete-alert">
+    <div class="text">
+      글을 삭제하시겠습니까?
+    </div>
+    <button class="cancel" onclick="hideDeleteAlert(this)">취소</button>
+    <button class="okay" onclick="inquirewDelete(this)">확인</button>
+  </div>
+
+  <div class="pw-input">
+    <div class="text">비밀번호 입력</div>
+    <input type="password">
+    <button class="cancel" onclick="hideAlert(this)">취소</button>
+    <button class="okay" onclick="pwCheck(this)">확인</button>
+  </div>
 
   <div class="top-move-button">
     <div>∧</div>
     <div>TOP</div>
   </div>
 
+</div>
 </div>
 </html>

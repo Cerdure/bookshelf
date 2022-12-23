@@ -380,6 +380,10 @@ $(function() {
           attchReset();
       }
     });
+
+    $(document).on("click",".review-title-my", function () {
+        document.location.replace("/review-my");
+    });
     });       // doc---------------------------------------------------
 
 
@@ -411,10 +415,8 @@ $(function() {
       swOpened = true;
     });
 
-    $("#search-input").keyup(function (key) {
-      if (key.keyCode == 13) {
+    $("#search-input").keyup(function () {
         bookSearch(0);
-      }
     });
     $("#search-icon").click(function () {
       bookSearch(0);
@@ -465,7 +467,8 @@ $(function() {
       deleteAlert(mdReviewId);
     });
 
-  });
+
+});
 
   let starClickIndex = -1;
   let bookPassed = false;
@@ -560,16 +563,6 @@ $(function() {
   }
 
 
-  function hideCloseAlert(_this) {
-    $("form").css('filter', 'brightness(100%)');
-    $(_this).parent().hide();
-  }
-
-  function hideDeleteAlert(_this) {
-    $(".write-wrapper-back").removeClass("modal-background");
-    $(_this).parent().hide();
-  }
-
   function registCheck(...passed) {
     if (passed.every(e => {return e;})) {
       $(".regist-button").removeClass("disable");
@@ -578,7 +571,15 @@ $(function() {
     }
   }
 
+function hideCloseAlert(_this) {
+  $("form").css('filter', 'brightness(100%)');
+  $(_this).parent().hide();
+}
 
+function hideDeleteAlert(_this) {
+  $(".write-wrapper-back").removeClass("modal-background");
+  $(_this).parent().hide();
+}
 
   function deleteAlert(_reviewId) {
     console.log("deleteAlert " + reviewId);

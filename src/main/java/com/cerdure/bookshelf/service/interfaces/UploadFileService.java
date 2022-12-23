@@ -14,15 +14,15 @@ import java.util.List;
 public interface UploadFileService {
     public String getFullPath(String name);
     public void saveFiles(ReviewDto reviewDto, Long reviewId) throws IOException;
-    public void saveFiles(InquireDto inquireDto) throws IOException;
-    public void saveFile(Long reviewId, MultipartFile file) throws IOException;
-    public void saveFile(InquireDto inquireDto, MultipartFile file) throws IOException;
+    public void saveFiles(InquireDto inquireDto, Long inquireId) throws IOException;
+    public void saveReviewFile(Long reviewId, MultipartFile file) throws IOException;
+    public void saveInquireFile(Long inquireId, MultipartFile file) throws IOException;
     private String createStoreFileName(String originalFilename) {
         return null;
     }
     private String extractExt(String originalFilename) {
         return null;
     }
-    public List<UploadFile> findAllByReview(Review review);
     public void deleteFilesByReviewId(Long reviewId);
+    public void deleteFilesByInquireId(Long inquireId);
 }
