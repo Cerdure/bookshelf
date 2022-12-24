@@ -54,6 +54,7 @@ public class Member implements UserDetails {
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
+    @Enumerated(EnumType.STRING)
     private MemberRole role;
 
     @PrePersist

@@ -304,8 +304,8 @@
             <div class="buyer">구매자</div>
             <div class="id" th:text="${review.member.nickname}"></div>
             <div class="date" th:text="${#temporals.format(review.regDate, 'yyyy-MM-dd HH:mm:ss')}"></div>
-            <div th:if="${#authentication.principal.username} == ${review.member.phone}" class="modify">수정</div>
-            <div th:if="${#authentication.principal.username} == ${review.member.phone}" class="delete">삭제</div>
+            <div th:if="${#authorization.expression('hasRole(''ADMIN'')')} ? true : (${#authentication.principal.username} == ${review.member.phone})" class="modify">수정</div>
+            <div th:if="${#authorization.expression('hasRole(''ADMIN'')')} ? true : (${#authentication.principal.username} == ${review.member.phone})" class="delete">삭제</div>
             <div class="tag" th:text="${review.tag}"></div>
 
             <div class="rating">

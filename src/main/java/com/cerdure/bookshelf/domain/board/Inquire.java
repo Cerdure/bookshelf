@@ -27,6 +27,8 @@ public class Inquire {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    private String memberNickname;
+
     private String title;
 
     @Size(max = 10000)
@@ -47,9 +49,6 @@ public class Inquire {
     @OneToMany(mappedBy = "inquire")
     private List<Reply> replies = new ArrayList<>();
 
-    @OneToMany(mappedBy = "inquire")
-    private List<UploadFile> files = new ArrayList<>();
-
     @PrePersist
     public void prePersist() {
         this.closed = this.closed == null ? 0 : this.closed;
@@ -59,9 +58,10 @@ public class Inquire {
     }
 
     @Builder
-    public Inquire(Long id, Member member, String title, String content, LocalDateTime regDate, LocalDateTime modDate, Integer closed, String pw, Integer hits, Integer reFlag, List<Reply> replies) {
+    public Inquire(Long id, Member member, String memberNickname, String title, String content, LocalDateTime regDate, LocalDateTime modDate, Integer closed, String pw, Integer hits, Integer reFlag, List<Reply> replies) {
         this.id = id;
         this.member = member;
+        this.memberNickname = memberNickname;
         this.title = title;
         this.content = content;
         this.regDate = regDate;
@@ -85,7 +85,11 @@ public class Inquire {
     public void changePw(String pw){
         this.pw = pw;
     }
+    public void hitsPlus(){
+        this.hits++;
+    }
     public void changeReFlag(Integer reFlag){
         this.reFlag = reFlag;
     }
+
 }

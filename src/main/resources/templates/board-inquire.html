@@ -38,7 +38,7 @@
 
 <div class="write-wrapper-back"></div>
   
-  <form action="/inquire" method="post" class="inquire-write-wrapper" enctype="multipart/form-data">
+  <form action="/inquire" method="post" class="inquire-write-wrapper">
     <div class="inquire-write-top">
       <span class="inquire-write-top-text">문의글 작성</span>
       <img class="inquire-write-top-icon" src="/img/icon/btn_dialog_close@2x.png">
@@ -54,24 +54,6 @@
           <textarea name="content" class="inquire-input-main" maxlength="3000"
                     placeholder="내용을 10자 이상 입력해주세요. 주제와 무관한 글은 임의로 삭제될 수 있습니다."></textarea>
           <div class="write-number">0/3000</div>
-        </div>
-      </div>
-
-      <div class="inquire-write-attach">
-        <div class="inquire-write-attach-title">
-          <span>ㅣ 사진 첨부 (선택)</span>
-          <span>0/5</span>
-        </div>
-        <div class="inquire-write-attach-photo">
-
-          <div class="inquire-write-attach-photo-button">
-            <input name="imageFiles" class="inquire-write-photo-input" type="file" multiple="multiple"
-                   accept=".jpg, .jpeg, .png, .gif" onchange="setThumbnail(event,this)">
-          </div>
-
-        </div>
-        <div class="inquire-write-attach-guide">
-          * JPG, PNG, GIF 파일만 최대 5장 업로드 가능합니다.
         </div>
       </div>
 
@@ -96,14 +78,14 @@
     <div class="inquire-write" th:classappend="${#authentication.principal.authorities} == 'ADMIN'? 'disable':''">글 작성</div>
     <div class="my-inquire-search" th:classappend="${#authentication.principal.authorities} == 'ADMIN'? 'disable':''">내가 쓴 글</div>
    
-    <div class="search">
-      <select name="inquire-search-sort" class="inquire-search-sort">
-        <option value="title">제목</option>
-        <option value="writer">작성자</option>
+    <form action="/inquire-search" method="get" class="search">
+      <select name="searchBy" class="inquire-search-sort">
+        <option value="1" th:selected="${dataUtils.searchBy == 1}">제목</option>
+        <option value="2" th:selected="${dataUtils.searchBy == 2}">작성자</option>
       </select>
-        <input type="text" name="inquire-search-input" class="inquire-search-input" placeholder="검색어를 입력하세요.">
-        <img src="/img/icon/search.svg">
-    </div>
+        <input type="text" name="input" class="inquire-search-input" placeholder="검색어를 입력하세요." th:value="${dataUtils.input}">
+        <img id="search-icon" src="/img/icon/search.svg" onclick="$('.search').submit()">
+    </form>
     
   </div>
   
@@ -150,16 +132,16 @@
             <span th:if="${inquires.number > 1}">...</span>
 
              <a th:each="page: ${#numbers.sequence(start, last)}"
-                th:if="${inquires.first ? page < inquires.number +4 :
-                (inquires.last ? page > inquires.number -2 : (page < inquires.number +3) && (page > inquires.number -1))}"
+                th:if="${inquires.first ? (page == 0 ? false : page < inquires.number + 4) :
+                (inquires.last ? page > inquires.number - 2 : (page < inquires.number + 3) && (page > inquires.number - 1))}"
                 th:class="${page == inquires.number + 1} ? 'index-active'"
                 th:text="${page}" th:href="@{/inquire(page=${page})}">
              </a>
 
-            <span th:if="${inquires.number < inquires.totalPages -2}">...</span>
+            <span th:if="${inquires.number < inquires.totalPages - 2}">...</span>
 
             <a th:href="@{/inquire(page=${inquires.totalPages})}"
-               th:if="${inquires.number < inquires.totalPages -2}"
+               th:if="${inquires.number < inquires.totalPages - 2}"
                th:text="${inquires.totalPages}" aria-label="Last" >
             </a>
 
@@ -167,7 +149,7 @@
                th:href="@{/inquire(page=${inquires.number +2})}">
               <img class="controller-btn-right" src="/img/icon/btn_pagination_next@2x.png">
             </a>
-            
+
           </span>
     </div>
  

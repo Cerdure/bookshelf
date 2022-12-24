@@ -1,7 +1,9 @@
 package com.cerdure.bookshelf.service;
 
+import com.cerdure.bookshelf.domain.board.Inquire;
 import com.cerdure.bookshelf.domain.board.Reply;
 import com.cerdure.bookshelf.domain.board.Review;
+import com.cerdure.bookshelf.domain.enums.MemberRole;
 import com.cerdure.bookshelf.dto.board.ReplyDto;
 import com.cerdure.bookshelf.dto.board.ReviewDto;
 import com.cerdure.bookshelf.repository.*;
@@ -16,6 +18,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Slf4j
@@ -34,15 +39,50 @@ public class ReplyServiceImpl implements ReplyService {
 
     @Override
     public void replySave(ReplyDto replyDto, Long inquireId, Authentication authentication) {
-        System.out.println("replyDto = " + replyDto);
-        System.out.println("inquireId = " + inquireId);
-        List<Reply> replies = replyRepository.findBySeqAfter(replyDto.getSeq()-1);
-        if(replies != null || replies.size() != 0){
-            replies.forEach(e -> e.changeSeq(e.getInquire().getId()==inquireId ? e.getSeq()+1 : e.getSeq()));
+        Inquire inquire = inquireRepository.findById(inquireId).get();
+        System.out.println("authentication.getAuthorities() = " + authentication.getAuthorities());
+        if(authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))){
+            inquire.changeReFlag(1);
+            inquireRepository.save(inquire);
         }
-        replyDto.setInquire(inquireRepository.findById(inquireId).get());
+        if(replyDto.getParentId()!=null){
+            Reply parent = replyRepository.findById(replyDto.getParentId()).get();
+            replyDto.setParent(parent);
+            replyDto.setLevel(parent.getLevel()+1);
+            replyDto.setContent("<strong>@"+parent.getMember().getNickname()+"</strong> "+replyDto.getContent());
+        }
+        replyDto.setInquire(inquire);
         replyDto.setMember(memberRepository.findByPhone(authentication.getName()).get());
-        replyDto.setContent("<strong>"+replyDto.getParentNickname()+"</strong> "+replyDto.getContent());
         replyRepository.save(replyDto.toEntity());
     }
+
+    @Override
+    public void replyModify(ReplyDto replyDto) {
+        Reply reply = replyRepository.findById(replyDto.getReplyId()).get();
+        reply.changeContent(replyDto.getContent());
+        if(reply.getParent()!=null){
+            Reply parent = replyRepository.findById(reply.getParent().getId()).get();
+            reply.changeContent("<strong>@"+parent.getMember().getNickname()+"</strong> "+replyDto.getContent());
+        }
+        replyRepository.save(reply);
+    }
+
+    @Override
+    public void replyDelete(ReplyDto replyDto) {
+        Reply reply = replyRepository.findById(replyDto.getReplyId()).get();
+        Inquire inquire = inquireRepository.findById(reply.getInquire().getId()).get();
+        List<MemberRole> roles = new ArrayList<>();
+        inquire.getReplies().forEach(rp -> roles.add(rp.getMember().getRole()));
+        if(!roles.contains("ROLE_ADMIN")){
+            inquire.changeReFlag(0);
+            inquireRepository.save(inquire);
+        }
+        if(reply.getChildren() == null || reply.getChildren().size() == 0){
+            replyRepository.delete(reply);
+        } else {
+            reply.delete();
+            replyRepository.save(reply);
+        }
+    }
+
 }

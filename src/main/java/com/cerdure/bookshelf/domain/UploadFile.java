@@ -23,10 +23,6 @@ public class UploadFile {
     @JoinColumn(name = "review_id")
     private Review review;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "inquire_id")
-    private Inquire inquire;
-
     private String originalFilename;
 
     private String storeFileName;
@@ -44,10 +40,9 @@ public class UploadFile {
     }
 
     @Builder
-    public UploadFile(Long id, Review review, Inquire inquire, String originalFilename, String storeFileName, String fileDir, String fullPath) {
+    public UploadFile(Long id, Review review, String originalFilename, String storeFileName, String fileDir, String fullPath) {
         this.id = id;
         this.review = review;
-        this.inquire = inquire;
         this.originalFilename = originalFilename;
         this.storeFileName = storeFileName;
         this.fileDir = fileDir;
@@ -57,11 +52,9 @@ public class UploadFile {
     public void changeReview(Review review){
         this.review = review;
     }
-
     public void changeStoreFileName(String storeFileName){
         this.storeFileName = storeFileName;
     }
-
     public void changeFullPath(String fullPath){
         this.fullPath = fullPath;
     }

@@ -25,7 +25,6 @@ public class UploadFileServiceImpl implements UploadFileService {
 
     private final FileRepository fileRepository;
     private final ReviewRepository reviewRepository;
-    private final InquireRepository inquireRepository;
     private String fileDir = System.getProperty("user.dir") + "/src/main/resources/static/upload-img/";
 
     public String getFullPath(String filename) {
@@ -36,13 +35,6 @@ public class UploadFileServiceImpl implements UploadFileService {
     public void saveFiles(ReviewDto reviewDto, Long reviewId) throws IOException {
         for (MultipartFile file : reviewDto.getImageFiles()) {
             saveReviewFile(reviewId, file);
-        }
-    }
-
-    @Override
-    public void saveFiles(InquireDto inquireDto, Long inquireId) throws IOException {
-        for (MultipartFile file : inquireDto.getImageFiles()) {
-            saveInquireFile(inquireId, file);
         }
     }
 
@@ -60,21 +52,6 @@ public class UploadFileServiceImpl implements UploadFileService {
         fileRepository.save(uploadFile);
         file.transferTo(new File(getFullPath(storeFileName)));
     }
-
-    @Override
-    public void saveInquireFile(Long inquireId, MultipartFile file) throws IOException {
-        String storeFileName = createStoreFileName(file.getOriginalFilename());
-        Inquire inquire = inquireRepository.findById(inquireId).get();
-
-        UploadFile uploadFile = UploadFile.builder()
-                .inquire(inquire)
-                .originalFilename(file.getOriginalFilename())
-                .storeFileName(storeFileName)
-                .build();
-
-        fileRepository.save(uploadFile);
-        file.transferTo(new File(getFullPath(storeFileName)));
-        }
 
     private String createStoreFileName(String originalFilename) {
         String ext = extractExt(originalFilename);
@@ -95,13 +72,6 @@ public class UploadFileServiceImpl implements UploadFileService {
     @Override
     public void deleteFilesByReviewId(Long reviewId) {
         List<UploadFile> uploadFiles = fileRepository.findAllByReviewId(reviewId);
-        uploadFiles.forEach(uploadFile -> new File(uploadFile.getFullPath()).delete());
-        uploadFiles.forEach(uploadFile -> fileRepository.delete(uploadFile));
-    }
-
-    @Override
-    public void deleteFilesByInquireId(Long inquireId) {
-        List<UploadFile> uploadFiles = fileRepository.findAllByInquireId(inquireId);
         uploadFiles.forEach(uploadFile -> new File(uploadFile.getFullPath()).delete());
         uploadFiles.forEach(uploadFile -> fileRepository.delete(uploadFile));
     }

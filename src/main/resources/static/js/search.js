@@ -48,7 +48,7 @@ $(function () {
   });
 
   function bookSearch() {
-    $.ajax({                                                      //한글이라 오류남?
+    $.ajax({
       url: "/search-input",
       type: "get",
       data: $("#search-form").serialize(),

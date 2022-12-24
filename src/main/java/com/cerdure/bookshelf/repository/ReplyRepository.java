@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ReplyRepository extends JpaRepository<Reply, Long> {
     public List<Reply> findBySeqAfter(Integer seq);
+    public List<Reply> findByInquireId(Long inquireId);
 }

@@ -25,8 +25,6 @@ import java.util.List;
 public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewRepository reviewRepository;
-    private final FileRepository fileRepository;
-    private final UploadFileServiceImpl uploadFileService;
 
     @Override
     public Long create(ReviewDto reviewDto) {
@@ -37,7 +35,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public Page<Review> findAll(Pageable pageable) {
-        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); // page는 index 처럼 0부터 시작
+        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable= PageRequest.of(page,3, Sort.by("regDate").descending());
         return reviewRepository.findAll(pageable);
     }
@@ -60,27 +58,15 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public void modify(Long reviewId, ReviewDto reviewDto, Authentication authentication) throws Exception {
         Review review = reviewRepository.findById(reviewId).get();
-//        System.out.println("review.getMember().getPhone() = " + review.getMember().getPhone());
-//        System.out.println("authentication.getName() = " + authentication.getName());
-//        if(review.getMember().getPhone() == authentication.getName()){
             review.changeRating(reviewDto.getRating());
             review.changeTag(reviewDto.getTag());
             review.changeContent(reviewDto.getContent());
             reviewRepository.save(review);
-//        } else {
-//            throw new Exception("작성자가 일치하지 않습니다.");
-//        }
     }
 
     @Override
     public void delete(Long reviewId, Authentication authentication) throws Exception {
         Review review = reviewRepository.findById(reviewId).get();
-//        System.out.println("review.getMember().getPhone() = " + review.getMember().getPhone());
-//        System.out.println("authentication.getName() = " + authentication.getName());
-//        if(review.getMember().getPhone() == authentication.getName()){
             reviewRepository.delete(review);
-//        } else {
-//            throw new Exception("작성자가 일치하지 않습니다.");
-//        }
     }
 }

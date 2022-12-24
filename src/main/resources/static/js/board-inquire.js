@@ -172,9 +172,7 @@ $(window).resize(function(){
       }
     });
 
-    $(document).on("click",".my-inquire-search", function () {
-      document.location.replace("/inquire-my");
-    });
+
   });       // doc---------------------------------------------------
 
 
@@ -185,77 +183,29 @@ $(".pw-input input").keyup(function (key){
   }
 });
 
- 
+  $("#search-input").keyup(function(key){
+    if (key.keyCode == 13) {
+        $('.search').submit();
+    }
+  });
 
-
+  $(".my-inquire-search").click(function () {
+    document.location.replace("/inquire-my");
+  });
 });
+
+
 
   let headerPassed = false;
   let mainPassed = false;
   let iwOpened = false;
-  let imgCount = 0;
-
-function imgChange() {
-  if (imgCount == 5) {
-    $(".inquire-write-attach-photo-button").hide();
-  } else {
-    $(".inquire-write-attach-photo-button").show();
-  }
-  $(".inquire-write-attach-title span:last-child").text(imgCount + '/5');
-}
-
-function setThumbnail(event) {
-  if (event.target.files.length > 0 && event.target.files.length < 6) {
-    imgCount = 0;
-    let imgs = document.querySelectorAll(".inquire-write-photo-wrapper");
-    if( imgs != null){imgs.forEach(e => e.remove());}
-
-    for (var image of event.target.files) {
-      imgCount++;
-      let reader = new FileReader();
-      reader.onload = function (event) {
-        let div = document.createElement("div");
-        div.setAttribute('class', 'inquire-write-photo-wrapper');
-        div.innerHTML = '<div class="inquire-write-photo-cancel" onclick="deleteImg(this)">X</div>';
-        let img = document.createElement("input");
-        img.setAttribute("style", "background-image: url(" + event.target.result + ")");
-        img.setAttribute("type", "file");
-        img.setAttribute("class", "inquire-write-photo");
-        img.setAttribute("disabled", true);
-        document.querySelector(".inquire-write-attach-photo").appendChild(div).appendChild(img);
-      }
-      reader.readAsDataURL(image);
-      imgChange();
-    }
-  } else if (event.target.files.length > 5) {
-    alert('이미지는 최대 5장까지 업로드 가능합니다.');
-    attchReset();
-  }
-}
-
-function attchReset() {
-  imgCount = 0;
-  let imgs = document.querySelectorAll(".inquire-write-photo-wrapper");
-  if( imgs != null){imgs.forEach(e => e.remove());}
-
-  let parent = document.querySelector(".inquire-write-attach-photo-button");
-  document.querySelector(".inquire-write-photo-input").remove();
-
-  parent.innerHTML = '<input name="imageFiles" class="inquire-write-photo-input" type="file" multiple="multiple" accept=".jpg, .jpeg, .png, .gif" onchange="setThumbnail(event, this)"></input>';
-}
-
-function deleteImg(_this) {
-  $(_this).parent().remove();
-  imgCount--;
-  imgChange();
-}
 
   function formClose(_this){
     $(".write-wrapper-back").removeClass("modal-background");
-    $("form").hide();
+    $(".inquire-write-wrapper").hide();
     $("body").css('overflow-y','scroll');
-    $("form").css('filter','brightness(100%)');
-    $("form textarea").val('');
+    $(".inquire-write-wrapper").css('filter','brightness(100%)');
+    $(".inquire-write-wrapper textarea").val('');
     $(".write-number").text('0/3000');
     $(".inquire-write-photo-wrapper").remove();
     $(".inquire-write-attach-photo-button").show();
@@ -290,9 +240,8 @@ function deleteImg(_this) {
       }
     }).done(function(result){
       if(result == null || result == ''){
-        console.log("not Closed");
+        document.location.replace("/inquire-detail/"+inquireId);
       } else {
-        console.log(result);
         inquirePw = result;
         $(".write-wrapper-back").addClass("modal-background");
         $(".pw-input").fadeIn(300);

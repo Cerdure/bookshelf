@@ -38,10 +38,11 @@
 </div>
 
 <div class="meta-wrapper">
+  <div class="write-wrapper-back"></div>
 
   <div id="modify-wrapper">
     <div class="modal-background"></div>
-    <form action="" method="post" class="inquire-modify-wrapper" enctype="multipart/form-data">
+    <form th:action="'/inquire-modify/'+${inquire.id}" method="post" class="inquire-modify-wrapper">
       <div class="inquire-write-top">
         <span class="inquire-write-top-text">문의글 수정</span>
         <img class="inquire-write-top-icon" src="/img/icon/btn_dialog_close@2x.png">
@@ -49,46 +50,23 @@
       <div class="inquire-write-contents">
         <div class="inquire-write-header">
           <div class="title">ㅣ 제목 *</div>
-          <textarea th:value="${modInquire!=null?modInquire.title:''}" name="title" class="inquire-input-header" maxlength="30" placeholder="제목을 입력하세요." ></textarea>
+          <textarea th:text="${inquire.title}" name="title" class="inquire-input-header" maxlength="30" placeholder="제목을 입력하세요." ></textarea>
         </div>
         <div class="inquire-write-main">
           <div class="inquire-write-main-title">ㅣ내용 *</div>
           <div class="inquire-write-frame">
-          <textarea th:value="${modInquire!=null?modInquire.content:''}" name="content" class="inquire-input-main" maxlength="3000"
+          <textarea th:text="${inquire.content}" name="content" class="inquire-input-main" maxlength="3000"
                     placeholder="내용을 10자 이상 입력해주세요. 주제와 무관한 글은 임의로 삭제될 수 있습니다."></textarea>
-            <div class="write-number">0/3000</div>
-          </div>
-        </div>
-
-        <div class="inquire-write-attach">
-          <div class="inquire-write-attach-title">
-            <span>ㅣ 사진 첨부 (선택)</span>
-            <span th:text="${modInquire!=null?modInquire.files.size():0}+'/5'"></span>
-          </div>
-          <div class="inquire-write-attach-photo">
-
-            <div class="inquire-write-attach-photo-button">
-              <input name="imageFiles" class="inquire-write-photo-input" type="file" multiple="multiple"  th:if="${(modInquire!=null?modInquire.files.size():0) < 5}"
-                     accept=".jpg, .jpeg, .png, .gif" th:value="${modInquire!=null?modInquire.files:null}">
-            </div>
-
-            <div class="review-write-photo-wrapper" th:each="file: ${modInquire!=null?modInquire.files:null}">
-              <div class="review-write-photo-cancel" onclick="deleteImg(this)">X</div>
-              <input class="review-write-photo" onchange="setThumbnail(event,this)" th:style="'background-image:url(' + ${file.fullPath} + ');'" >
-            </div>
-
-          </div>
-          <div class="inquire-write-attach-guide">
-            * JPG, PNG, GIF 파일만 최대 5장 업로드 가능합니다.
+            <div class="write-number" th:text="${#strings.length(inquire.content)}+'/3000'">0/3000</div>
           </div>
         </div>
 
         <div class="inquire-write-private">
-          <label>ㅣ 비밀글<input th:checked="${modInquire!=null?modInquire.closed:0} == 1" name="closed" class="private-check" type="checkbox"  value="1"></label>
-          <input th:value="${modInquire!=null?modInquire.pw:''}" name="pw" class="private-pw" type="password"  maxlength="12" placeholder="비밀번호를 입력해주세요.">
+          <label>ㅣ 비밀글<input th:checked="${inquire.closed == 1}" name="closed" class="private-check" type="checkbox"  value="1"></label>
+          <input th:value="${inquire.pw}" name="pw" class="private-pw" type="password"  maxlength="12" placeholder="비밀번호를 입력해주세요.">
         </div>
       </div>
-      <button type="submit" class="regist-button disable">등록</button>
+      <button type="submit" class="regist-button">등록</button>
     </form>
   </div>
 
@@ -102,14 +80,15 @@
 
   <div class="detail-wrapper">
     <input id="inquireId" th:value="${inquire.id}" type="hidden">
+    <span class="reFlag"  th:text="${inquire.reFlag == 1 ? '답변완료' : '미답변'}"></span>
     <span class="title" th:text="${inquire.title}"></span>
-    <img class="lock" src="/img/icon/lock.svg" th:if="${inquire.closed==1}">
+    <img class="lock" src="/img/icon/lock.svg" th:if="${inquire.closed == 1}">
     <div class="sub-title">
       <span class="type" th:text="${inquire.member.nickname}"></span>
       <span class="split">ㅣ</span>
       <span class="date" th:text="${#temporals.format(inquire.regDate, 'yyyy.MM.dd')}"></span>
-      <span th:if="${#authentication.principal.username} == ${inquire.member.phone}" class="remove">삭제</span>
-      <span th:if="${#authentication.principal.username} == ${inquire.member.phone}" class="edit">수정</span>
+      <span th:if="${#authorization.expression('hasRole(''ADMIN'')')} ? true : (${#authentication.principal.username} == ${inquire.member.phone})" class="remove">삭제</span>
+      <span th:if="${#authorization.expression('hasRole(''ADMIN'')')} ? true : (${#authentication.principal.username} == ${inquire.member.phone})" class="edit">수정</span>
     </div>
     <div class="contents" th:text="${inquire.content}"></div>
 
@@ -124,28 +103,43 @@
       <div class="comment-button-cancel" onclick="commentCancel(this)">취소</div>
       </div>
 
-      <div class="my-comment" th:each="reply : ${inquire.replies}" th:style="${'padding-left:'+40*reply.level+'px;'}">
-        <input id="replyId" th:value="${reply.id}" type="hidden">
-        <input id="replySeq" th:value="${reply.seq}" type="hidden">
-        <input id="replyLevel" th:value="${reply.level}" type="hidden">
-        <input id="childNum" th:value="${reply.childNum}" type="hidden">
-        <div class="main">
-        <div class="header">
-          <span class="name" th:text="${reply.member.nickname}"></span>
-          <span class="split">ㅣ</span>
-          <span class="date" th:text="${#temporals.format(inquire.regDate, 'yyyy.MM.dd HH:mm:ss')}"></span>
-        </div>
-        <div class="body" th:utext="${reply.content}"></div>
-        <div class="option">
-          <img class="opt-btn" src="/img/icon/three-dots-vertical.svg">
-          <div class="box">
-            <div class="edit" th:if="${#authentication.principal.username} == ${reply.member.phone}">수정</div>
-            <div class="remove" th:if="${#authentication.principal.username} == ${reply.member.phone}">삭제</div>
-            <div class="reply">답글 달기</div>
+      <div th:each="reply : ${inquire.replies}" th:if="${reply.parent==null}">
+
+        <div th:fragment="replyBlock" th:remove="tag">
+
+          <div class="my-comment" th:style="${'padding-left:'+40*reply.level+'px;'}">
+            <input id="replyId" th:value="${reply.id}" type="hidden">
+            <div class="main">
+              <div class="header">
+                <span class="name" th:text="${reply.member?.nickname}"></span>
+                <span class="split" th:if="${reply.member!=null}">ㅣ</span>
+                <span class="date" th:text="${#temporals.format(inquire.regDate, 'yyyy.MM.dd HH:mm:ss')}"></span>
+              </div>
+              <div class="body" th:utext="${reply.content}"></div>
+              <div class="option">
+                <img class="opt-btn" src="/img/icon/three-dots-vertical.svg">
+                <div class="box">
+                  <div class="edit" th:if="${#authorization.expression('hasRole(''ADMIN'')')} ? true : (${#authentication.principal.username} == ${reply.member?.phone})">수정</div>
+                  <div class="remove" th:if="${#authorization.expression('hasRole(''ADMIN'')')} ? true : (${#authentication.principal.username} == ${reply.member?.phone})">삭제</div>
+                  <div class="reply">답글 달기</div>
+                </div>
+              </div>
+            </div>
           </div>
+
+          <th:block th:each="children : ${reply.children}">
+            <th:block th:with="reply = ${children}"
+                      th:include="this :: replyBlock"
+                      th:remove="tag">
+            </th:block>
+          </th:block>
+
         </div>
+
       </div>
-      </div>
+
+
+
     </div>
   </div>
 
@@ -154,7 +148,7 @@
     <input class="inquireId" th:value="${nextInquire.id}" type="hidden">
     <img class="icon" src="/img/icon/chevron-up.svg">
     <a class="title" th:if="${nextInquire.id==null}">다음글이 없습니다.</a>
-    <a class="title" th:if="${nextInquire.id!=null}" onclick="inquireDetail(this)" th:text="${nextInquire.title}">다음 문의글</a>
+    <a class="title" th:if="${nextInquire.id!=null}" onclick="inquireDetail(this)" th:text="${nextInquire.title}"></a>
     <img class="lock" src="/img/icon/lock.svg" th:if="${nextInquire.closed==1}">
   </div>
 
@@ -163,7 +157,7 @@
     <input class="inquireId" th:value="${prevInquire.id}" type="hidden">
     <img class="icon" src="/img/icon/chevron-up.svg">
     <a class="title" th:if="${prevInquire.id==null}">이전글이 없습니다.</a>
-    <a class="title" th:if="${prevInquire.id!=null}" onclick="inquireDetail(this)" th:text="${prevInquire.title}">이전 문의글</a>
+    <a class="title" th:if="${prevInquire.id!=null}" onclick="inquireDetail(this)" th:text="${prevInquire.title}"></a>
     <img class="lock" src="/img/icon/lock.svg" th:if="${prevInquire.closed==1}">
   </div>
 
@@ -171,13 +165,28 @@
  
 </div>
 
+  <div class="alert-window close-alert">
+    <div class="text">
+      글 수정을 취소하겠습니까?
+    </div>
+    <button class="cancel" onclick="hideAlert(this)">취소</button>
+    <button class="okay" onclick="formClose(this)">확인</button>
+  </div>
 
   <div class="alert-window delete-alert">
     <div class="text">
       글을 삭제하시겠습니까?
     </div>
     <button class="cancel" onclick="hideDeleteAlert(this)">취소</button>
-    <button class="okay" onclick="inquirewDelete(this)">확인</button>
+    <button class="okay" onclick="inquireDelete(this)">확인</button>
+  </div>
+
+  <div class="alert-window reply-delete-alert">
+    <div class="text">
+      댓글을 삭제하시겠습니까?
+    </div>
+    <button class="cancel" onclick="hideDeleteAlert(this)">취소</button>
+    <button class="okay" onclick="replyDelete(this)">확인</button>
   </div>
 
   <div class="pw-input">

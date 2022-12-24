@@ -19,6 +19,7 @@ public class InquireDto {
 
     private Long id;
     private Member member;
+    private String memberNickname;
     private String title;
     private String content;
     private LocalDateTime regDate;
@@ -28,12 +29,14 @@ public class InquireDto {
     private Integer hits;
     private Integer reFlag;
     private List<Reply> replies;
-    private List<MultipartFile> imageFiles;
+    private Integer searchBy;
+    private String input;
 
     @Builder
-    public InquireDto(Long id, Member member, String title, String content, LocalDateTime regDate, LocalDateTime modDate, Integer closed, String pw, Integer hits, Integer reFlag, List<Reply> replies, List<MultipartFile> imageFiles) {
+    public InquireDto(Long id, Member member, String memberNickname, String title, String content, LocalDateTime regDate, LocalDateTime modDate, Integer closed, String pw, Integer hits, Integer reFlag, List<Reply> replies, Integer searchBy, String input) {
         this.id = id;
         this.member = member;
+        this.memberNickname = memberNickname;
         this.title = title;
         this.content = content;
         this.regDate = regDate;
@@ -43,12 +46,14 @@ public class InquireDto {
         this.hits = hits;
         this.reFlag = reFlag;
         this.replies = replies;
-        this.imageFiles = imageFiles;
+        this.searchBy = searchBy;
+        this.input = input;
     }
 
     public Inquire toEntity(){
         return Inquire.builder()
                 .member(this.member)
+                .memberNickname(this.memberNickname)
                 .title(this.title)
                 .content(this.content)
                 .regDate(this.regDate)

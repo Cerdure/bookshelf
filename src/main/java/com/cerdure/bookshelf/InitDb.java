@@ -887,10 +887,22 @@ public class InitDb {
                     .role(MemberRole.USER)
                     .build();
 
+            Member member4 = Member.builder()
+                    .name("관리자")
+                    .nickname("관리자")
+                    .phone("00099990000")
+                    .birth("000000")
+                    .sex("1")
+                    .pw(passwordEncoder.encode("1234"))
+                    .address(new Address("서울 당산동","145가","K013"))
+                    .role(MemberRole.ADMIN)
+                    .build();
+
             em.persist(member);
             em.persist(member1);
             em.persist(member2);
             em.persist(member3);
+            em.persist(member4);
 
             Review[] reviews = new Review[10];
 
@@ -995,6 +1007,7 @@ public class InitDb {
 
             inquires[0] = Inquire.builder()
                     .member(member)
+                    .memberNickname(member.getNickname())
                     .title("tt1111111111111")
                     .content("ct11111111111")
                     .closed(1).pw("1234")
@@ -1002,7 +1015,8 @@ public class InitDb {
                     .build();
 
             inquires[1] = Inquire.builder()
-                    .member(member)
+                    .member(member1)
+                    .memberNickname(member1.getNickname())
                     .title("tt2222222222")
                     .content("ct1222222222")
                     .closed(1).pw("1234")
@@ -1011,6 +1025,7 @@ public class InitDb {
 
             inquires[2] = Inquire.builder()
                     .member(member)
+                    .memberNickname(member.getNickname())
                     .title("tt3333333333")
                     .content("ct333333333")
                     .closed(1).pw("1234")
@@ -1019,6 +1034,7 @@ public class InitDb {
 
             inquires[3] = Inquire.builder()
                     .member(member)
+                    .memberNickname(member.getNickname())
                     .title("tt44444444")
                     .content("ct444444444")
                     .closed(1).pw("1234")
@@ -1026,7 +1042,8 @@ public class InitDb {
                     .build();
 
             inquires[4] = Inquire.builder()
-                    .member(member)
+                    .member(member1)
+                    .memberNickname(member1.getNickname())
                     .title("tt55555555")
                     .content("ct555555555")
                     .closed(1).pw("1234")
@@ -1034,7 +1051,8 @@ public class InitDb {
                     .build();
 
             inquires[5] = Inquire.builder()
-                    .member(member)
+                    .member(member2)
+                    .memberNickname(member2.getNickname())
                     .title("tt6666666")
                     .content("ct666666666")
                     .closed(1).pw("1234")
@@ -1043,6 +1061,7 @@ public class InitDb {
 
             inquires[6] = Inquire.builder()
                     .member(member)
+                    .memberNickname(member.getNickname())
                     .title("tt7777777777")
                     .content("ct777777777")
                     .closed(1).pw("1234")
@@ -1051,6 +1070,7 @@ public class InitDb {
 
             inquires[7] = Inquire.builder()
                     .member(member)
+                    .memberNickname(member.getNickname())
                     .title("tt888888888")
                     .content("ct88888888")
                     .closed(1).pw("1234")
@@ -1059,6 +1079,7 @@ public class InitDb {
 
             inquires[8] = Inquire.builder()
                     .member(member)
+                    .memberNickname(member.getNickname())
                     .title("tt9999999999")
                     .content("ct9999999999")
                     .closed(1).pw("1234")
@@ -1067,6 +1088,7 @@ public class InitDb {
 
             inquires[9] = Inquire.builder()
                     .member(member)
+                    .memberNickname(member.getNickname())
                     .title("tt101010101010")
                     .content("ct1010101010")
                     .closed(1).pw("1234")
@@ -1081,27 +1103,31 @@ public class InitDb {
             Reply[] replies = new Reply[30];
 
             for (int i=0; i<30; i++){
-                if(i%2==0){
+                if(i%3!=1) {
                     replies[i] = Reply.builder()
                             .member(member2)
-                            .inquire(inquires[i/3])
+                            .inquire(inquires[i / 3])
                             .content("계란을 삶을 때 몇 분을 삶아야 할까 고민하셨나요? 바로 " + i + "분<br>" +
                                     "오늘은 맛있는 삶은 계란 만드는 방법으로 찾아왔습니다.")
-                            .seq(i%3).level(i%2)
-                            .childNum(i%3==0?1:0)
-                            .build();
-                } else {
-                    replies[i] = Reply.builder()
-                            .member(member3)
-                            .inquire(inquires[i/3])
-                            .content("<strong>@테스터2</strong> 계란을 삶을 때 몇 분을 삶아야 할까 고민하셨나요? 바로 " + i + "분<br>" +
-                                    "맨들맨들한 삶은 계란 만드는 방법으로 찾아왔습니다.")
-                            .seq(i%3).level(i%2)
+                            .level(0)
                             .build();
                 }
-                em.persist(replies[i]);
             }
 
+            for (int i=1; i<30; i+=3){
+                replies[i] = Reply.builder()
+                        .member(member3)
+                        .inquire(inquires[i/3])
+                        .content("<strong>@테스터2</strong> 계란을 삶을 때 몇 분을 삶아야 할까 고민하셨나요? 바로 " + i + "분<br>" +
+                                "맨들맨들한 삶은 계란 만드는 방법으로 찾아왔습니다.")
+                        .parent(replies[i-1])
+                        .level(1)
+                        .build();
+            }
+
+            for (Reply reply : replies) {
+                em.persist(reply);
+            }
 
             UploadFile[][] files = new UploadFile[10][5];
 

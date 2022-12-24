@@ -111,36 +111,8 @@ $(window).resize(function(){
 
  $(".top-back-title:nth-child(1)").show();
 
+
  $(document).ready(function (){
-     $(document).on("change","#modify-wrapper .inquire-write-photo-input", function(event){
-         if (event.target.files.length > 0 && event.target.files.length < 6) {
-             imgCount = 0;
-             let imgs = document.querySelectorAll(".inquire-write-photo-wrapper");
-             if( imgs != null){imgs.forEach(e => e.remove());}
-
-             for (var image of event.target.files) {
-                 imgCount++;
-                 let reader = new FileReader();
-                 reader.onload = function (event) {
-                     let div = document.createElement("div");
-                     div.setAttribute('class', 'inquire-write-photo-wrapper');
-                     div.innerHTML = '<div class="inquire-write-photo-cancel" onclick="deleteImg(this)">X</div>';
-                     let img = document.createElement("input");
-                     img.setAttribute("style", "background-image: url(" + event.target.result + ")");
-                     img.setAttribute("type", "file");
-                     img.setAttribute("class", "inquire-write-photo");
-                     img.setAttribute("disabled", true);
-                     document.querySelector("#modify-wrapper .inquire-write-attach-photo").appendChild(div).appendChild(img);
-                 }
-                 reader.readAsDataURL(image);
-                 imgChange();
-             }
-         } else if (event.target.files.length > 5) {
-             alert('이미지는 최대 5장까지 업로드 가능합니다.');
-             attchReset();
-         }
-     });
-
      $(document).on("mouseover", ".my-comment",function (){
          $(".option img:not(.clicked)").stop().fadeOut(100);
          $(this).find(".option img").stop().fadeIn(300);
@@ -164,18 +136,14 @@ $(window).resize(function(){
      });
      $(document).on("click", ".reply", function (){
          $(".box").fadeOut(0);
+         $(".inner-comment").remove();
          let parent = $(this).closest(".my-comment");
          let parentId = parent.find("#replyId").val();
-         let parentNickname = parent.find(".name").text();
-         let parentChildNum = Number(parent.find("#childNum").val());
          let form = document.createElement("form");
          form.setAttribute('class','inner-comment');
          form.innerHTML =
              '<input id="parentId" type="hidden" value="'+ parentId +'">' +
-             '<input id="commentSeq" type="hidden" value="'+ (Number(parent.find("#replySeq").val())+parentChildNum+1) +'">' +
-             '<input id="commentLevel" type="hidden" value="'+ (Number(parent.find("#replyLevel").val())+1) +'">' +
              '<img src="/img/icon/arrow-return-right.svg">' +
-             '<strong>@'+parentNickname+'</strong>'+
              '<textarea class="comment" name="content" maxlength="300" onkeydown="resize(this)" ' +
              'onkeyup="resize(this)" onclick="commentClick(this)" onfocusout="commentFocusout(this)" ' +
              'placeholder="내용을 입력해주세요."></textarea>'+
@@ -185,6 +153,32 @@ $(window).resize(function(){
          $(this).closest('.my-comment').append(form);
      });
 
+     $(document).on("click", ".my-comment .edit", function () {
+         $(this).closest(".my-comment").find(".option").hide();
+         let origin = $(this).closest(".my-comment").find(".body"); //+origin.text().length
+         if(origin.find("strong")==null){
+             commentBodyText = origin.text();
+         } else {
+             commentBodyText = origin.text().substring(origin.text().indexOf(" ")+1, origin.text().length);
+         }
+         origin.text('');
+         let form = document.createElement("form");
+         form.setAttribute('class','inner-comment');
+         form.innerHTML =
+             '<textarea class="mod-comment" name="content" maxlength="300" onkeydown="resize(this)" ' +
+             'onkeyup="resize(this)" onclick="commentClick(this)" onfocusout="commentFocusout(this)" ' +
+             'placeholder="수정할 내용을 입력해주세요.">'+commentBodyText+'</textarea>'+
+             '<div class="comment-underline"></div>' +
+             '<div class="comment-button-save" value="save" onclick="replyModify(this)">수정</div>' +
+             '<div class="comment-button-cancel" onclick="myCommentCancel(this)">취소</div>';
+         $(this).closest('.my-comment').find(".body").append(form);
+     });
+
+     $(document).on("click", ".my-comment .remove", function () {
+         replyId = $(this).closest(".my-comment").find("#replyId").val();
+         $(".write-wrapper-back").addClass("modal-background");
+         $(".reply-delete-alert").show();
+     });
 
  });
 
@@ -195,17 +189,85 @@ $(window).resize(function(){
         }
     });
 
+    $(".detail-wrapper .sub-title .edit").click(function (){
+        $('#modify-wrapper').fadeIn(300);
+        iwOpened = true;
+    });
 
 
+    $(document).on("keyup", ".inquire-input-header", function () { console.log("header")
+        let val = $(this).val();
+        if(val!=''){
+            headerPassed = true;
+        } else {
+            headerPassed = false;
+        }
+        registCheck(headerPassed,mainPassed);
+    });
 
+    $(document).on("keyup", ".inquire-input-main", function () { console.log("main")
+        let val = $(this).val();
+        $(".write-number").text(val.length+"/3000");
+        if(val.length>9){
+            mainPassed = true;
+        } else {
+            mainPassed = false;
+        }
+        registCheck(headerPassed,mainPassed);
+    });
+
+    $(document).on("click",".inquire-write-top-icon", function () {
+        $("form").css('filter', 'brightness(0.5)');
+        $(".close-alert").show();
+    });
+
+    $(document).on("click", ".private-check", function(){
+        if($(this).is(':checked')){
+            $(".private-pw").stop().show();
+            $(".private-pw").stop().animate({'width':'200px'},300);
+        } else {
+            $(".private-pw").stop().animate({'width':'0px'},300,function(){
+                $(".private-pw").stop().hide();
+                $(".private-pw").val('');
+            });
+        }
+    });
+
+    $(".detail-wrapper .sub-title .remove").click(function(){
+        inquireId = $('#inquireId').val();
+        deleteAlert();
+    });
 });
+
+    let commentBodyText;
+    let inquireId;
+    let inquirePw;
+    let replyId;
+    let headerPassed = true;
+    let mainPassed = true;
+    let iwOpened = false;
+
+
+    function formClose(_this){
+        $("#modify-wrapper").hide();
+        $("body").css('overflow-y','scroll');
+        $("form").css('filter','brightness(100%)');
+        iwOpened = false;
+        hideAlert(_this)
+    }
+
+    function registCheck(...passed){
+        if(passed.every(e => {return e;})) {
+            $(".regist-button").removeClass("disable");
+        } else {
+            $(".regist-button").addClass("disable");
+        }
+    }
 
   function replySave(_this){
           let data = {
               content: $(_this).parent().find(".comment").val(),
-              seq: $(_this).parent().find("#commentSeq").val(),
-              level:$(_this).parent().find("#commentLevel").val(),
-              parentNickname: $(_this).parent().find("strong").text()
+              parentId: $(_this).parent().find("#parentId").val()
           };
           $.ajax({
               url: "/reply/" + $("#inquireId").val(),
@@ -217,9 +279,46 @@ $(window).resize(function(){
                   console.log(error);
               }
           }).done(function (replies) {
-              $('.comment-wrapper').replaceWith(replies);
+              document.location.replace("/inquire-detail/"+$("#inquireId").val());
           });
   }
+
+function replyModify(_this){
+    let data = {
+        replyId: $(_this).closest(".my-comment").find("#replyId").val(),
+        content: $(_this).parent().find(".mod-comment").val(),
+    };
+    $.ajax({
+        url: "/reply-modify/" + $("#inquireId").val(),
+        type: "post",
+        data: data,
+        dataType: "html",
+        async: true,
+        error: function (xhr, status, error) {
+            console.log(error);
+        }
+    }).done(function (replies) {
+        document.location.replace("/inquire-detail/"+$("#inquireId").val());
+    });
+}
+
+function replyDelete(_this){
+    let data = {
+        replyId: replyId,
+    };
+    $.ajax({
+        url: "/reply-delete/" + $("#inquireId").val(),
+        type: "post",
+        data: data,
+        dataType: "html",
+        async: true,
+        error: function (xhr, status, error) {
+            console.log(error);
+        }
+    }).done(function (replies) {
+        document.location.replace("/inquire-detail/"+$("#inquireId").val());
+    });
+}
 
   function hide(_this){
     $("form").css('filter','brightness(100%)');
@@ -235,10 +334,6 @@ $(window).resize(function(){
     $(_this).parent().find(".comment-underline").stop().animate({'width':'100%'},200,'easeInOutQuad');
     $(_this).parent().find(".comment-button-save").stop().fadeIn(300);
     $(_this).parent().find(".comment-button-cancel").stop().fadeIn(300);
-   }
-
-   function commentFocusout(_this){
-    $(_this).parent().find(".comment-underline").stop().animate({'width':'0%'},100,'easeInOutQuad');
    }
 
    function commentCancel(_this){
@@ -260,8 +355,7 @@ function hideDeleteAlert(_this) {
     $(_this).parent().hide();
 }
 
-function deleteAlert(_inquireId) {
-    inquireId = _inquireId;
+function deleteAlert() {
     $(".write-wrapper-back").addClass("modal-background");
     $(".delete-alert").show();
 }
@@ -281,27 +375,29 @@ function inquireDelete() {
 
 function inquireDetail(_this){
     inquireId =  $(_this).parent().find(".inquireId").val();
-    $.ajax({
-        url: "/inquire-closedCheck/"+inquireId,
-        type: "get",
-        data_type: "text",
-        error: function (xhr, status, error) {
-            console.log(error);
-        }
-    }).done(function(result){
-        if(result == null || result == ''){
-            console.log("not Closed");
-        } else {
-            console.log(result);
-            inquirePw = result;
-            $(".write-wrapper-back").addClass("modal-background");
-            $(".pw-input").fadeIn(300);
-        }
-    });
+      if(closed!=1){
+          $.ajax({
+              url: "/inquire-closedCheck/"+inquireId,
+              type: "get",
+              data_type: "text",
+              error: function (xhr, status, error) {
+                  console.log(error);
+              }
+          }).done(function(result){
+              if(result == null || result == ''){
+                  document.location.replace("/inquire-detail/"+inquireId);
+              } else {
+                  inquirePw = result;
+                  $(".write-wrapper-back").addClass("modal-background");
+                  $(".pw-input").fadeIn(300);
+              }
+          });
+      } else {
+          $(".write-wrapper-back").addClass("modal-background");
+          $(".pw-input").fadeIn(300);
+      }
 }
 
-let inquireId;
-let inquirePw;
 
 function pwCheck(_this){
     console.log("pwCheck pw="+inquirePw);

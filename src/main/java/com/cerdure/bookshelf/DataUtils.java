@@ -10,6 +10,8 @@ public class DataUtils {
     private String name;
     private String sortOrder;
     private Integer categoryId;
+    private Integer searchBy;
+    private String input;
     private LocalDate now;
     private LocalDate oneMonthAgo;
     private LocalDate threeMonthAgo;

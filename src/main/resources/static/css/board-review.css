@@ -125,7 +125,8 @@
   border-radius: 5px;
   border: 1px solid silver;
   text-align: center;
-  line-height: 30px;
+  line-height: 34px;
+  font-size: 14px;
   font-weight: 900;
   cursor: pointer;
   color: rgb(109, 109, 109);
@@ -146,7 +147,8 @@
   background-color: cornflowerblue;
   color: white;
   text-align: center;
-  line-height: 30px;
+  line-height: 34px;
+  font-size: 14px;
   font-weight: 900;
   cursor: pointer;
 }
