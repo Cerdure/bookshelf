@@ -11,9 +11,9 @@ $(function () {
     .hover(function () {
       let index = $(this).index();
       if (index == 0) {
-        $("#underbar").stop().animate({ 'left': '25px' }, 200, 'swing');
+        $("#underbar").stop().animate({ 'left': '0%' }, 200, 'swing');
       } else {
-        $("#underbar").stop().animate({ 'left': 22 + 100 * index + 'px' }, 200, 'swing');
+        $("#underbar").stop().animate({ 'left': 20 * index + '%' }, 200, 'swing');
       }
     })
     .click(function () {
@@ -23,9 +23,9 @@ $(function () {
     })
     .mouseleave(function () {
       if (ubClickindex == 0) {
-        $("#underbar").stop().animate({ 'left': '25px' }, 200, 'swing');
+        $("#underbar").stop().animate({ 'left': '0%' }, 200, 'swing');
       } else {
-        $("#underbar").stop().animate({ 'left': 22 + 100 * ubClickindex + 'px' }, 200, 'swing');
+        $("#underbar").stop().animate({ 'left': 20 * ubClickindex + '%' }, 200, 'swing');
       }
     });
 
@@ -190,16 +190,13 @@ $(function () {
         $('html').stop().animate({ scrollTop: 609 }, 1000);
         return;
       case 1:
-        $('html').stop().animate({ scrollTop: 1147 }, 1000);
+        $('html').stop().animate({ scrollTop: 1090 }, 1000);
         return;
       case 2:
-        $('html').stop().animate({ scrollTop: 1984 }, 1000);
+        $('html').stop().animate({ scrollTop: 1900 }, 1000);
         return;
       case 3:
-        $('html').stop().animate({ scrollTop: 3043 }, 1000);
-        return;
-      case 4:
-        $('html').stop().animate({ scrollTop: 4077 }, 1000);
+        $('html').stop().animate({ scrollTop: 2910 }, 1000);
         return;
     }
   });
@@ -212,28 +209,34 @@ $(function () {
         $('html').stop().animate({ scrollTop: 609 }, 1000);
         return;
       case 1:
-        $('html').stop().animate({ scrollTop: 1147 }, 1000);
+        $('html').stop().animate({ scrollTop: 1090 }, 1000);
         return;
       case 2:
-        $('html').stop().animate({ scrollTop: 1984 }, 1000);
+        $('html').stop().animate({ scrollTop: 1900 }, 1000);
         return;
       case 3:
-        $('html').stop().animate({ scrollTop: 3043 }, 1000);
-        return;
-      case 4:
-        $('html').stop().animate({ scrollTop: 4077 }, 1000);
+        $('html').stop().animate({ scrollTop: 2910 }, 1000);
         return;
     }
   });
 
 
   if (st > 557) {
+    $(".category-wrapper").css({
+      'position': 'fixed',
+      'top': '-92px',
+      'width': '100%',
+      'border': 'none',
+      'z-index': '5'
+    });
+    $(".sale-wrapper").css({
+      'margin-top':'230px'
+    });
     $(".category-title-wrapper").css({
       'position': 'fixed',
-      'top': '60px',
+      'top': '112px',
       'background': 'white',
       'border-bottom': '1px solid #ebebeb',
-      'z-index': '5'
     });
     if (width < 1280) {
       $(".category-title").css({
@@ -244,6 +247,16 @@ $(function () {
       'height': '160px'
     });
   } else {
+    $(".category-wrapper").css({
+      'position': 'relative',
+      'top': 'auto',
+      'width': '1280px',
+      'border': '1px solid silver',
+      'z-index': '0'
+    });
+    $(".sale-wrapper").css({
+      'margin-top':'auto'
+    });
     $(".category-title-wrapper").css({
       'position': 'relative',
       'top': '0px',
@@ -259,14 +272,24 @@ $(function () {
     });
   }
 
-  $(window).scroll(function () {
-    st = $(this).scrollTop();
+  $(window).scroll(function () { 
+    st = $(this).scrollTop();           console.log(st);
     width = $(this).width();
 
     if (st > 557) {
+      $(".category-wrapper").css({
+        'position': 'fixed',
+        'top': '-92px',
+        'width': '100%',
+        'border': 'none',
+        'z-index': '5'
+      });
+      $(".sale-wrapper").css({
+        'margin-top':'230px'
+      });
       $(".category-title-wrapper").css({
         'position': 'fixed',
-        'top': '60px',
+        'top': '112px',
         'background': 'white',
         'border-bottom': '1px solid #ebebeb',
         'z-index': '5'
@@ -280,6 +303,16 @@ $(function () {
         'height': '160px'
       });
     } else {
+      $(".category-wrapper").css({
+        'position': 'relative',
+        'top': 'auto',
+        'width': '1280px',
+        'border': '1px solid silver',
+        'z-index': '0'
+      });
+      $(".sale-wrapper").css({
+        'margin-top':'auto'
+      });
       $(".category-title-wrapper").css({
         'position': 'relative',
         'top': '0px',
@@ -302,25 +335,20 @@ $(function () {
         .animate({ 'color': 'rgb(255, 190, 0)' }, 200);
       $(".category-title span:not(.category-title span:nth-child(1))").stop()
         .animate({ 'color': '#696969' }, 200);
-    } else if (st < 1900) {
+    } else if (st < 1750) {
       $(".category-title span:nth-child(2)").stop()
         .animate({ 'color': 'rgb(255, 190, 0)' }, 200);
       $(".category-title span:not(.category-title span:nth-child(2))").stop()
         .animate({ 'color': '#696969' }, 200);
-    } else if (st < 2800) {
+    } else if (st < 2700) {
       $(".category-title span:nth-child(3)").stop()
         .animate({ 'color': 'rgb(255, 190, 0)' }, 200);
       $(".category-title span:not(.category-title span:nth-child(3))").stop()
         .animate({ 'color': '#696969' }, 200);
-    } else if (st < 3600) {
+    } else {
       $(".category-title span:nth-child(4)").stop()
         .animate({ 'color': 'rgb(255, 190, 0)' }, 200);
       $(".category-title span:not(.category-title span:nth-child(4))").stop()
-        .animate({ 'color': '#696969' }, 200);
-    } else {
-      $(".category-title span:nth-child(5)").stop()
-        .animate({ 'color': 'rgb(255, 190, 0)' }, 200);
-      $(".category-title span:not(.category-title span:nth-child(5))").stop()
         .animate({ 'color': '#696969' }, 200);
     }
   })
@@ -434,7 +462,7 @@ $(function () {
   const checkImg = "/img/icon/patch-check-fill.svg";
 
   $(window).scroll(function () {
-    if (!checked && $(this).scrollTop() > 3042 && $(this).scrollTop() < 3480) {
+    if (!checked && $(this).scrollTop() > 2900) {
       $(".check-day" + currentDay).css({
         'height': '100%',
         'position': 'absolute',

@@ -11,9 +11,9 @@ $(function () {
     .hover(function () {
       let index = $(this).index();
       if (index == 0) {
-        $("#underbar").stop().animate({ 'left': '25px' }, 200, 'swing');
+        $("#underbar").stop().animate({ 'left': '0%' }, 200, 'swing');
       } else {
-        $("#underbar").stop().animate({ 'left': 22 + 100 * index + 'px' }, 200, 'swing');
+        $("#underbar").stop().animate({ 'left': 20 * index + '%' }, 200, 'swing');
       }
     })
     .click(function () {
@@ -23,9 +23,9 @@ $(function () {
     })
     .mouseleave(function () {
       if (ubClickindex == 0) {
-        $("#underbar").stop().animate({ 'left': '25px' }, 200, 'swing');
+        $("#underbar").stop().animate({ 'left': '0%' }, 200, 'swing');
       } else {
-        $("#underbar").stop().animate({ 'left': 22 + 100 * ubClickindex + 'px' }, 200, 'swing');
+        $("#underbar").stop().animate({ 'left': 20 * ubClickindex + '%' }, 200, 'swing');
       }
     });
 
@@ -73,30 +73,15 @@ $(function () {
     });
 
 
-  $(".banner-font-wrapper li h1").each(function () {
-    $(this).css('opacity', "0%");
-  });
-  $(".banner-font-wrapper li h4").each(function () {
-    $(this).css('opacity', "0%");
-  });
-  $(".banner-img-wrapper img").each(function () {
-    $(this).css('opacity', "0%");
-  });
-  $(".bf-big-" + index).css('animation', "slidein 0.5s both");
-  $(".bf-small-" + index).css('animation', "slidein 1s both");
-  $(".banner-img-" + index).css('animation', "slidein 1s both");
+  $(".banner-img-wrapper:first-child").show();
 
   function startInterval() {
     return setInterval(function () {
       gradientIndex++;
       index++;
       index %= 6;
-      $(".bf-big-" + (index + 5) % 6).css('animation', 'none');
-      $(".bf-small-" + (index + 5) % 6).css('animation', 'none');
-      $(".banner-img-" + (index + 5) % 6).css('animation', 'none');
-      $(".bf-big-" + index).css('animation', "slidein 0.5s both");
-      $(".bf-small-" + index).css('animation', "slidein 1s both");
-      $(".banner-img-" + index).css('animation', "slidein 1s both");
+      $(".banner-img-wrapper").hide();
+      $(".banner-img-wrapper:nth-child("+(index+1)+")").show();
       $(".banner-wrapper").animate({ backgroundPosition: 20 * gradientIndex + "%" }, 1000);
       $(".banner-current-index").text(index + 1);
       $(".banner-index-fill").animate({ 'left': (-55 + index * 11) + 'px' }, 500);
@@ -110,12 +95,8 @@ $(function () {
     gradientIndex++;
     index++;
     index %= 6;
-    $(".bf-big-" + (index + 5) % 6).css('animation', 'none');
-    $(".bf-small-" + (index + 5) % 6).css('animation', 'none');
-    $(".banner-img-" + (index + 5) % 6).css('animation', 'none');
-    $(".bf-big-" + index).css('animation', "slidein 0.5s both");
-    $(".bf-small-" + index).css('animation', "slidein 1s both");
-    $(".banner-img-" + index).css('animation', "slidein 1s both");
+    $(".banner-img-wrapper").hide();
+    $(".banner-img-wrapper:nth-child("+(index+1)+")").show();
     $(".banner-wrapper").animate({ backgroundPosition: 20 * gradientIndex + "%" }, 1000);
     $(".banner-current-index").text(index + 1);
     $(".banner-index-fill").animate({ 'left': (-55 + index * 11) + 'px' }, 500);
@@ -126,12 +107,8 @@ $(function () {
     gradientIndex--;
     index += 5;
     index %= 6;
-    $(".bf-big-" + (index + 1) % 6).css('animation', 'none');
-    $(".bf-small-" + (index + 1) % 6).css('animation', 'none');
-    $(".banner-img-" + (index + 1) % 6).css('animation', 'none');
-    $(".bf-big-" + index).css('animation', "slidein 0.5s both");
-    $(".bf-small-" + index).css('animation', "slidein 1s both");
-    $(".banner-img-" + index).css('animation', "slidein 1s both");
+    $(".banner-img-wrapper").hide();
+    $(".banner-img-wrapper:nth-child("+(index+1)+")").show();
     $(".banner-wrapper").animate({ backgroundPosition: 20 * gradientIndex + "%" }, 1000);
     $(".banner-current-index").text(index + 1);
     $(".banner-index-fill").animate({ 'left': (-55 + index * 11) + 'px' }, 500);
@@ -179,6 +156,7 @@ $(function () {
     $(this).parent().find('input').val('');
     $(".search-result-category").remove();
     $(".search-result-book").remove();
+    $(".search-result-outer-wrapper").hide();
   });
 
   $(document).ready(function (){
@@ -189,226 +167,77 @@ $(function () {
     });
 
     $(document).on("keyup ready", ".simple-search input", function () {
+    });
 
+    let tbIndex = 1;
+
+    $(document).on("click", ".tb-btn-left", function () {
+      if (tbIndex > 1) {
+        tbIndex--;
+        $(".slides ul").animate({ left: -420 * (tbIndex - 1) + "px" }, 1000);
+      }
+    });
+    $(document).on("click", ".tb-btn-right", function () {
+      if (tbIndex < 3) {
+        $(".slides ul").animate({ left: -420 * tbIndex + "px" }, 1000);
+        tbIndex++;
+      }
+    });
+
+    $(document).on("mouseover", ".slides", function () {
+      if (tbIndex == 1) {
+        $(".tb-btn-right").fadeIn(300);
+      } else if (tbIndex == 2) {
+        $(".tb-btn-left").fadeIn(300);
+        $(".tb-btn-right").fadeIn(300);
+      } else {
+        $(".tb-btn-left").fadeIn(300);
+      }
+    });
+
+    $(document).on("mouseleave", ".slides", function () {
+      $(".tb-btn-left").fadeOut(300);
+      $(".tb-btn-right").fadeOut(300);
+    });
+
+
+    $(document).on("click", ".tb-reset-box", function () {
+      $(".slides ul li").css('display', 'none');
+      $.ajax({
+        url: "/todayBook-reset",
+        type: "get",
+        error: function (xhr, status, error) {
+          console.log(error);
+        }
+      }).done(function(result){
+        $(".slides").hide();
+        $('.today-book-wrapper').replaceWith(result);
+        $(".slides").hide();
+        $(".slides").fadeIn(300);
+      });
     });
 
   });
 
 
 
-  let tbArr1 = new Array(5);
-  for (var i = 1; i < 6; i++) {
-    let randNum = Math.floor(Math.random() * 62 + 1);
-    while (tbArr1.indexOf(randNum) != -1) randNum = Math.floor(Math.random() * 62 + 1);
-    tbArr1.push(randNum);
-    $(".today-book-img-" + i).attr('src', "/img/book-cover/" + randNum + ".jpg");
-    $(".today-book-name-" + i).text("책이름" + randNum);
-    $(".today-book-author-" + i).text("작가" + randNum);
-  }
-  let todayBookimg1 = $(".today-book-img-1").attr('src');
-  $(".today-book-background-1").css("background-image", "url(" + todayBookimg1 + ")");
-  let todayBookimg2 = $(".today-book-img-2").attr('src');
-  $(".today-book-background-2").css("background-image", "url(" + todayBookimg2 + ")");
-  let todayBookimg3 = $(".today-book-img-3").attr('src');
-  $(".today-book-background-3").css("background-image", "url(" + todayBookimg3 + ")");
-  let todayBookimg4 = $(".today-book-img-4").attr('src');
-  $(".today-book-background-4").css("background-image", "url(" + todayBookimg4 + ")");
-  let todayBookimg5 = $(".today-book-img-5").attr('src');
-  $(".today-book-background-5").css("background-image", "url(" + todayBookimg5 + ")");
-
-  let tbIndex = 1;
-  $(".tb-btn-left").css('animation', 'fadeout 0.3s both');
-  $(".tb-btn-right").css('animation', 'fadeout 0.3s both');
-
-  $(".tb-btn-left").click(function () {
-    if (tbIndex > 1) {
-      tbIndex--;
-      $(".slides ul").animate({ left: -420 * (tbIndex - 1) + "px" }, 1000);
-    }
-  });
-  $(".tb-btn-right").click(function () {
-    if (tbIndex < 3) {
-      $(".slides ul").animate({ left: -420 * tbIndex + "px" }, 1000);
-      tbIndex++;
-    }
-  });
-
-  $(".tb-button").mouseover(function () {
-    if (tbIndex == 1) {
-      $(".tb-btn-right").css('animation', 'fadein 0.3s both');
-    } else if (tbIndex == 2) {
-      $(".tb-btn-left").css('animation', 'fadein 0.3s both');
-      $(".tb-btn-right").css('animation', 'fadein 0.3s both');
-    } else {
-      $(".tb-btn-left").css('animation', 'fadein 0.3s both');
-    }
-  });
-
-  $(".tb-button").mouseleave(function () {
-    $(".tb-btn-left").css('animation', 'fadeout 0.3s both');
-    $(".tb-btn-right").css('animation', 'fadeout 0.3s both');
-  });
-
-
-  $(".tb-reset-box").click(function () {
-    $(".slides ul li").css('display', 'none');
-    let tbArr2 = new Array(5);
-    for (var i = 1; i < 6; i++) {
-      let randNum = Math.floor(Math.random() * 62 + 1);
-      while (tbArr2.indexOf(randNum) != -1) randNum = Math.floor(Math.random() * 62 + 1);
-      tbArr2.push(randNum);
-      $(".today-book-img-" + i).attr('src', "/img/book-cover/" + randNum + ".jpg");
-      $(".today-book-name-" + i).text("책이름" + randNum);
-      $(".today-book-author-" + i).text("작가" + randNum);
-    }
-    let todayBookimg1 = $(".today-book-img-1").attr('src');
-    $(".today-book-background-1").css("background-image", "url(" + todayBookimg1 + ")");
-    let todayBookimg2 = $(".today-book-img-2").attr('src');
-    $(".today-book-background-2").css("background-image", "url(" + todayBookimg2 + ")");
-    let todayBookimg3 = $(".today-book-img-3").attr('src');
-    $(".today-book-background-3").css("background-image", "url(" + todayBookimg3 + ")");
-    let todayBookimg4 = $(".today-book-img-4").attr('src');
-    $(".today-book-background-4").css("background-image", "url(" + todayBookimg4 + ")");
-    let todayBookimg5 = $(".today-book-img-5").attr('src');
-    $(".today-book-background-5").css("background-image", "url(" + todayBookimg5 + ")");
-    $(".slides ul li").fadeIn(500);
-  });
-
-
-  let arr = [];
-  let bestEntire = [];
-  let bestDomestic = [];
-  let bestForeign = [];
-  let steadyEntire = [];
-  let steadyDomestic = [];
-  let steadyForeign = [];
-  let best = true;
-  let steady = false;
-  let entire = true;
-  let domestic = false;
-  let foreign = false;
-
-  for (var i = 0; i < 60; i++) {
-    let randNum = Math.floor(Math.random() * 62 + 1);
-    while (arr.indexOf(randNum) != -1) randNum = Math.floor(Math.random() * 62 + 1);
-    arr.push(randNum);
-    if (bestEntire.length != 10) {
-      bestEntire.push(randNum);
-    } else if (bestDomestic.length != 10) {
-      bestDomestic.push(randNum);
-    } else if (bestForeign.length != 10) {
-      bestForeign.push(randNum);
-    } else if (steadyEntire.length != 10) {
-      steadyEntire.push(randNum);
-    } else if (steadyDomestic.length != 10) {
-      steadyDomestic.push(randNum);
-    } else {
-      steadyForeign.push(randNum);
-    }
-  }
-
-  for (var j = 0; j < 10; j++) {
-    $(".best-img-" + (j + 1)).attr('src', "/img/book-cover/" + bestEntire[j] + ".jpg");
-  }
-  $(".title-best").click(function () {
-    best = true;
-    steady = false;
-  });
-  $(".title-steady").click(function () {
-    best = false;
-    steady = true;
-  });
-  $(".title-entire").click(function () {
-    entire = true;
-    domestic = false;
-    foreign = false;
-  });
-  $(".title-domestic").click(function () {
-    entire = false;
-    domestic = true;
-    foreign = false;
-  });
-  $(".title-foreign").click(function () {
-    entire = false;
-    domestic = false;
-    foreign = true;
-  });
-
-  $(".best-title-wrapper ul li").not(".best-title-center, .top-10").click(function () {
-    if (best && entire) {
-      $(".best-books-wrapper").css('display', 'none');
-      for (var j = 0; j < 10; j++) {
-        $(".best-img-" + (j + 1)).attr('src', "/img/book-cover/" + bestEntire[j] + ".jpg");
-      }
-      $(".best-books-wrapper").fadeIn(500);
-      $(".title-best").css('color', 'black');
-      $(".title-steady").css('color', 'lightgray');
-      $(".title-entire").css('color', 'black');
-      $(".title-domestic").css('color', 'lightgray');
-      $(".title-foreign").css('color', 'lightgray');
-    }
-    else if (best && domestic) {
-      $(".best-books-wrapper").css('display', 'none');
-      for (var j = 0; j < 10; j++) {
-        $(".best-img-" + (j + 1)).attr('src', "/img/book-cover/" + bestDomestic[j] + ".jpg");
-      }
-      $(".best-books-wrapper").fadeIn(500);
-      $(".title-best").css('color', 'black');
-      $(".title-steady").css('color', 'lightgray');
-      $(".title-entire").css('color', 'lightgray');
-      $(".title-domestic").css('color', 'black');
-      $(".title-foreign").css('color', 'lightgray');
-    }
-    else if (best && foreign) {
-      $(".best-books-wrapper").css('display', 'none');
-      for (var j = 0; j < 10; j++) {
-        $(".best-img-" + (j + 1)).attr('src', "/img/book-cover/" + bestForeign[j] + ".jpg");
-      }
-      $(".best-books-wrapper").fadeIn(500);
-      $(".title-best").css('color', 'black');
-      $(".title-steady").css('color', 'lightgray');
-      $(".title-entire").css('color', 'lightgray');
-      $(".title-domestic").css('color', 'lightgray');
-      $(".title-foreign").css('color', 'black');
-    }
-    else if (steady && entire) {
-      $(".best-books-wrapper").css('display', 'none');
-      for (var j = 0; j < 10; j++) {
-        $(".best-img-" + (j + 1)).attr('src', "/img/book-cover/" + steadyEntire[j] + ".jpg");
-      }
-      $(".best-books-wrapper").fadeIn(500);
-      $(".title-best").css('color', 'lightgray');
-      $(".title-steady").css('color', 'black');
-      $(".title-entire").css('color', 'black');
-      $(".title-domestic").css('color', 'lightgray');
-      $(".title-foreign").css('color', 'lightgray');
-    }
-    else if (steady && domestic) {
-      $(".best-books-wrapper").css('display', 'none');
-      for (var j = 0; j < 10; j++) {
-        $(".best-img-" + (j + 1)).attr('src', "/img/book-cover/" + steadyDomestic[j] + ".jpg");
-      }
-      $(".best-books-wrapper").fadeIn(500);
-      $(".title-best").css('color', 'lightgray');
-      $(".title-steady").css('color', 'black');
-      $(".title-entire").css('color', 'lightgray');
-      $(".title-domestic").css('color', 'black');
-      $(".title-foreign").css('color', 'lightgray');
-    }
-    else if (steady && foreign) {
-      $(".best-books-wrapper").css('display', 'none');
-      for (var j = 0; j < 10; j++) {
-        $(".best-img-" + (j + 1)).attr('src', "/img/book-cover/" + steadyForeign[j] + ".jpg");
-      }
-      $(".best-books-wrapper").fadeIn(500);
-      $(".title-best").css('color', 'lightgray');
-      $(".title-steady").css('color', 'black');
-      $(".title-entire").css('color', 'lightgray');
-      $(".title-domestic").css('color', 'lightgray');
-      $(".title-foreign").css('color', 'black');
-    }
-  });
-
 });
+
+function bestBook(_this, criteria){
+  $(".best-title-2 li").css('color','#b9b9b9');
+  $(_this).css('color','#000000');
+  $.ajax({
+    url: "/bestBook/"+criteria,
+    type: "get",
+    error: function (xhr, status, error) {
+      console.log(error);
+    }
+  }).done(function(result){
+    $(".best-books-wrapper").hide();
+    $('.best-books-wrapper').replaceWith(result);
+    $(".best-books-wrapper").hide();
+    $(".best-books-wrapper").fadeIn(300);
+  });
+}
 
 

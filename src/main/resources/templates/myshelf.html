@@ -21,7 +21,7 @@
     <div class="top-back-title-wrapper">
       <img class="profile" src="/img/icon/person-circle.svg">
       <div class="top-back-title">
-        <div class="top-back-title-name">user</div>
+        <div class="top-back-title-name" th:text="${member.nickname}"></div>
         <div class="top-back-title-text">의 책장</div>
         <div class="top-back-title-following">팔로잉+</div>
         <div class="top-back-title-follower">팔로워+</div>
@@ -29,7 +29,7 @@
       <img class="top-back-setting" src="/img/icon/setting-list.svg">
       <div class="top-back-point-wrapper">
         <img class="top-back-point-icon" src="/img/icon/bootstrap-fill.svg">
-        <div class="top-back-point-text">1000 포인트</div>
+        <div class="top-back-point-text" th:text="${member.point} + ' 포인트'"></div>
       </div>
     </div>
   </div>
@@ -39,10 +39,10 @@
   <div class="middle-nav-wrapper">
     <div class="middle-nav-container">
       <div class="middle-nav">
-        <div>전체도서</div>
         <div>책선반</div>
         <div>독서 기록</div>
         <div>구매내역</div>
+        <div>회원 정보</div>
         <div class="middle-nav-underbar"></div>
       </div>
     </div>
@@ -51,7 +51,7 @@
 
   <div class="meta-wrapper">
 
-    <div class="entire-book-wrapper">
+    <!-- <div class="entire-book-wrapper">
       <div class="entire-book-title-background"></div>
       <div class="entire-book-title">
         <div class="entire-book-number">
@@ -89,63 +89,8 @@
           <div class="entire-book-name-1"><span>책이름 1</span><img src="/img/icon/three-dots-vertical.svg"></div>
           <div class="entire-book-author-1"><span>작가 1</span></div>
         </li>
-        <li>
-          <div class="entire-book-img-2"><img src="/img/book-cover/2.jpg"></div>
-          <div class="entire-book-name-2"><span>책이름 2</span><img src="/img/icon/three-dots-vertical.svg"></div>
-          <div class="entire-book-author-2"><span>작가 2</span></div>
-        </li>
-        <li>
-          <div class="entire-book-img-3"><img src="/img/book-cover/3.jpg"></div>
-          <div class="entire-book-name-3"><span>책이름 3</span><img src="/img/icon/three-dots-vertical.svg"></div>
-          <div class="entire-book-author-3"><span>작가 3</span></div>
-        </li>
-        <li>
-          <div class="entire-book-img-4"><img src="/img/book-cover/4.jpg"></div>
-          <div class="entire-book-name-4"><span>책이름 4</span><img src="/img/icon/three-dots-vertical.svg"></div>
-          <div class="entire-book-author-4"><span>작가 4</span></div>
-        </li>
-        <li>
-          <div class="entire-book-img-5"><img src="/img/book-cover/5.jpg"></div>
-          <div class="entire-book-name-5"><span>책이름 5</span><img src="/img/icon/three-dots-vertical.svg"></div>
-          <div class="entire-book-author-5"><span>작가 5</span></div>
-        </li>
-        <li>
-          <div class="entire-book-img-6"><img src="/img/book-cover/6.jpg"></div>
-          <div class="entire-book-name-6"><span>책이름 6</span><img src="/img/icon/three-dots-vertical.svg"></div>
-          <div class="entire-book-author-6"><span>작가 6</span></div>
-        </li>
-        <li>
-          <div class="entire-book-img-7"><img src="/img/book-cover/7.jpg"></div>
-          <div class="entire-book-name-7"><span>책이름 7</span><img src="/img/icon/three-dots-vertical.svg"></div>
-          <div class="entire-book-author-7"><span>작가 7</span></div>
-        </li>
-        <li>
-          <div class="entire-book-img-8"><img src="/img/book-cover/8.jpg"></div>
-          <div class="entire-book-name-8"><span>책이름 8</span><img src="/img/icon/three-dots-vertical.svg"></div>
-          <div class="entire-book-author-8"><span>작가 8</span></div>
-        </li>
-        <li>
-          <div class="entire-book-img-9"><img src="/img/book-cover/9.jpg"></div>
-          <div class="entire-book-name-9"><span>책이름 9</span><img src="/img/icon/three-dots-vertical.svg"></div>
-          <div class="entire-book-author-9"><span>작가 9</span></div>
-        </li>
-        <li>
-          <div class="entire-book-img-10"><img src="/img/book-cover/10.jpg"></div>
-          <div class="entire-book-name-10"><span>책이름 10</span><img src="/img/icon/three-dots-vertical.svg"></div>
-          <div class="entire-book-author-10"><span>작가 10</span></div>
-        </li>
-        <li>
-          <div class="entire-book-img-11"><img src="/img/book-cover/11.jpg"></div>
-          <div class="entire-book-name-11"><span>책이름 11</span><img src="/img/icon/three-dots-vertical.svg"></div>
-          <div class="entire-book-author-11"><span>작가 11</span></div>
-        </li>
-        <li>
-          <div class="entire-book-img-12"><img src="/img/book-cover/12.jpg"></div>
-          <div class="entire-book-name-12"><span>책이름 12</span><img src="/img/icon/three-dots-vertical.svg"></div>
-          <div class="entire-book-author-12"><span>작가 12</span></div>
-        </li>
       </div>
-    </div>
+    </div> -->
 
     <div class="shelf-wrapper">
       <div class="favorite-wrapper">
@@ -431,6 +376,10 @@
           <span>해당 기간에 구매한 상품이 없습니다.</span>
         </div>
       </div>
+
+    </div>
+
+    <div class="member-info-wrapper">
 
     </div>
 

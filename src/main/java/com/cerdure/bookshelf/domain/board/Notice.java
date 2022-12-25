@@ -24,31 +24,44 @@ public class Notice {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    private String memberNickname;
+
     private String title;
 
     @Size(max = 10000)
     private String content;
 
-    private LocalDate regDate = LocalDate.now();
+    private LocalDateTime regDate = LocalDateTime.now();
 
-    private LocalDate modDate;
+    private LocalDateTime modDate;
 
     private Integer hits;
 
     @PrePersist
     public void prePersist() {
-        this.regDate = this.regDate == null ? LocalDate.now() : this.regDate;
+        this.regDate = this.regDate == null ? LocalDateTime.now() : this.regDate;
         this.hits = this.hits == null ? 0 : this.hits;
     }
 
     @Builder
-    public Notice(Long id, Member member, String title, String content, LocalDate regDate, LocalDate modDate, Integer hits) {
+    public Notice(Long id, Member member, String memberNickname, String title, String content, LocalDateTime regDate, LocalDateTime modDate, Integer hits) {
         this.id = id;
         this.member = member;
+        this.memberNickname = memberNickname;
         this.title = title;
         this.content = content;
         this.regDate = regDate;
         this.modDate = modDate;
         this.hits = hits;
+    }
+
+    public void changeTitle(String title){
+        this.title = title;
+    }
+    public void changeContent(String content){
+        this.content = content;
+    }
+    public void hitsPlus(){
+        this.hits++;
     }
 }

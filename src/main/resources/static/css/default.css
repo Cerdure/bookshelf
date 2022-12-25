@@ -207,34 +207,33 @@ header {
 
 .top-nav {
   position: absolute;
-  top: 50%;
+  width: 520px;
+  height: 60px;
   left: 180px;
-  transform: translateY(-50%);
+  line-height: 60px;
 }
-
+.top-nav ul {
+  position: absolute;
+  width: 100%;
+  font-size: 0px;
+}
+.top-nav ul li {
+  position: relative;
+  width: 20%;
+  list-style: none;
+  font-family: 'Noto Sans KR', sans-serif;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+  font-size: 16px;
+}
 .top-nav ul li:first-child {
   color: #000000;
 }
 
 .top-nav ul li:not(:first-child) {
-  color: rgb(180, 180, 180);
+  color: #898989;
 }
-.top-nav ul li a {
-  color: rgb(180, 180, 180);
-  text-decoration: none;
-}
-.top-nav ul li {
-  list-style: none;
-  margin-left: 25px;
-  margin-right: 25px;
-  font-family: 'Noto Sans KR', sans-serif;
-  position: relative;
-  left: 21px;
-  width: auto;
-  display: inline-block;
-  cursor: pointer;
-}
-
 .top-nav ul li:active {
   transform: scale(0.9);
   transition: 0.1s;

@@ -1,10 +1,9 @@
 #underbar {
   position: absolute;
-  left: 122px;
-  /* 122 222 322 422*/
-  top: 37px;
+  left: 20%;
+  top: 56px;
   background: #ffd16d;
-  width: 80px;
+  width: 20%;
   height: 4px;
 }
 #overbar {
@@ -401,6 +400,7 @@
 .controller a{
   display: inline-block;
   width: 19px;
+  margin: 0 2px;
   border-radius: 50%;
   line-height: 19px;
   cursor: pointer;

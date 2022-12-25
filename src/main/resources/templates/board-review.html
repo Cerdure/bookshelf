@@ -26,7 +26,6 @@
         <div onclick="location.href='/review?page=0&size=3'">책리뷰</div>
         <div onclick="location.href='/inquire'">상품문의</div>
         <div onclick="location.href='/notice'">공지사항</div>
-        <div onclick="location.href='/winner'">당첨자발표</div>
         <div class="middle-nav-underbar"></div>
       </div>
     </div>
@@ -113,7 +112,7 @@
         </div>
 
       </div>
-      <button type="submit" class="regist-button disable">등록</button>
+      <div type="submit" class="regist-button disable" onclick="formSubmit(this)">등록</div>
     </form>
 
 
@@ -169,7 +168,8 @@
           <div class="review-write-main-title">ㅣ 리뷰 작성 *</div>
           <div class="review-write-frame">
             <textarea name="content" class="review-write" maxlength="3000" th:value="${modReview!=null?modReview.content:''}"
-                      th:text="${modReview!=null?modReview.content:''}" placeholder="내용을 10자 이상 입력해주세요. 주제와 무관한 글은 임의로 삭제될 수 있습니다."></textarea>
+                      th:utext="${modReview!=null ? #strings.replace(modReview.content, '<br>', '&#10') : ''}"
+                      placeholder="내용을 10자 이상 입력해주세요. 주제와 무관한 글은 임의로 삭제될 수 있습니다."></textarea>
             <div class="write-number" th:text="${#strings.length((modReview!=null?modReview.content:''))} + '/3000'">0/3000</div>
           </div>
         </div>
@@ -196,7 +196,7 @@
           </div>
         </div>
       </div>
-      <button type="submit" class="regist-button disable">등록</button>
+      <div class="regist-button disable" onclick="formSubmit(this)">등록</div>
     </form>
     </div>
 
@@ -253,11 +253,11 @@
              <img class="controller-btn-left" src="/img/icon/btn_pagination_prev@2x.png">
            </a>
 
-          <a th:if="${books.number > 1}"
+          <a th:if="${books.totalPages < 4 ? false :books.number > 1}"
              th:text="1" id="idx">
           </a>
 
-          <span th:if="${books.number > 1}">...</span>
+          <span th:if="${books.totalPages < 4 ? false :books.number > 1}">...</span>
 
            <a th:each="page: ${#numbers.sequence(start, last)}"
               th:if="${books.first ? page < books.number +4 :
@@ -266,9 +266,9 @@
               th:text="${page}">
            </a>
 
-          <span th:if="${books.number < books.totalPages -2}">...</span>
+          <span th:if="${books.totalPages < 4 ? false :books.number < books.totalPages -2}">...</span>
 
-          <a th:if="${books.number < books.totalPages -2}"
+          <a th:if="${books.totalPages < 4 ? false :books.number < books.totalPages -2}"
              th:text="${books.totalPages}" id="idx">
           </a>
 
@@ -290,8 +290,8 @@
     <div class="review-wrapper" id="review-wrapper">
       <div class="review-title-wrapper">
         <div class="review-title" th:text="'모두의 리뷰 ('+${reviews?.totalElements} +')'"></div>
-        <div class="review-title-write" th:classappend="${#authentication.principal.authorities} == 'ADMIN'? 'disable':''">리뷰 작성</div>
-        <div class="review-title-my" th:classappend="${#authentication.principal.authorities} == 'ADMIN'? 'disable':''">내가 쓴 리뷰</div>
+        <div class="review-title-write" th:classappend="${#authorization.expression('hasRole(''ADMIN'')')}? 'disable':''">리뷰 작성</div>
+        <div class="review-title-my" th:classappend="${#authorization.expression('hasRole(''ADMIN'')')}? 'disable':''">내가 쓴 리뷰</div>
       </div>
 
       <div class="reviews-wrapper">
@@ -329,7 +329,7 @@
 
           <div class="body">
             <div class="review">
-              <span th:text="${review.content}"></span>
+              <span th:utext="${review.content}"></span>
             </div>
             <div class="frame"></div>
             <div th:unless="${#lists.isEmpty(review.files) || review.files.size()==0 }">

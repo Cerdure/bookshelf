@@ -8,9 +8,9 @@ $(function () {
     .hover(function () {
       let index = $(this).index();
       if (index == 0) {
-        $("#underbar").stop().animate({ 'left': '25px' }, 200, 'swing');
+        $("#underbar").stop().animate({ 'left': '0%' }, 200, 'swing');
       } else {
-        $("#underbar").stop().animate({ 'left': 22 + 100 * index + 'px' }, 200, 'swing');
+        $("#underbar").stop().animate({ 'left': 20 * index + '%' }, 200, 'swing');
       }
     })
     .click(function () {
@@ -20,9 +20,9 @@ $(function () {
     })
     .mouseleave(function () {
       if (ubClickindex == 0) {
-        $("#underbar").stop().animate({ 'left': '25px' }, 200, 'swing');
+        $("#underbar").stop().animate({ 'left': '0%' }, 200, 'swing');
       } else {
-        $("#underbar").stop().animate({ 'left': 22 + 100 * ubClickindex + 'px' }, 200, 'swing');
+        $("#underbar").stop().animate({ 'left': 20 * ubClickindex + '%' }, 200, 'swing');
       }
     });
 
@@ -114,18 +114,10 @@ $(window).resize(function(){
 });
 
   $(".top-back-title").show();
-  $(".middle-nav-underbar").css('left','25%');
-
-
-
-
 
 
 
   $(document).ready(function () {
-    // $(document).on("change", "#sortOrder", function () {
-    //   bookSearch();
-    // });
     $(document).on("click", ".inquire-write", function () {
       $(".write-wrapper-back").addClass("modal-background");
       $(".inquire-write-wrapper").fadeIn(200);
@@ -265,5 +257,12 @@ function hideAlert(_this) {
   $(".write-wrapper-back").removeClass("modal-background");
   $("form").css('filter', 'brightness(100%)');
   $(_this).parent().hide();
+}
+
+function formSubmit(_this){
+  let form = $(_this).closest("form");
+  let content = form.find("[name=content]");
+  content.val(content.val().replace(/\n/g, "<br>"));
+  form.submit();
 }
 

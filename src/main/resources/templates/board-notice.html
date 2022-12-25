@@ -28,7 +28,6 @@
       <div onclick="location.href='/review?page=0&size=3'">책리뷰</div>
       <div onclick="location.href='/inquire'">상품문의</div>
       <div onclick="location.href='/notice'">공지사항</div>
-      <div onclick="location.href='/winner'">당첨자발표</div>
       <div class="middle-nav-underbar"></div>
     </div>
   </div>
@@ -42,27 +41,33 @@
 <div class="notice-wrapper">
   <div class="notice-title-wrapper">
     <div class="title">공지사항</div>
-    <button class="notice-write">공지 등록</button>
+    <button class="notice-write" sec:authorize="hasRole('ADMIN')">공지 등록</button>
   </div>
 
-  <div class="notice-middle-wrapper">
-    <span class="number">12</span>
+  <form action="/notice-search" method="get" class="notice-middle-wrapper" id="search-form">
+    <span class="number" th:text="${notices.totalElements}"></span>
     <span class="text">건</span>
     <div class="notice-search-wrapper">
       <div class="search">
-          <input type="text" name="notice-search-input" class="notice-search-input"
-          placeholder="검색어를 입력하세요.">
-          <img src="/img/icon/search.svg">
+        <select name="searchBy" class="search-by">
+          <option value="1" th:selected="${dataUtils.searchBy == 1 || dataUtils.searchBy == null}">제목</option>
+          <option value="2" th:selected="${dataUtils.searchBy == 2}">내용</option>
+        </select>
+          <input type="text" name="input" class="notice-search-input"
+          placeholder="검색어를 입력하세요." th:value="${dataUtils.input}">
+          <img src="/img/icon/search.svg" onclick="$('#search-form').submit()">
       </div>
     </div>
-    <select name="notice-middle-type" id="notice-middle-type">
-      <option value="001">북셸프</option>
-      <option value="002">고객센터</option>
+    <select name="memberId" id="notice-middle-type" onchange="$('#search-form').submit()">
+      <option value="" th:selected="${dataUtils.memberId == null}">전체</option>
+      <option value="98" th:selected="${dataUtils.memberId == 98}">북셸프</option>
+      <option value="99" th:selected="${dataUtils.memberId == 99}">고객센터</option>
     </select>
-  </div>
+  </form>
 
 
-  <form role="form" action="#" method="post" class="notice-write-wrapper">
+
+  <form action="/notice" method="post" class="notice-write-wrapper">
     <div class="notice-write-top">
       <span class="notice-write-top-text">공지사항 등록</span>
       <img class="notice-write-top-icon" src="/img/icon/btn_dialog_close@2x.png">
@@ -70,18 +75,18 @@
     <div class="notice-write-contents">
       <div class="notice-write-header">
         <div class="title">ㅣ 제목</div>
-        <textarea name="notice-input-header" class="notice-input-header" maxlength="30" placeholder="제목을 입력하세요." ></textarea>
+        <textarea name="title" class="notice-input-header" maxlength="30" placeholder="제목을 입력하세요." ></textarea>
       </div>
       <div class="notice-write-main">
         <div class="notice-write-main-title">ㅣ내용</div>
         <div class="notice-write-frame">
-          <textarea name="notice-input-main" class="notice-input-main" maxlength="3000"
+          <textarea name="content" class="notice-input-main" maxlength="3000"
             placeholder="내용을 입력해주세요."></textarea>
           <div class="write-number">0/3000</div>
         </div>
       </div>
     </div>
-    <button type="submit" class="regist-button disable">등록</button>
+    <div class="regist-button disable" onclick="formSubmit(this)">등록</div>
   </form>
 
 
@@ -93,118 +98,53 @@
         <div class="date">등록일</div>
     </div>
     <div class="body">
-      <div class="my-notice">
-        <div class="number">1</div>
-        <div class="title" onclick="location.href='/notice-detail'">
-          <span class="text">공지 안내글 일시적 변경사항  </span> 
-        </div>
-        <div class="type">북셸프</div>
-        <div class="date">2022.12.02</div>
-      </div>
-      <div class="my-notice">
-        <div class="number">2</div>
-        <div class="title" onclick="location.href='/notice-detail'">
-          <span class="text">공지 안내글 일시적 변경사항  </span> 
-        </div>
-        <div class="type">북셸프</div>
-        <div class="date">2022.12.02</div>
-      </div>
-      <div class="my-notice">
-        <div class="number">3</div>
-        <div class="title" onclick="location.href='/notice-detail'">
-          <span class="text">공지 안내글 일시적 변경사항  </span> 
-        </div>
-        <div class="type">북셸프</div>
-        <div class="date">2022.12.02</div>
-      </div>
-      <div class="my-notice">
-        <div class="number">4</div>
-        <div class="title" onclick="location.href='/notice-detail'">
-          <span class="text">공지 안내글 일시적 변경사항  </span> 
-        </div>
-        <div class="type">고객센터</div>
-        <div class="date">2022.12.02</div>
-      </div>
-      <div class="my-notice">
-        <div class="number">5</div>
-        <div class="title" onclick="location.href='/notice-detail'">
-          <span class="text">공지 안내글 일시적 변경사항  </span> 
-        </div>
-        <div class="type">고객센터</div>
-        <div class="date">2022.12.02</div>
-      </div>
-      <div class="my-notice">
-        <div class="number">6</div>
-        <div class="title" onclick="location.href='/notice-detail'">
-          <span class="text">공지 안내글 일시적 변경사항  </span> 
-        </div>
-        <div class="type">고객센터</div>
-        <div class="date">2022.12.02</div>
-      </div>
-      <div class="my-notice">
-        <div class="number">7</div>
-        <div class="title" onclick="location.href='/notice-detail'">
-          <span class="text">공지 안내글 일시적 변경사항  </span> 
-        </div>
-        <div class="type">고객센터</div>
-        <div class="date">2022.12.02</div>
-      </div>
-      <div class="my-notice">
-        <div class="number">8</div>
-        <div class="title" onclick="location.href='/notice-detail'">
-          <span class="text">공지 안내글 일시적 변경사항  </span> 
-        </div>
-        <div class="type">고객센터</div>
-        <div class="date">2022.12.02</div>
-      </div>
-      <div class="my-notice">
-        <div class="number">9</div>
-        <div class="title" onclick="location.href='/notice-detail'">
-          <span class="text">공지 안내글 일시적 변경사항  </span> 
-        </div>
-        <div class="type">고객센터</div>
-        <div class="date">2022.12.02</div>
-      </div>
-      <div class="my-notice">
-        <div class="number">10</div>
-        <div class="title" onclick="location.href='/notice-detail'">
-          <span class="text">공지 안내글 일시적 변경사항  </span> 
-        </div>
-        <div class="type">고객센터</div>
-        <div class="date">2022.12.02</div>
-      </div>
-      <div class="my-notice">
-        <div class="number">11</div>
-        <div class="title" onclick="location.href='/notice-detail'">
-          <span class="text">공지 안내글 일시적 변경사항  </span> 
-        </div>
-        <div class="type">고객센터</div>
-        <div class="date">2022.12.02</div>
-      </div>
-      <div class="my-notice">
-        <div class="number">12</div>
-        <div class="title" onclick="location.href='/notice-detail'">
-          <span class="text">공지 안내글 일시적 변경사항  </span> 
-        </div>
-        <div class="type">고객센터</div>
-        <div class="date">2022.12.02</div>
+      <div class="my-notice" th:each="notice, i : ${notices}">
+        <div class="number" th:text="${i.count}">1</div>
+        <a class="title" th:href="'/notice-detail/' + ${notice.id}">
+          <span class="text" th:text="${notice.title}"></span>
+        </a>
+        <div class="type" th:text="${notice.memberNickname}"></div>
+        <div class="date" th:text="${#temporals.format(notice.regDate, 'yyyy-MM-dd')}"></div>
       </div>
     </div>
   </div>
-
+  
   <div class="notice-controller">
-    <span class="controller">
-      <img class="controller-btn-left" src="/img/icon/btn_pagination_prev@2x.png">
-      <a class="index-1 index-active">1</a>
-      <span class="first-ellipsis">...</span>
-      <a class="index-2">2</a>
-      <a class="index-3">3</a>
-      <a class="index-4">4</a>
-      <a class="index-5">5</a>
-      <span class="last-ellipsis">...</span>
-      <a class="index-6">13</a>
-      <img class="controller-btn-right" src="/img/icon/btn_pagination_next@2x.png">
-    </span>
+          <span class="controller"
+                th:with="start=${T(java.lang.Math).floor(notices.number/10)*10 + 1}, last=(${notices.totalPages})">
+
+             <a th:class="${notices.first} ? 'disable'"
+                th:href="@{/notice(page=${notices.number})}">
+               <img class="controller-btn-left" src="/img/icon/btn_pagination_prev@2x.png">
+             </a>
+
+            <a th:href="@{/notice(page=1)}"
+               th:if="${notices.totalPages < 4 ? false :notices.number > 1}"
+               th:text="1" aria-label="First">
+            </a>
+
+            <span th:if="${notices.totalPages < 4 ? false :notices.number > 1}">...</span>
+
+             <a th:each="page: ${#numbers.sequence(start, last)}"
+                th:if="${notices.first ? (page == 0 ? false : page < notices.number + 4) :
+                (notices.last ? page > notices.number - 2 : (page < notices.number + 3) && (page > notices.number - 1))}"
+                th:class="${page == notices.number + 1} ? 'index-active'"
+                th:text="${page}" th:href="@{/notice(page=${page})}">
+             </a>
+
+            <span th:if="${notices.totalPages < 4 ? false :notices.number < notices.totalPages - 2}">...</span>
+
+            <a th:href="@{/notice(page=${notices.totalPages})}"
+               th:if="${notices.totalPages < 4 ? false : notices.number < notices.totalPages - 2}"
+               th:text="${notices.totalPages}" aria-label="Last" >
+            </a>
+
+            <a th:class="${notices.last} ? 'disable'"
+               th:href="@{/notice(page=${notices.number +2})}">
+              <img class="controller-btn-right" src="/img/icon/btn_pagination_next@2x.png">
+            </a>
+
+          </span>
   </div>
   
 </div>
@@ -224,5 +164,6 @@
     <div>TOP</div>
   </div>
 
+</div>
 </div>
 </html>

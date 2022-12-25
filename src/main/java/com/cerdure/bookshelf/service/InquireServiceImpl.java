@@ -40,7 +40,7 @@ public class InquireServiceImpl implements InquireService {
     @Override
     public Page<Inquire> findAll(Pageable pageable) {
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
-        pageable= PageRequest.of(page,3, Sort.by("regDate").descending());
+        pageable= PageRequest.of(page,8, Sort.by("regDate").descending());
         return inquireRepository.findAll(pageable);
     }
 
@@ -89,13 +89,14 @@ public class InquireServiceImpl implements InquireService {
     }
 
     @Override
-    public void modify(Long inquireId, InquireDto inquireDto, Authentication authentication) throws Exception {
+    public Inquire modify(Long inquireId, InquireDto inquireDto, Authentication authentication) throws Exception {
         Inquire inquire = inquireRepository.findById(inquireId).get();
             inquire.changeTitle(inquireDto.getTitle());
             inquire.changeContent(inquireDto.getContent());
             inquire.changeClosed(inquireDto.getClosed());
             inquire.changePw(inquireDto.getPw());
             inquireRepository.save(inquire);
+            return inquire;
     }
 
     @Override

@@ -7,9 +7,9 @@
         .hover(function () {
           let index = $(this).index();
           if (index == 0) {
-            $("#underbar").stop().animate({ 'left': '25px' }, 200, 'swing');
+            $("#underbar").stop().animate({ 'left': '0' }, 200, 'swing');
           } else {
-            $("#underbar").stop().animate({ 'left': 22 + 100 * index + 'px' }, 200, 'swing');
+            $("#underbar").stop().animate({ 'left': 20 * index + '%' }, 200, 'swing');
           }
         })
         .click(function () {
@@ -19,9 +19,9 @@
         })
         .mouseleave(function () {
           if (ubClickindex == 0) {
-            $("#underbar").stop().animate({ 'left': '25px' }, 200, 'swing');
+            $("#underbar").stop().animate({ 'left': '0' }, 200, 'swing');
           } else {
-            $("#underbar").stop().animate({ 'left': 22 + 100 * ubClickindex + 'px' }, 200, 'swing');
+            $("#underbar").stop().animate({ 'left': 20 * ubClickindex + '%' }, 200, 'swing');
           }
         });
     

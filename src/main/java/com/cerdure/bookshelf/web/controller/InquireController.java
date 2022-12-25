@@ -1,15 +1,13 @@
 package com.cerdure.bookshelf.web.controller;
 
-import com.cerdure.bookshelf.DataUtils;
 import com.cerdure.bookshelf.domain.board.Inquire;
-import com.cerdure.bookshelf.domain.board.Reply;
 import com.cerdure.bookshelf.domain.member.Member;
+import com.cerdure.bookshelf.dto.DataUtils;
 import com.cerdure.bookshelf.dto.board.InquireDto;
 import com.cerdure.bookshelf.dto.board.ReplyDto;
 import com.cerdure.bookshelf.service.InquireServiceImpl;
 import com.cerdure.bookshelf.service.MemberServiceImpl;
 import com.cerdure.bookshelf.service.ReplyServiceImpl;
-import com.cerdure.bookshelf.service.UploadFileServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,9 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
-import java.util.List;
-
 @Controller
 @RequiredArgsConstructor
 public class InquireController {
@@ -28,12 +23,38 @@ public class InquireController {
     private final InquireServiceImpl inquireService;
     private final MemberServiceImpl memberService;
     private final ReplyServiceImpl replyService;
-    private final UploadFileServiceImpl uploadFileService;
 
     @GetMapping("/inquire")
     public String allInquires(@ModelAttribute("inquireDto") InquireDto inquireDto, Model model, Pageable pageable){
         Page<Inquire> inquires = inquireService.findAll(pageable);
         DataUtils dataUtils = new DataUtils();
+        model.addAttribute("dataUtils", dataUtils);
+        model.addAttribute("inquires",inquires);
+        return "board-inquire";
+    }
+
+    @GetMapping("/inquire-my")
+    public String myInquire(Authentication authentication, Model model, Pageable pageable) throws Exception{
+        String phone = authentication.getName();
+        Member member = memberService.findByPhone(phone);
+        Page<Inquire> inquires = inquireService.findByMemberId(member.getId(), pageable);
+        DataUtils dataUtils = new DataUtils();
+        model.addAttribute("dataUtils", dataUtils);
+        model.addAttribute("inquires",inquires);
+        return "board-inquire";
+    }
+
+    @GetMapping("/inquire-search")
+    public String findInquire(@ModelAttribute InquireDto inquireDto, Model model, Pageable pageable) throws Exception{
+        Page<Inquire> inquires;
+        if(inquireDto.getSearchBy() == 1){
+            inquires = inquireService.findByTitle(inquireDto.getInput(), pageable);
+        } else {
+            inquires = inquireService.findByMemberNickname(inquireDto.getInput(), pageable);
+        }
+        DataUtils dataUtils = new DataUtils();
+        dataUtils.setSearchBy(inquireDto.getSearchBy());
+        dataUtils.setInput(inquireDto.getInput());
         model.addAttribute("dataUtils", dataUtils);
         model.addAttribute("inquires",inquires);
         return "board-inquire";
@@ -45,6 +66,28 @@ public class InquireController {
         Page<Inquire> inquires = inquireService.findAll(pageable);
         model.addAttribute("inquires",inquires);
         return "redirect:/inquire";
+    }
+
+    @PostMapping("/inquire-modify/{inquireId}")
+    public String modifyInquire(@PathVariable("inquireId") Long inquireId, @ModelAttribute InquireDto inquireDto, Authentication authentication, Model model, Pageable pageable) throws Exception{
+        Inquire inquire = inquireService.modify(inquireId, inquireDto, authentication);
+        Page<Inquire> inquires = inquireService.findAll(pageable);
+        Inquire prev = inquireService.findPrevInquire(inquire);
+        Inquire next = inquireService.findNextInquire(inquire);
+        model.addAttribute("inquire",inquire);
+        model.addAttribute("prevInquire",prev);
+        model.addAttribute("nextInquire",next);
+        return "inquire-detail";
+    }
+
+    @PostMapping("/inquire-delete/{inquireId}")
+    public String deleteInquire(@PathVariable("inquireId") Long inquireId, Authentication authentication, Model model, Pageable pageable) throws Exception{
+        inquireService.delete(inquireId, authentication);
+        Page<Inquire> inquires = inquireService.findAll(pageable);
+        DataUtils dataUtils = new DataUtils();
+        model.addAttribute("dataUtils", dataUtils);
+        model.addAttribute("inquires",inquires);
+        return "board-inquire";
     }
 
     @GetMapping("/inquire-closedCheck/{inquireId}")
@@ -111,55 +154,12 @@ public class InquireController {
         return "inquire-detail";
     }
 
-    @PostMapping("/inquire-modify/{inquireId}")
-    public String modify(@PathVariable("inquireId") Long inquireId, @ModelAttribute InquireDto inquireDto, Authentication authentication, Model model, Pageable pageable) throws Exception{
-        inquireService.modify(inquireId, inquireDto, authentication);
-        Page<Inquire> inquires = inquireService.findAll(pageable);
-        DataUtils dataUtils = new DataUtils();
-        model.addAttribute("dataUtils", dataUtils);
-        model.addAttribute("inquires",inquires);
-        return "board-inquire";
-    }
-
-    @PostMapping("/inquire-delete/{inquireId}")
-    public String delete(@PathVariable("inquireId") Long inquireId, Authentication authentication, Model model, Pageable pageable) throws Exception{
-        inquireService.delete(inquireId, authentication);
-        Page<Inquire> inquires = inquireService.findAll(pageable);
-        DataUtils dataUtils = new DataUtils();
-        model.addAttribute("dataUtils", dataUtils);
-        model.addAttribute("inquires",inquires);
-        return "board-inquire";
-    }
-
-    @GetMapping("/inquire-search")
-    public String findInquire(@ModelAttribute InquireDto inquireDto, Model model, Pageable pageable) throws Exception{
-        Page<Inquire> inquires;
-        System.out.println("inquireDto.getSearchBy() = " + inquireDto.getSearchBy());
-        System.out.println("inquireDto.getInput() = " + inquireDto.getInput());
-        if(inquireDto.getSearchBy() == 1){
-            inquires = inquireService.findByTitle(inquireDto.getInput(), pageable);
-        } else {
-            inquires = inquireService.findByMemberNickname(inquireDto.getInput(), pageable);
-        }
-        DataUtils dataUtils = new DataUtils();
-        dataUtils.setSearchBy(inquireDto.getSearchBy());
-        dataUtils.setInput(inquireDto.getInput());
-        model.addAttribute("dataUtils", dataUtils);
-        model.addAttribute("inquires",inquires);
-        return "board-inquire";
-    }
 
 
-    @GetMapping("/inquire-my")
-    public String myInquire(Authentication authentication, Model model, Pageable pageable) throws Exception{
-        String phone = authentication.getName();
-        Member member = memberService.findByPhone(phone);
-        Page<Inquire> inquires = inquireService.findByMemberId(member.getId(), pageable);
-        DataUtils dataUtils = new DataUtils();
-        model.addAttribute("dataUtils", dataUtils);
-        model.addAttribute("inquires",inquires);
-        return "board-inquire";
-    }
+
+
+
+
 
 
 

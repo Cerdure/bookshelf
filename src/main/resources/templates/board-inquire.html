@@ -28,7 +28,6 @@
       <div onclick="location.href='/review?page=0&size=3'">책리뷰</div>
       <div onclick="location.href='/inquire'">상품문의</div>
       <div onclick="location.href='/notice'">공지사항</div>
-      <div onclick="location.href='/winner'">당첨자발표</div>
       <div class="middle-nav-underbar"></div>
     </div>
   </div>
@@ -62,7 +61,7 @@
         <input class="private-pw" type="password" name="pw" maxlength="12" placeholder="비밀번호를 입력해주세요.">
       </div>
     </div>
-    <button type="submit" class="regist-button disable">등록</button>
+    <div type="submit" class="regist-button disable" onclick="formSubmit(this)">등록</div>
   </form>
 
 
@@ -75,8 +74,8 @@
     <span class="number" th:text="${inquires?.totalElements}"></span>
     <span class="text">건</span>
  
-    <div class="inquire-write" th:classappend="${#authentication.principal.authorities} == 'ADMIN'? 'disable':''">글 작성</div>
-    <div class="my-inquire-search" th:classappend="${#authentication.principal.authorities} == 'ADMIN'? 'disable':''">내가 쓴 글</div>
+    <div class="inquire-write" th:classappend="${#authorization.expression('hasRole(''ADMIN'')')}? 'disable':''">글 작성</div>
+    <div class="my-inquire-search" th:classappend="${#authorization.expression('hasRole(''ADMIN'')')}? 'disable':''">내가 쓴 글</div>
    
     <form action="/inquire-search" method="get" class="search">
       <select name="searchBy" class="inquire-search-sort">
@@ -125,11 +124,11 @@
              </a>
 
             <a th:href="@{/inquire(page=1)}"
-               th:if="${inquires.number > 1}"
-               th:text="1">
+               th:if="${inquires.totalPages < 4 ? false :inquires.number > 1}"
+               th:text="1" aria-label="First">
             </a>
 
-            <span th:if="${inquires.number > 1}">...</span>
+            <span th:if="${inquires.totalPages < 4 ? false :inquires.number > 1}">...</span>
 
              <a th:each="page: ${#numbers.sequence(start, last)}"
                 th:if="${inquires.first ? (page == 0 ? false : page < inquires.number + 4) :
@@ -138,10 +137,10 @@
                 th:text="${page}" th:href="@{/inquire(page=${page})}">
              </a>
 
-            <span th:if="${inquires.number < inquires.totalPages - 2}">...</span>
+            <span th:if="${inquires.totalPages < 4 ? false :inquires.number < inquires.totalPages - 2}">...</span>
 
             <a th:href="@{/inquire(page=${inquires.totalPages})}"
-               th:if="${inquires.number < inquires.totalPages - 2}"
+               th:if="${inquires.totalPages < 4 ? false :inquires.number < inquires.totalPages - 2}"
                th:text="${inquires.totalPages}" aria-label="Last" >
             </a>
 

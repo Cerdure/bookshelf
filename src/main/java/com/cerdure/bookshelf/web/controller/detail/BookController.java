@@ -1,6 +1,6 @@
 package com.cerdure.bookshelf.web.controller.detail;
 
-import com.cerdure.bookshelf.DataUtils;
+import com.cerdure.bookshelf.dto.DataUtils;
 import com.cerdure.bookshelf.domain.board.Review;
 import com.cerdure.bookshelf.domain.book.Book;
 import com.cerdure.bookshelf.domain.member.Member;

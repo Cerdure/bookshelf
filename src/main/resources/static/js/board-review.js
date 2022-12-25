@@ -8,9 +8,9 @@ $(function () {
     .hover(function () {
       let index = $(this).index();
       if (index == 0) {
-        $("#underbar").stop().animate({ 'left': '25px' }, 200, 'swing');
+        $("#underbar").stop().animate({ 'left': '0%' }, 200, 'swing');
       } else {
-        $("#underbar").stop().animate({ 'left': 22 + 100 * index + 'px' }, 200, 'swing');
+        $("#underbar").stop().animate({ 'left': 20 * index + '%' }, 200, 'swing');
       }
     })
     .click(function () {
@@ -20,9 +20,9 @@ $(function () {
     })
     .mouseleave(function () {
       if (ubClickindex == 0) {
-        $("#underbar").stop().animate({ 'left': '25px' }, 200, 'swing');
+        $("#underbar").stop().animate({ 'left': '0%' }, 200, 'swing');
       } else {
-        $("#underbar").stop().animate({ 'left': 22 + 100 * ubClickindex + 'px' }, 200, 'swing');
+        $("#underbar").stop().animate({ 'left': 20 * ubClickindex + '%' }, 200, 'swing');
       }
     });
 
@@ -110,7 +110,6 @@ $(function() {
   });
 
   $(".top-back-title").show();
-  $(".middle-nav-underbar").css('left', '0%');
 
   
 
@@ -599,4 +598,11 @@ function hideDeleteAlert(_this) {
     }).done(function(result){
       document.location.replace("/review");
     });
+  }
+
+  function formSubmit(_this){
+    let form = $(_this).closest("form");
+    let content = form.find("[name=content]");
+    content.val(content.val().replace(/\n/g, "<br>"));
+    form.submit();
   }

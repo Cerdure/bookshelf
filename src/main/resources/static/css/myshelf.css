@@ -1,10 +1,9 @@
 #underbar {
   position: absolute;
-  left: 322px;
-  /* 122 222 322 422*/
-  top: 37px;
+  left: 60%;
+  top: 56px;
   background: #ffd16d;
-  width: 80px;
+  width: 20%;
   height: 4px;
 }
 #overbar {

@@ -1,7 +1,6 @@
 package com.cerdure.bookshelf.service;
 
 import com.cerdure.bookshelf.domain.book.Book;
-import com.cerdure.bookshelf.domain.book.Category;
 import com.cerdure.bookshelf.dto.BookDto;
 import com.cerdure.bookshelf.repository.BookRepository;
 import com.cerdure.bookshelf.service.interfaces.BookService;
@@ -11,7 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional(readOnly = true)
@@ -21,13 +23,15 @@ public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
 
     @Override
-    public void insert(BookDto bookDto) {
-
+    public List<Book> findAll() {
+        return bookRepository.findAll();
     }
 
     @Override
-    public void validateDuplicateBook(BookDto bookDto) {
-
+    public Page<Book> findAllWithPaging(Pageable pageable) {
+        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); // page는 index 처럼 0부터 시작
+        pageable= PageRequest.of(page,5);
+        return bookRepository.findAll(pageable);
     }
 
     @Override
@@ -83,15 +87,38 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> findAll() {
-        return bookRepository.findAll();
+    public List<Book> findTop10(Integer criteria) {
+        switch (criteria){
+            case 0:
+                List<Book> allBooks = bookRepository.findAll();
+                Map<Integer, Integer> map = new HashMap<>();
+                for (Book book : allBooks) {
+                    map.put(allBooks.indexOf(book), book.getSales()*book.getRating());
+                }
+                List<Integer> keySet = new ArrayList<>(map.keySet());
+                keySet.sort((o1, o2) -> map.get(o2).compareTo(map.get(o1)));
+                List<Book> resultBooks = new ArrayList<>();
+                for (int i=0; i<10; i++){
+                    resultBooks.add(allBooks.get(keySet.get(i)));
+                }
+                return resultBooks;
+            case 1:
+                return bookRepository.findTop10ByOrderBySalesDesc();
+            case 2:
+                return bookRepository.findTop10ByOrderByRatingDesc();
+        }
+        return null;
+    }
+
+
+    @Override
+    public void insert(BookDto bookDto) {
+
     }
 
     @Override
-    public Page<Book> findAllWithPaging(Pageable pageable) {
-        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); // page는 index 처럼 0부터 시작
-        pageable= PageRequest.of(page,5);
-        return bookRepository.findAll(pageable);
+    public void validateDuplicateBook(BookDto bookDto) {
+
     }
 
     @Override

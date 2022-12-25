@@ -28,10 +28,9 @@
 <div class="middle-nav-wrapper">
   <div class="middle-nav-container">
     <div class="middle-nav">
-      <div onclick="location.href='/review?page=0&size=3'">책리뷰</div>
+      <div onclick="location.href='/review'">책리뷰</div>
       <div onclick="location.href='/inquire'">상품문의</div>
       <div onclick="location.href='/notice'">공지사항</div>
-      <div onclick="location.href='/winner'">당첨자발표</div>
       <div class="middle-nav-underbar"></div>
     </div>
   </div>
@@ -55,7 +54,7 @@
         <div class="inquire-write-main">
           <div class="inquire-write-main-title">ㅣ내용 *</div>
           <div class="inquire-write-frame">
-          <textarea th:text="${inquire.content}" name="content" class="inquire-input-main" maxlength="3000"
+          <textarea th:utext="${#strings.replace(inquire.content, '<br>', '&#10')}" name="content" class="inquire-input-main" maxlength="3000"
                     placeholder="내용을 10자 이상 입력해주세요. 주제와 무관한 글은 임의로 삭제될 수 있습니다."></textarea>
             <div class="write-number" th:text="${#strings.length(inquire.content)}+'/3000'">0/3000</div>
           </div>
@@ -66,7 +65,7 @@
           <input th:value="${inquire.pw}" name="pw" class="private-pw" type="password"  maxlength="12" placeholder="비밀번호를 입력해주세요.">
         </div>
       </div>
-      <button type="submit" class="regist-button">등록</button>
+      <div type="submit" class="regist-button" onclick="formSubmit(this)">등록</div>
     </form>
   </div>
 
@@ -90,7 +89,7 @@
       <span th:if="${#authorization.expression('hasRole(''ADMIN'')')} ? true : (${#authentication.principal.username} == ${inquire.member.phone})" class="remove">삭제</span>
       <span th:if="${#authorization.expression('hasRole(''ADMIN'')')} ? true : (${#authentication.principal.username} == ${inquire.member.phone})" class="edit">수정</span>
     </div>
-    <div class="contents" th:text="${inquire.content}"></div>
+    <div class="contents" th:utext="${inquire.content}"}></div>
 
     <div class="comment-wrapper">
       <div class="sum" th:text="'댓글 '+${inquire.replies.size()}+'개'"></div>

@@ -18,40 +18,11 @@
 
   <div class="banner-wrapper">
     <div class="banner">
-      <div class="banner-img-wrapper">
-        <img class="banner-img-0" src="/img/book-cover/1.jpg" alt="">
-        <img class="banner-img-1" src="/img/book-cover/2.jpg" alt="">
-        <img class="banner-img-2" src="/img/book-cover/3.jpg" alt="">
-        <img class="banner-img-3" src="/img/book-cover/4.jpg" alt="">
-        <img class="banner-img-4" src="/img/book-cover/5.jpg" alt="">
-        <img class="banner-img-5" src="/img/book-cover/6.jpg" alt="">
-      </div>
-      <div class="banner-font-wrapper">
-        <li>
-          <h1 class="bf-big-0">배너 타이틀1</h1>
-          <h4 class="bf-small-0">배너 내용1</span>
-        </li>
-        <li>
-          <h1 class="bf-big-1">배너 타이틀2</h1>
-          <h4 class="bf-small-1">배너 내용2</span>
-        </li>
-        <li>
-          <h1 class="bf-big-2">배너 타이틀3</h1>
-          <h4 class="bf-small-2">배너 내용3</span>
-        </li>
-        <li>
-          <h1 class="bf-big-3">배너 타이틀4</h1>
-          <h4 class="bf-small-3">배너 내용4</span>
-        </li>
-        <li>
-          <h1 class="bf-big-4">배너 타이틀5</h1>
-          <h4 class="bf-small-4">배너 내용5</span>
-        </li>
-        <li>
-          <h1 class="bf-big-5">배너 타이틀6</h1>
-          <h4 class="bf-small-5">배너 내용6</span>
-        </li>
-      </div>
+        <a class="banner-img-wrapper" th:each="bannerBook : ${bannerBooks}" th:href="@{/book(id=${bannerBook.id})}">
+          <h1 class="bf-big-0" th:text="${bannerBook.name}"></h1>
+          <h4 class="bf-small-0" th:text="${bannerBook.author}"></h4>
+          <img class="banner-img-0" th:src="${bannerBook.imgPath}">
+        </a>
       <div class="banner-button-wrapper">
         <button class="btn-left"><</button>
             <button class="btn-right">></button>
@@ -107,43 +78,15 @@
     </div>
     <div class="slides">
       <ul>
-        <li>
-          <div><span class="today-book-background-1"></span></div>
-          <img class="today-book-img-1" >
-          <p class="today-book-name-1">책이름1</p>
-          <p class="today-book-author-1">작가1</p>
-        </li>
-        <li>
-          <div><span class="today-book-background-2"></span></div>
-          <img class="today-book-img-2">
-          <p class="today-book-name-2">책이름2</p>
-          <p class="today-book-author-2">작가2</p>
-        </li>
-        <li>
-          <div><span class="today-book-background-3"></span></div>
-          <img class="today-book-img-3">
-          <p class="today-book-name-3">책이름3</p>
-          <p class="today-book-author-3">작가3</p>
-        </li>
-        <li>
-          <div><span class="today-book-background-4"></span></div>
-          <img class="today-book-img-4">
-          <p class="today-book-name-4">책이름4</p>
-          <p class="today-book-author-4">작가4</p>
-        </li>
-        <li>
-          <div><span class="today-book-background-5"></span></div>
-          <img class="today-book-img-5">
-          <p class="today-book-name-5">책이름5</p>
-          <p class="today-book-author-5">작가5</p>
-        </li>
+        <a th:each="todayBook : ${todayBooks}"  th:href="@{/book(id=${todayBook.id})}">
+          <div><span th:style="'background-image:url(' + ${todayBook.imgPath} + ');'"></span></div>
+          <img th:src="${todayBook.imgPath}" >
+          <p th:text="${todayBook.name}"></p>
+          <p th:text="${todayBook.author}"></p>
+        </a>
       </ul>
-      <div class="tb-button-wrapper">
-        <div class="tb-button">
-          <button class="tb-btn-left"><</button>
-              <button class="tb-btn-right">></button>
-        </div>
-      </div>
+      <button class="tb-btn-left">&lt;</button>
+      <button class="tb-btn-right">&gt;</button>
     </div>
     <div class="tb-reset-wrapper">
       <div class="tb-reset-box">
@@ -156,45 +99,21 @@
     <div class="best-title-wrapper">
       <ul class="best-title-1">
         <li class="title-best">베스트</li>
-        <li class="best-title-center">|</li>
-        <li class="title-steady">스테디</li>
-        <li class="top-10">서점 3사 top10 북셸프에서 만나보세요!</li>
+        <li class="top-10">북셸프 통계 top10</li>
       </ul>
       <ul class="best-title-2">
-        <li class="title-entire">전체</li>
-        <li class="title-domestic">국내도서</li>
-        <li class="title-foreign">외국도서</li>
+        <li class="best-entire" onclick="bestBook(this, 0)">종합</li>
+        <li class="best-sale" onclick="bestBook(this, 1)">판매부수</li>
+        <li class="best-rating" onclick="bestBook(this, 2)">평점</li>
       </ul>
     </div>
     <div class="best-books-wrapper">
-      <div class="best-row-1">
-        <img class="best-img-1">
-        <img class="best-img-2">
-        <img class="best-img-3">
-        <img class="best-img-4">
-        <img class="best-img-5">
-      </div>
-      <div class="best-row-num1">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-        <div>5</div>
-      </div>
-      <div class="best-row-2">
-        <img class="best-img-6">
-        <img class="best-img-7">
-        <img class="best-img-8">
-        <img class="best-img-9">
-        <img class="best-img-10">
-      </div>
-      <div class="best-row-num2">
-        <div>6</div>
-        <div>7</div>
-        <div>8</div>
-        <div>9</div>
-        <div>10</div>
-      </div>
+      <a class="best-book" th:each="bestBook,i : ${bestBooks}" th:href="@{/book(id=${bestBook.id})}">
+        <div class="best-book-inner-box">
+        <img th:src="${bestBook.imgPath}">
+        <div class="number" th:text="${i.count}" th:style="${i.count == 1} ? 'background-color: rgb(227, 178, 0);' : 'background-color: rgba(0, 0, 0, 0.5);'"></div>
+        </div>
+      </a>
     </div>
   </div>
   <div class="picks-wrapper">
@@ -246,41 +165,10 @@
       </div>
       <div class="notice-box">
         <ul>
-          <li onclick="location.href='/notice-detail'">
-            <span>공지사항 1</span>
-            <p>다음 달부터 서울 등 규제지역에서<br>
-              15억 원 초과 아파트의 주택담보대출이 가능해지고<br>
-              무주택자와 1주택자에 대한 주택담보인정비율(LTV)이<br>
-              50%로 일괄 높아진다.
-            </p>
-            <span>2022.11.11</span>
-          </li>
-          <li onclick="location.href='/notice-detail'">
-            <span>공지사항 2</span>
-            <p>다음 달부터 서울 등 규제지역에서<br>
-              15억 원 초과 아파트의 주택담보대출이 가능해지고<br>
-              무주택자와 1주택자에 대한 주택담보인정비율(LTV)이<br>
-              50%로 일괄 높아진다.
-            </p>
-            <span>2022.10.29</span>
-          </li>
-          <li onclick="location.href='/notice-detail'">
-            <span>공지사항 3</span>
-            <p>다음 달부터 서울 등 규제지역에서<br>
-              15억 원 초과 아파트의 주택담보대출이 가능해지고<br>
-              무주택자와 1주택자에 대한 주택담보인정비율(LTV)이<br>
-              50%로 일괄 높아진다.
-            </p>
-            <span>2022.10.04</span>
-          </li>
-          <li onclick="location.href='/notice-detail'">
-            <span>공지사항 4</span>
-            <p>다음 달부터 서울 등 규제지역에서<br>
-              15억 원 초과 아파트의 주택담보대출이 가능해지고<br>
-              무주택자와 1주택자에 대한 주택담보인정비율(LTV)이<br>
-              50%로 일괄 높아진다.
-            </p>
-            <span>2022.9.30</span>
+          <li th:each="notice : ${notices}" th:href="'/notice-detail/' + ${notice.id}">
+            <span th:text="${notice.title}"></span>
+            <p th:utext="${notice.content}"></p>
+            <span th:text="${#temporals.format(notice.regDate, 'yyyy.MM.dd')}"></span>
           </li>
         </ul>
       </div>
@@ -288,7 +176,6 @@
   </div>
   <div class="bottom-banner">
     <div class="bottom-banner-title">오늘의 문장</div>
-    <div class="bottom-banner-button">></div>
     <div class="bottom-banner-inner-box">
       <div class="bottom-banner-inner-title">오늘은 무비데이!</div>
       <img class="bottom-banner-qutoes-left" src="/img/icon/qutoes-top-gray.left.png">

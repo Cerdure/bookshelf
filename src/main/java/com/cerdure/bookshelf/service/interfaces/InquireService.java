@@ -18,7 +18,7 @@ public interface InquireService {
     public Page<Inquire> findByMemberNickname(String memberNickname, Pageable pageable);
     public Inquire findPrevInquire(Inquire inquire);
     public Inquire findNextInquire(Inquire inquire);
-    public void modify(Long inquireId, InquireDto inquireDto, Authentication authentication) throws Exception;
+    public Inquire modify(Long inquireId, InquireDto inquireDto, Authentication authentication) throws Exception;
     public void delete(Long inquireId, Authentication authentication) throws Exception;
     public void hitsPlus(Inquire inquire);
 }

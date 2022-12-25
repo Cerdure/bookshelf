@@ -24,16 +24,42 @@
 <div class="middle-nav-wrapper">
   <div class="middle-nav-container">
     <div class="middle-nav">
-      <div onclick="location.href='/review?page=0&size=3'">책리뷰</div>
-      <div onclick="location.href='/notice'">상품문의</div>
+      <div onclick="location.href='/review'">책리뷰</div>
+      <div onclick="location.href='/inquire'">상품문의</div>
       <div onclick="location.href='/notice'">공지사항</div>
-      <div onclick="location.href='/winner'">당첨자발표</div>
       <div class="middle-nav-underbar"></div>
     </div>
   </div>
 </div>
 
 <div class="meta-wrapper">
+  <div class="write-wrapper-back"></div>
+
+  <div id="modify-wrapper">
+    <div class="modal-background"></div>
+  <form th:action="'/notice-modify/'+${notice.id}" method="post" class="notice-modify-wrapper">
+    <div class="notice-write-top">
+      <span class="notice-write-top-text">공지사항 수정</span>
+      <img class="notice-write-top-icon" src="/img/icon/btn_dialog_close@2x.png">
+    </div>
+    <div class="notice-write-contents">
+      <div class="notice-write-header">
+        <div class="title">ㅣ 제목</div>
+        <textarea name="title" class="notice-input-header" maxlength="30" placeholder="제목을 입력하세요." th:text="${notice.title}"></textarea>
+      </div>
+      <div class="notice-write-main">
+        <div class="notice-write-main-title">ㅣ내용</div>
+        <div class="notice-write-frame">
+          <textarea name="content" class="notice-input-main" maxlength="3000" th:utext="${#strings.replace(notice.content, '<br>', '&#10')}"
+                    placeholder="내용을 입력해주세요."></textarea>
+          <div class="write-number" th:text="${#strings.length(notice.content)}+'/3000'">0/3000</div>
+        </div>
+      </div>
+    </div>
+    <div type="submit" class="regist-button" onclick="formSubmit(this)">등록</div>
+  </form>
+  </div>
+
 
 <div class="notice-wrapper">
   <div class="notice-title-wrapper">
@@ -41,44 +67,50 @@
   </div>
 
   <div class="detail-wrapper">
-    <span class="title">공지 안내글 일시적 변경사항</span>
+    <input id="notice-id" th:value="${notice.id}" type="hidden">
+    <span class="title" th:text="${notice.title}"></span>
     <div class="sub-title">
-      <span class="type">북셸프</span>
+      <span class="type" th:text="${notice.memberNickname}"></span>
       <span class="split">ㅣ</span>
-      <span class="date">2022.12.02</span>
-      <span class="remove">삭제</span>
-      <span class="edit">수정</span>
+      <span class="date" th:text="${#temporals.format(notice.regDate, 'yyyy.MM.dd')}"></span>
+      <span class="remove" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">삭제</span>
+      <span class="edit" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">수정</span>
     </div>
-    <div class="contents">
-      남녀노소 불문하고 사랑받는 크림빵의 인기는<br>
-      CU 편의점의 연세우유 크림빵으로 새로운 역사를 썼다고 해도 과언이 아니다.<br>
-      동네 빵집에서 사 먹던 길쭉한 모양의 크림빵도 아니고, 마트 매대에 있던 빵도 아니다. <br><br>
-      디저트 공간에 고스란히 자리 잡고 있으며, <br>
-      냉장 보관되고 있는 크림빵. 품절 대란이 일어나고, <br>
-      유튜브 및 SNS에 수없이 등장하며 많은 사람의 관심을 받았다. <br>
-      이에 타 편의점도 어김없이 비슷한 종류의 빵을 출시하기 시작했다. <br><br>
-      CU 편의점의 연세우유 크림빵과 함께 GS25 브레디크, 이마트24의 빵빵도넛까지 <br>
-      총 3종의 차이점이 무엇인지 낱낱이 파헤쳐 보기로 했다. <br>
-      초코, 딸기 등 다양한 맛이 있지만, <br>
-      공통적이면서도 기본인 오리지널(우유)을 선택했다.
-    </div>
+    <div class="contents" th:utext="${notice.content}"></div>
+  </div>
+
+  <div class="next-detail">
+    <span class="next">다음글</span>
+    <img class="icon" src="/img/icon/chevron-up.svg">
+    <a class="title" th:if="${nextNotice.id==null}">다음글이 없습니다.</a>
+    <a class="title" th:if="${nextNotice.id!=null}" th:href="'/notice-detail/' + ${nextNotice.id}" th:text="${nextNotice.title}"></a>
   </div>
 
   <div class="prev-detail">
     <span class="prev">이전글</span>
-    <img src="/img/icon/chevron-up.svg">
-    <a class="title" href="#">이전 공지글</a>
+    <img class="icon" src="/img/icon/chevron-up.svg">
+    <a class="title" th:if="${prevNotice.id==null}">이전글이 없습니다.</a>
+    <a class="title" th:if="${prevNotice.id!=null}" th:href="'/notice-detail/' + ${prevNotice.id}" th:text="${prevNotice.title}"></a>
   </div>
-
-  <div class="next-detail">
-    <span class="next">이전글</span>
-    <img src="/img/icon/chevron-up.svg">
-    <a class="title" href="#">다음 공지글</a>
-  </div>
-
   <div class="back-button" onclick="location.href='/notice'">공지사항 목록</div>
  
-</div>  
+</div>
+
+  <div class="alert-window close-alert">
+    <div class="text">
+      글 수정을 취소하겠습니까?
+    </div>
+    <button class="cancel" onclick="hideAlert(this)">취소</button>
+    <button class="okay" onclick="formClose(this)">확인</button>
+  </div>
+
+  <div class="alert-window delete-alert">
+    <div class="text">
+      글을 삭제하시겠습니까?
+    </div>
+    <button class="cancel" onclick="hideDeleteAlert(this)">취소</button>
+    <button class="okay" onclick="noticeDelete(this)">확인</button>
+  </div>
 
   <div class="top-move-button">
     <div>∧</div>

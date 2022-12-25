@@ -1,6 +1,7 @@
 package com.cerdure.bookshelf;
 
 import com.cerdure.bookshelf.domain.board.Inquire;
+import com.cerdure.bookshelf.domain.board.Notice;
 import com.cerdure.bookshelf.domain.board.Reply;
 import com.cerdure.bookshelf.domain.book.Book;
 import com.cerdure.bookshelf.domain.UploadFile;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * 종 주문 2개
@@ -863,6 +865,7 @@ public class InitDb {
                     .pw(passwordEncoder.encode("1234"))
                     .address(new Address("서울 당산동","145가","K013"))
                     .role(MemberRole.USER)
+                    .point(30000)
                     .build();
 
             Member member2 = Member.builder()
@@ -874,6 +877,7 @@ public class InitDb {
                     .pw(passwordEncoder.encode("1234"))
                     .address(new Address("서울 당산동","145가","K013"))
                     .role(MemberRole.USER)
+                    .point(40000)
                     .build();
 
             Member member3 = Member.builder()
@@ -885,24 +889,39 @@ public class InitDb {
                     .pw(passwordEncoder.encode("1234"))
                     .address(new Address("서울 당산동","145가","K013"))
                     .role(MemberRole.USER)
+                    .point(25000)
                     .build();
 
-            Member member4 = Member.builder()
-                    .name("관리자")
-                    .nickname("관리자")
+            Member bookshelf = Member.builder()
+                    .name("북셸프")
+                    .nickname("북셸프")
+                    .phone("00011110000")
+                    .birth("000000")
+                    .sex("1")
+                    .pw(passwordEncoder.encode("1234"))
+                    .address(new Address("서울 당산동","145가","K013"))
+                    .role(MemberRole.ADMIN)
+                    .point(1000000)
+                    .build();
+
+            Member center = Member.builder()
+                    .name("고객센터")
+                    .nickname("고객센터")
                     .phone("00099990000")
                     .birth("000000")
                     .sex("1")
                     .pw(passwordEncoder.encode("1234"))
                     .address(new Address("서울 당산동","145가","K013"))
                     .role(MemberRole.ADMIN)
+                    .point(2345678)
                     .build();
 
             em.persist(member);
             em.persist(member1);
             em.persist(member2);
             em.persist(member3);
-            em.persist(member4);
+            em.persist(bookshelf);
+            em.persist(center);
 
             Review[] reviews = new Review[10];
 
@@ -1008,91 +1027,87 @@ public class InitDb {
             inquires[0] = Inquire.builder()
                     .member(member)
                     .memberNickname(member.getNickname())
-                    .title("tt1111111111111")
-                    .content("ct11111111111")
-                    .closed(1).pw("1234")
+                    .title("검색이 되지 않거나 품절/절판인 도서는 구입할 수 없나요? ")
+                    .content("검색이 되지 않거나 품절/절판인 도서는 구입할 수 없나요????")
                     .regDate(LocalDateTime.now())
                     .build();
 
             inquires[1] = Inquire.builder()
                     .member(member1)
                     .memberNickname(member1.getNickname())
-                    .title("tt2222222222")
-                    .content("ct1222222222")
+                    .title("책 구매는 어떻게 하나요?")
+                    .content("책 구매는 어떻게 하나요?????")
                     .closed(1).pw("1234")
-                    .regDate(LocalDateTime.now().minusDays(1))
+                    .regDate(LocalDateTime.now().minusDays(20))
                     .build();
 
             inquires[2] = Inquire.builder()
                     .member(member)
                     .memberNickname(member.getNickname())
-                    .title("tt3333333333")
-                    .content("ct333333333")
-                    .closed(1).pw("1234")
-                    .regDate(LocalDateTime.now().minusDays(2))
+                    .title("책 서비스 이용 중 불편한 점이 있다면?")
+                    .content("책 서비스 이용 중 불편한 점이 있다면????")
+                    .regDate(LocalDateTime.now().minusDays(40))
                     .build();
 
             inquires[3] = Inquire.builder()
                     .member(member)
                     .memberNickname(member.getNickname())
-                    .title("tt44444444")
-                    .content("ct444444444")
-                    .closed(1).pw("1234")
-                    .regDate(LocalDateTime.now().minusDays(3))
+                    .title("책 검색결과는 어떻게 제공되나요?")
+                    .content("책 검색결과는 어떻게 제공되나요????")
+                    .regDate(LocalDateTime.now().minusDays(60))
                     .build();
 
             inquires[4] = Inquire.builder()
                     .member(member1)
                     .memberNickname(member1.getNickname())
-                    .title("tt55555555")
-                    .content("ct555555555")
+                    .title("베스트셀러,새로나온책 기준은?")
+                    .content("베스트셀러,새로나온책 기준은????")
                     .closed(1).pw("1234")
-                    .regDate(LocalDateTime.now().minusDays(4))
+                    .regDate(LocalDateTime.now().minusDays(80))
                     .build();
 
             inquires[5] = Inquire.builder()
                     .member(member2)
                     .memberNickname(member2.getNickname())
-                    .title("tt6666666")
-                    .content("ct666666666")
-                    .closed(1).pw("1234")
-                    .regDate(LocalDateTime.now().minusDays(5))
+                    .title("책 검색의 검색 옵션은 어떻게 사용하나요?")
+                    .content("책 검색의 검색 옵션은 어떻게 사용하나요????")
+                    .regDate(LocalDateTime.now().minusDays(100))
                     .build();
 
             inquires[6] = Inquire.builder()
                     .member(member)
                     .memberNickname(member.getNickname())
-                    .title("tt7777777777")
-                    .content("ct777777777")
+                    .title("책 정보를 수정, 삭제해주세요.")
+                    .content("책 정보를 수정, 삭제해주세요.....")
                     .closed(1).pw("1234")
-                    .regDate(LocalDateTime.now().minusDays(6))
+                    .regDate(LocalDateTime.now().minusDays(120))
                     .build();
 
             inquires[7] = Inquire.builder()
                     .member(member)
                     .memberNickname(member.getNickname())
-                    .title("tt888888888")
-                    .content("ct88888888")
+                    .title("검색을 쉽게 하는 방법은 없나요?")
+                    .content("검색을 쉽게 하는 방법은 없나요????")
                     .closed(1).pw("1234")
-                    .regDate(LocalDateTime.now().minusDays(7))
+                    .regDate(LocalDateTime.now().minusDays(140))
                     .build();
 
             inquires[8] = Inquire.builder()
                     .member(member)
                     .memberNickname(member.getNickname())
-                    .title("tt9999999999")
-                    .content("ct9999999999")
+                    .title("제가 알고있는 출판사 이름과 다릅니다.")
+                    .content("제가 알고있는 출판사 이름과 다릅니다....")
                     .closed(1).pw("1234")
-                    .regDate(LocalDateTime.now().minusDays(8))
+                    .regDate(LocalDateTime.now().minusDays(160))
                     .build();
 
             inquires[9] = Inquire.builder()
                     .member(member)
                     .memberNickname(member.getNickname())
-                    .title("tt101010101010")
-                    .content("ct1010101010")
+                    .title("검색되지 않는 도서를 구입할 수 있나요?")
+                    .content("검색되지 않는 도서를 구입할 수 있나요????")
                     .closed(1).pw("1234")
-                    .regDate(LocalDateTime.now().minusDays(9))
+                    .regDate(LocalDateTime.now().minusDays(180))
                     .build();
 
             for (Inquire inquire : inquires) {
@@ -1107,8 +1122,8 @@ public class InitDb {
                     replies[i] = Reply.builder()
                             .member(member2)
                             .inquire(inquires[i / 3])
-                            .content("계란을 삶을 때 몇 분을 삶아야 할까 고민하셨나요? 바로 " + i + "분<br>" +
-                                    "오늘은 맛있는 삶은 계란 만드는 방법으로 찾아왔습니다.")
+                            .content("많은 분들이 북셸프를 이용하고 있는데<br>" +
+                                    "책 사이트 중에서 제일 좋은 사이트인 것 같아요.")
                             .level(0)
                             .build();
                 }
@@ -1118,8 +1133,8 @@ public class InitDb {
                 replies[i] = Reply.builder()
                         .member(member3)
                         .inquire(inquires[i/3])
-                        .content("<strong>@테스터2</strong> 계란을 삶을 때 몇 분을 삶아야 할까 고민하셨나요? 바로 " + i + "분<br>" +
-                                "맨들맨들한 삶은 계란 만드는 방법으로 찾아왔습니다.")
+                        .content("<strong>@유저22</strong> 저도, 많은 분들이 사용하고 있는 북셸프를 이용하는데요.<br>" +
+                                "책 사이트 중에서 제일 좋은 사이트인 것 같아요.")
                         .parent(replies[i-1])
                         .level(1)
                         .build();
@@ -1128,6 +1143,40 @@ public class InitDb {
             for (Reply reply : replies) {
                 em.persist(reply);
             }
+
+
+            Notice[] notices = new Notice[10];
+
+            for (int i=0; i<10; i++){
+                if(i%2==0){
+                    notices[i] = Notice.builder()
+                            .member(bookshelf)
+                            .memberNickname(bookshelf.getNickname())
+                            .title(LocalDateTime.now().minusDays(i*20).format(DateTimeFormatter.ofPattern("M월 d일자"))
+                                    + " 개인정보 처리방침 변경 안내")
+                            .content("북셸프 서비스를 이용해 주시는 고객님께 감사 드립니다.<br>" +
+                                    "북셸프 개인정보처리방침이 일부 개정 될 예정으로 변경내용을 사전 공지하오니<br>" +
+                                    "서비스 이용에 참조하시기 바랍니다.")
+                            .regDate(LocalDateTime.now().minusDays(i*20))
+                            .build();
+                } else {
+                    notices[i] = Notice.builder()
+                            .member(center)
+                            .memberNickname(center.getNickname())
+                            .title(LocalDateTime.now().minusDays(i*20).format(DateTimeFormatter.ofPattern("M월 d일자"))
+                                    + "이용약관 개정 안내")
+                            .content("북셸프 서비스를 이용해주시는 고객님께 감사드리며,<br />" +
+                                    "북셸프 이용약관이 개정되어 안내하오니 이용에 참고하여 주시기 바랍니다.")
+                            .regDate(LocalDateTime.now().minusDays(i*20))
+                            .build();
+                }
+            }
+
+            for (Notice notice : notices) {
+                em.persist(notice);
+            }
+
+
 
             UploadFile[][] files = new UploadFile[10][5];
 

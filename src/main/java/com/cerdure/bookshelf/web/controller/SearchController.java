@@ -1,6 +1,6 @@
 package com.cerdure.bookshelf.web.controller;
 
-import com.cerdure.bookshelf.DataUtils;
+import com.cerdure.bookshelf.dto.DataUtils;
 import com.cerdure.bookshelf.domain.book.Book;
 import com.cerdure.bookshelf.domain.book.Category;
 import com.cerdure.bookshelf.dto.BookDto;
@@ -13,8 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 

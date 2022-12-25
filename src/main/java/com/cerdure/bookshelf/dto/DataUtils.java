@@ -1,4 +1,4 @@
-package com.cerdure.bookshelf;
+package com.cerdure.bookshelf.dto;
 
 
 import lombok.Data;
@@ -12,6 +12,7 @@ public class DataUtils {
     private Integer categoryId;
     private Integer searchBy;
     private String input;
+    private Long memberId;
     private LocalDate now;
     private LocalDate oneMonthAgo;
     private LocalDate threeMonthAgo;

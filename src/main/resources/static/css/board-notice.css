@@ -1,10 +1,9 @@
 #underbar {
   position: absolute;
-  left: 422px;
-  /* 122 222 322 422*/
-  top: 37px;
+  left: 80%;
+  top: 56px;
   background: #ffd16d;
-  width: 80px;
+  width: 20%;
   height: 4px;
 }
 #overbar {
@@ -79,7 +78,7 @@
 }
 .middle-nav div:not(.middle-nav-underbar) {
   position: relative;
-  width: 25%;
+  width: 33.3%;
   float: left;
   margin: 10px 0;
   font-family: 'Noto Sans KR', sans-serif;
@@ -89,8 +88,8 @@
 .middle-nav-underbar {
   position: absolute;
   bottom: 1px;
-  left: 0%;
-  width: 25%;
+  left: 66.6%;
+  width: 33.3%;
   height: 3px;
   background-color: #000000;
   opacity: 0.5;
@@ -114,6 +113,22 @@
   pointer-events: none;
 }
 
+
+.notice-controller {
+  position: relative;
+  height: 40px;
+  margin: auto;
+  margin-top: 40px;
+  text-align: center;
+}
+
+.controller {
+  position: relative;
+  top: 20px;
+  display: inline-block;
+  width: 228px;
+}
+
 .controller-btn-left {
   position: absolute;
   top: 2px;
@@ -132,14 +147,13 @@
 }
 .controller a{
   display: inline-block;
-  width: 22px;
-  height: 22px;
+  width: 19px;
+  margin: 0 2px;
   border-radius: 50%;
   line-height: 19px;
   cursor: pointer;
-}
-.controller .first-ellipsis {
-  display: none;
+  text-decoration: none;
+  font-weight: 900;
 }
 .index-active {
  background-color: cornflowerblue;
@@ -221,14 +235,26 @@
   overflow: hidden;
   display: inline-block;
 }
+.search-by {
+  position: absolute; 
+  top: 0px;
+  left: 0;
+  border: none;
+  outline: none;
+  border-right: 1px solid silver;
+  width: 30%;
+  height: 100%;
+  text-indent: 10px;
+}
 .notice-search-input{
   position: absolute;
+  top: 0px;
   right: 0;
-  width: 100%;
+  width: 70%;
   height: 100%;
   border: none;
   outline: none;
-  text-indent: 40px;
+  text-indent: 20px;
 }
 .notice-search-wrapper img {
   position: absolute;
@@ -282,6 +308,9 @@
   text-align: left;
   text-indent: 40px;
   cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .notices .type {
   width: 15%;
@@ -305,15 +334,9 @@
 }
 .my-notice {
   border-bottom: 1px solid lightgray;
+  display: flex;
 }
-.notice-controller {
-  position: relative;
-  width: 228px;
-  height: 40px;
-  margin: auto;
-  margin-top: 40px;
-  text-align: center;
-}
+
 
 
 .notice-write-wrapper {

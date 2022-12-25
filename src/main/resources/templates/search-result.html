@@ -76,11 +76,11 @@
              <img class="controller-btn-left" src="/img/icon/btn_pagination_prev@2x.png">
            </a>
 
-          <a th:if="${books.number > 1}"
+          <a th:if="${books.totalPages < 4 ? false :books.number > 1}"
              th:text="1" id="idx">
           </a>
 
-          <span th:if="${books.number > 1}">...</span>
+          <span th:if="${books.totalPages < 4 ? false :books.number > 1}">...</span>
 
            <a th:each="page: ${#numbers.sequence(start, last)}"
               th:if="${books.first ? page < books.number +4 :
@@ -89,9 +89,9 @@
               th:text="${page}">
            </a>
 
-          <span th:if="${books.number < books.totalPages -2}">...</span>
+          <span th:if="${books.totalPages < 4 ? false :books.number < books.totalPages -2}">...</span>
 
-          <a th:if="${books.number < books.totalPages -2}"
+          <a th:if="${books.totalPages < 4 ? false :books.number < books.totalPages -2}"
              th:text="${books.totalPages}" id="idx">
           </a>
 
