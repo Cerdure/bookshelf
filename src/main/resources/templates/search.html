@@ -71,16 +71,16 @@
         </div>
         <div class="inner-box">
         <ul>
-          <li th:each="trend,i : ${trends}" th:if="${i.count<6}">
+          <a th:each="trend,i : ${trends}" th:if="${i.count<6}" th:onclick="search(${trend.searchData})">
             <span th:text="${i.count}" th:style="${i.count == 1} ? 'color: rgb(255, 166, 0);' : ''"></span>
             <div th:class="'trend-'+${i.count}" th:text="${trend.searchData == null ? '-' : trend.searchData}"></div>
-          </li>
+          </a>
         </ul>
         <ul>
-          <li th:each="trend,i : ${trends}" th:if="${i.count>5}">
+          <a th:each="trend,i : ${trends}" th:if="${i.count>5}" th:onclick="search(${trend.searchData})">
             <span th:text="${i.count}"></span>
             <div th:class="'trend-'+${i.count}" th:text="${trend.searchData == null ? '-' : trend.searchData}"></div>
-          </li>
+          </a>
         </ul>
         </div>
       </div>

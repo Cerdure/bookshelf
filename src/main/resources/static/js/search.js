@@ -67,6 +67,11 @@ $(function () {
     }
   });
 
+  $(".inner-box a").click(function(){
+      $("#search-input").val($(this).find("div").text());
+      $("#search-form").submit();
+  })
+
   $(document).ready(function (){
     $(document).on("click","#category-box",function (){
        $("#category-id-input").val($(this).find("#category-id").val());
@@ -91,18 +96,18 @@ $(function () {
 
 
   let startTime = 9;
-  let innerInterval = setInterval(function (){ console.log("first "+startTime);
+  let innerInterval = setInterval(function (){
     if(startTime < 0){
       clearInterval(innerInterval);
       startTime = 9;
-    } else { console.log(startTime);
+    } else {
       $('.trend-'+(startTime+1)).addClass("flip");
       startTime--;
     }
   },100);
 
   let intervalOn = false;
-  let outerInterval = setInterval(function (){ console.log('oi');
+  let outerInterval = setInterval(function (){
     if(!intervalOn){
       $('.trend-wrapper ul li div').removeClass("flip");
       $.ajax({
@@ -199,4 +204,6 @@ $(function () {
   $(".trend-current-time").text(month + '.' + day + " " + hour + ":" + minute + " 기준");
 
 });
+
+
 

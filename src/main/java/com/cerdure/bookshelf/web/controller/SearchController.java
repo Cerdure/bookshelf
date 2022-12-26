@@ -16,7 +16,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -65,16 +67,21 @@ public class SearchController {
         String inputVal = bookDto.getName();
         if(inputVal!=""){
             List<Category> categories = categoryService.findByName(inputVal);
-            List<Book> books = bookService.findByName(inputVal);
+            List<BookDto> bookDtos = bookService.findByName(inputVal).stream()
+                    .map(o -> BookDto.builder()
+                            .id(o.getId())
+                            .name(o.getName())
+                            .build())
+                    .collect(Collectors.toList());
             if(categories != null){
                 categories.forEach(e -> e.coincidenceHighlight(inputVal));
             }
-            if(books != null){
-                books.forEach(e -> e.coincidenceHighlight(inputVal));
+            if(bookDtos != null){
+                bookDtos.forEach(e -> e.coincidenceHighlight(inputVal));
             }
             trendService.insert(inputVal);
             model.addAttribute("ipCategories", categories);
-            model.addAttribute("ipBooks", books);
+            model.addAttribute("ipBooks", bookDtos);
         }
         return "search-result :: #search-input-results";
     }

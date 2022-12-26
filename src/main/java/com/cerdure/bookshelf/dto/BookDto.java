@@ -31,9 +31,10 @@ public class BookDto {
     private String publisherReview;
     private String sortOrder;
     private List<Integer> categoryIds;
+    private Category category;
 
     @Builder
-    public BookDto(Long id, String name, String imgPath, String author, String publisher, LocalDate publishDate, String ISBN, Integer originPrice, Integer discountRate, Integer discountPrice, Integer stock, String intro, String bookIndex, String publisherReview, String sortOrder, List<Integer> categoryIds) {
+    public BookDto(Long id, String name, String imgPath, String author, String publisher, LocalDate publishDate, String ISBN, Integer originPrice, Integer discountRate, Integer discountPrice, Integer stock, String intro, String bookIndex, String publisherReview, String sortOrder, List<Integer> categoryIds, Category category) {
         this.id = id;
         this.name = name;
         this.imgPath = imgPath;
@@ -50,5 +51,16 @@ public class BookDto {
         this.publisherReview = publisherReview;
         this.sortOrder = sortOrder;
         this.categoryIds = categoryIds;
+        this.category = category;
+    }
+
+    public void coincidenceHighlight(String input){
+        input = input.toUpperCase();
+        int startIndex = this.name.toUpperCase().indexOf(input);
+        int endIndex = startIndex + input.length();
+        String coincidenceStr = "<strong>" + this.name.substring(startIndex, endIndex) + "</strong>";
+        String prevStr = this.name.substring(0, startIndex);
+        String nextStr = this.name.substring(endIndex, this.name.length());
+        this.name = prevStr + coincidenceStr + nextStr;
     }
 }

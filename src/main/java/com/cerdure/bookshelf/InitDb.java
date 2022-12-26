@@ -1259,13 +1259,37 @@ public class InitDb {
                 }
             }
 
-            Trend[] trends = new Trend[10];
-            for(int i=0; i<10; i++){
-                trends[i] = Trend.builder()
-                        .searchData("검색어-"+(i+1))
-                        .count(10-i)
-                        .build();
-            }
+            Trend[] trends = new Trend[7];
+
+            trends[0] = Trend.builder()
+                    .searchData("책")
+                    .count(10)
+                    .build();
+            trends[1] = Trend.builder()
+                    .searchData("여행")
+                    .count(9)
+                    .build();
+            trends[2] = Trend.builder()
+                    .searchData("인간")
+                    .count(8)
+                    .build();
+            trends[3] = Trend.builder()
+                    .searchData("법")
+                    .count(7)
+                    .build();
+            trends[4] = Trend.builder()
+                    .searchData("부자")
+                    .count(6)
+                    .build();
+            trends[5] = Trend.builder()
+                    .searchData("심리학")
+                    .count(5)
+                    .build();
+            trends[6] = Trend.builder()
+                    .searchData("과학")
+                    .count(4)
+                    .build();
+
             for (Trend trend : trends) {
                 em.persist(trend);
             }
