@@ -165,11 +165,11 @@
       </div>
       <div class="notice-box">
         <ul>
-          <li th:each="notice : ${notices}" th:href="'/notice-detail/' + ${notice.id}">
+          <a th:each="notice : ${notices}" th:href="'/notice-detail/' + ${notice.id}">
             <span th:text="${notice.title}"></span>
             <p th:utext="${notice.content}"></p>
             <span th:text="${#temporals.format(notice.regDate, 'yyyy.MM.dd')}"></span>
-          </li>
+          </a>
         </ul>
       </div>
     </div>

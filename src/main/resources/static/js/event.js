@@ -47,12 +47,7 @@ $(function () {
     });
 
     
-  for (var i = 0; i < 16; i++) {
-    let randNum = Math.floor(Math.random() * 62 + 1);
-    while (arr.indexOf(randNum) != -1) randNum = Math.floor(Math.random() * 62 + 1);
-    arr.push(randNum);
-    $(".bi-" + i + " img").attr('src', "/img/book-cover/" + randNum + ".jpg");
-  }
+
 
   function bannerSlide(speed) {
     $(".banner-current-index").text(count % 16 + 1 < 10 ? '0' + (count % 16 + 1) : count % 16 + 1);
@@ -79,22 +74,29 @@ $(function () {
     else {
       $(".banner-img-wrapper ul").animate({ 'right': -3405 + 160 * count + 'px' }, speed);
     }
-    $(".bi-" + (count + 4) % 16).animate({
-      'width': '210px', 'height': '290px', 'top': '-70px', 'opacity': '1'
-    }, speed);
-    $(".bi-" + (count + 4) % 16 + " img").animate({
-      'width': '190px', 'height': '270px'
-    }, speed);
-    $(".banner-font-big").text("책 이 름 " + arr[(count + 4) % 16]);
-    $(".banner-font-small").text("오직 북셸프에서만 " + arr[(count + 4) % 16]);
-    $(".banner-before").css('backgroundImage', 'url(' + $(".bi-" + (count + 4) % 16 + " img").attr('src') + ')');
-
     $(".bi-" + (count + 3) % 16).animate({
       'width': '160px', 'height': '220px', 'top': '0px', 'opacity': '0.5'
     }, speed);
+    $(".bi-" + (count + 3) % 16).removeClass("bi-active");
     $(".bi-" + (count + 3) % 16 + " img").animate({
       'width': '140px', 'height': '200px'
     }, speed);
+
+    $(".bi-" + (count + 4) % 16).animate({
+      'width': '210px', 'height': '290px', 'top': '-70px', 'opacity': '1'
+    }, speed);
+    $(".bi-" + (count + 4) % 16).addClass("bi-active");
+    $(".bi-" + (count + 4) % 16 + " img").animate({
+      'width': '190px', 'height': '270px'
+    }, speed);
+
+    $(".banner-font-big").text($(".bi-active").find(".book-name").val());
+    $(".active-origin-price").text(Number($(".bi-active").find(".book-origin-price").val()).toLocaleString('ko-KR') + '원');
+    $(".active-discount-rate").text('-' + $(".bi-active").find(".book-discount-rate").val() + '%');
+    $(".active-discount-price").text(Number($(".bi-active").find(".book-discount-price").val()).toLocaleString('ko-KR') + '원');
+    $(".banner-before").css('backgroundImage', 'url(' + $(".bi-" + (count + 4) % 16 + " img").attr('src') + ')');
+
+   
   }
 
   function bannerSlideReverse(speed) {
@@ -119,22 +121,29 @@ $(function () {
     $(".banner-current-index").text((count) % 16 == 0 ? 16 : (count) % 16 < 10 ? '0' + (count) % 16 : (count) % 16);
     $(".banner-index-fill").stop().animate({ 'left': (-57 + ((count) % 16 == 0 ? 15 : (count - 1) % 16) * 3.8) + 'px' }, 500);
 
-    $(".bi-" + (count + 4) % 16).animate({
-      'width': '210px', 'height': '290px', 'top': '-70px', 'opacity': '1'
-    }, speed);
-    $(".bi-" + (count + 4) % 16 + " img").animate({
-      'width': '190px', 'height': '270px'
-    }, speed);
-    $(".banner-font-big").text("스 페 셜 북 " + arr[(count + 4) % 16]);
-    $(".banner-font-small").text("오직 북셸프에서만 " + arr[(count + 4) % 16]);
-    $(".banner-before").css('backgroundImage', 'url(' + $(".bi-" + (count + 4) % 16 + " img").attr('src') + ')');
-
     $(".bi-" + (count + 5) % 16).animate({
       'width': '160px', 'height': '220px', 'top': '0px', 'opacity': '0.5'
     }, speed);
+    $(".bi-" + (count + 5) % 16).removeClass("bi-active");
     $(".bi-" + (count + 5) % 16 + " img").animate({
       'width': '140px', 'height': '200px'
     }, speed);
+
+    $(".bi-" + (count + 4) % 16).animate({
+      'width': '210px', 'height': '290px', 'top': '-70px', 'opacity': '1'
+    }, speed);
+    $(".bi-" + (count + 4) % 16).addClass("bi-active");
+    $(".bi-" + (count + 4) % 16 + " img").animate({
+      'width': '190px', 'height': '270px'
+    }, speed);
+
+    $(".banner-font-big").text($(".bi-active").find(".book-name").val());
+    $(".active-origin-price").text(Number($(".bi-active").find(".book-origin-price").val()).toLocaleString('ko-KR') + '원');
+    $(".active-discount-rate").text('-' + $(".bi-active").find(".book-discount-rate").val() + '%');
+    $(".active-discount-price").text(Number($(".bi-active").find(".book-discount-price").val()).toLocaleString('ko-KR') + '원');
+    $(".banner-before").css('backgroundImage', 'url(' + $(".bi-" + (count + 4) % 16 + " img").attr('src') + ')');
+
+
   }
 
   bannerSlide(300);
@@ -251,7 +260,7 @@ $(function () {
       'position': 'relative',
       'top': 'auto',
       'width': '1280px',
-      'border': '1px solid silver',
+      'border': '1px solid #eaeaea',
       'z-index': '0'
     });
     $(".sale-wrapper").css({
@@ -307,7 +316,7 @@ $(function () {
         'position': 'relative',
         'top': 'auto',
         'width': '1280px',
-        'border': '1px solid silver',
+        'border': '1px solid #eaeaea',
         'z-index': '0'
       });
       $(".sale-wrapper").css({
@@ -389,56 +398,87 @@ $(function () {
     row[Math.floor(i / 9)][i % 9] = randNum;
   }
 
-  for (var j = 0; j < 2; j++) {
-    for (var k = 0; k < 9; k++) {
-      $(".sale-row-" + j + " li:nth-child(" + (k + 1) + ") img").attr('src', "/img/book-cover/" + row[j][k] + ".jpg");
-      $(".sale-row-" + j + " li:nth-child(" + (k + 1) + ") span:nth-child(2)").text("책이름" + row[j][k]);
-      $(".sale-row-" + j + " li:nth-child(" + (k + 1) + ") span:nth-child(3)").text("작가" + row[j][k]);
-    }
-    $(".sale-row-" + j + " li:nth-child(10) img").attr('src', $(".sale-row-" + j + " li:nth-child(1) img").attr('src'));
-    $(".sale-row-" + j + " li:nth-child(10) span:nth-child(2)").text($(".sale-row-" + j + " li:nth-child(1) span:nth-child(2)").text());
-    $(".sale-row-" + j + " li:nth-child(10) span:nth-child(3)").text($(".sale-row-" + j + " li:nth-child(1) span:nth-child(3)").text());
-  }
-
-
-  let count = -1;
-  let reverseCount = 0;
-
-  function reversSlide() {
-    $(".sale-row-1").animate({ 'right': '-130px' }, 5000, "linear", function () {
-      reverseCount += 8;
-      for (var k = 0; k < 9; k++) {
-        $(".sale-row-1 li:nth-child(" + (k + 1) + ") img")
-          .attr('src', "/img/book-cover/" + row[1][(k + reverseCount) % 9] + ".jpg");
-        $(".sale-row-1 li:nth-child(" + (k + 1) + ") span:nth-child(2)").text("책이름" + row[1][(k + reverseCount) % 9]);
-        $(".sale-row-1 li:nth-child(" + (k + 1) + ") span:nth-child(3)").text("작가" + row[1][(k + reverseCount) % 9]);
-      }
-      $(".sale-row-1 li:nth-child(10) img").attr('src', $(".sale-row-1 li:nth-child(1) img").attr('src'));
-      $(".sale-row-1 li:nth-child(10) span:nth-child(2)").text($(".sale-row-1 li:nth-child(1) span:nth-child(2)").text());
-      $(".sale-row-1 li:nth-child(10) span:nth-child(3)").text($(".sale-row-1 li:nth-child(1) span:nth-child(3)").text());
-      $(this).css('right', '0px')
-    });
-  }
-
 
   function slide() {
     $(".sale-row-0").animate({ 'right': '130px' }, 5000, "linear", function () {
-      count++;
-      for (var k = 0; k < 9; k++) {
-        $(".sale-row-0 li:nth-child(" + (k + 1) + ") img")
-          .attr('src', "/img/book-cover/" + row[0][(k + 1 + count) % 9] + ".jpg");
-        $(".sale-row-0 li:nth-child(" + (k + 1) + ") span:nth-child(2)").text("책이름" + row[0][(k + 1 + count) % 9]);
-        $(".sale-row-0 li:nth-child(" + (k + 1) + ") span:nth-child(3)").text("작가" + row[0][(k + 1 + count) % 9]);
+      let nextImgs = [];
+      let nextNames = [];
+      let nextAuthors = [];
+      for (var i=1; i<10; i++){
+        nextImgs[i] =  $(".sale-row-0 a:nth-child(" + (i % 9 + 1) + ") img").attr('src');
+        nextNames[i] =  $(".sale-row-0 a:nth-child(" + (i % 9 + 1) + ") #sale-book-name").text();
+        nextAuthors[i] =  $(".sale-row-0 a:nth-child(" + (i % 9 + 1) + ") #sale-discount-rate").text();
       }
-      $(".sale-row-0 li:nth-child(10) img").attr('src', $(".sale-row-0 li:nth-child(1) img").attr('src'));
-      $(".sale-row-0 li:nth-child(10) span:nth-child(2)").text($(".sale-row-0 li:nth-child(1) span:nth-child(2)").text());
-      $(".sale-row-0 li:nth-child(10) span:nth-child(3)").text($(".sale-row-0 li:nth-child(1) span:nth-child(3)").text());
-      $(this).css('right', '0px')
+      for (var k = 1; k < 10; k++) {
+        $(".sale-row-0 a:nth-child(" + k + ") img").attr('src', nextImgs[k]);
+        $(".sale-row-0 a:nth-child(" + k + ") #sale-book-name").text(nextNames[k]);
+        $(".sale-row-0 a:nth-child(" + k + ") #sale-discount-rate").text(nextAuthors[k]);
+      }
+      $(".sale-row-0 a:nth-child(10) img").attr('src', nextImgs[1]);
+      $(".sale-row-0 a:nth-child(10) #sale-book-name").text(nextNames[1]);
+      $(".sale-row-0 a:nth-child(10) #sale-discount-rate").text(nextAuthors[1]);
+      $(this).css('right', '0px');
+    });
+  }
+
+  function reversSlide() {
+    $(".sale-row-1").animate({ 'right': '-130px' }, 5000, "linear", function () {
+      let prevImgs = [];
+      let prevNames = [];
+      let prevAuthors = [];
+      for (var i=1; i<10; i++){
+        prevImgs[i] =  $(".sale-row-1 a:nth-child(" + ((i + 7) % 9 + 1) + ") img").attr('src');
+        prevNames[i] =  $(".sale-row-1 a:nth-child(" + ((i + 7) % 9 + 1) + ") #sale-book-name").text();
+        prevAuthors[i] =  $(".sale-row-1 a:nth-child(" + ((i + 7) % 9 + 1) + ") #sale-discount-rate").text();
+      }
+      for (var k = 1; k < 10; k++) {
+        $(".sale-row-1 a:nth-child(" + k + ") img").attr('src', prevImgs[k]);
+        $(".sale-row-1 a:nth-child(" + k + ") #sale-book-name").text(prevNames[k]);
+        $(".sale-row-1 a:nth-child(" + k + ") #sale-discount-rate").text(prevAuthors[k]);
+      }
+      $(".sale-row-1 a:nth-child(10) img").attr('src', prevImgs[1]);
+      $(".sale-row-1 a:nth-child(10) #sale-book-name").text(prevNames[1]);
+      $(".sale-row-1 a:nth-child(10) #sale-discount-rate").text(prevAuthors[1]);
+      $(this).css('right', '0px');
     });
   }
 
   slide(); reversSlide();
   let saleInterval = [setInterval(slide, 5000), setInterval(reversSlide, 5000)];
+
+
+  $("#search-input").keyup(function(key){
+    if (key.keyCode == 13) {
+      $("#search-form").submit();
+    } else {
+      bookSearch();
+    }
+  });
+
+  $(".search-input .reset").click(function () {
+    $(this).parent().find('input').val('');
+    $(".search-result-category").remove();
+    $(".search-result-book").remove();
+    $(".search-result-outer-wrapper").hide();
+  });
+
+  function bookSearch() {
+    $.ajax({                                                    
+      url: "/event-sale",
+      type: "get",
+      data: $("#search-form").serialize(),
+      dataType: "html",
+      async: true,
+    }).done(function (data) {
+      $('#search-input-results').replaceWith(data);
+      if(data.length < 100) {
+        $(".search-result-outer-wrapper").hide();
+      } else {
+        $(".search-result-outer-wrapper").show();
+      }
+    });
+  }
+
 });
 
 

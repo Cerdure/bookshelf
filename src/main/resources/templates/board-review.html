@@ -290,8 +290,8 @@
     <div class="review-wrapper" id="review-wrapper">
       <div class="review-title-wrapper">
         <div class="review-title" th:text="'모두의 리뷰 ('+${reviews?.totalElements} +')'"></div>
-        <div class="review-title-write" th:classappend="${#authorization.expression('hasRole(''ADMIN'')')}? 'disable':''">리뷰 작성</div>
-        <div class="review-title-my" th:classappend="${#authorization.expression('hasRole(''ADMIN'')')}? 'disable':''">내가 쓴 리뷰</div>
+        <div class="review-title-write" th:classappend="${#authorization.expression('hasRole(''USER'')')}? '' : 'disable'">리뷰 작성</div>
+        <div class="review-title-my" th:classappend="${#authorization.expression('hasRole(''USER'')')}? '' : 'disable'">내가 쓴 리뷰</div>
       </div>
 
       <div class="reviews-wrapper">
@@ -304,8 +304,10 @@
             <div class="buyer">구매자</div>
             <div class="id" th:text="${review.member.nickname}"></div>
             <div class="date" th:text="${#temporals.format(review.regDate, 'yyyy-MM-dd HH:mm:ss')}"></div>
-            <div th:if="${#authorization.expression('hasRole(''ADMIN'')')} ? true : (${#authentication.principal.username} == ${review.member.phone})" class="modify">수정</div>
-            <div th:if="${#authorization.expression('hasRole(''ADMIN'')')} ? true : (${#authentication.principal.username} == ${review.member.phone})" class="delete">삭제</div>
+            <div th:if="${#authorization.expression('hasRole(''ADMIN'')')} ? true :
+            (${#authorization.expression('hasRole(''USER'')')} ? (${#authentication.principal?.username} == ${review.member.phone}) : false)" class="modify">수정</div>
+            <div th:if="${#authorization.expression('hasRole(''ADMIN'')')} ? true :
+            (${#authorization.expression('hasRole(''USER'')')} ? (${#authentication.principal?.username} == ${review.member.phone}) : false)" class="delete">삭제</div>
             <div class="tag" th:text="${review.tag}"></div>
 
             <div class="rating">

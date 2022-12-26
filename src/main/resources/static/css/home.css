@@ -173,6 +173,7 @@
   opacity: 0.3;
   display: none;
 }
+
 .simple-search-wrapper {
   position: relative;
   width: 1280px;
@@ -180,11 +181,9 @@
   margin-bottom: 100px;
   padding: 20px;
 }
-
 .simple-search {
   padding: 20px;
 }
-
 .simple-search-title {
   position: relative;
   font-family: 'Noto Sans KR', sans-serif;
@@ -192,13 +191,11 @@
   color: #696969;
   margin-bottom: 20px;
 }
-
 .simple-search-input {
   position: relative;
   width: 100%;
   height: 50px;
 }
-
 .simple-search input {
   position: absolute;
   width: 100%;
@@ -213,7 +210,6 @@
 .simple-search input::-webkit-input-placeholder {
   color: rgb(180, 180, 180);
 }
-
 .search-input .icon {
   position: absolute;
   top: 50%;
@@ -296,7 +292,6 @@
   font-size: 20px;
   color: #a1a1a1;
 }
-
 .search-result-book {
   position: relative;
   width: 100%;
@@ -881,10 +876,9 @@
 }
 
 .notice-box ul {
-  list-style: none;
 }
 
-.notice-box ul li {
+.notice-box ul a {
   float: left;
   width: 270px;
   height: 230px;
@@ -896,7 +890,7 @@
   cursor: pointer;
 }
 
-.notice-box ul li span:first-child {
+.notice-box ul a span:first-child {
   position: relative;
   top: 0px;
   left: 0px;
@@ -909,7 +903,7 @@
   color: #696969;
 }
 
-.notice-box ul li p {
+.notice-box ul a p {
   position: relative;
   top: 11px;
   left: 0px;
@@ -920,7 +914,7 @@
   overflow: hidden;
 }
 
-.notice-box ul li span:last-child {
+.notice-box ul a span:last-child {
   position: relative;
   top: 30px;
   left: 0px;

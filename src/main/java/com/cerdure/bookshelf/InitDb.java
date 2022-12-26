@@ -1,5 +1,6 @@
 package com.cerdure.bookshelf;
 
+import com.cerdure.bookshelf.domain.Trend;
 import com.cerdure.bookshelf.domain.board.Inquire;
 import com.cerdure.bookshelf.domain.board.Notice;
 import com.cerdure.bookshelf.domain.board.Reply;
@@ -1256,6 +1257,17 @@ public class InitDb {
                         em.persist(innerFile);
                     }
                 }
+            }
+
+            Trend[] trends = new Trend[10];
+            for(int i=0; i<10; i++){
+                trends[i] = Trend.builder()
+                        .searchData("검색어-"+(i+1))
+                        .count(10-i)
+                        .build();
+            }
+            for (Trend trend : trends) {
+                em.persist(trend);
             }
         }
     }

@@ -26,6 +26,11 @@
       <div class="top">
         <div class="title" th:text="${book.name}"></div>
         <div class="author" th:text="${book.author}"></div>
+        <div class="price-header">
+          <div th:class="${book.discountRate == 0} ? 'discount-price' : 'origin-price'" th:text="${#numbers.formatInteger(book.originPrice, 3, 'COMMA') + '원'}"></div>
+          <div th:if="${book.discountRate != 0}" class="discount-rate" th:text="'-'+${book.discountRate}+'%'"></div>
+        </div>
+        <div th:if="${book.discountRate != 0}" class="discount-price" th:text="${#numbers.formatInteger(book.discountPrice, 3, 'COMMA') + '원'}"></div>
       </div>
       <div class="box">
         <div class="inner-box">
@@ -35,7 +40,7 @@
           <li><img src="/img/book-cover/search-category-comic.jpg"></li>
           <li><img src="/img/book-cover/search-category-politics.jpg"></li>
           </div>
-        <div class="text">책장에 담은 사람</div>
+        <div class="text">북마크한 사람</div>
         <div class="number">1,560명</div>
         </div>
         <div class="reviews">
@@ -43,7 +48,7 @@
           <div class="text">이 책의 리뷰</div>
           <div class="number" th:text="${book.reviews?.size()}+'개'">3개</div>
         </div>
-        <div class="first-review">
+        <div class="first-review" th:classappend="${#authorization.expression('hasRole(''USER'')')} ? '' : 'disable'">
           <img class="icon" src="/img/icon/search-list-editor.svg">
           <div class="text">
             리뷰 작성하고<br>
@@ -164,20 +169,16 @@
   </div>
 
   <div class="side-wrapper">
-    <div class="put-myshelf">
-      <img src="/img/icon/search-list-series.svg">
-      <span>내 책장에 담기</span>
-    </div>
-    <div class="bookmark">
+    <div class="bookmark" th:classappend="${#authorization.expression('hasRole(''USER'')')} ? '' : 'disable'">
       <img src="/img/icon/bookmark.svg">
       <span>북마크하기</span>
     </div>
-    <div class="write-review">
+    <div class="write-review" th:classappend="${#authorization.expression('hasRole(''USER'')')} ? '' : 'disable'">
       <img src="/img/icon/search-list-editor.svg">
       <span>리뷰 남기기</span>
     </div>
-    <button class="cart-btn">장바구니에 넣기</button>
-    <button class="buy-btn">구매하기</button>
+    <button class="cart-btn" th:classappend="${#authorization.expression('hasRole(''USER'')')} ? '' : 'disable'">장바구니에 넣기</button>
+    <button class="buy-btn" th:classappend="${#authorization.expression('hasRole(''USER'')')} ? '' : 'disable'">구매하기</button>
   </div>
 
 </div>

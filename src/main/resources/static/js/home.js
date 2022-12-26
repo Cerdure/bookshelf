@@ -128,7 +128,7 @@ $(function () {
 
 
   function bookSearch() {
-    $.ajax({                                                      //한글이라 오류남?
+    $.ajax({                                                    
       url: "/home-search-input",
       type: "get",
       data: $("#search-form").serialize(),
@@ -233,9 +233,7 @@ function bestBook(_this, criteria){
       console.log(error);
     }
   }).done(function(result){
-    $(".best-books-wrapper").hide();
     $('.best-books-wrapper').replaceWith(result);
-    $(".best-books-wrapper").hide();
     $(".best-books-wrapper").fadeIn(300);
   });
 }

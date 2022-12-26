@@ -20,58 +20,52 @@
   <div class="banner">
     <div class="banner-title">
       <div class="banner-title-1">북셸프 0주년 기념!</div>
-      <div class="banner-title-2">특별 기획전</div>
+      <div class="banner-title-2">특가 기획전</div>
     </div>
     <div class="banner-before"></div>
     <div class="banner-img-wrapper">
       <ul>
-        <li class="bi-7"><img></li>
-        <li class="bi-8"><img></li>
-        <li class="bi-9"><img></li>
-        <li class="bi-10"><img></li>
-        <li class="bi-11"><img></li>
-        <li class="bi-12"><img></li>
-        <li class="bi-13"><img></li>
-        <li class="bi-14"><img></li>
-        <li class="bi-15"><img></li>
-        
-        <li class="bi-0"><img></li>
-        <li class="bi-1"><img></li>
-        <li class="bi-2"><img></li>
-        <li class="bi-3"><img></li>
-        <li class="bi-4"><img></li>
-        <li class="bi-5"><img></li>
-        <li class="bi-6"><img></li>
-        <li class="bi-7"><img></li>
-        <li class="bi-8"><img></li>
-        <li class="bi-9"><img></li>
-        <li class="bi-10"><img></li>
-        <li class="bi-11"><img></li>
-        <li class="bi-12"><img></li>
-        <li class="bi-13"><img></li>
-        <li class="bi-14"><img></li>
-        <li class="bi-15"><img></li>
+        <a th:each="book,i : ${bannerBooks}" th:if="${i.count > 7}" th:class="'bi-'+(${i.count}-1)"
+           th:href="@{/book(id=${book.id})}">
+          <input class="book-name" th:value="${book.name}" type="hidden">
+          <input class="book-origin-price" th:value="${book.originPrice}" type="hidden">
+          <input class="book-discount-rate" th:value="${book.discountRate}" type="hidden">
+          <input class="book-discount-price" th:value="${book.discountPrice}" type="hidden">
+          <img th:src="${book.imgPath}">
+        </a>
 
-        <li class="bi-0"><img></li>
-        <li class="bi-1"><img></li>
-        <li class="bi-2"><img></li>
-        <li class="bi-3"><img></li>
-        <li class="bi-4"><img></li>
-        <li class="bi-5"><img></li>
-        <li class="bi-6"><img></li>
-        <li class="bi-7"><img></li>
-        <li class="bi-8"><img></li>
+        <a th:each="book,i : ${bannerBooks}" th:href="@{/book(id=${book.id})}" th:class="'bi-'+(${i.count}-1)">
+          <input class="book-name" th:value="${book.name}" type="hidden">
+          <input class="book-origin-price" th:value="${book.originPrice}" type="hidden">
+          <input class="book-discount-rate" th:value="${book.discountRate}" type="hidden">
+          <input class="book-discount-price" th:value="${book.discountPrice}" type="hidden">
+          <img th:src="${book.imgPath}">
+        </a>
+
+        <a th:each="book,i : ${bannerBooks}" th:if="${i.count < 10}" th:class="'bi-'+(${i.count}-1)"
+           th:href="@{/book(id=${book.id})}">
+          <input class="book-name" th:value="${book.name}" type="hidden">
+          <input class="book-origin-price" th:value="${book.originPrice}" type="hidden">
+          <input class="book-discount-rate" th:value="${book.discountRate}" type="hidden">
+          <input class="book-discount-price" th:value="${book.discountPrice}" type="hidden">
+          <img th:src="${book.imgPath}">
+        </a>
       </ul>
     </div>
+
     <div class="banner-font-wrapper">
-        <h1 class="banner-font-big"></h1>
-        <h4 class="banner-font-small"></span>
-      </li>
+        <div class="banner-font-big"></div>
+        <div class="banner-font-small">
+          <span class="active-origin-price"></span>
+          <span class="active-discount-rate"></span>
+          <span class="active-arrow">→</span>
+          <span class="active-discount-price"></span>
+        </div>
     </div>
-    <div class="banner-button-wrapper">
-      <button class="btn-left"><</button>
-      <button class="btn-right">></button>
-    </div>
+
+    <button class="btn-left"><</button>
+    <button class="btn-right">></button>
+
     <div class="banner-index-wrapper">
       <div class="banner-current-index">01</div>
       <div class="banner-index-fill-box">
@@ -104,116 +98,59 @@
 
 <div class="sale-wrapper">
   <div class="sale-title-wrapper">
-    <span>| 특가 세일 도서</span>
-    <div class="sale-input-wrapper">
-      <input type="text" placeholder="상품명으로 검색해보세요.">
-      <img src="/img/icon/search.svg">
+    <span id="title">| 특가 도서 검색</span>
+
+    <div class="simple-search-wrapper">
+      <div class="simple-search">
+        <form class="simple-search-input search-input" action="/search-result" method="get" id="search-form">
+          <input id="search-input" name="name" type="text" autocomplete="off" placeholder="찾으시는 책이 있나요?">
+          <img class="icon" onclick="document.getElementById('search-form').submit();" src="/img/icon/search.svg">
+          <input id="category-id-input" name="categoryIds" type="hidden">
+          <img class="reset" src="/img/icon/x-circle-fill.svg">
+        </form>
+      </div>
     </div>
+
+    <div class="search-result-outer-wrapper">
+      <div class="search-result-wrapper" id="search-input-results">
+        <div class="search-result-book" th:each="book : ${ipBooks}">
+          <img src="/img/icon/sale-icon.png">
+          <a th:href="'/book?id=' + ${book.id}">
+            <span class="data" th:utext="${book.name}"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+
   </div>
   <div class="sale-contents">
     <ul class="sale-row-0">
-      <li>
-        <img src="">
-        <span id="sale-book-name"></span>
-        <span id="sale-author"></span>
-      </li>
-      <li>
-        <img src="">
-        <span id="sale-book-name"></span>
-        <span id="sale-author"></span>
-      </li>
-      <li>
-        <img src="">
-        <span id="sale-book-name"></span>
-        <span id="sale-author"></span>
-      </li>
-      <li>
-        <img src="">
-        <span id="sale-book-name"></span>
-        <span id="sale-author"></span>
-      </li>
-      <li>
-        <img src="">
-        <span id="sale-book-name"></span>
-        <span id="sale-author"></span>
-      </li>
-      <li>
-        <img src="">
-        <span id="sale-book-name"></span>
-        <span id="sale-author"></span>
-      </li>
-      <li>
-        <img src="">
-        <span id="sale-book-name"></span>
-        <span id="sale-author"></span>
-      </li>
-      <li>
-        <img src="">
-        <span id="sale-book-name"></span>
-        <span id="sale-author"></span>
-      </li>
-      <li>
-        <img src="">
-        <span id="sale-book-name"></span>
-        <span id="sale-author"></span>
-      </li>
-      <li>
-        <img src="">
-        <span id="sale-book-name"></span>
-        <span id="sale-author"></span>
-      </li>
+      <a th:each="book,i : ${saleBooks}" th:if="${i.count < 10}" th:href="@{/book(id=${book.id})}">
+        <img th:src="${book.imgPath}">
+        <span id="sale-book-name" th:text="${book.name}"></span>
+        <span id="sale-discount-rate" th:text="${book.discountRate} + '%'"></span>
+        <span id="sale-text" th:text="' 할인'"></span>
+      </a>
+      <a th:each="book,i : ${saleBooks}" th:if="${i.count == 1}" th:href="@{/book(id=${book.id})}">
+        <img th:src="${book.imgPath}">
+        <span id="sale-book-name" th:text="${book.name}"></span>
+        <span id="sale-discount-rate" th:text="${book.discountRate} + '%'"></span>
+        <span id="sale-text" th:text="' 할인'"></span>
+      </a>
     </ul>
     <ul class="sale-row-1">
-      <li>
-        <img src="">
-        <span id="sale-book-name"></span>
-        <span id="sale-author"></span>
-      </li>
-      <li>
-        <img src="">
-        <span id="sale-book-name"></span>
-        <span id="sale-author"></span>
-      </li>
-      <li>
-        <img src="">
-        <span id="sale-book-name"></span>
-        <span id="sale-author"></span>
-      </li>
-      <li>
-        <img src="">
-        <span id="sale-book-name"></span>
-        <span id="sale-author"></span>
-      </li>
-      <li>
-        <img src="">
-        <span id="sale-book-name"></span>
-        <span id="sale-author"></span>
-      </li>
-      <li>
-        <img src="">
-        <span id="sale-book-name"></span>
-        <span id="sale-author"></span>
-      </li>
-      <li>
-        <img src="">
-        <span id="sale-book-name"></span>
-        <span id="sale-author"></span>
-      </li>
-      <li>
-        <img src="">
-        <span id="sale-book-name"></span>
-        <span id="sale-author"></span>
-      </li>
-      <li>
-        <img src="">
-        <span id="sale-book-name"></span>
-        <span id="sale-author"></span>
-      </li>
-      <li>
-        <img src="">
-        <span id="sale-book-name"></span>
-        <span id="sale-author"></span>
-      </li>
+      <a th:each="book,i : ${saleBooks}" th:if="${i.count > 9}" th:href="@{/book(id=${book.id})}">
+        <img th:src="${book.imgPath}">
+        <span id="sale-book-name" th:text="${book.name}"></span>
+        <span id="sale-discount-rate" th:text="${book.discountRate} + '%'"></span>
+        <span id="sale-text" th:text="' 할인'"></span>
+      </a>
+      <a th:each="book,i : ${saleBooks}" th:if="${i.count == 10}" th:href="@{/book(id=${book.id})}">
+        <img th:src="${book.imgPath}">
+        <span id="sale-book-name" th:text="${book.name}"></span>
+        <span id="sale-discount-rate" th:text="${book.discountRate} + '%'"></span>
+        <span id="sale-text" th:text="' 할인'"></span>
+      </a>
     </ul>
   </div>
 </div>

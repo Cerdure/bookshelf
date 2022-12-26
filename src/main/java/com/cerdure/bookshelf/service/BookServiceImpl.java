@@ -110,6 +110,21 @@ public class BookServiceImpl implements BookService {
         return null;
     }
 
+    @Override
+    public List<Book> findDiscountTop16() {
+        return bookRepository.findTop16ByOrderByDiscountRateDesc();
+    }
+
+    @Override
+    public List<Book> findDiscountTop18() {
+        return bookRepository.findTop18ByOrderByDiscountRateDesc();
+    }
+
+    @Override
+    public List<Book> findByNameWithDiscount(String name, int discountRate) {
+        return bookRepository.findByNameContainingIgnoreCaseAndDiscountRateAfterOrderByDiscountRateDesc(name, discountRate);
+    }
+
 
     @Override
     public void insert(BookDto bookDto) {

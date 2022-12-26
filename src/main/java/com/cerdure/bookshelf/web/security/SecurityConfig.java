@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/img/**",
             "/css/**",
             "/js/**",
-            "**/upload-img/**",
+            "/upload-img/**",
             // other public endpoints of your API may be appended to this array
             "/mysql/**",
             "/swagger-ui/**"
@@ -52,7 +52,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                    .antMatchers("/", "/login/**", "/join/**", "/search/**", "/search-input/**", "/search-result/**", "/search-result-input/**", "/home-search-input/**", "/event/**", "/review-my/**").permitAll()
+                    .antMatchers("/", "/login/**", "/join/**", "/todayBook-reset/**", "/home-search-input/**", "/bestBook/**",
+                            "/search/**", "/search-input/**", "/search-result/**", "/search-result-input/**", "/search-trend/**", "/book/**",
+                            "/event/**", "/event-sale/**", "/review/**", "/review-my/**", "/inquire/**", "/inquire-detail/**", "/notice", "/notice-detail/**").permitAll()
                     .antMatchers("/admin").hasRole("ADMIN")
                     .anyRequest().authenticated()
                 .and()

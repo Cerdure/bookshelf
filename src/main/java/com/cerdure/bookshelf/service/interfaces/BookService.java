@@ -21,6 +21,9 @@ public interface BookService {
     public Page<Book> findByNameWithCategoryAndPublishDate(String name, List<Integer> categoryIds, LocalDate publishDate, String sortOrder, Pageable pageable);
     public Page<Book> findByCategory(Integer categoryId, Pageable pageable);
     public List<Book> findTop10(Integer criteria);
+    public List<Book> findDiscountTop16();
+    public List<Book> findDiscountTop18();
+    public List<Book> findByNameWithDiscount(String name, int discountRate);
     public void insert(BookDto bookDto);
     void validateDuplicateBook(BookDto bookDto);
     public void modify(BookDto bookDto);

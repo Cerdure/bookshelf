@@ -44,7 +44,7 @@ $(function () {
     });
 
 
-  if(st>210){
+  if(st>220){
     $(".middle-nav-wrapper").css({
       'position':'fixed',
       'top':'60px',
@@ -90,10 +90,10 @@ $(function () {
     $(".record-top").css('margin-top','0px');
     $(".order-list-title-wrapper").css('margin-top','0px');
   }
-  if(st>214){
+  if(st>224){
     $(".order-list-title-wrapper").css({
       'position':'fixed',
-      'top':'70px',
+      'top':'60px',
       'border-bottom':'1px solid #ebebeb',
       'height':'60px',
       'box-shadow':'0px 3px 5px 0px rgba(0,0,0,0.1)'
@@ -123,7 +123,7 @@ $(function () {
   $(window)
   .scroll(function(){
     st = $(this).scrollTop();
-    if(st>210){
+    if(st>220){
       $(".middle-nav-wrapper").css({
         'position':'fixed',
         'top':'60px',
@@ -171,10 +171,10 @@ $(function () {
       $(".order-list-title-wrapper").css('margin-top','0px');
   
     }
-    if(st>214){
+    if(st>224){
       $(".order-list-title-wrapper").css({
         'position':'fixed',
-        'top':'70px',
+        'top':'60px',
         'border-bottom':'1px solid #ebebeb',
         'height':'60px',
         'box-shadow':'0px 3px 5px 0px rgba(0,0,0,0.1)'
@@ -377,22 +377,17 @@ $(".middle-nav div:not(.middle-nav-underbar)").click(function(){
   let mnIndex = $(this).index();
   switch(mnIndex){
     case 0:
-      $(".shelf-wrapper, .record-wrapper, .order-list-wrapper, .order-list-title-wrapper, .record-question-box, .order-list-title-detail-wrapper").fadeOut(0);
-      $(".entire-book-wrapper").fadeIn(300);
-      $(".middle-nav-underbar").animate({'left':mnIndex*25+'%'},300);
-      break;
-    case 1:
-      $(".entire-book-wrapper, .record-wrapper, .order-list-wrapper, .order-list-title-wrapper, .record-question-box, .order-list-title-detail-wrapper").fadeOut(0);
+      $(".record-wrapper, .order-list-wrapper, .order-list-title-wrapper, .record-question-box, .order-list-title-detail-wrapper").fadeOut(0);
       $(".shelf-wrapper").fadeIn(300);
       $(".middle-nav-underbar").animate({'left':mnIndex*25+'%'},300);
       break;
-    case 2:
-      $(".entire-book-wrapper, .shelf-wrapper, .order-list-wrapper, .order-list-title-wrapper, .record-question-box, .order-list-title-detail-wrapper").fadeOut(0);
+    case 1:
+      $(".shelf-wrapper, .order-list-wrapper, .order-list-title-wrapper, .record-question-box, .order-list-title-detail-wrapper").fadeOut(0);
       $(".record-wrapper").fadeIn(300);
       $(".middle-nav-underbar").animate({'left':mnIndex*25+'%'},300);
       break;
-    case 3:
-      $(".entire-book-wrapper, .shelf-wrapper, .record-wrapper, .record-question-box, .order-list-title-detail-wrapper").fadeOut(0);
+    case 2:
+      $(".shelf-wrapper, .record-wrapper, .record-question-box, .order-list-title-detail-wrapper").fadeOut(0);
       $(".order-list-wrapper, .order-list-title-wrapper").fadeIn(300);
       $(".middle-nav-underbar").animate({'left':mnIndex*25+'%'},300);
       break;  

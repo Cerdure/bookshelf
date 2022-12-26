@@ -1,18 +1,20 @@
 package com.cerdure.bookshelf.web.controller;
 
+import com.cerdure.bookshelf.domain.Trend;
 import com.cerdure.bookshelf.dto.DataUtils;
 import com.cerdure.bookshelf.domain.book.Book;
 import com.cerdure.bookshelf.domain.book.Category;
 import com.cerdure.bookshelf.dto.BookDto;
 import com.cerdure.bookshelf.service.BookServiceImpl;
+import com.cerdure.bookshelf.service.TrendServiceImpl;
 import com.cerdure.bookshelf.service.interfaces.CategoryService;
+import com.cerdure.bookshelf.service.interfaces.TrendService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,11 +24,23 @@ public class SearchController {
 
     private final BookServiceImpl bookService;
     private final CategoryService categoryService;
+    private final TrendServiceImpl trendService;
 
     @GetMapping("/search")
-    public String search(){
+    public String search(Model model){
+        List<Trend> trends = trendService.findTop10();
+        model.addAttribute("trends", trends);
         return "search";
     }
+
+    @PostMapping("/search-trend")
+    @ResponseBody
+    public List<Trend> trendUpdate(){
+        System.out.println("trendUpdate()");
+        List<Trend> trends = trendService.findTop10();
+        return trends;
+    }
+
 
     @GetMapping("/search-input")
     public String searchInput(@ModelAttribute BookDto bookDto, Model model) {
@@ -58,6 +72,7 @@ public class SearchController {
             if(books != null){
                 books.forEach(e -> e.coincidenceHighlight(inputVal));
             }
+            trendService.insert(inputVal);
             model.addAttribute("ipCategories", categories);
             model.addAttribute("ipBooks", books);
         }
@@ -98,6 +113,7 @@ public class SearchController {
             dataUtils.setCategoryId(categoryId);
             model.addAttribute("books", books);
         }
+        trendService.insert(bookDto.getName());
         model.addAttribute("dataUtils", dataUtils);
         return "search-result";
     }
@@ -113,6 +129,7 @@ public class SearchController {
         DataUtils dataUtils = new DataUtils();
         dataUtils.setName(bookDto.getName());
         dataUtils.setSortOrder(bookDto.getSortOrder());
+        trendService.insert(bookDto.getName());
         model.addAttribute("books", books);
         model.addAttribute("dataUtils", dataUtils);
         return "search-result :: #search-results";

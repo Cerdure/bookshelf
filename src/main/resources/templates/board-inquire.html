@@ -74,8 +74,8 @@
     <span class="number" th:text="${inquires?.totalElements}"></span>
     <span class="text">건</span>
  
-    <div class="inquire-write" th:classappend="${#authorization.expression('hasRole(''ADMIN'')')}? 'disable':''">글 작성</div>
-    <div class="my-inquire-search" th:classappend="${#authorization.expression('hasRole(''ADMIN'')')}? 'disable':''">내가 쓴 글</div>
+    <div class="inquire-write" th:classappend="${#authorization.expression('hasRole(''USER'')')}? '' : 'disable'">글 작성</div>
+    <div class="my-inquire-search" th:classappend="${#authorization.expression('hasRole(''USER'')')}? '' : 'disable'">내가 쓴 글</div>
    
     <form action="/inquire-search" method="get" class="search">
       <select name="searchBy" class="inquire-search-sort">

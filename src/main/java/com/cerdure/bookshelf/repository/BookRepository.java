@@ -21,6 +21,10 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     public Page <Book> findByNameContainingIgnoreCaseAndPublishDateAfter(String name, LocalDate publishDate, Pageable pageable);
     public List<Book> findTop10ByOrderBySalesDesc();
     public List<Book> findTop10ByOrderByRatingDesc();
+    public List<Book> findTop16ByOrderByDiscountRateDesc();
+    public List<Book> findTop18ByOrderByDiscountRateDesc();
+    public List<Book> findByNameContainingIgnoreCaseAndDiscountRateAfterOrderByDiscountRateDesc(String name, Integer discountRate);
+
 
 
 }
